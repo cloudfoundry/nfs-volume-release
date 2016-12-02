@@ -1,0 +1,5 @@
+check process nfsdriver
+  with pidfile /var/vcap/sys/run/nfsdriver/nfsdriver.pid
+  start program "/var/vcap/jobs/nfsdriver/bin/nfsdriver_ctl start"
+  stop program "/var/vcap/jobs/nfsdriver/bin/nfsdriver_ctl stop"
+  group vcap

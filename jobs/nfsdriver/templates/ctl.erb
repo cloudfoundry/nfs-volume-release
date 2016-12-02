@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/nfsdriver
+LOG_DIR=/var/vcap/sys/log/nfsdriver
+PIDFILE=$RUN_DIR/nfsdriver.pid
+
+source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "nfsdriver"
+
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for GOLANG 1.5.3 DNS bug
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    # Allowed number of open file descriptors
+    ulimit -n 100000
+
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LICRARY_PATH
+
+    exec chpst -u vcap:vcap sleep 10000 \
+      2> >(tee -a $LOG_DIR/nfsdriver.stderr.log | logger -p user.error -t vcap.nfsdriver) \
+      1> >(tee -a $LOG_DIR/nfsdriver.stdout.log | logger -p user.info -t vcap.nfsdriver)
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: nfsdriver_ctl {start|stop}"
+
+    ;;
+
+esac

@@ -1,0 +1,50 @@
+name: nfs
+director_uuid: 0b0eebf4-5016-4006-b0dd-ec0bd93ea01c
+
+releases:
+  - name: nfs
+    version: latest
+
+jobs:
+  - name: nfsdriver
+    instances: 1
+    resource_pool: nfs-resourcepool
+    networks:
+    - name: nfs-net
+      static_ips: &web-ips [10.244.18.47]
+    properties:
+      nfsdriver: {}
+    templates:
+    - release: nfs
+      name: nfsdriver
+
+properties: {}
+
+networks:
+  - name: nfs-net
+    type: manual
+    subnets:
+      - range: 10.244.18.0/24
+        gateway: 10.244.18.1
+        static: *web-ips
+        cloud_properties: {}
+
+resource_pools:
+  - name: nfs-resourcepool
+    network: nfs-net
+    cloud_properties: {}
+    stemcell:
+      name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+      version: latest
+
+compilation:
+  workers: 1
+  network: nfs-net
+  cloud_properties: {}
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  serial: false
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000

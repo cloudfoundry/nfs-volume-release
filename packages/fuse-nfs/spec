@@ -1,0 +1,10 @@
+---
+name: fuse-nfs
+
+files:
+  - fuse-nfs.tar.gz
+  - automake-1.15.tar.gz
+  - libtool-2.4.6.tar.gz
+  - autoconf-2.69.tar.gz
+  - fuse-2.9.2.tar.gz
+  - libnfs-1.11.0.tar.gz

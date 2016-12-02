@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e -x
+
+echo "Installing libfuse"
+pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
+make install
+popd
+
+echo "Installing libnfs"
+pushd /var/vcap/packages/fuse-nfs/libnfs-1.11.0
+./configure
+make install
+popd
+
+echo "Installing fuse-nfs"
+pushd /var/vcap/packages/fuse-nfs/fuse-nfs
+make install
+popd
+
+cat << EOF > /etc/fuse.conf
+user_allow_other
+EOF
+chown vcap:vcap /etc/fuse.conf
+
+echo "Installed fuse-nfs"
+exit 0

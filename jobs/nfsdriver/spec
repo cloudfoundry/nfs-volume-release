@@ -1,0 +1,12 @@
+---
+name: nfsdriver
+
+templates:
+  install.erb: bin/pre-start
+  ctl.erb: bin/nfsdriver_ctl
+
+packages:
+- nfs_pid_utils
+- fuse-nfs
+
+properties: {}

@@ -1,0 +1,39 @@
+.blobs
+blobs
+.nvim
+.nvimrc
+scripts/config
+.dev_builds
+.DS_Store
+dev_releases/**/*
+.final_builds/jobs/**/*.tgz
+.final_builds/packages/**/*.tgz
+*.swp
+config/private.yml
+config/dev.yml
+
+## goPath system specifics
+pkg
+bin/
+
+## vim plugins to ignore
+src/9fans.net/
+src/github.com/alecthomas/
+src/github.com/golang/
+src/github.com/google/
+src/github.com/jstemmer/
+src/github.com/kisielk/
+src/github.com/klauspost/
+src/github.com/nsf/
+src/github.com/rogpeppe/
+src/golang.org/
+
+#intellij goo
+*.iml
+
+# gosub and friends
+src/github.com/vito/gosub
+src/github.com/codegangsta/cli
+
+# certs suite for locally running tests
+src/code.cloudfoundry.org/volume_driver_cert/

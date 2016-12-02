@@ -1,0 +1,7 @@
+---
+final_name: nfs-volume
+blobstore:
+  provider: s3
+  options:
+    bucket_name: nfs-volume-blobs
+

@@ -1,0 +1,49 @@
+set -e
+
+tar xf autoconf-2.69.tar.gz
+
+pushd autoconf-2.69
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
+  make
+  make install
+  export PATH=${PATH}:${BOSH_INSTALL_TARGET}/bin
+popd
+
+tar xf automake-1.15.tar.gz
+
+pushd automake-1.15
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
+  make
+  make install
+popd
+
+tar xf libtool-2.4.6.tar.gz
+
+pushd libtool-2.4.6
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
+  make
+  make install
+popd
+
+tar xzf fuse-2.9.2.tar.gz
+pushd fuse-2.9.2
+  ./configure
+  make install
+popd
+cp -R fuse-2.9.2 ${BOSH_INSTALL_TARGET}
+
+tar xzf libnfs-1.11.0.tar.gz
+pushd libnfs-1.11.0
+  ./configure
+  make install
+popd
+cp -R libnfs-1.11.0 ${BOSH_INSTALL_TARGET}
+
+tar xzf fuse-nfs.tar.gz
+pushd fuse-nfs
+  ./setup.sh
+  ./configure
+  make
+popd
+
+cp -R fuse-nfs ${BOSH_INSTALL_TARGET}
