@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+scripts_path=./$(dirname $0)
+eval $($scripts_path/get_paths.sh)
+
+pushd src/code.cloudfoundry.org/nfsv3driver
+  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+popd
+pushd src/code.cloudfoundry.org/nfsdriver
+  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+popd
