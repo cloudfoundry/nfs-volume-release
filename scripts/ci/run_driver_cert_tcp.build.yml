@@ -4,8 +4,7 @@ platform: linux
 image: docker:///cloudfoundry/inigo-ci
 
 inputs:
-  - name: nfs-bosh-release
-  - name: deployments-persi
+  - name: nfs-volume-release
   - name: lib-nfs
   - name: fuse-nfs
 
