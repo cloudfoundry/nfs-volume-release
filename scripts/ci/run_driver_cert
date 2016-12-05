@@ -6,19 +6,25 @@ set -x -e
 sudo apt-get update
 sudo apt-get --assume-yes install autoconf automake libtool xsltproc fuse-dev git
 
-wget https://sites.google.com/site/libnfstarballs/li/libnfs-1.11.0.tar.gz?attredirects=0&d=1
-mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
-tar xzf libnfs-1.11.0.tar.gz
+#wget https://sites.google.com/site/libnfstarballs/li/libnfs-1.11.0.tar.gz?attredirects=0&d=1
+#mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
+#tar xzf libnfs-1.11.0.tar.gz
+
 pushd libnfs-1.11.0
-  ./configure
-  make install
+    libtoolize
+    aclocal
+    autoheader
+    autoconf
+    automake --add-missing
+    ./configure
+    make install
 popd
 
 pushd fuse-nfs
-  ./setup.sh
-  ./configure
-  make
-  make install
+    ./setup.sh
+    ./configure
+    make
+    make install
 popd
 
 ######################################################################################

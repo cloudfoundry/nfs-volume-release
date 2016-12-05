@@ -5,7 +5,7 @@ set -e
 scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
-NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/
+NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/tmp
 
 # json encode the CEPH_KEYRING string since it is multiline and we will inject it into a json string
 #ENCODED_KEYRING=${CEPH_KEYRING//\\/\\\\} # \
@@ -41,16 +41,17 @@ echo "{
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
       \"remote_mount_point\":\"/\"}
   }
-} "  > $NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/fixture.json
+} "  > $NFS_RELEASE_DIR/tmp/fixture.json
 
 #      \"keyring\":\"$ENCODED_KEYRING\",
 
-export FIXTURE_FILENAME="$NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/fixture.json"
+export FIXTURE_FILENAME="$NFS_RELEASE_DIR/tmp/fixture.json"
 
 cd `dirname $0`
 cd ../src/code.cloudfoundry.org/nfsv3driver
 
-go build -o "acceptance/exec/nfsv3driver" "cmd/nfsv3driver/main.go"
+#go build -o "acceptance/exec/nfsv3driver" "cmd/nfsv3driver/main.go"
+go build -o "cmd/nfsv3driver/main.go"
 
 go get -t code.cloudfoundry.org/volume_driver_cert
 

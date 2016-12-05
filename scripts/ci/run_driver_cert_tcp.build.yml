@@ -6,6 +6,7 @@ image: docker:///cloudfoundry/inigo-ci
 inputs:
   - name: nfs-bosh-release
   - name: deployments-persi
+  - name: lib-nfs
   - name: fuse-nfs
 
 params:
