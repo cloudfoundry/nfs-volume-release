@@ -13,10 +13,10 @@ packages:
 properties:
  nfsv3driver.listen_addr:
     description: "address nfsv3driver listens on"
-    default: "127.0.0.1:7089"
+    default: "127.0.0.1:7589"
  nfsv3driver.debug_addr:
    description: "address nfsv3driver will serve debug info"
-   default: "127.0.0.1:7189"
+   default: "127.0.0.1:7689"
  nfsv3driver.driver_path:
    description: "path to place driver spec/json file for volman to discover"
    default: "/var/vcap/data/voldrivers"
