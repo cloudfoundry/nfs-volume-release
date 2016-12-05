@@ -18,6 +18,6 @@ cd `dirname $0`
 
 killall -9 nfsv3driver
 
-mkdir -p ../mountdir
+mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
 
- ../exec/nfsv3driver -listenAddr="${listen_addr}" -transport="$TRANSPORT" -driversPath="$drivers_path" &
+$NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="${listen_addr}" -transport="$TRANSPORT" -driversPath="$drivers_path" &

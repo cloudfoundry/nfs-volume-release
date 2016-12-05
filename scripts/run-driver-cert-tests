@@ -53,19 +53,25 @@ cd `dirname $0`
 cd ../src/code.cloudfoundry.org/nfsv3driver
 
 #go build -o "acceptance/exec/nfsv3driver" "cmd/nfsv3driver/main.go"
-go build -o "cmd/nfsv3driver/main.go"
+go build -o "$NFS_RELEASE_DIR/tmp/nfsv3driver" "cmd/nfsv3driver/main.go"
 
 go get -t code.cloudfoundry.org/volume_driver_cert
 
 echo $listen_address
 echo $drivers_path
-/bin/bash $NFS_RELEASE_DIR/scripts/startdriver.sh $listen_address $drivers_path
+#. ./$NFS_RELEASE_DIR/scripts/startdriver.sh $listen_address $drivers_path
+
+killall -9 nfsv3driver
+
+mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
+
+$NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="${listen_addr}" -transport="$TRANSPORT" -driversPath="$drivers_path" &
 
 pushd $NFS_RELEASE_DIR/src/code.cloudfoundry.org/volume_driver_cert
     ginkgo
 popd
 
-/bin/bash $NFS_RELEASE_DIR/scripts/stopdriver.sh
+#. ./$NFS_RELEASE_DIR/scripts/stopdriver.sh
+killall -9 nfsv3driver
 
-
-rm acceptance/exec/nfsv3driver
+rm $NFS_RELEASE_DIR/tmp/nfsv3driver
