@@ -6,6 +6,6 @@ absolute_path() {
 
 scripts_path=$(absolute_path `dirname $0`)
 
-CEPHFS_RELEASE_DIR=${CEPHFS_RELEASE_DIR:-$(absolute_path $scripts_path/..)}
+NFS_RELEASE_DIR=${NFS_RELEASE_DIR:-$(absolute_path $scripts_path/..)}
 
-echo CEPHFS_RELEASE_DIR=$CEPHFS_RELEASE_DIR
+echo NFS_RELEASE_DIR=$NFS_RELEASE_DIR

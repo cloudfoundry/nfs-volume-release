@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -x -e
+
+### Install ruby and the the bosh cli
+sudo apt-get update
+sudo apt-get --assume-yes install autoconf automake libtool xsltproc fuse-dev git
+
+wget https://sites.google.com/site/libnfstarballs/li/libnfs-1.11.0.tar.gz?attredirects=0&d=1
+mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
+tar xzf libnfs-1.11.0.tar.gz
+pushd libnfs-1.11.0
+  ./configure
+  make install
+popd
+
+pushd fuse-nfs
+  ./setup.sh
+  ./configure
+  make
+  make install
+popd
+
+######################################################################################
+#### prepare for acceptance
+######################################################################################
+
+export NFS_SERVER_IP=10.10.100.45 #TODO: replace with a route53 DNS alias
+
+pushd nfs-volume-release
+    export GOROOT=/usr/local/go
+    export PATH=$GOROOT/bin:$PATH
+
+    export GOPATH=$PWD
+    export PATH=$PWD/bin:$PATH
+
+    go get github.com/onsi/ginkgo/ginkgo
+    go get github.com/onsi/gomega
+
+    ./scripts/run-driver-cert-tests -race
+popd

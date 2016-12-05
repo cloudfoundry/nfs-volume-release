@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -e
+
+scripts_path=./$(dirname $0)
+eval $($scripts_path/get_paths.sh)
+
+NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/
+
+# json encode the CEPH_KEYRING string since it is multiline and we will inject it into a json string
+#ENCODED_KEYRING=${CEPH_KEYRING//\\/\\\\} # \
+#ENCODED_KEYRING=${ENCODED_KEYRING//\//\\\/} # /
+#ENCODED_KEYRING=${ENCODED_KEYRING//\'/\\\'} # ' (not strictly needed ?)
+#ENCODED_KEYRING=${ENCODED_KEYRING//\"/\\\"} # "
+#ENCODED_KEYRING=${ENCODED_KEYRING//$'\t'/\\\t} # \t (tab)
+#ENCODED_KEYRING=${ENCODED_KEYRING//$'\n'/\\\n} # \n (newline)
+#ENCODED_KEYRING=${ENCODED_KEYRING//^M/\\\r} # \r (carriage return)
+#ENCODED_KEYRING=${ENCODED_KEYRING//^L/\\\f} # \f (form feed)
+#ENCODED_KEYRING=${ENCODED_KEYRING//^H/\\\b} # \b (backspace)
+
+mkdir -p ~/voldriver_plugins
+drivers_path=$(realpath ~/voldriver_plugins)
+
+if [ "$TRANSPORT" == "tcp" ]
+    then
+        listen_address=0.0.0.0:9750
+        driver_address=http://$listen_address
+else
+    listen_address=$drivers_path/nfsv3driver.sock
+    driver_address=$drivers_path/nfsv3driver.sock
+fi
+
+echo "{
+  \"volman_driver_path\": \"~/voldriver_plugins\",
+  \"driver_address\": \"$driver_address\",
+  \"driver_name\": \"nfsv3driver\",
+  \"create_config\": {
+    \"Name\": \"nfs-volume-name\",
+    \"Opts\": {
+      \"ip\":\"$NFS_SERVER_IP\",
+      \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
+      \"remote_mount_point\":\"/\"}
+  }
+} "  > $NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/fixture.json
+
+#      \"keyring\":\"$ENCODED_KEYRING\",
+
+export FIXTURE_FILENAME="$NFS_RELEASE_DIR/src/code.cloudfoundry.org/nfsv3driver/acceptance/fixture.json"
+
+cd `dirname $0`
+cd ../src/code.cloudfoundry.org/nfsv3driver
+
+go build -o "acceptance/exec/nfsv3driver" "cmd/nfsv3driver/main.go"
+
+go get -t code.cloudfoundry.org/volume_driver_cert
+
+echo $listen_address
+echo $drivers_path
+/bin/bash $NFS_RELEASE_DIR/scripts/startdriver.sh $listen_address $drivers_path
+
+pushd $NFS_RELEASE_DIR/src/code.cloudfoundry.org/volume_driver_cert
+    ginkgo
+popd
+
+/bin/bash $NFS_RELEASE_DIR/scripts/stopdriver.sh
+
+
+rm acceptance/exec/nfsv3driver
