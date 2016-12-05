@@ -1,0 +1,28 @@
+---
+name: nfsv3driver
+
+templates:
+  install.erb: bin/pre-start
+  ctl.erb: bin/nfsv3driver_ctl
+
+packages:
+- nfs_pid_utils
+- fuse-nfs
+- nfsv3driver
+
+properties:
+ nfsv3driver.listen_addr:
+    description: "address nfsv3driver listens on"
+    default: "127.0.0.1:7089"
+ nfsv3driver.debug_addr:
+   description: "address nfsv3driver will serve debug info"
+   default: "127.0.0.1:7189"
+ nfsv3driver.driver_path:
+   description: "path to place driver spec/json file for volman to discover"
+   default: "/var/vcap/data/voldrivers"
+ nfsv3driver.cell_mount_path:
+   description: "path to mount volumes into on the cell"
+   default: "/var/vcap/data/volumes/nfs"
+ nfsv3driver.log_level:
+   description: "nfsv3driver log level"
+   default: "info"

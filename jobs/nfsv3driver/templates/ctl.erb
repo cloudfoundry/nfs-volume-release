@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/nfsv3driver
+LOG_DIR=/var/vcap/sys/log/nfsv3driver
+PIDFILE=$RUN_DIR/nfsv3driver.pid
+
+source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "nfsv3driver"
+
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for GOLANG 1.5.3 DNS bug
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    # Allowed number of open file descriptors
+    ulimit -n 100000
+
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+#    exec chpst -u vcap:vcap sleep 10000 \
+#      2> >(tee -a $LOG_DIR/nfsdriver.stderr.log | logger -p user.error -t vcap.nfsdriver) \
+#      1> >(tee -a $LOG_DIR/nfsdriver.stdout.log | logger -p user.info -t vcap.nfsdriver)
+
+    exec chpst /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
+      --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
+      --transport="tcp" \
+      --debugAddr="<%= p("nfsv3driver.debug_addr") %>" \
+      --driversPath="<%= p("nfsv3driver.driver_path") %>" \
+      --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
+      --logLevel="<%= p("nfsv3driver.log_level") %>" \
+      2> >(tee -a $LOG_DIR/nfsv3driver.stderr.log | logger -p user.error -t vcap.nfsv3driver) \
+      1> >(tee -a $LOG_DIR/nfsv3driver.stdout.log | logger -p user.info -t vcap.nfsv3driver)
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: nfsv3driver_ctl {start|stop}"
+
+    ;;
+
+esac

@@ -1,0 +1,33 @@
+---
+name: nfsv3driver
+
+dependencies:
+- golang-nfsvolume
+- fuse-nfs
+
+files:
+  - code.cloudfoundry.org/cfhttp/*.go # gosub
+  - code.cloudfoundry.org/cfhttp/handlers/*.go # gosub
+  - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
+  - code.cloudfoundry.org/cflager/*.go # gosub
+  - code.cloudfoundry.org/clock/*.go # gosub
+  - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/goshims/execshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
+  - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/nfsdriver/*.go # gosub
+  - code.cloudfoundry.org/nfsv3driver/*.go # gosub
+  - code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver/*.go # gosub
+  - code.cloudfoundry.org/voldriver/*.go # gosub
+  - code.cloudfoundry.org/voldriver/backoff/*.go # gosub
+  - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
+  - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
+  - github.com/bmizerany/pat/*.go # gosub
+  - github.com/tedsuo/ifrit/*.go # gosub
+  - github.com/tedsuo/ifrit/grouper/*.go # gosub
+  - github.com/tedsuo/ifrit/http_server/*.go # gosub
+  - github.com/tedsuo/ifrit/sigmon/*.go # gosub
+  - github.com/tedsuo/rata/*.go # gosub

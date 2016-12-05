@@ -35,8 +35,8 @@ function sync_package() {
   )
 }
 
-sync_package cephdriver       -app code.cloudfoundry.org/cephdriver/cmd/cephdriver
-sync_package cephbroker       -app code.cloudfoundry.org/cephbroker/main/cephbroker
+sync_package nfsv3driver       -app code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver
+#sync_package cephbroker       -app code.cloudfoundry.org/cephbroker/main/cephbroker
 
 wait
 
