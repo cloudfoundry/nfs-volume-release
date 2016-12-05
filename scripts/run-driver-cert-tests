@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -e -x
 
 scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
@@ -29,6 +29,8 @@ else
     listen_address=$drivers_path/nfsv3driver.sock
     driver_address=$drivers_path/nfsv3driver.sock
 fi
+
+mkdir -p $NFS_RELEASE_DIR/tmp
 
 echo "{
   \"volman_driver_path\": \"~/voldriver_plugins\",
