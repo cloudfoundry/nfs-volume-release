@@ -10,7 +10,7 @@ sudo apt-get --assume-yes install autoconf automake libtool xsltproc fuse
 #mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
 #tar xzf libnfs-1.11.0.tar.gz
 
-pushd libnfs-1.11.0
+pushd lib-nfs
     libtoolize
     aclocal
     autoheader
