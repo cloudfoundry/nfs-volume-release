@@ -61,7 +61,7 @@ echo $listen_address
 echo $drivers_path
 #. ./$NFS_RELEASE_DIR/scripts/startdriver.sh $listen_address $drivers_path
 
-killall -9 nfsv3driver
+killall -9 nfsv3driver || true
 
 mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
 
@@ -72,6 +72,6 @@ pushd $NFS_RELEASE_DIR/src/code.cloudfoundry.org/volume_driver_cert
 popd
 
 #. ./$NFS_RELEASE_DIR/scripts/stopdriver.sh
-killall -9 nfsv3driver
+killall -9 nfsv3driver || true
 
-rm $NFS_RELEASE_DIR/tmp/nfsv3driver
+rm -f $NFS_RELEASE_DIR/tmp/nfsv3driver
