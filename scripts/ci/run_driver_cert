@@ -31,7 +31,7 @@ popd
 #### prepare for acceptance
 ######################################################################################
 
-export NFS_SERVER_IP=10.10.100.45 #TODO: replace with a route53 DNS alias
+export NFS_SERVER_IP=nfs.persi.cf-app.com
 
 pushd nfs-volume-release
     export GOROOT=/usr/local/go
