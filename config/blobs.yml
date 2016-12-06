@@ -23,3 +23,7 @@ libtool-2.4.6.tar.gz:
   object_id: e0ed438e-0f3f-4a57-bf0f-488a99af9682
   sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
   size: 1806697
+go1.7.linux-amd64.tar.gz:
+  object_id: 6183a9fa-4871-4853-8e46-c579f1d2f1a9
+  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
+  size: 81573766
