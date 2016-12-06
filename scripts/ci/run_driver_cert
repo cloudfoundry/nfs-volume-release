@@ -27,6 +27,10 @@ pushd fuse-nfs
     make install
 popd
 
+cat << EOF > /etc/fuse.conf
+user_allow_other
+EOF
+
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 ######################################################################################
