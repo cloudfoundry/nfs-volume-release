@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: nfs-volume-release
+  - name: nfs-volume-version
+
+outputs:
+  - name: created-nfs-volume-release
+
+params: []
+
+run:
+  path: nfs-volume-release/scripts/ci/create_nfs_volume_release

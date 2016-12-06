@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x -e
+
+version=`cat nfs-volume-version/number`
+pushd nfs-volume-release
+
+bosh -n --parallel 10 create release --version $version --name nfs-volume --force --with-tarball
+mv dev_releases/nfs-volume/nfs-volume-$version.tgz ../created-nfs-volume-release/nfsvolume-$version.tgz
+popd
