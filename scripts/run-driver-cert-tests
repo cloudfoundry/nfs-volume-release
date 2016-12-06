@@ -48,7 +48,7 @@ killall -9 nfsv3driver || true
 
 mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
 
-$NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="${listen_addr}" -transport="$TRANSPORT" -driversPath="$drivers_path" &
+$NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="$listen_addr" -transport="$TRANSPORT" -driversPath="$drivers_path" &
 
 pushd $NFS_RELEASE_DIR/src/code.cloudfoundry.org/volume_driver_cert
     ginkgo
