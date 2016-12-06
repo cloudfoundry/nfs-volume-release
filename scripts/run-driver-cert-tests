@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/tmp
-NFS_SERVER_IP=nfs.persi.cf-app.com:7589
+NFS_SERVER_IP=nfs.persi.cf-app.com
 
 mkdir -p ~/voldriver_plugins
 drivers_path=$(realpath ~/voldriver_plugins)
@@ -31,7 +31,7 @@ echo "{
     \"Opts\": {
       \"ip\":\"$NFS_SERVER_IP\",
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
-      \"remote_mount_point\":\"/\"}
+      \"remote_mount_point\":\"/export/users\"}
   }
 } "  > $NFS_RELEASE_DIR/tmp/fixture.json
 
