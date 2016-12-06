@@ -8,6 +8,8 @@ eval $($scripts_path/get_paths.sh)
 NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/tmp
 NFS_SERVER_IP=nfs.persi.cf-app.com
 
+listen_address=0.0.0.0:7589
+
 mkdir -p ~/voldriver_plugins
 drivers_path=$(realpath ~/voldriver_plugins)
 
