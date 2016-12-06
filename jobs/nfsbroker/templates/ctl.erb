@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/nfsbroker
+LOG_DIR=/var/vcap/sys/log/nfsbroker
+PIDFILE=$RUN_DIR/nfsbroker.pid
+
+source /var/vcap/packages/nfsvolume_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "nfsbroker"
+
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    mkdir -p "<%= p("nfsbroker.data-dir") %>"
+    chown -R vcap:vcap "<%= p("nfsbroker.data-dir") %>"
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for go DNS bug (fix slated for v1.7)
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap /var/vcap/packages/nfsbroker/bin/nfsbroker \
+      --listenAddr="<%= p("nfsbroker.listen-addr") %>" \
+      --serviceName="<%= p("nfsbroker.service-name") %>" \
+      --serviceId="<%= p("nfsbroker.service-id") %>" \
+      --dataDir="<%= p("nfsbroker.data-dir") %>" \
+      --username="<%= p("nfsbroker.username") %>" \
+      --password="<%= p("nfsbroker.password") %>" \
+      2> >(tee -a $LOG_DIR/nfsbroker.stderr.log | logger -p user.error -t vcap.nfsbroker) \
+      1> >(tee -a $LOG_DIR/nfsbroker.stdout.log | logger -p user.info -t vcap.nfsbroker)
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: nfsbroker_ctl {start|stop}"
+
+    ;;
+
+esac

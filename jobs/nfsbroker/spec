@@ -1,0 +1,30 @@
+---
+name: nfsbroker
+
+templates:
+  ctl.erb: bin/nfsbroker_ctl
+
+packages:
+- golang-nfsvolume
+- nfsvolume_pid_utils
+- nfsbroker
+
+properties:
+  nfsbroker.listen-addr:
+    description: "address nfsbroker listens on"
+    default: "0.0.0.0:8999"
+  nfsbroker.service-name:
+    description: "name of the service to be registered with cf"
+    default: "nfs"
+  nfsbroker.service-id:
+    description: "Id of the service to be registered with cf"
+    default: "nfs-service-guid"
+  nfsbroker.data-dir:
+    description: "Directory on broker VM to persist instance and binding state"
+    default: "/var/vcap/store/nfsbroker"
+  nfsbroker.username:
+    description: "Basic auth username to verify on incoming Service Broker requests"
+    default: "admin"
+  nfsbroker.password:
+    description: "Basic auth password to verify on incoming Service Broker requests"
+    default: "admin"
