@@ -28,3 +28,4 @@ properties:
   nfsbroker.password:
     description: "Basic auth password to verify on incoming Service Broker requests"
     default: "admin"
+  - github.com/cloudfoundry-community/nfsdriver/cmd/nfsdriver/*.go # gosub
