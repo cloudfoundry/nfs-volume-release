@@ -58,3 +58,15 @@
 	path = src/github.com/onsi/ginkgo
 	url = https://github.com/onsi/ginkgo
 	branch = master
+[submodule "src/github.com/cloudfoundry-community/nfsbroker"]
+	path = src/github.com/cloudfoundry-community/nfsbroker
+	url = https://github.com/cloudfoundry-community/nfsbroker
+	branch = master
+[submodule "src/github.com/pivotal-cf/brokerapi"]
+	path = src/github.com/pivotal-cf/brokerapi
+	url = https://github.com/pivotal-cf/brokerapi
+	branch = master
+[submodule "src/github.com/gorilla/mux"]
+	path = src/github.com/gorilla/mux
+	url = https://github.com/gorilla/mux
+	branch = master

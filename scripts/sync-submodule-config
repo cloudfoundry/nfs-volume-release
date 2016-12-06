@@ -11,6 +11,9 @@ go install github.com/vito/gosub
 
   # separate test and binary dependencies
   gosub list -test code.cloudfoundry.org/nfsv3driver/...
+
+  gosub list -app github.com/cloudfoundry-community/nfsbroker/cmd/...
+  gosub list -test github.com/cloudfoundry-community/nfsbroker/...
 } > /tmp/packages
 
 cat /tmp/packages | xargs gosub sync
