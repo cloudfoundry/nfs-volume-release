@@ -31,8 +31,6 @@ popd
 #### prepare for acceptance
 ######################################################################################
 
-export NFS_SERVER_IP=nfs.persi.cf-app.com
-
 pushd nfs-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
