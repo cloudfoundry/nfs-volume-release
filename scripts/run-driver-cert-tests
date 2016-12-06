@@ -31,9 +31,9 @@ echo "{
   \"create_config\": {
     \"Name\": \"nfs-volume-name\",
     \"Opts\": {
-      \"ip\":\"$NFS_SERVER_IP\",
+      \"ip\":\"nfs://$NFS_SERVER_IP/export/users/\",
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
-      \"remote_mount_point\":\"/export/users\"}
+      \"remote_mount_point\":\"\"}
   }
 } "  > $NFS_RELEASE_DIR/tmp/fixture.json
 
