@@ -5,4 +5,19 @@ dependencies:
 - golang-nfsvolume
 
 files:
-  - github.com/cloudfoundry-community/nfsdriver/cmd/nfsdriver/*.go # gosub
+  - code.cloudfoundry.org/cflager/*.go # gosub
+  - code.cloudfoundry.org/clock/*.go # gosub
+  - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/lager/*.go # gosub
+  - github.com/cloudfoundry-community/nfsbroker/cmd/nfsbroker/*.go # gosub
+  - github.com/cloudfoundry-community/nfsbroker/nfsbroker/*.go # gosub
+  - github.com/cloudfoundry-community/nfsbroker/utils/*.go # gosub
+  - github.com/gorilla/mux/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
+  - github.com/tedsuo/ifrit/*.go # gosub
+  - github.com/tedsuo/ifrit/grouper/*.go # gosub
+  - github.com/tedsuo/ifrit/http_server/*.go # gosub
+  - github.com/tedsuo/ifrit/sigmon/*.go # gosub
