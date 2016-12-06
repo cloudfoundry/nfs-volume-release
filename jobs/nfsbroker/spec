@@ -7,7 +7,6 @@ templates:
 packages:
 - golang-nfsvolume
 - nfsvolume_pid_utils
-- nfsbroker
 
 properties:
   nfsbroker.listen-addr:
