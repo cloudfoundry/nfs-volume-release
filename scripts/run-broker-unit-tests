@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e -x
+
+pushd src/github.com/cloudfoundry-community/nfsbroker
+  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+popd
