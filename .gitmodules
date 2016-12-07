@@ -70,3 +70,7 @@
 	path = src/github.com/gorilla/mux
 	url = https://github.com/gorilla/mux
 	branch = master
+[submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
+	path = src/code.cloudfoundry.org/persi-acceptance-tests
+	url = https://github.com/cloudfoundry-incubator/persi-acceptance-tests
+	branch = master

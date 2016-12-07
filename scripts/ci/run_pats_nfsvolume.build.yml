@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: nfs-volume-release
+
+params:
+  CF_USERNAME: replace-me
+  CF_PASSWORD: replace-me
+  CF_API_ENDPOINT: replace-me
+  APPS_DOMAIN: replace-me
+  APPLICATION_PATH: replace-me
+  NAME_PREFIX: efsvolume
+  SERVICE_NAME: replace-me
+  PLAN_NAME: replace-me
+  BROKER_URL: replace-me
+  BROKER_USER: replace-me
+  BROKER_PASSWORD: replace-me
+run:
+  path: nfs-volume-release/scripts/ci/run_pats_withsetup
