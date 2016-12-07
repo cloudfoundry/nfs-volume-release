@@ -1,0 +1,20 @@
+---
+name: nfs-volume
+
+compilation:
+  workers: 1
+  network: nfsvolume-subnet
+  reuse_compilation_vms: true
+  cloud_properties:
+    availability_zone: us-east-1c
+    instance_type: m3.large
+    ephemeral_disk:
+      size: 10000 # in MB
+      type: gp2
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  serial: false
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
