@@ -31,7 +31,7 @@ echo "{
   \"create_config\": {
     \"Name\": \"nfs-volume-name\",
     \"Opts\": {
-      \"ip\":\"nfs://$NFS_SERVER_IP/export/users/\",
+      \"source\":\"nfs://$NFS_SERVER_IP/export/users/\",
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
       \"remote_mount_point\":\"\"}
   }
