@@ -4,7 +4,7 @@ set -x -e
 
 ### Install ruby and the the bosh cli
 sudo apt-get update
-sudo apt-get --assume-yes install autoconf automake libtool xsltproc libfuse-dev
+sudo apt-get --assume-yes install autoconf automake libtool xsltproc libfuse-dev fuse
 
 #wget https://sites.google.com/site/libnfstarballs/li/libnfs-1.11.0.tar.gz?attredirects=0&d=1
 #mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
