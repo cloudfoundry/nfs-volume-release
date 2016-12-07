@@ -1,0 +1,80 @@
+---
+name: nfs-volume
+director_uuid:  (( merge ))
+
+compilation:
+  workers: 1
+  network: nfsvolume-subnet
+  reuse_compilation_vms: true
+  cloud_properties:
+    availability_zone: us-east-1c
+    instance_type: m3.large
+    ephemeral_disk:
+      size: 10000 # in MB
+      type: gp2
+
+jobs:
+- name: nfsbroker
+  instances: 1
+  log_level: debug
+  networks:
+  - name: nfsvolume-subnet
+    default: [dns, gateway]
+  - name: public
+    static_ips:
+    - <<: (( merge ))
+  resource_pool: medium
+  templates:
+  - release: nfs-volume
+    name: nfsbroker
+  - release: cf
+    name: route_registrar
+  persistent_disk: 25000
+  properties:
+    nfsbroker: {}
+    route_registrar:
+      routes:
+      - name: nfs-broker
+        port: 8999
+        registration_interval: 20s
+        tags:
+          component: nfs-broker
+        uris:
+        - nfs-broker.persi.cf-app.com
+
+networks:
+- name: nfsvolume-subnet
+  subnets: (( merge ))
+  type: manual
+- name: public
+  type: vip
+
+properties:
+  nfsbroker:
+    plan-desc: broker for exisiting NFS shares
+    username: (( merge ))
+    password: (( merge ))
+
+releases:
+  - name: nfs-volume
+    version: latest
+  - name: cf
+    version: latest
+
+resource_pools:
+  - name: large
+    network: nfsvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
+
+  - name: medium
+    network: nfsvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  serial: false
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
