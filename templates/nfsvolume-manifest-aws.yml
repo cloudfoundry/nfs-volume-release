@@ -54,6 +54,7 @@ properties:
     plan-desc: broker for exisiting NFS shares
     username: (( merge ))
     password: (( merge ))
+  nats: (( merge ))
 
 releases:
   - name: nfs-volume
