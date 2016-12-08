@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password"
+    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password server_addr share"
     exit 1
 }
 
@@ -46,7 +46,9 @@ pushd `dirname $0`
       \"broker_password\": \"${9}\",
       \"skip_ssl_validation\": true,
       \"default_timeout\": 30,
-      \"name_prefix\": \"PATs\"
+      \"name_prefix\": \"PATs\",
+      \"server_addr\": \"${10}\",
+      \"share\": \"${11}\"
     } "  > ${CONFIG}
 
     export TEST_APPLICATION_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora"
