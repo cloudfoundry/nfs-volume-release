@@ -21,8 +21,6 @@ import (
 
 const (
 	PCAP uint32 = 200
-
-	runes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 )
 
 var _ = Describe("Certify with: ", func() {
@@ -155,6 +153,8 @@ func asRoot(logger lager.Logger, cmd string, args ...string) ([]byte, error) {
 }
 
 func randomString(n int) string {
+	runes := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 	b := make([]rune, n)
 	for i := range b {
 		b[i] = runes[rand.Intn(len(runes))]
