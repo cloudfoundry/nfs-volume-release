@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 NFS_ACCEPTANCE_DIR=$NFS_RELEASE_DIR/tmp
-NFS_SERVER_IP=nfs.persi.cf-app.com
+NFS_SERVER_IP=54.234.122.229
 
 listen_address=0.0.0.0:7589
 
