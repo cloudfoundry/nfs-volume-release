@@ -29,12 +29,21 @@ var _ = Describe("Certify with: ", func() {
 		output []byte
 		attrs  syscall.SysProcAttr
 
+		source     string
+		mountPoint string
+
 		pcapMountPath string
 		rootMountPath string
 	)
 
 	BeforeEach(func() {
 		testLogger = lagertest.NewTestLogger("MainTest")
+
+		source = os.Getenv("FUSE_MOUNT")
+		Expect(source).NotTo(Equal(""))
+
+		mountPoint = os.Getenv("NFS_MOUNT")
+		Expect(source).NotTo(Equal(""))
 
 		attrs = syscall.SysProcAttr{
 			Credential: &syscall.Credential{
@@ -66,7 +75,7 @@ var _ = Describe("Certify with: ", func() {
 				output, err = asUser(testLogger, PCAP, PCAP, "mkdir", "-p", pcapMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
-				output, err = asUser(testLogger, PCAP, PCAP, "fuse-nfs", "-n", "nfs://nfs.persi.cf-app.com/export/users?uid=3000&gid=3050", "-m", pcapMountPath)
+				output, err = asUser(testLogger, PCAP, PCAP, "fuse-nfs", "-n", source, "-m", pcapMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
 				// root mount
@@ -75,7 +84,7 @@ var _ = Describe("Certify with: ", func() {
 				output, err = asRoot(testLogger, "mkdir", "-p", rootMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
-				output, err = asRoot(testLogger, "mount", "-t", "nfs", "-o", "nfsvers=3,nolock", "nfs.persi.cf-app.com:/export/users", rootMountPath)
+				output, err = asRoot(testLogger, "mount", "-t", "nfs", "-o", "nfsvers=3,nolock", mountPoint, rootMountPath)
 				Expect(err).NotTo(HaveOccurred())
 			})
 
