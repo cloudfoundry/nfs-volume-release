@@ -13,12 +13,16 @@ import (
 
 	"os"
 
+	"math/rand"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 const (
 	PCAP uint32 = 200
+
+	runes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 )
 
 var _ = Describe("Certify with: ", func() {
@@ -34,9 +38,12 @@ var _ = Describe("Certify with: ", func() {
 
 		pcapMountPath string
 		rootMountPath string
+
+		filename string
 	)
 
 	BeforeEach(func() {
+
 		testLogger = lagertest.NewTestLogger("MainTest")
 
 		source = os.Getenv("FUSE_MOUNT")
@@ -51,6 +58,8 @@ var _ = Describe("Certify with: ", func() {
 				Gid: PCAP,
 			},
 		}
+
+		filename = randomString(10)
 	})
 
 	Context("given a pcap user with uid:gid 200:200", func() {
@@ -89,6 +98,9 @@ var _ = Describe("Certify with: ", func() {
 			})
 
 			AfterEach(func() {
+				output, err = asUser(testLogger, PCAP, PCAP, "rm", filepath.Join(pcapMountPath, filename))
+				Expect(err).NotTo(HaveOccurred())
+
 				output, err = asRoot(testLogger, "umount", rootMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
@@ -103,14 +115,14 @@ var _ = Describe("Certify with: ", func() {
 			})
 
 			It("successfully creates a file with uid:gid pcap:pcap", func() {
-				output, err = asUser(testLogger, PCAP, PCAP, "touch", filepath.Join(pcapMountPath, "tempfile"))
+				output, err = asUser(testLogger, PCAP, PCAP, "touch", filepath.Join(pcapMountPath, filename))
 				Expect(err).NotTo(HaveOccurred())
 
-				output, err = asUser(testLogger, PCAP, PCAP, "stat", "-c", "%u:%g", filepath.Join(pcapMountPath, "tempfile"))
+				output, err = asUser(testLogger, PCAP, PCAP, "stat", "-c", "%u:%g", filepath.Join(pcapMountPath, filename))
 				Expect(err).NotTo(HaveOccurred())
 				Expect(string(output)).To(Equal("200:200\n"))
 
-				output, err = asUser(testLogger, PCAP, PCAP, "stat", "-c", "%u:%g", filepath.Join(rootMountPath, "tempfile"))
+				output, err = asUser(testLogger, PCAP, PCAP, "stat", "-c", "%u:%g", filepath.Join(rootMountPath, filename))
 				Expect(err).NotTo(HaveOccurred())
 				Expect(string(output)).To(Equal("3000:3050\n"))
 			})
@@ -140,4 +152,12 @@ func asUser(logger lager.Logger, uid, gid uint32, cmd string, args ...string) ([
 
 func asRoot(logger lager.Logger, cmd string, args ...string) ([]byte, error) {
 	return asUser(logger, 0, 0, cmd, args...)
+}
+
+func randomString(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = runes[rand.Intn(len(runes))]
+	}
+	return string(b)
 }
