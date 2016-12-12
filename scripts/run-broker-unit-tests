@@ -2,6 +2,6 @@
 
 set -e -x
 
-pushd src/github.com/cloudfoundry-community/nfsbroker
+pushd src/code.cloudfoundry.org/nfsbroker
   ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
 popd

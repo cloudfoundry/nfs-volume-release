@@ -62,14 +62,6 @@
 	path = src/github.com/cloudfoundry-community/nfsbroker
 	url = https://github.com/cloudfoundry-community/nfsbroker
 	branch = master
-[submodule "src/github.com/pivotal-cf/brokerapi"]
-	path = src/github.com/pivotal-cf/brokerapi
-	url = https://github.com/pivotal-cf/brokerapi
-	branch = master
-[submodule "src/github.com/gorilla/mux"]
-	path = src/github.com/gorilla/mux
-	url = https://github.com/gorilla/mux
-	branch = master
 [submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
 	path = src/code.cloudfoundry.org/persi-acceptance-tests
 	url = https://github.com/cloudfoundry-incubator/persi-acceptance-tests
@@ -82,6 +74,13 @@
 	path = src/github.com/nu7hatch/gouuid
 	url = https://github.com/nu7hatch/gouuid
 	branch = master
+[submodule "src/github.com/gorilla/mux"]
+	path = src/github.com/gorilla/mux
+	url = https://github.com/gorilla/mux
+[submodule "src/github.com/pivotal-cf/brokerapi"]
+	path = src/github.com/pivotal-cf/brokerapi
+	url = https://github.com/pivotal-cf/brokerapi
 [submodule "src/code.cloudfoundry.org/nfsbroker"]
 	path = src/code.cloudfoundry.org/nfsbroker
-	url = https://github.com/cloudfoundry-incubator/nfsbroker.git
+	url = https://github.com/cloudfoundry-incubator/nfsbroker
+	branch = master

@@ -11,9 +11,9 @@ files:
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
-  - github.com/cloudfoundry-community/nfsbroker/cmd/nfsbroker/*.go # gosub
-  - github.com/cloudfoundry-community/nfsbroker/nfsbroker/*.go # gosub
-  - github.com/cloudfoundry-community/nfsbroker/utils/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/cmd/nfsbroker/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
   - github.com/gorilla/mux/*.go # gosub
   - github.com/pivotal-cf/brokerapi/*.go # gosub
   - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
