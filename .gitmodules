@@ -82,3 +82,6 @@
 	path = src/github.com/nu7hatch/gouuid
 	url = https://github.com/nu7hatch/gouuid
 	branch = master
+[submodule "src/code.cloudfoundry.org/nfsbroker"]
+	path = src/code.cloudfoundry.org/nfsbroker
+	url = https://github.com/cloudfoundry-incubator/nfsbroker.git
