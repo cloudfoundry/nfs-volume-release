@@ -30,6 +30,7 @@ case $1 in
     ulimit -n 100000
 
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+    export PATH=/usr/local/bin:$PATH
 
 #    exec chpst -u vcap:vcap sleep 10000 \
 #      2> >(tee -a $LOG_DIR/nfsdriver.stderr.log | logger -p user.error -t vcap.nfsdriver) \
