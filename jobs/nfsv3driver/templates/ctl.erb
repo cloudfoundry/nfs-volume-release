@@ -23,7 +23,7 @@ case $1 in
     chown -R cvcap:cvcap $LOG_DIR
 
     mkdir -p /var/vcap/data/voldrivers
-    chmod 666 /var/vcap/data/voldrivers
+    chmod 777 /var/vcap/data/voldrivers
 
     export GOMAXPROCS=$(nproc)
 
