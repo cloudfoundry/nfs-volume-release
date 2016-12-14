@@ -13,11 +13,17 @@ case $1 in
   start)
     pid_guard $PIDFILE "nfsv3driver"
 
+   # make a new container cvcap user if it doesn't already exist
+   id -u cvcap &>/dev/null || useradd -u 2000 cvcap
+
     mkdir -p $RUN_DIR
-    chown -R vcap:vcap $RUN_DIR
+    chown -R cvcap:cvcap $RUN_DIR
 
     mkdir -p $LOG_DIR
-    chown -R vcap:vcap $LOG_DIR
+    chown -R cvcap:cvcap $LOG_DIR
+
+    mkdir -p /var/vcap/data/voldrivers
+    chmod 666 /var/vcap/data/voldrivers
 
     export GOMAXPROCS=$(nproc)
 
@@ -36,8 +42,6 @@ case $1 in
 #      2> >(tee -a $LOG_DIR/nfsdriver.stderr.log | logger -p user.error -t vcap.nfsdriver) \
 #      1> >(tee -a $LOG_DIR/nfsdriver.stdout.log | logger -p user.info -t vcap.nfsdriver)
 
-   # make a new container vcap user if it doesn't already exist
-   id -u cvcap &>/dev/null || useradd -u 2000 cvcap
 
     exec chpst -u cvcap:cvcap /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
       --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
