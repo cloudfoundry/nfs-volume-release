@@ -16,6 +16,7 @@ popd
 echo "Installing fuse-nfs"
 pushd /var/vcap/packages/fuse-nfs/fuse-nfs
 make install
+setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
 popd
 
 cat << EOF > /etc/fuse.conf
