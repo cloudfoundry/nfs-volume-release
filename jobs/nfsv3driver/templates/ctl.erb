@@ -25,6 +25,9 @@ case $1 in
     mkdir -p /var/vcap/data/voldrivers
     chmod 777 /var/vcap/data/voldrivers
 
+    mkdir -p "<%= p("nfsv3driver.cell_mount_path") %>"
+    chown -R cvcap:cvcap "<%= p("nfsv3driver.cell_mount_path") %>"
+
     export GOMAXPROCS=$(nproc)
 
     # Work around for GOLANG 1.5.3 DNS bug

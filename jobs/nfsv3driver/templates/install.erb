@@ -19,10 +19,13 @@ make install
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
 popd
 
+# make a new container cvcap user if it doesn't already exist
+id -u cvcap &>/dev/null || useradd -u 2000 cvcap
+
 cat << EOF > /etc/fuse.conf
 user_allow_other
 EOF
-chown vcap:vcap /etc/fuse.conf
+chown cvcap:cvcap /etc/fuse.conf
 
 echo "Installed fuse-nfs"
 exit 0
