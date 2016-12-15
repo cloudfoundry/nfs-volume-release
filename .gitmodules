@@ -77,6 +77,7 @@
 [submodule "src/github.com/gorilla/mux"]
 	path = src/github.com/gorilla/mux
 	url = https://github.com/gorilla/mux
+	branch = master
 [submodule "src/github.com/pivotal-cf/brokerapi"]
 	path = src/github.com/pivotal-cf/brokerapi
 	url = https://github.com/julian-hj/brokerapi
