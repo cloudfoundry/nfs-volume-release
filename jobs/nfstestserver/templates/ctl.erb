@@ -13,19 +13,20 @@ case $1 in
   start)
     pid_guard $PIDFILE "nfsd"
 
-    service nfs-kernel-server start
+    service nfs-kernel-server start \
+      2> >(tee -a $LOG_DIR/nfstestserver.stderr.log | logger -p user.error -t vcap.nfstestserver) \
+      1> >(tee -a $LOG_DIR/nfstestserver.stdout.log | logger -p user.info -t vcap.nfstestserver)
 
-    # gross...only ok because it is a test server
-    sleep 2
+    while [ "$(pidof -s nfsd)" == "" ]; do
+      sleep 1
+    done
 
+    mkdir -p $RUN_DIR
     pidof -s nfsd > $PIDFILE
     ;;
 
   stop)
-    service nfs-kernel-server stop \
-      2> >(tee -a $LOG_DIR/nfstestserver.stderr.log | logger -p user.error -t vcap.nfstestserver) \
-      1> >(tee -a $LOG_DIR/nfstestserver.stdout.log | logger -p user.info -t vcap.nfstestserver)
-
+    service nfs-kernel-server stop
     ;;
 
   *)
