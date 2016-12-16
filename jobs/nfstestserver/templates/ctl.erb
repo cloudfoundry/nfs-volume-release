@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/nfstestserver
+LOG_DIR=/var/vcap/sys/log/nfstestserver
+PIDFILE=$RUN_DIR/nfstestserver.pid
+
+source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "nfsd"
+
+    service nfs-kernel-server start
+
+    # gross...only ok because it is a test server
+    sleep 2
+
+    pidof -s nfsd > $PIDFILE
+    ;;
+
+  stop)
+    service nfs-kernel-server stop \
+      2> >(tee -a $LOG_DIR/nfstestserver.stderr.log | logger -p user.error -t vcap.nfstestserver) \
+      1> >(tee -a $LOG_DIR/nfstestserver.stdout.log | logger -p user.info -t vcap.nfstestserver)
+
+    ;;
+
+  *)
+    echo "Usage: nfstestserver_ctl {start|stop}"
+
+    ;;
+
+esac

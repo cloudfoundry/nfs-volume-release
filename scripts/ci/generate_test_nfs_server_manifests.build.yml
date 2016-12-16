@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: deployments-persi
+  - name: nfs-volume-release
+
+outputs:
+  - name: generated-manifest-nfs
+
+params:
+  DEPLOYMENTS_DIR: replace-me
+  ENVIRONMENT_NAME: replace-me
+  BOSH_PASSWORD: replace-me
+  BOSH_TARGET: replace-me
+  BOSH_USERNAME: replace-me
+  INFRASTRUCTURE: replace-me
+
+run:
+  path: nfs-volume-release/scripts/ci/generate_test_nfs_server_manifests
+

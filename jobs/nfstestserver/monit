@@ -1,0 +1,5 @@
+check process nfstestserver
+  with pidfile /var/vcap/sys/run/nfstestserver/nfstestserver.pid
+  start program "/var/vcap/jobs/nfstestserver/bin/nfstestserver_ctl start"
+  stop program "/var/vcap/jobs/nfstestserver/bin/nfstestserver_ctl stop"
+  group vcap

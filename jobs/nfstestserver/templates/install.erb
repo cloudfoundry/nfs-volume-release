@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e -x
+
+echo "Installing nfs server"
+
+apt-get update
+apt-get --assume-yes install nfs-kernel-server
+
+mkdir -p /export/users
+chmod 777 /export
+chmod 777 /export/users
+
+cat << EOF > /etc/exports
+/export       10.0.0.0/8(rw,fsid=0,no_subtree_check,async)
+/export/users 10.0.0.0/8(rw,nohide,no_subtree_check,async)
+EOF
+
+exit 0
