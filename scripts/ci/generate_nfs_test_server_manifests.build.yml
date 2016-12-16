@@ -19,5 +19,5 @@ params:
   INFRASTRUCTURE: replace-me
 
 run:
-  path: nfs-volume-release/scripts/ci/generate_test_nfs_server_manifests
+  path: nfs-volume-release/scripts/ci/generate_nfs_test_server_manifests
 
