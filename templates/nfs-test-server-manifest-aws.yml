@@ -1,5 +1,5 @@
 ---
-name: nfs-test_server
+name: nfs-server
 director_uuid:  (( merge ))
 
 compilation:
