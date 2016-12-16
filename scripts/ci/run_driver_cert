@@ -6,10 +6,6 @@ set -x -e
 sudo apt-get update
 sudo apt-get --assume-yes install autoconf automake libtool xsltproc libfuse-dev fuse nfs-common
 
-#wget https://sites.google.com/site/libnfstarballs/li/libnfs-1.11.0.tar.gz?attredirects=0&d=1
-#mv libnfs-1.11.0.tar.gz?attredirects=0&d=1 libnfs-1.11.0.tar.gz
-#tar xzf libnfs-1.11.0.tar.gz
-
 pushd lib-nfs
     libtoolize
     aclocal
@@ -19,6 +15,8 @@ pushd lib-nfs
     ./configure
     make install
 popd
+
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 pushd fuse-nfs
     ./setup.sh

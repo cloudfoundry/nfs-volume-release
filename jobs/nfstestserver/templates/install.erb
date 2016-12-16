@@ -8,12 +8,17 @@ apt-get update
 apt-get --assume-yes install nfs-kernel-server
 
 mkdir -p /export/users
+mkdir -p /export2/certs
 chmod 777 /export
+chmod 777 /export2
 chmod 777 /export/users
+chmod 777 /export2/certs
 
 cat << EOF > /etc/exports
-/export       10.0.0.0/8(rw,fsid=0,no_subtree_check,async)
-/export/users 10.0.0.0/8(rw,nohide,no_subtree_check,async)
+/export        10.0.0.0/8(rw,fsid=0,no_subtree_check,async)
+/export/users  10.0.0.0/8(rw,nohide,no_subtree_check,async)
+/export2       10.0.0.0/8(rw,fsid=1,no_subtree_check,async,insecure)
+/export2/certs 10.0.0.0/8(rw,nohide,no_subtree_check,async,insecure)
 EOF
 
 exit 0
