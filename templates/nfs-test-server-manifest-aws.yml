@@ -19,9 +19,9 @@ jobs:
   networks:
   - name: nfsvolume-subnet
     default: [dns, gateway]
-    static_ips: [10.10.200.72] #TODO merge this in
+    static_ips: (( nfs-test-server.ips ))
   - name: public
-    static_ips: [52.2.197.67]
+    static_ips: (( nfs-test-server.public_ips ))
   resource_pool: medium
   templates:
   - release: nfs-volume
@@ -61,3 +61,5 @@ update:
   serial: false
   canary_watch_time: 1000-30000
   update_watch_time: 1000-30000
+
+nfs-test-server: (( merge ))
