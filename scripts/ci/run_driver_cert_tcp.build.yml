@@ -10,6 +10,7 @@ inputs:
 
 params:
   TRANSPORT: tcp
+  SOURCE: ~
 
 run:
   path: nfs-volume-release/scripts/ci/run_driver_cert
