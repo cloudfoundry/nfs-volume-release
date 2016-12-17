@@ -41,5 +41,5 @@ pushd nfs-volume-release
     go get github.com/onsi/ginkgo/ginkgo
     go get github.com/onsi/gomega
 
-    ./scripts/run-driver-cert-tests -race
+    SOURCE=$SOURCE ./scripts/run-driver-cert-tests -race
 popd
