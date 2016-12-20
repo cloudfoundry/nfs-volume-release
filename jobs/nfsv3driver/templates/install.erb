@@ -2,21 +2,21 @@
 
 set -e -x
 
-echo "Installing libfuse"
+echo "Copying libfuse Shared Objects"
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
-make install
+cp lib/.libs/*.so /usr/lib
 popd
 
-echo "Installing libnfs"
+echo "Copying libnfs Shared Objects"
 pushd /var/vcap/packages/fuse-nfs/libnfs-1.11.0
-./configure
-make install
+cp lib/.libs/*.so /usr/lib
+cp lib/.libs/*.so.8 /usr/lib
 popd
 
-echo "Installing fuse-nfs"
+echo "Adding fuse-nfs to PATH"
 pushd /var/vcap/packages/fuse-nfs/fuse-nfs
-make install
-setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
+cp fuse/fuse-nfs /usr/bin
+setcap 'cap_net_bind_service=+ep' /usr/bin/fuse-nfs
 popd
 
 # make a new container cvcap user if it doesn't already exist
