@@ -203,14 +203,16 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
 
 ### Generate the Deployment Manifest
 * run the following script:
+
     ```bash
     $ ./scripts/generate_manifest.sh cf.yml director-uuid.yml iaas.yml creds.yml  
     ```
 
-that will generate `nfsvolume-aws-manifest.yml` in the current directory.
+to generate `nfsvolume-aws-manifest.yml` into the current directory.
 
 ### Deploy NFS Broker
-* type the following: 
+* Deploy the broker using the generated manifest: 
+
     ```bash
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
