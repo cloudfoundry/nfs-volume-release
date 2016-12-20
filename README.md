@@ -285,20 +285,23 @@ If you do not have an existing NFS Server then you can optionally deploy the tes
 NB: manually edit to fix hard-coded ip ranges, security groups and subnets to match your deployment.
 
 * run the following script:
+
     ```bash
     $ ./scripts/generate_server_manifest.sh director-uuid.yml iaas.yml
     ```
 
-that will generate `nfs-test-server-aws-manifest.yml` in the current directory.
+to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 
 ### Deploy the NFS Server
-* type the following: 
+* Deploy the NFS server using the generated manifest:
+
     ```bash
     $ bosh -d nfs-test-server-aws-manifest.yml deploy
     ```
     
 ## Register nfs-broker
-* type the following: 
+* Register the broker and grant access to it's service with the following command: 
+
     ```bash
     $ cf create-service-broker nfsbroker <BROKER_USERNAME> <BROKER_PASSWORD> http://nfs-broker.YOUR.DOMAIN.com
     $ cf enable-service-access nfs
@@ -306,6 +309,7 @@ that will generate `nfs-test-server-aws-manifest.yml` in the current directory.
 
 ## Create an NFS volume service
 * type the following: 
+
     ```bash
     $ cf create-service nfs Existing myVolume -c '{"share":"<PRIVATE_IP>/export/users"}'
     $ cf services
