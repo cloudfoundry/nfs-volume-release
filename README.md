@@ -311,7 +311,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 * type the following: 
 
     ```bash
-    $ cf create-service nfs Existing myVolume -c '{"share":"<PRIVATE_IP>/export/users"}'
+    $ cf create-service nfs Existing myVolume -c '{"share":"<PRIVATE_IP>/export/vol1"}'
     $ cf services
     ```
 
