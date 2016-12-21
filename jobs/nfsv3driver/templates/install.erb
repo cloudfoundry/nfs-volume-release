@@ -2,9 +2,11 @@
 
 set -e -x
 
-echo "Copying libfuse Shared Objects"
+echo "Copying libfuse Shared Objects and installing fusermount"
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
 cp lib/.libs/*.so /usr/lib
+cp util/fusermount /usr/bin
+setcap 'cap_sys_admin=+ep' /usr/bin/fusermount
 popd
 
 echo "Copying libnfs Shared Objects"
