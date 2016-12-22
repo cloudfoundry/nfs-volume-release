@@ -323,7 +323,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     
     $ cf push pora --no-start
     
-    $ cf bind-service pora myVolume
+    $ cf bind-service pora myVolume -c '{"uid":"1000","gid":"1000"}'
     
     $ cf start pora
     ```
