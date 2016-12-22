@@ -32,6 +32,7 @@ check_param BROKER_USER
 check_param BROKER_PASSWORD
 check_param SERVER_ADDRESS
 check_param SHARE
+check_param BIND_CONFIG
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
@@ -51,4 +52,5 @@ ${BROKER_URL} \
 ${BROKER_USER} \
 ${BROKER_PASSWORD} \
 ${SERVER_ADDRESS} \
-${SHARE}
+${SHARE} \
+${BIND_CONFIG}

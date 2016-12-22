@@ -48,7 +48,8 @@ pushd `dirname $0`
       \"default_timeout\": 30,
       \"name_prefix\": \"PATs\",
       \"server_addr\": \"${10}\",
-      \"share\": \"${11}\"
+      \"share\": \"${11}\",
+      \"bind_config\": \"${12}\",
     } "  > ${CONFIG}
 
     export TEST_APPLICATION_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora"
