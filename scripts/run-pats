@@ -34,27 +34,29 @@ pushd `dirname $0`
       popd
     fi
 
-    echo "{
-      \"admin_user\": \"${1}\",
-      \"admin_password\": \"${2}\",
-      \"api\": \"${3}\",
-      \"apps_domain\": \"${4}\",
-      \"service_name\": \"${5}\",
-      \"plan_name\": \"${6}\",
-      \"broker_url\": \"${7}\",
-      \"broker_user\": \"${8}\",
-      \"broker_password\": \"${9}\",
-      \"skip_ssl_validation\": true,
-      \"default_timeout\": 30,
-      \"name_prefix\": \"PATs\",
-      \"server_addr\": \"${10}\",
-      \"share\": \"${11}\",
-      \"bind_config\": \"${12}\",
-    } "  > ${CONFIG}
+cat << EOF > ${CONFIG}
+{
+      "admin_user": "${1}",
+      "admin_password": "${2}",
+      "api": "${3}",
+      "apps_domain": "${4}",
+      "service_name": "${5}",
+      "plan_name": "${6}",
+      "broker_url": "${7}",
+      "broker_user": "${8}",
+      "broker_password": "${9}",
+      "skip_ssl_validation": true,
+      "default_timeout": 30,
+      "name_prefix": "PATs",
+      "server_addr": "${10}",
+      "share": "${11}",
+      "bind_config": "{\"uid\":\"1000\",\"gid\":\"1000\"}"
+    }
+EOF
 
     export TEST_APPLICATION_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora"
 
     pushd  ../src/code.cloudfoundry.org/persi-acceptance-tests
-        CONFIG=${CONFIG} ginkgo -r -p -race .
+        CONFIG=${CONFIG} ginkgo -r .
     popd
 popd
