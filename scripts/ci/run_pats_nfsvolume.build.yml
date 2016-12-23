@@ -20,6 +20,5 @@ params:
   BROKER_PASSWORD: replace-me
   SERVER_ADDRESS: replace-me
   SHARE: replace-me
-  BIND_CONFIG: replace-me
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup
