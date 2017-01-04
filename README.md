@@ -7,7 +7,7 @@ This broker/driver pair allows you to provision existing NFS volumes and bind th
 
 ## Pre-requisites
 
-1. Install Cloud Foundry with Diego, or start from an existing CF+Diego deployment on AWS.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://github.com/cloudfoundry/diego-release/tree/develop/examples/aws) provides detailed instructions. 
+1. Install Cloud Foundry with Diego, or start from an existing CF+Diego deployment on AWS.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://github.com/cloudfoundry/diego-release/tree/develop/examples/aws) provides detailed instructions.
 
 2. If you don't already have it, install spiff according to its [README](https://github.com/cloudfoundry-incubator/spiff). spiff is a tool for generating BOSH manifests that is required in some of the scripts used below.
 
@@ -30,16 +30,16 @@ This broker/driver pair allows you to provision existing NFS volumes and bind th
 
 ## Enable Volume Services in CF and Redeploy
 
-In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.) 
+In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.)
 
 ## Colocate the nfsv3driver job on the Diego Cell
 If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh status` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
 
-### OLD WAY #1 Using Scripts to generate the Diego Manifest 
-If you originally created your Diego manifest from the scripts in diego-release, then you can use the same scripts to recreate the manifest with `nfsv3driver` included. 
+### OLD WAY #1 Using Scripts to generate the Diego Manifest
+If you originally created your Diego manifest from the scripts in diego-release, then you can use the same scripts to recreate the manifest with `nfsv3driver` included.
 
 1. In your diego-release folder, locate the file `manifest-generation/bosh-lite-stubs/experimental/voldriver/drivers.yml` and copy it into your local directory.  Edit it to look like this:
-    
+
     ```yaml
     volman_overrides:
       releases:
@@ -55,10 +55,10 @@ If you originally created your Diego manifest from the scripts in diego-release,
 3. Redeploy Diego.  Again, this will be a fast operation as it only needs to start the new `nfsv3driver` job on each Diego cell.
 
 ### OLD WAY #2 Manual Editing
-If you did not use diego scripts to generate your manifest, you can manually edit your diego manifest to include the driver. 
+If you did not use diego scripts to generate your manifest, you can manually edit your diego manifest to include the driver.
 
 1. Add `nfs-volume` to the `releases:` key
-    
+
     ```yaml
     releases:
     - name: diego
@@ -68,20 +68,20 @@ If you did not use diego scripts to generate your manifest, you can manually edi
       version: latest
     ```
 2. Add `nfsv3driver` to the `jobs: name: cell_z1 templates:` key
-    
+
     ```yaml
     jobs:
-      ... 
+      ...
       - name: cell_z1
-        ... 
+        ...
         templates:
         - name: consul_agent
           release: cf
-          ... 
+          ...
         - name: nfsv3driver
           release: nfs-volume
     ```
-    
+
 3. If you are using multiple AZz, repeat step 2 for `cell_z2`, `cell_z3`, etc.
 
 4. Redeploy Diego using your new manifest.
@@ -90,7 +90,7 @@ If you did not use diego scripts to generate your manifest, you can manually edi
 This technique allows you to co-locate bosh jobs on cells without editing the Diego bosh manifest.
 
 1. Create a new `runtime-config.yml` with the following content:
-   
+
     ```yaml
     ---
     releases:
@@ -99,9 +99,9 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
     addons:
     - name: voldrivers
       include:
-        deployments: 
+        deployments:
         - <YOUR DIEGO DEPLOYMENT NAME>
-        jobs: 
+        jobs:
         - name: rep
           release: diego
       jobs:
@@ -126,10 +126,10 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
 
 * copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
 
-#### director.yml 
+#### director.yml
 * determine your bosh director uuid by invoking bosh status --uuid
 * create a new director.yml file and place the following contents into it:
-    
+
     ```yaml
     ---
     director_uuid: <your uuid>
@@ -146,7 +146,7 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
           networks:
           - name: public
             static_ips: [<--- STATIC IP WANT YOUR NFSBROKER TO BE IN --->]
-        
+
         networks:
         - name: nfsvolume-subnet
           subnets:
@@ -167,7 +167,7 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
             # -> nfs range 10.10.200.121-125 <-
             static:
             - 10.10.200.10 - 10.10.200.105
-        
+
         resource_pools:
           - name: medium
             stemcell:
@@ -189,9 +189,9 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
 
 #### creds.yml
 * Determine the following information
-    - BROKER_USERNAME: some invented username 
+    - BROKER_USERNAME: some invented username
     - BROKER_PASSWORD: some invented password
-    
+
 * create a new creds.yml file and place the following contents into it:
     ```yaml
         ---
@@ -211,12 +211,12 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
 to generate `nfsvolume-aws-manifest.yml` into the current directory.
 
 ### Deploy NFS Broker
-* Deploy the broker using the generated manifest: 
+* Deploy the broker using the generated manifest:
 
     ```bash
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
-   
+
 ## Deploying the Test NFS Server (Optional)
 
 If you do not have an existing NFS Server then you can optionally deploy the test nfs server bundled in this release.
@@ -225,10 +225,10 @@ If you do not have an existing NFS Server then you can optionally deploy the tes
 
 #### Create Stub Files
 
-##### director.yml 
+##### director.yml
 * determine your bosh director uuid by invoking bosh status --uuid
 * create a new director.yml file and place the following contents into it:
-    
+
     ```yaml
     ---
     director_uuid: <your uuid>
@@ -256,11 +256,11 @@ If you do not have an existing NFS Server then you can optionally deploy the tes
             # ceph range 10.10.200.106-110
             # local range 10.10.200.111-115
             # efs range 10.10.200.116-120
-            # nfs range 10.10.200.121-125 
+            # nfs range 10.10.200.121-125
             - 10.10.200.106 - 10.10.200.125
             static:
             - 10.10.200.10 - 10.10.200.105
-        
+
         resource_pools:
           - name: medium
             stemcell:
@@ -276,7 +276,7 @@ If you do not have an existing NFS Server then you can optionally deploy the tes
             cloud_properties:
               instance_type: m3.large
               availability_zone: us-east-1c
-        
+
         nfs-test-server:
           ips: [<--- PRIVATE IP ADDRESS --->]
           public_ips: [<--- PUBLIC IP ADDRESS --->]
@@ -299,8 +299,10 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     $ bosh -d nfs-test-server-aws-manifest.yml deploy
     ```
     
+* Note the default **gid** & **uid** which are 0 and 0 respectively (root).
+
 ## Register nfs-broker
-* Register the broker and grant access to it's service with the following command: 
+* Register the broker and grant access to it's service with the following command:
 
     ```bash
     $ cf create-service-broker nfsbroker <BROKER_USERNAME> <BROKER_PASSWORD> http://nfs-broker.YOUR.DOMAIN.com
@@ -308,28 +310,37 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     ```
 
 ## Create an NFS volume service
-* type the following: 
+* type the following:
 
     ```bash
     $ cf create-service nfs Existing myVolume -c '{"share":"<PRIVATE_IP>/export/vol1"}'
     $ cf services
     ```
 
-## Deploy the pora test app, bind it to your service and start the app
+## Deploy the pora test app, first by pushing the source code to CloudFoundry
 * type the following:
- 
+
     ```bash
     $ cd src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora
-    
+
     $ cf push pora --no-start
-    
-    $ cf bind-service pora myVolume -c '{"uid":"1000","gid":"1000"}'
-    
+    ```
+
+* Bind the service to your app supplying the correct uid and gid corresponding to what is seen on the nfs server.
+    ```bash
+    $ cf bind-service pora myVolume -c '{"uid":"0","gid":"0"}'
+    ```
+
+* Start the application
+    ```bash
     $ cf start pora
     ```
 
 ## Test the app to make sure that it can access your NFS volume
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
 * to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
-* test files will be written as the application user 1000:1000
 
+## User and Group ID
+* When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.
+* The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.
+* Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
