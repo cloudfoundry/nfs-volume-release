@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -x -e
+
+######################################################################################
+#### prepare for acceptance
+######################################################################################
+
+pushd nfs-volume-release
+    export GOROOT=/usr/local/go
+    export PATH=$GOROOT/bin:$PATH
+
+    export GOPATH=$PWD
+    export PATH=$PWD/bin:$PATH
+
+    go get github.com/onsi/ginkgo/ginkgo
+    go get github.com/onsi/gomega
+
+    ./scripts/run-kerbdriver-cert-tests -race
+popd
