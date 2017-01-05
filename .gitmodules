@@ -80,7 +80,7 @@
 	branch = master
 [submodule "src/github.com/pivotal-cf/brokerapi"]
 	path = src/github.com/pivotal-cf/brokerapi
-	url = https://github.com/julian-hj/brokerapi
+	url = https://github.com/pivotal-cf/brokerapi
 	branch = master
 [submodule "src/code.cloudfoundry.org/nfsbroker"]
 	path = src/code.cloudfoundry.org/nfsbroker
