@@ -2,6 +2,12 @@
 
 set -x -e
 
+### Install kinit
+sudo apt-get update
+sudo apt-get --assume-yes install krb5-user
+
+### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
+
 ######################################################################################
 #### prepare for acceptance
 ######################################################################################
