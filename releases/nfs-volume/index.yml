@@ -2,4 +2,6 @@
 builds:
   ee70dbff-59fe-4590-98e8-64fefea2d566:
     version: 0.0.0
+  feed4394-af36-4db1-8194-22c6010f7018:
+    version: 0.0.1
 format-version: '2'
