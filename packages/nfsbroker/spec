@@ -10,6 +10,7 @@ files:
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/cmd/nfsbroker/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
