@@ -32,7 +32,9 @@ echo "{
     \"Opts\": {
       \"source\":\"$SOURCE\",
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
-      \"remote_mount_point\":\"/export/home\"}
+      \"kerberosPrincipal\":/"share1@PERSI.CF-APP.COM/",
+      \"kerberosKeytab\":\"$KEYTAB\",
+      \"mode\":\"1\"}
   }
 } "  > $NFS_ACCEPTANCE_DIR/kerb-fixture.json
 
