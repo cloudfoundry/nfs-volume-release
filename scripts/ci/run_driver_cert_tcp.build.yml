@@ -5,6 +5,8 @@ image: docker:///cloudfoundry/inigo-ci
 
 inputs:
   - name: nfs-volume-release
+  - name: lib-nfs
+  - name: fuse-nfs
 
 params:
   TRANSPORT: tcp
