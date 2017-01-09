@@ -7,6 +7,12 @@ sudo apt-get update
 sudo apt-get --assume-yes install krb5-user
 
 ### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
+ktutil <<EOT
+addent -password -p share1@PERSI.CF-APP.COM -k 1 -e aes256-cts
+
+wkt /tmp/share1.keytab
+EOT
+export KEYTAB=`cat /tmp/share1.keytab | base64`
 
 ######################################################################################
 #### prepare for acceptance
