@@ -3,8 +3,12 @@
 set -x -e
 
 ### Install kinit
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 sudo apt-get --assume-yes install krb5-user
+
+cat /etc/krb5.conf | sed -e 's/default_realm = ATHENA.MIT.EDU/default_realm = PERSI.CF-APP.COM/' > /tmp/krb5.conf
+mv -f /tmp/krb5.conf /etc/krb5.conf
 
 ### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
 ktutil <<EOT
