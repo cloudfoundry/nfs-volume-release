@@ -42,7 +42,7 @@ properties:
     description: "(optional) database hostname when using SQL to store broker state",
   nfsbroker.dbPort:
     default: "",
-    description: "(optional) dacdtabase port when using SQL to store broker state",
+    description: "(optional) database port when using SQL to store broker state",
   nfsbroker.dbName:
     default: "",
     description: "(optional) database name when using SQL to store broker state",
