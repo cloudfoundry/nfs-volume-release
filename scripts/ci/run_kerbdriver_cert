@@ -16,7 +16,7 @@ addent -password -p share1@PERSI.CF-APP.COM -k 1 -e aes256-cts
 
 wkt /tmp/share1.keytab
 EOT
-export KEYTAB=`cat /tmp/share1.keytab | base64`
+export KEYTAB=`cat /tmp/share1.keytab | base64 | awk '{printf "%s",$0}END{print""}'`
 
 ######################################################################################
 #### prepare for acceptance
