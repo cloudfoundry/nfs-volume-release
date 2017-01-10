@@ -36,6 +36,12 @@ case $1 in
       --dataDir="<%= p("nfsbroker.data-dir") %>" \
       --username="<%= p("nfsbroker.username") %>" \
       --password="<%= p("nfsbroker.password") %>" \
+      --dbDriver="<%= p("nfsbroker.dbDriver") %>" \
+      --dbUsername="<%= p("nfsbroker.dbUsername") %>" \
+      --dbPassword="<%= p("nfsbroker.dbPassword") %>" \
+      --dbHostname="<%= p("nfsbroker.dbHostname") %>" \
+      --dbPort="<%= p("nfsbroker.dbPort") %>" \
+      --dbName="<%= p("nfsbroker.dbName") %>" \
       2> >(tee -a $LOG_DIR/nfsbroker.stderr.log | logger -p user.error -t vcap.nfsbroker) \
       1> >(tee -a $LOG_DIR/nfsbroker.stdout.log | logger -p user.info -t vcap.nfsbroker)
 
