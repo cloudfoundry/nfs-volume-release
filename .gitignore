@@ -11,6 +11,7 @@ dev_releases/**/*
 *.swp
 config/private.yml
 config/dev.yml
+releases/nfs-volume/*.tgz
 
 ## goPath system specifics
 pkg
