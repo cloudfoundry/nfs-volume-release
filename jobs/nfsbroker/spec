@@ -38,11 +38,11 @@ properties:
     default: ""
     description: "(optional) database password when using SQL to store broker state"
   nfsbroker.dbHostname:
-    default: "",
-    description: "(optional) database hostname when using SQL to store broker state",
+    default: ""
+    description: "(optional) database hostname when using SQL to store broker state"
   nfsbroker.dbPort:
-    default: "",
-    description: "(optional) database port when using SQL to store broker state",
+    default: ""
+    description: "(optional) database port when using SQL to store broker state"
   nfsbroker.dbName:
-    default: "",
-    description: "(optional) database name when using SQL to store broker state",
+    default: ""
+    description: "(optional) database name when using SQL to store broker state"
