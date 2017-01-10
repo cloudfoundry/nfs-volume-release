@@ -346,4 +346,11 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 * Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
 
 
-
+# Todo: reduce the size of this repo going forward
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA' \
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.0.tgz'  --prune-empty --tag-name-filter cat -- --all
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.1.tgz'  --prune-empty --tag-name-filter cat -- --all
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.2.tgz'  --prune-empty --tag-name-filter cat -- --all
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.3.tgz'  --prune-empty --tag-name-filter cat -- --all
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.4.tgz'  --prune-empty --tag-name-filter cat -- --all
+ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch releases/nfs-volume/nfs-volume-0.0.5.tgz'  --prune-empty --tag-name-filter cat -- --all
