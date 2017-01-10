@@ -5,7 +5,7 @@ set -x -e
 ### Install kinit
 sudo apt-get update
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get --assume-yes install krb5-user
+sudo apt-get --assume-yes install dialog krb5-user
 
 cat /etc/krb5.conf | sed -e 's/default_realm = ATHENA.MIT.EDU/default_realm = PERSI.CF-APP.COM/' > /tmp/krb5.conf
 mv -f /tmp/krb5.conf /etc/krb5.conf
