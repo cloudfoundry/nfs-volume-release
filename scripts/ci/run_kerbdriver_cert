@@ -4,11 +4,13 @@ set -x -e
 
 ### Install kinit
 sudo apt-get update
-export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND="noninteractive"
+#sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password rootpw"
+sudo debconf-set-selections <<< "krb5-config krb5-config/default_realm string PERSI.CF-APP.COM"
 sudo apt-get --assume-yes install dialog krb5-user
 
-cat /etc/krb5.conf | sed -e 's/default_realm = ATHENA.MIT.EDU/default_realm = PERSI.CF-APP.COM/' > /tmp/krb5.conf
-mv -f /tmp/krb5.conf /etc/krb5.conf
+#cat /etc/krb5.conf | sed -e 's/default_realm = ATHENA.MIT.EDU/default_realm = PERSI.CF-APP.COM/' > /tmp/krb5.conf
+#mv -f /tmp/krb5.conf /etc/krb5.conf
 
 ### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
 ktutil <<EOT
