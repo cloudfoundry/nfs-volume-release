@@ -28,3 +28,21 @@ properties:
   nfsbroker.password:
     description: "Basic auth password to verify on incoming Service Broker requests"
     default: "admin"
+  nfsbroker.dbDriver:
+    default: ""
+    description: "(optional) database driver name when using SQL to store broker state"
+  nfsbroker.dbUsername:
+    default: ""
+    description: "(optional) database username when using SQL to store broker state"
+  nfsbroker.dbPassword:
+    default: ""
+    description: "(optional) database password when using SQL to store broker state"
+  nfsbroker.dbHostname:
+    default: "",
+    description: "(optional) database hostname when using SQL to store broker state",
+  nfsbroker.dbPort:
+    default: "",
+    description: "(optional) dacdtabase port when using SQL to store broker state",
+  nfsbroker.dbName:
+    default: "",
+    description: "(optional) database name when using SQL to store broker state",
