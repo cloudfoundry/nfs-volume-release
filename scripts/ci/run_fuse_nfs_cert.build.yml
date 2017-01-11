@@ -1,7 +1,7 @@
 ---
 platform: linux
 
-image: docker:///ubuntu/trusty
+image: docker:///cloudfoundry/inigo-ci
 
 inputs:
   - name: nfs-volume-release
