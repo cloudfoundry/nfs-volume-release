@@ -8,6 +8,7 @@ export DEBIAN_FRONTEND="noninteractive"
 #sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password rootpw"
 sudo debconf-set-selections <<< "krb5-config krb5-config/default_realm string PERSI.CF-APP.COM"
 sudo debconf-set-selections <<< "krb5-config krb5-config/kerberos_servers string kdc.persi.cf-app.com"
+sudo debconf-set-selections <<< "krb5-config krb5-config/admin_server string kdc.persi.cf-app.com"
 sudo apt-get --assume-yes install dialog krb5-user
 
 #cat /etc/krb5.conf | sed -e 's/default_realm = ATHENA.MIT.EDU/default_realm = PERSI.CF-APP.COM/' > /tmp/krb5.conf
