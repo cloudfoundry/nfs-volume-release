@@ -86,6 +86,11 @@
 	path = src/code.cloudfoundry.org/nfsbroker
 	url = https://github.com/cloudfoundry-incubator/nfsbroker
 	branch = master
+[submodule "src/github.com/lib/pq"]
+	path = src/github.com/lib/pq
+	url = https://github.com/lib/pq
+	branch = master
 [submodule "src/code.cloudfoundry.org/kerbdriver"]
 	path = src/code.cloudfoundry.org/kerbdriver
-	url = https://github.com/cloudfoundry-incubator/kerbdriver.git
+	url = https://github.com/cloudfoundry-incubator/kerbdriver
+	branch = master
