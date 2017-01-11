@@ -5,11 +5,34 @@ set -x -e
 ### Install kinit
 sudo apt-get update
 export DEBIAN_FRONTEND="noninteractive"
-#sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password rootpw"
 sudo debconf-set-selections <<< "krb5-config krb5-config/default_realm string PERSI.CF-APP.COM"
 sudo debconf-set-selections <<< "krb5-config krb5-config/kerberos_servers string kdc.persi.cf-app.com"
 sudo debconf-set-selections <<< "krb5-config krb5-config/admin_server string kdc.persi.cf-app.com"
-sudo apt-get --assume-yes install dialog nfs-common krb5-user
+sudo apt-get --assume-yes install nfs-common krb5-user
+
+### Setup NFS Client
+mount -t rpc_pipefs sunrpc /run/rpc_pipefs
+rpc.gssd -vvv -n
+rpc.idmapd -vvv
+cat >/etc/idmapd.conf <<EOT
+[General]
+Verbosity = 0
+Pipefs-Directory = /run/rpc_pipefs
+Domain = persi.cf-app.com
+
+[Translation]
+Method = static,nsswitch
+
+[Static]
+share1@PERSI.CF-APP.COM = share
+cloudfoundry@PERSI.CF-APP.COM = root
+
+[Mapping]
+Nobody-User = nobody
+Nobody-Group = nogroup
+EOT
+echo "54.87.134.167 nfs.persi.cf-app.com" >> /etc/hosts
+useradd share1
 
 ### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
 ktutil <<EOT
