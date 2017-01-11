@@ -16,6 +16,8 @@ files:
   - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
   - github.com/gorilla/mux/*.go # gosub
+  - github.com/lib/pq/*.go # gosub
+  - github.com/lib/pq/oid/*.go # gosub
   - github.com/pivotal-cf/brokerapi/*.go # gosub
   - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
