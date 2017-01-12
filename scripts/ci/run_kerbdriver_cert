@@ -13,7 +13,7 @@ sudo apt-get --assume-yes install nfs-common krb5-user
 ### Setup NFS Client
 mount -t rpc_pipefs sunrpc /run/rpc_pipefs
 rpc.gssd -vvv -n
-rpc.idmapd -vvv
+
 cat >/etc/idmapd.conf <<EOT
 [General]
 Verbosity = 0
@@ -24,13 +24,15 @@ Domain = persi.cf-app.com
 Method = static,nsswitch
 
 [Static]
-share1@PERSI.CF-APP.COM = share
+share1@PERSI.CF-APP.COM = share1
 cloudfoundry@PERSI.CF-APP.COM = root
 
 [Mapping]
 Nobody-User = nobody
 Nobody-Group = nogroup
 EOT
+
+rpc.idmapd -vvv
 echo "54.87.134.167 nfs.persi.cf-app.com" >> /etc/hosts
 useradd share1
 
