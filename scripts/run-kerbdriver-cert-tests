@@ -34,7 +34,7 @@ echo "{
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
       \"kerberosPrincipal\":\"share1@PERSI.CF-APP.COM\",
       \"kerberosKeytab\":\"$KEYTAB\",
-      \"mode\":\"1\"}
+      \"mode\":1}
   }
 } "  > $NFS_ACCEPTANCE_DIR/kerb-fixture.json
 
