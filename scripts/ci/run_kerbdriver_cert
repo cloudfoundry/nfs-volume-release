@@ -11,6 +11,7 @@ sudo debconf-set-selections <<< "krb5-config krb5-config/admin_server string kdc
 sudo apt-get --assume-yes install nfs-common krb5-user
 
 ### Setup NFS Client
+mkdir -p /run/rpc_pipefs
 mount -t rpc_pipefs sunrpc /run/rpc_pipefs
 rpc.gssd -vvv -n
 
