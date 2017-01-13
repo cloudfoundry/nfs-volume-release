@@ -44,6 +44,13 @@ wkt /tmp/share1.keytab
 EOT
 export KEYTAB=`cat /tmp/share1.keytab | base64 | awk '{printf "%s",$0}END{print""}'`
 
+### Get a kerberos ticket for cloudfoundry@PERSI.CF_APP.COM
+ktutil <<EOT
+addent -password -p cloudfoundry@PERSI.CF-APP.COM -k 1 -e aes256-cts
+burrito
+wkt /tmp/cloudfoundry.keytab
+EOT
+
 ######################################################################################
 #### prepare for acceptance
 ######################################################################################
