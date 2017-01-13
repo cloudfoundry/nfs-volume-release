@@ -47,6 +47,8 @@ go build -o "$NFS_ACCEPTANCE_DIR/kerbdriver" "cmd/kerbdriver/main.go"
 
 go get -t code.cloudfoundry.org/volume_driver_cert
 
+mkdir -p /tmp/volumes
+
 killall -9 kerbdriver || true
 
 $NFS_ACCEPTANCE_DIR/kerbdriver -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$NFS_ACCEPTANCE_DIR/voldriver_plugins" -kerberosPrincipal="cloudfoundry@PERSI.CF-APP.COM" -keytab="/tmp/cloudfoundry.keytab"&
