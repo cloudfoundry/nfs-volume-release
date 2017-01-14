@@ -30,7 +30,7 @@ echo "{
   \"create_config\": {
     \"Name\": \"kerb-volume-name\",
     \"Opts\": {
-      \"source\":\"$SOURCE\",
+      \"source\":\"${SOURCE:=nfs.persi.cf-app.com:/home}\",
       \"local_mount_point\":\"$NFS_ACCEPTANCE_DIR/mountdir\",
       \"kerberosPrincipal\":\"share1@PERSI.CF-APP.COM\",
       \"kerberosKeytab\":\"$KEYTAB\",
@@ -51,7 +51,7 @@ mkdir -p /tmp/volumes
 
 killall -9 kerbdriver || true
 
-$NFS_ACCEPTANCE_DIR/kerbdriver -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$NFS_ACCEPTANCE_DIR/voldriver_plugins" -kerberosPrincipal="cloudfoundry@PERSI.CF-APP.COM" -keytab="/tmp/cloudfoundry.keytab"&
+$NFS_ACCEPTANCE_DIR/kerbdriver -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$NFS_ACCEPTANCE_DIR/voldriver_plugins" -kerberosPrincipal="cloudfoundry@PERSI.CF-APP.COM" -keytab="/tmp/cloudfoundry.keytab" -logLevel=debug&
 
 pushd $NFS_RELEASE_DIR
     ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert

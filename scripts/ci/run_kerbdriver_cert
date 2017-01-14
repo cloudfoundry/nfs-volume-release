@@ -40,7 +40,7 @@ useradd share1
 ### Get a kerberos ticket for SHARE1@PERSI.CF_APP.COM
 ktutil <<EOT
 addent -password -p share1@PERSI.CF-APP.COM -k 1 -e aes256-cts
-
+share1
 wkt /tmp/share1.keytab
 EOT
 export KEYTAB=`cat /tmp/share1.keytab | base64 | awk '{printf "%s",$0}END{print""}'`
