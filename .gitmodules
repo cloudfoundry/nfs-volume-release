@@ -94,3 +94,7 @@
 	path = src/code.cloudfoundry.org/kerbdriver
 	url = https://github.com/cloudfoundry-incubator/kerbdriver
 	branch = master
+[submodule "src/github.com/go-sql-driver/mysql"]
+	path = src/github.com/go-sql-driver/mysql
+	url = https://github.com/go-sql-driver/mysql
+	branch = master
