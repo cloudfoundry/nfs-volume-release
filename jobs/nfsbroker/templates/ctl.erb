@@ -15,8 +15,8 @@ case $1 in
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $LOG_DIR
 
-    mkdir -p "<%= p("nfsbroker.data-dir") %>"
-    chown -R vcap:vcap "<%= p("nfsbroker.data-dir") %>"
+    mkdir -p "<%= p("nfsbroker.data_dir") %>"
+    chown -R vcap:vcap "<%= p("nfsbroker.data_dir") %>"
 
     export GOMAXPROCS=$(nproc)
 
