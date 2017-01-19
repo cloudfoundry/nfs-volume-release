@@ -1,0 +1,46 @@
+---
+packages:
+- name: fuse-nfs
+  version: f6c002e343774fefff5ccc674c68237491228729
+  fingerprint: f6c002e343774fefff5ccc674c68237491228729
+  sha1: b88450cc7f216def918fd059cee5101ba25ca901
+  dependencies: []
+- name: golang-nfsvolume
+  version: bfef694ebb81e79df9fa1b52485520e8f3bca68f
+  fingerprint: bfef694ebb81e79df9fa1b52485520e8f3bca68f
+  sha1: af0d9f7e1ef518750e072e6acab61c33db7b8c15
+  dependencies: []
+- name: nfsbroker
+  version: 85f6c2de0264898e6dcb62fa8c4364ee4efa5298
+  fingerprint: 85f6c2de0264898e6dcb62fa8c4364ee4efa5298
+  sha1: 25a39cefbbae176ff1ccaf8f0703cf750a204810
+  dependencies:
+  - golang-nfsvolume
+- name: nfsv3driver
+  version: 346a73b70083f10ce288174ad0366a8ccfdc496a
+  fingerprint: 346a73b70083f10ce288174ad0366a8ccfdc496a
+  sha1: 09b23c0c0de080cfead8cb0fd35316afd7ccce22
+  dependencies:
+  - fuse-nfs
+  - golang-nfsvolume
+jobs:
+- name: nfsbroker
+  version: 8ee4a845d082a33f15ef42e7d55cb770b7f337bb
+  fingerprint: 8ee4a845d082a33f15ef42e7d55cb770b7f337bb
+  sha1: d4eefc2053763dda90016a4b5bfc71738fc4b1b9
+- name: nfstestserver
+  version: 277640339af01c2ed151d97c1d2311343a79733b
+  fingerprint: 277640339af01c2ed151d97c1d2311343a79733b
+  sha1: d9b44284ce154d14d19770735896c1a5e46e8e25
+- name: nfsv3driver
+  version: 937879b9b238d7b3c09fd441bc332b8ac8a22527
+  fingerprint: 937879b9b238d7b3c09fd441bc332b8ac8a22527
+  sha1: 02f58ae5bb523f7bef68a7391b9e0b2eaa4e76b6
+license:
+  version: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  fingerprint: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  sha1: 3b62c7156cd705556ddb8a2d30d3f83213070ae2
+commit_hash: c1f39286
+uncommitted_changes: false
+name: nfs-volume
+version: 0.1.1
