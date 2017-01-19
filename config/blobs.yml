@@ -1,29 +1,29 @@
 ---
 autoconf-2.69.tar.gz:
-  object_id: 62c15a19-8a83-4d45-9d16-1e408324d108
+  object_id: 088016b1-790d-4bbd-8144-b75583956015
   sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
   size: 1927468
 automake-1.15.tar.gz:
-  object_id: d01a9ce0-8375-4dac-8cf2-d2789559e278
+  object_id: 599da939-8df8-4876-ab1b-f6576c2a595b
   sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
   size: 2244206
 fuse-2.9.2.tar.gz:
-  object_id: a9fe29a9-9f1d-4e67-91d3-7f3ff8eb564d
+  object_id: 3194fa81-68be-4b39-bc88-1786b2f95f4a
   sha: fcfc005b1edcd5e8b325729a1b325ff0e8b2a5ab
   size: 560123
 fuse-nfs.tar.gz:
-  object_id: 42074317-d1f7-4f28-9216-3f37bad57d16
+  object_id: f2e8e182-ae6c-4dd6-8869-3847faf863f1
   sha: dd1a0012ae9a30d5de34a7191d95d3b06b7791ce
   size: 644368
+go1.7.linux-amd64.tar.gz:
+  object_id: a4a82ed6-a022-431a-af06-5317422d3211
+  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
+  size: 81573766
 libnfs-1.11.0.tar.gz:
-  object_id: ba627e8c-8a75-4a31-8426-69bec0925fb0
+  object_id: 737f769d-c0e0-4bf2-a748-bc1aff64c1ff
   sha: b675d6696aa88d0e44f25e9862cf46c1a1fd41f9
   size: 686400
 libtool-2.4.6.tar.gz:
-  object_id: e0ed438e-0f3f-4a57-bf0f-488a99af9682
+  object_id: 04657ae3-fe12-48ad-ab2f-d6ddcb5c96ab
   sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
   size: 1806697
-go1.7.linux-amd64.tar.gz:
-  object_id: 6183a9fa-4871-4853-8e46-c579f1d2f1a9
-  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
-  size: 81573766
