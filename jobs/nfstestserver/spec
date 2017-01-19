@@ -5,7 +5,6 @@ templates:
   install.erb: bin/pre-start
   ctl.erb: bin/nfstestserver_ctl
 
-packages:
-- nfs_pid_utils
+packages: []
 
 properties: {}

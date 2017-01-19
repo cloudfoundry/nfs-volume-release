@@ -6,13 +6,9 @@ RUN_DIR=/var/vcap/sys/run/nfsv3driver
 LOG_DIR=/var/vcap/sys/log/nfsv3driver
 PIDFILE=$RUN_DIR/nfsv3driver.pid
 
-source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
-
 case $1 in
 
   start)
-    pid_guard $PIDFILE "nfsv3driver"
-
    # make a new container cvcap user if it doesn't already exist
    id -u cvcap &>/dev/null || useradd -u 2000 cvcap
 
@@ -41,11 +37,6 @@ case $1 in
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
     export PATH=/usr/local/bin:$PATH
 
-#    exec chpst -u vcap:vcap sleep 10000 \
-#      2> >(tee -a $LOG_DIR/nfsdriver.stderr.log | logger -p user.error -t vcap.nfsdriver) \
-#      1> >(tee -a $LOG_DIR/nfsdriver.stdout.log | logger -p user.info -t vcap.nfsdriver)
-
-
     exec chpst -u cvcap:cvcap /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
       --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
       --transport="tcp" \
@@ -53,14 +44,16 @@ case $1 in
       --driversPath="<%= p("nfsv3driver.driver_path") %>" \
       --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
       --logLevel="<%= p("nfsv3driver.log_level") %>" \
-      2> >(tee -a $LOG_DIR/nfsv3driver.stderr.log | logger -p user.error -t vcap.nfsv3driver) \
-      1> >(tee -a $LOG_DIR/nfsv3driver.stdout.log | logger -p user.info -t vcap.nfsv3driver)
+      >> $LOG_DIR/nfsv3driver.stdout.log \
+      2>> $LOG_DIR/nfsv3driver.stderr.log
 
     ;;
 
   stop)
-    kill_and_wait $PIDFILE
-
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
     ;;
 
   *)

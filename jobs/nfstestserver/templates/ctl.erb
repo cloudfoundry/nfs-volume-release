@@ -6,16 +6,14 @@ RUN_DIR=/var/vcap/sys/run/nfstestserver
 LOG_DIR=/var/vcap/sys/log/nfstestserver
 PIDFILE=$RUN_DIR/nfstestserver.pid
 
-source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
-
 case $1 in
 
   start)
-    pid_guard $PIDFILE "nfsd"
+    mkdir -p $LOG_DIR
 
     service nfs-kernel-server start \
-      2> >(tee -a $LOG_DIR/nfstestserver.stderr.log | logger -p user.error -t vcap.nfstestserver) \
-      1> >(tee -a $LOG_DIR/nfstestserver.stdout.log | logger -p user.info -t vcap.nfstestserver)
+      >> $LOG_DIR/nfstestserver.stdout.log \
+      2>> $LOG_DIR/nfstestserver.stderr.log
 
     while [ "$(pidof -s nfsd)" == "" ]; do
       sleep 1

@@ -6,7 +6,6 @@ templates:
   ctl.erb: bin/nfsv3driver_ctl
 
 packages:
-- nfs_pid_utils
 - fuse-nfs
 - nfsv3driver
 

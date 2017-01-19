@@ -6,13 +6,9 @@ RUN_DIR=/var/vcap/sys/run/nfsbroker
 LOG_DIR=/var/vcap/sys/log/nfsbroker
 PIDFILE=$RUN_DIR/nfsbroker.pid
 
-source /var/vcap/packages/nfs_pid_utils/pid_utils.sh
-
 case $1 in
 
   start)
-    pid_guard $PIDFILE "nfsbroker"
-
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
 
@@ -42,14 +38,16 @@ case $1 in
       --dbHostname="<%= p("nfsbroker.dbHostname") %>" \
       --dbPort="<%= p("nfsbroker.dbPort") %>" \
       --dbName="<%= p("nfsbroker.dbName") %>" \
-      2> >(tee -a $LOG_DIR/nfsbroker.stderr.log | logger -p user.error -t vcap.nfsbroker) \
-      1> >(tee -a $LOG_DIR/nfsbroker.stdout.log | logger -p user.info -t vcap.nfsbroker)
+      >> $LOG_DIR/nfsbroker.stdout.log \
+      2>> $LOG_DIR/nfsbroker.stderr.log
 
     ;;
 
   stop)
-    kill_and_wait $PIDFILE
-
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
     ;;
 
   *)

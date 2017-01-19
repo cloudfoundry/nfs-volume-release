@@ -6,7 +6,6 @@ templates:
 
 packages:
 - golang-nfsvolume
-- nfs_pid_utils
 - nfsbroker
 
 properties:
