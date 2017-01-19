@@ -26,18 +26,18 @@ case $1 in
     echo $$ > $PIDFILE
 
     exec chpst -u vcap:vcap /var/vcap/packages/nfsbroker/bin/nfsbroker \
-      --listenAddr="<%= p("nfsbroker.listen-addr") %>" \
-      --serviceName="<%= p("nfsbroker.service-name") %>" \
-      --serviceId="<%= p("nfsbroker.service-id") %>" \
-      --dataDir="<%= p("nfsbroker.data-dir") %>" \
+      --listenAddr="<%= p("nfsbroker.listen_addr") %>" \
+      --serviceName="<%= p("nfsbroker.service_name") %>" \
+      --serviceId="<%= p("nfsbroker.service_id") %>" \
+      --dataDir="<%= p("nfsbroker.data_dir") %>" \
       --username="<%= p("nfsbroker.username") %>" \
       --password="<%= p("nfsbroker.password") %>" \
-      --dbDriver="<%= p("nfsbroker.dbDriver") %>" \
-      --dbUsername="<%= p("nfsbroker.dbUsername") %>" \
-      --dbPassword="<%= p("nfsbroker.dbPassword") %>" \
-      --dbHostname="<%= p("nfsbroker.dbHostname") %>" \
-      --dbPort="<%= p("nfsbroker.dbPort") %>" \
-      --dbName="<%= p("nfsbroker.dbName") %>" \
+      --dbDriver="<%= p("nfsbroker.db_driver") %>" \
+      --dbUsername="<%= p("nfsbroker.db_username") %>" \
+      --dbPassword="<%= p("nfsbroker.db_password") %>" \
+      --dbHostname="<%= p("nfsbroker.db_hostname") %>" \
+      --dbPort="<%= p("nfsbroker.db_port") %>" \
+      --dbName="<%= p("nfsbroker.db_name") %>" \
       >> $LOG_DIR/nfsbroker.stdout.log \
       2>> $LOG_DIR/nfsbroker.stderr.log
 

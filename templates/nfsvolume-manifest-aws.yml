@@ -51,7 +51,7 @@ networks:
 
 properties:
   nfsbroker:
-    plan-desc: broker for exisiting NFS shares
+    plan_desc: broker for exisiting NFS shares
     username: (( merge ))
     password: (( merge ))
   nats: (( merge ))
