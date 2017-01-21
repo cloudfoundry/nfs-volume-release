@@ -44,3 +44,6 @@ properties:
   nfsbroker.db_name:
     default: ""
     description: "(optional) database name when using SQL to store broker state"
+  nfsbroker.db_ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify SSL connection"
