@@ -38,3 +38,6 @@ src/github.com/codegangsta/cli
 
 # certs suite for locally running tests
 src/code.cloudfoundry.org/volume_driver_cert/
+
+# testing support
+src/github.com/maxbrunsfeld/
