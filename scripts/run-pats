@@ -57,6 +57,6 @@ EOF
     export TEST_APPLICATION_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora"
 
     pushd  ../src/code.cloudfoundry.org/persi-acceptance-tests
-        CONFIG=${CONFIG} ginkgo -r .
+        CONFIG=${CONFIG} ginkgo  --slowSpecThreshold=300 -r .
     popd
 popd
