@@ -24,6 +24,9 @@ popd
 # make a new container cvcap user if it doesn't already exist
 id -u cvcap &>/dev/null || useradd -u 2000 cvcap
 
+adduser cvcap fuse
+chown root:fuse /dev/fuse
+
 cat << EOF > /etc/fuse.conf
 user_allow_other
 EOF
