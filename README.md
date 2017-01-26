@@ -236,7 +236,7 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
        description: "(optional) database name when using SQL to store broker state"
      nfsbroker.db_ca_cert:
        default: ""
-       description: "(optional) CA Cert to verify SSL connection"
+       description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
     ```
 
     * For example: for a secure mysql database, properties.yml could look like:
