@@ -9,23 +9,23 @@ packages:
 - nfsbroker
 
 properties:
-  nfsbroker.listen_addr:
-    description: "address nfsbroker listens on"
-    default: "0.0.0.0:8999"
-  nfsbroker.service_name:
-    description: "name of the service to be registered with cf"
-    default: "nfs"
-  nfsbroker.service_id:
-    description: "Id of the service to be registered with cf"
-    default: "nfs-service-guid"
-  nfsbroker.data_dir:
-    description: "Directory on broker VM to persist instance and binding state"
-    default: "/var/vcap/store/nfsbroker"
   nfsbroker.username:
     description: "Basic auth username to verify on incoming Service Broker requests"
     default: "admin"
   nfsbroker.password:
     description: "Basic auth password to verify on incoming Service Broker requests"
+  nfsbroker.listen_addr:
+    description: "(optional) address nfsbroker listens on"
+    default: "0.0.0.0:8999"
+  nfsbroker.service_name:
+    description: "(optional) name of the service to be registered with cf"
+    default: "nfs"
+  nfsbroker.service_id:
+    description: "(optional) Id of the service to be registered with cf"
+    default: "nfs-service-guid"
+  nfsbroker.data_dir:
+    description: "(optional) Directory on broker VM to persist instance and binding state"
+    default: "/var/vcap/store/nfsbroker"
   nfsbroker.db_driver:
     default: ""
     description: "(optional) database driver name when using SQL to store broker state"
