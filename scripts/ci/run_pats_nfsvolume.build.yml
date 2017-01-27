@@ -21,6 +21,6 @@ params:
   SERVER_ADDRESS: replace-me
   SHARE: replace-me
   PUSHED_BROKER_NAME: replace-me
-  MYSQL_SERVICE_NAME: replace-me
+  SQL_SERVICE_NAME: replace-me
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup

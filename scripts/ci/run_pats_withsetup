@@ -33,6 +33,7 @@ fi
 
 pushd ${scripts_path}/../src/code.cloudfoundry.org/nfsbroker
   ./cp_files.sh
+  export BROKER_APPLICATION_PATH=$PWD
 popd
 
 go get github.com/onsi/ginkgo/ginkgo
@@ -50,4 +51,4 @@ ${BROKER_PASSWORD} \
 ${SERVER_ADDRESS} \
 ${SHARE} \
 ${PUSHED_BROKER_NAME} \
-${MYSQL_SERVICE_NAME}
+${SQL_SERVICE_NAME}

@@ -52,11 +52,12 @@ cat << EOF > ${CONFIG}
       "share": "${11}",
       "bind_config": "{\"uid\":\"1000\",\"gid\":\"1000\"}",
       "pushed_broker_name": "${12}",
-      "mysql_service_name": "${13}"
+      "sql_service_name": "${13}"
     }
 EOF
 
     export TEST_APPLICATION_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets/pora"
+    export ASSETS_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets"
 
     pushd  ../src/code.cloudfoundry.org/persi-acceptance-tests
         CONFIG=${CONFIG} ginkgo  --slowSpecThreshold=300 -r .
