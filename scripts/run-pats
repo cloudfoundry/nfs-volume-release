@@ -50,7 +50,9 @@ cat << EOF > ${CONFIG}
       "name_prefix": "PATs",
       "server_addr": "${10}",
       "share": "${11}",
-      "bind_config": "{\"uid\":\"1000\",\"gid\":\"1000\"}"
+      "bind_config": "{\"uid\":\"1000\",\"gid\":\"1000\"}",
+      "pushed_broker_name": "${12}",
+      "mysql_service_name": "${13}"
     }
 EOF
 

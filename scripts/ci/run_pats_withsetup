@@ -13,13 +13,6 @@ else
 fi
 export PATH=$GOPATH/bin:$PATH
 
-absolute_path() {
-  (cd $1 && pwd)
-}
-
-base_path=$(absolute_path `dirname $0`)
-
-
 source ${scripts_path}/ci/utils.sh
 check_param CF_USERNAME
 check_param CF_PASSWORD
@@ -38,6 +31,10 @@ if [ -z "$APPLICATION_PATH" ]; then
     exit 1
 fi
 
+pushd ${scripts_path}/../src/code.cloudfoundry.org/nfsbroker
+  ./cp_files.sh
+popd
+
 go get github.com/onsi/ginkgo/ginkgo
 
 ${scripts_path}/run-pats \
@@ -51,4 +48,6 @@ ${BROKER_URL} \
 ${BROKER_USER} \
 ${BROKER_PASSWORD} \
 ${SERVER_ADDRESS} \
-${SHARE}
+${SHARE} \
+${PUSHED_BROKER_NAME} \
+${MYSQL_SERVICE_NAME}
