@@ -5,23 +5,23 @@ dependencies:
 - golang-nfsvolume
 
 files:
+  - code.cloudfoundry.org/cflager/*.go # gosub
+  - code.cloudfoundry.org/clock/*.go # gosub
+  - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
+  - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/cflager/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/clock/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/debugserver/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/goshims/osshim/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/lager/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/go-sql-driver/mysql/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/gorilla/mux/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/lib/pq/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/lib/pq/oid/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/auth/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/grouper/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/http_server/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/sigmon/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
+  - github.com/go-sql-driver/mysql/*.go # gosub
+  - github.com/gorilla/mux/*.go # gosub
+  - github.com/lib/pq/*.go # gosub
+  - github.com/lib/pq/oid/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
+  - github.com/tedsuo/ifrit/*.go # gosub
+  - github.com/tedsuo/ifrit/grouper/*.go # gosub
+  - github.com/tedsuo/ifrit/http_server/*.go # gosub
+  - github.com/tedsuo/ifrit/sigmon/*.go # gosub
