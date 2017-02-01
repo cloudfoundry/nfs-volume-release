@@ -20,9 +20,9 @@ params:
   BROKER_PASSWORD: replace-me
   SERVER_ADDRESS: replace-me
   SHARE: replace-me
-  PUSHED_BROKER_NAME: replace-me
-  SQL_SERVICE_NAME: replace-me
-  DB_SERVICE_NAME: replace-me
-  DB_DRIVER_NAME: replace-me
+  PUSHED_BROKER_NAME:
+  DB_SERVICE_INSTANCE_NAME:
+  DB_SERVICE_NAME:
+  DB_DRIVER_NAME:
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup
