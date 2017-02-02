@@ -25,3 +25,6 @@ properties:
  nfsv3driver.log_level:
    description: "nfsv3driver log level"
    default: "info"
+ nfsv3driver.disable:
+   description: "disable nfsv3driver"
+   default: false
