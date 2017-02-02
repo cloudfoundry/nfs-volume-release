@@ -24,6 +24,7 @@ popd
 # make a new container cvcap user if it doesn't already exist
 id -u cvcap &>/dev/null || useradd -u 2000 cvcap
 
+groupadd fuse | true
 adduser cvcap fuse
 chown root:fuse /dev/fuse
 
