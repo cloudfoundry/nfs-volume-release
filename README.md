@@ -120,13 +120,29 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
 
 ## Deploying nfsbroker
 
-### Create Stub Files
+The nfsbroker can be deployed in two ways; as a cf app or as a BOSH deployment.  The choice is yours!
 
-#### cf.yml
+### Way #1 `cf push` the broker
+
+When the service broker is `cf push`ed, it must be bound to a MySql or Postgres database service instance.  (Since Cloud Foundry applications are stateless, it is not safe to store state on the local filesystem, so we require a database to do simple bookkeeping.)
+
+Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
+- `cd src/code.cloudfoundry.org/nfsbroker`
+- run `cp-file.sh` to copy dependencies from the gopath into a vendor directory
+- edit `manifest.yml` to set up broker username/password and sql db driver name and cf service name.  If you are using the [cf-mysql-release](http://bosh.io/releases/github.com/cloudfoundry/cf-mysql-release) from bosh.io, then the database parameters in manifest.yml will already be correct.
+- `cf push <broker app name> --no-start`
+- `cf bind-service <broker app name> <sql service instance name>`
+- `cf start <broker app name>`
+
+### Way #2 - `bosh deploy` the broker
+
+#### Create Stub Files
+
+##### cf.yml
 
 * copy your cf.yml that you used during cf deployment, or download it from bosh: `bosh download manifest [your cf deployment name] > cf.yml`
 
-#### director.yml
+##### director.yml
 * determine your bosh director uuid by invoking bosh status --uuid
 * create a new director.yml file and place the following contents into it:
 
@@ -135,7 +151,7 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
     director_uuid: <your uuid>
     ```
 
-#### iaas.yml
+##### iaas.yml
 
 * Create a stub for your iaas settings from the following template:
 
@@ -187,7 +203,7 @@ This technique allows you to co-locate bosh jobs on cells without editing the Di
 
 NB: manually edit to fix hard-coded ip ranges, security groups and subnets to match your deployment.
 
-#### properties.yml
+##### properties.yml
 * Minimally determine the following information:
 
     - BROKER_USERNAME: some invented username
@@ -289,7 +305,7 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
     cf delete-service-broker nfsbroker -f
     ```
     > Stay tuned for the CF pushable version of this broker.
-### Generate the Deployment Manifest
+#### Generate the Deployment Manifest
 * run the following script:
 
     ```bash
@@ -298,13 +314,12 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
 
 to generate `nfsvolume-aws-manifest.yml` into the current directory.
 
-### Deploy NFS Broker
+#### Deploy NFS Broker
 * Deploy the broker using the generated manifest:
 
     ```bash
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
-
 ## Deploying the Test NFS Server (Optional)
 
 If you do not have an existing NFS Server then you can optionally deploy the test nfs server bundled in this release.
