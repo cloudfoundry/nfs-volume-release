@@ -320,6 +320,7 @@ to generate `nfsvolume-aws-manifest.yml` into the current directory.
     ```bash
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
+    
 ## Deploying the Test NFS Server (Optional)
 
 If you do not have an existing NFS Server then you can optionally deploy the test nfs server bundled in this release.
