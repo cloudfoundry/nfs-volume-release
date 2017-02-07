@@ -25,6 +25,8 @@ check_param BROKER_USER
 check_param BROKER_PASSWORD
 check_param SERVER_ADDRESS
 check_param SHARE
+check_param TEST_MULTI_CELL
+check_param TEST_MOUNT_OPTIONS
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"

@@ -60,6 +60,6 @@ EOF
     export ASSETS_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets"
 
     pushd  ../src/code.cloudfoundry.org/persi-acceptance-tests
-        TEST_MULTI_CELL=true TEST_MOUNT_OPTIONS=true CONFIG=${CONFIG} ginkgo  --slowSpecThreshold=300 -r .
+        CONFIG=${CONFIG} ginkgo --slowSpecThreshold=300 -r .
     popd
 popd

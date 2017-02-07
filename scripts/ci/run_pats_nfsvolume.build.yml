@@ -24,5 +24,7 @@ params:
   DB_SERVICE_INSTANCE_NAME:
   DB_SERVICE_NAME:
   DB_DRIVER_NAME:
+  TEST_MULTI_CELL: true
+  TEST_MOUNT_OPTIONS: false
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup
