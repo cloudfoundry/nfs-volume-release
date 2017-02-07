@@ -19,13 +19,12 @@ chmod 775 /export/users
 chmod 775 /export/vol1
 chmod 775 /export/vol2
 chmod 775 /export/vol3
-chmod 775 /export2/certs
+chmod 777 /export2/certs
 
 chown root:vcap /export/users
 chown root:vcap /export/vol1
 chown root:vcap /export/vol2
 chown root:vcap /export/vol3
-chown root:vcap /export2/certs
 
 cat << EOF > /etc/exports
 /export        10.0.0.0/8(rw,fsid=0,no_subtree_check,async)
