@@ -321,6 +321,8 @@ to generate `nfsvolume-aws-manifest.yml` into the current directory.
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
     
+# Testing or Using this Release
+
 ## Deploying the Test NFS Server (Optional)
 
 If you do not have an existing NFS Server then you can optionally deploy the test nfs server bundled in this release.
@@ -434,6 +436,12 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     ```bash
     $ cf bind-service pora myVolume -c '{"uid":"0","gid":"0"}'
     ```
+> ####Bind Parameters####
+> * **uid & gid:** When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.  The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
+> * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like 
+> ```
+cf bind-service pora myVolume -c '{"uid":"0","gid":"0","mount":"/my/path"}'
+```
 
 * Start the application
     ```bash
@@ -444,10 +452,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
 * to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
 
-## User and Group ID
-* When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.
-* The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.
-* Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
 
-
+# Troubleshooting
+If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
 
