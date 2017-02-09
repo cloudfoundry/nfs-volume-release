@@ -34,16 +34,14 @@ if [ -z "$APPLICATION_PATH" ]; then
 fi
 
 pushd ${scripts_path}/../src/code.cloudfoundry.org/nfsbroker
-  ./cp_files.sh
+  GOOS=linux GOARCH=amd64 go build -o bin/nfsbroker
   export BROKER_APPLICATION_PATH=$PWD
 
   if [ -n "$PUSHED_BROKER_NAME" ]; then
 cat << EOF > manifest.yml
 ---
-  buildpack: go_buildpack
+  buildpack: binary_buildpack
   env:
-    GOPACKAGENAME: nfsbroker
-    GOVERSION: go1.7
     DBSERVICENAME: ${DB_SERVICE_NAME}
     DBDRIVERNAME: ${DB_DRIVER_NAME}
     SERVICENAME: ${SERVICE_NAME}
