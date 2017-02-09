@@ -27,3 +27,7 @@ libtool-2.4.6.tar.gz:
   object_id: 04657ae3-fe12-48ad-ab2f-d6ddcb5c96ab
   sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
   size: 1806697
+cf-cli_6.23.1_linux_x86-64.tgz:
+  object_id: 53270c4b-ab0d-4f23-ba1b-384e04631c60
+  sha: a195e99cae5ab17b453b0a0747508c8f3eee5cae
+  size: 6692717

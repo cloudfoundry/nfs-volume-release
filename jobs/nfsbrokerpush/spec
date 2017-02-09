@@ -1,0 +1,55 @@
+---
+name: nfsbrokerpush
+
+templates:
+  deploy.sh.erb: bin/run
+  manifest.yml.erb: manifest.yml
+
+packages:
+  - nfsbroker
+  - golang-nfsvolume
+  - cf_cli
+
+properties:
+  nfsbrokerpush.domain:
+    description: 'Cloud Foundry System Domain'
+  nfsbrokerpush.cf.admin_user:
+    description: 'Username of the CF admin user'
+  nfsbrokerpush.cf.admin_password:
+    description: 'Password of the CF admin user'
+  nfsbrokerpush.cf.dial_timeout:
+    description: 'CF CLI connection dial timeout'
+    default: 5
+  nfsbrokerpush.organization:
+    description: 'Organization that hosts the app'
+  nfsbrokerpush.space:
+    description: 'Space that hosts the app'
+  nfsbrokerpush.username:
+    description: 'service broker username'
+  nfsbrokerpush.password:
+    description: 'service broker password'
+  nfsbrokerpush.service_name:
+    description: 'service name in marketplace'
+    default: nfs
+  nfsbrokerpush.db.driver:
+    description: 'mysql or postgres'
+    default: mysql
+  nfsbrokerpush.db.host:
+    description: 'database host'
+  nfsbrokerpush.db.port:
+    description: 'database port'
+    default: 3306
+  nfsbrokerpush.db.username:
+    description: 'database username'
+  nfsbrokerpush.db.password:
+    description: 'database password'
+  nfsbrokerpush.db.name:
+    description: 'database name'
+  nfsbrokerpush.syslog_url:
+    description: 'External log service URL'
+  nfsbrokerpush.error_on_misconfiguration:
+    description: 'Throw error on service misconfiguration during deployment'
+    default: true
+  nfsbrokerpush.skip_cert_verify:
+    description: 'true if the cf api uses test certs that should not be verified'
+    default: false

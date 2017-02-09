@@ -1,0 +1,109 @@
+#!/bin/bash -exu
+
+export PATH="/var/vcap/packages/cf_cli/bin:$PATH"
+export CF_HOME=`pwd`/home/cf
+export CF_DIAL_TIMEOUT=<%= properties.nfsbrokerpush.cf.dial_timeout %>
+
+SCHEME=https
+DOMAIN=<%= properties.nfsbrokerpush.domain %>
+ADMIN_USER=<%= properties.nfsbrokerpush.cf.admin_user %>
+ADMIN_PASSWORD="<%= properties.nfsbrokerpush.cf.admin_password %>"
+API_ENDPOINT=$SCHEME://api.$DOMAIN
+ORG=<%= properties.nfsbrokerpush.organization %>
+SPACE=<%= properties.nfsbrokerpush.space %>
+APP_NAME=nfsbroker
+SERVICE_BROKER_NAME=nfsbroker
+SERVICE_NAME="<%= properties.nfsbrokerpush.service_name %>"
+SYSLOG_URL="<%= properties.nfsbrokerpush.syslog_url %>"
+MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
+USERNAME="<%= properties.nfsbrokerpush.username %>"
+PASSWORD="<%= properties.nfsbrokerpush.password %>"
+APP_URL=$SCHEME://$APP_NAME.$DOMAIN
+
+mkdir -p $CF_HOME
+
+ERROR_EXIT_CODE=<%= properties.nfsbrokerpush.error_on_misconfiguration ? 1 : 0 %>
+DEPLOYMENT_STATUS=0
+
+function authenticate_and_target() {
+  cf api $API_ENDPOINT <% if properties.nfsbrokerpush.skip_cert_verify %>--skip-ssl-validation<% end %>
+  cf auth $ADMIN_USER "$ADMIN_PASSWORD"
+  cf create-org $ORG
+  cf target -o $ORG
+  cf create-space $SPACE
+  cf target -s $SPACE
+}
+
+function create_manifest() {
+  cat $MANIFEST
+  cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
+}
+
+function create_logging_service() {
+  local LOGGER_NAME=$APP_NAME-logger
+  set +e
+    cf service $LOGGER_NAME --guid
+    local exit_code=$?
+  set -e
+
+  if [[ -z "$SYSLOG_URL" ]]; then
+    echo "Syslog URL is not set."
+
+    if [[ $exit_code -eq 0 ]]; then
+      cf delete-service $LOGGER_NAME -f
+    fi
+
+    return
+  fi
+
+
+  if [[ $exit_code -ne 0 ]]; then
+    cf create-user-provided-service $LOGGER_NAME -l $SYSLOG_URL
+  else
+    cf update-user-provided-service $LOGGER_NAME -l $SYSLOG_URL
+  fi
+
+  cf bind-service $APP_NAME $LOGGER_NAME
+}
+
+function push_app() {
+  local exit_code
+
+  mkdir -p /var/vcap/data/tmp
+  export TMPDIR=/var/vcap/data/tmp
+
+  pushd /var/vcap/packages/nfsbroker > /dev/null
+    set +e
+      cf push "${APP_NAME}" -i 1
+      exit_code=$?
+    set -e
+
+    if [[ $exit_code -ne 0 ]]; then
+      cf logs "${APP_NAME}" --recent
+      exit "${exit_code}"
+    fi
+  popd > /dev/null
+}
+
+function register_service() {
+  cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  cf enable-service-access $SERVICE_NAME
+}
+
+function print_deployment_status() {
+  if [[ $DEPLOYMENT_STATUS != 0 ]]; then
+    echo "Deployment failed!"
+    exit 1
+  fi
+
+  echo "Deployment succeeded!"
+}
+
+cf -v
+
+authenticate_and_target
+create_manifest
+push_app
+create_logging_service
+register_service
+print_deployment_status

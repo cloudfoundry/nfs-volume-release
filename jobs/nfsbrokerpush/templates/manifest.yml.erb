@@ -1,0 +1,15 @@
+---
+  buildpack: binary_buildpack
+  env:
+    GOPACKAGENAME: nfsbroker
+    GOVERSION: go1.7
+    SERVICENAME: "<%= properties.nfsbrokerpush.service_name %>"
+    USERNAME: "<%= properties.nfsbrokerpush.username %>"
+    PASSWORD: "<%= properties.nfsbrokerpush.password %>"
+    LOGLEVEL: info
+    DBDRIVERNAME: "<%= properties.nfsbrokerpush.db.driver %>"
+    DBHOST: "<%= properties.nfsbrokerpush.db.host %>"
+    DBPORT: "<%= properties.nfsbrokerpush.db.port %>"
+    DBNAME: "<%= properties.nfsbrokerpush.db.name %>"
+    DB_USERNAME: "<%= properties.nfsbrokerpush.db.username %>"
+    DB_PASSWORD: "<%= properties.nfsbrokerpush.db.password %>"

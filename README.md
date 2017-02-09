@@ -128,7 +128,7 @@ When the service broker is `cf push`ed, it must be bound to a MySql or Postgres 
 
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 - `cd src/code.cloudfoundry.org/nfsbroker`
-- run `cp-file.sh` to copy dependencies from the gopath into a vendor directory
+- `GOOS=linux GOARCH=amd64 go build -o bin/nfsbroker`
 - edit `manifest.yml` to set up broker username/password and sql db driver name and cf service name.  If you are using the [cf-mysql-release](http://bosh.io/releases/github.com/cloudfoundry/cf-mysql-release) from bosh.io, then the database parameters in manifest.yml will already be correct.
 - `cf push <broker app name> --no-start`
 - `cf bind-service <broker app name> <sql service instance name>`

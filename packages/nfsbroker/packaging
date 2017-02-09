@@ -8,5 +8,7 @@ export GOROOT=$(readlink -nf /var/vcap/packages/golang-nfsvolume)
 export PATH=$GOROOT/bin:$PATH
 go install code.cloudfoundry.org/nfsbroker
 
+cp code.cloudfoundry.org/nfsbroker/Procfile ${BOSH_INSTALL_TARGET}
+
 # clean up source artifacts
 rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg
