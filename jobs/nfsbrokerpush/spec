@@ -13,6 +13,8 @@ packages:
 properties:
   nfsbrokerpush.domain:
     description: 'Cloud Foundry System Domain'
+  nfsbrokerpush.app_domain:
+    description: 'Domain used to host the broker app'
   nfsbrokerpush.cf.admin_user:
     description: 'Username of the CF admin user'
   nfsbrokerpush.cf.admin_password:
