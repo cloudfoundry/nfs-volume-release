@@ -87,7 +87,6 @@ function push_app() {
 
 function register_service() {
   cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
-  cf enable-service-access $SERVICE_NAME
 }
 
 function print_deployment_status() {
