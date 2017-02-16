@@ -42,14 +42,16 @@ cat << EOF > manifest.yml
 ---
   buildpack: binary_buildpack
   env:
-    DBSERVICENAME: ${DB_SERVICE_NAME}
     DBDRIVERNAME: ${DB_DRIVER_NAME}
     SERVICENAME: ${SERVICE_NAME}
     USERNAME: ${BROKER_USER}
     PASSWORD: ${BROKER_PASSWORD}
     LOGLEVEL: debug
-  services:
-    - ${DB_SERVICE_INSTANCE_NAME}
+    DBHOST: ${DB_HOST}
+    DBPORT: ${DB_PORT}
+    DBNAME: ${DB_NAME}
+    DB_USERNAME: ${DB_USERNAME}
+    DB_PASSWORD: ${DB_PASSWORD}
 EOF
 
   fi
