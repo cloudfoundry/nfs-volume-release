@@ -2,6 +2,9 @@
 
 set -e -x
 
+# make sure there arent any existing fuse-nfs mounts
+pkill -f fuse-nfs
+
 echo "Copying libfuse Shared Objects and installing fusermount"
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
 cp lib/.libs/*.so /usr/lib
