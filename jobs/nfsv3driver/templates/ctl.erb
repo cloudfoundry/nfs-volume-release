@@ -44,6 +44,10 @@ case $1 in
       --driversPath="<%= p("nfsv3driver.driver_path") %>" \
       --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
       --logLevel="<%= p("nfsv3driver.log_level") %>" \
+      --allowed-in-source="<%= p("nfsv3driver.allowed-in-source") %>" \
+      --default-in-source="<%= p("nfsv3driver.default-in-source") %>" \
+      --allowed-in-mount="<%= p("nfsv3driver.allowed-in-mount") %>" \
+      --default-in-mount="<%= p("nfsv3driver.default-in-mount") %>" \
       >> $LOG_DIR/nfsv3driver.stdout.log \
       2>> $LOG_DIR/nfsv3driver.stderr.log
 
