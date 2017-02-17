@@ -28,3 +28,19 @@ properties:
  nfsv3driver.disable:
    description: "disable nfsv3driver"
    default: false
+ nfsv3driver.allowed-in-source:
+   description: "Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params"
+   example: "uid,gid,auto-traverse-mounts,dircache"
+   default: "uid,gid"
+ nfsv3driver.default-in-source:
+   description: "Comma separated list of default values for options in the source URL query params, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be applied."
+   example: "uid:1000,gid=1000,auto-traverse-mounts=1"
+   default: ""
+ nfsv3driver.allowed-in-mount:
+   description: "Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
+   example: "allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,sloppy_mount,fsname"
+   default: "auto_cache"
+ nfsv3driver.default-in-mount:
+   description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
+   example: "allow_root:false,allow_other:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true"
+   default: "auto_cache:true"

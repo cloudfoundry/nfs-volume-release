@@ -41,6 +41,10 @@ case $1 in
       --dbPort="<%= p("nfsbroker.db_port") %>" \
       --dbName="<%= p("nfsbroker.db_name") %>" \
       --dbCACert="<%= p("nfsbroker.db_ca_cert") %>" \
+      --allowed-in-source="<%= p("nfsbroker.allowed-in-source") %>" \
+      --default-in-source="<%= p("nfsbroker.default-in-source") %>" \
+      --allowed-in-mount="<%= p("nfsbroker.allowed-in-mount") %>" \
+      --default-in-mount="<%= p("nfsbroker.default-in-mount") %>" \
       >> $LOG_DIR/nfsbroker.stdout.log \
       2>> $LOG_DIR/nfsbroker.stderr.log
 
