@@ -309,7 +309,7 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
 * run the following script:
 
     ```bash
-    $ ./scripts/generate_manifest.sh cf.yml director-uuid.yml iaas.yml properties.yml 
+    $ ./scripts/generate_manifest.sh cf.yml director-uuid.yml iaas.yml properties.yml
     ```
 
 to generate `nfsvolume-aws-manifest.yml` into the current directory.
@@ -320,7 +320,7 @@ to generate `nfsvolume-aws-manifest.yml` into the current directory.
     ```bash
     $ bosh -d nfsvolume-aws-manifest.yml deploy
     ```
-    
+
 # Testing or Using this Release
 
 ## Deploying the Test NFS Server (Optional)
@@ -404,7 +404,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     ```bash
     $ bosh -d nfs-test-server-aws-manifest.yml deploy
     ```
-    
+
 * Note the default **gid** & **uid** which are 0 and 0 respectively (root).
 
 ## Register nfs-broker
@@ -438,7 +438,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     ```
 > ####Bind Parameters####
 > * **uid & gid:** When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.  The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
-> * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like 
+> * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
 > ``` cf bind-service pora myVolume -c '{"uid":"0","gid":"0","mount":"/my/path"}'```
 
 * Start the application
@@ -450,7 +450,18 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 * to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
 * to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
 
+# Application specifics
+For most buildpack applications, the workflow described above will enable NFS volume services (we have tested go, java, php and python). There are special situations to note however when using a Docker image as discussed below:
+
+## Special notes for Docker Image based apps
+The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. Below is a table showcasing what we have tested with success and failures.
+
+| uid:gid | Description | Result |
+|:----------|:-------------|:-----|
+| 2000:2000 | Any CF Buildpack Default User -- CVCAP User | Success |
+| 0:0 | Docker Default User -- Root User | Success |
+| 20:20 | Custom User Created | Failure |
+
 
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
-
