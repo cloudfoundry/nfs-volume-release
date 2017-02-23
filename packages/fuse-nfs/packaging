@@ -39,7 +39,7 @@ pushd libnfs-1.11.0
 popd
 cp -R libnfs-1.11.0 ${BOSH_INSTALL_TARGET}
 
-tar xzf fuse-nfs.tar.gz
+tar xvf fuse-nfs.tar.gz
 pushd fuse-nfs
   ./setup.sh
   ./configure
