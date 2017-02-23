@@ -42,5 +42,5 @@ properties:
    default: "auto_cache"
  nfsv3driver.default-in-mount:
    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
-   example: "allow_root:false,allow_other:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true"
+   example: "allow_root:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true"
    default: "auto_cache:true"
