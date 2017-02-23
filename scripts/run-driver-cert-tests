@@ -29,7 +29,7 @@ echo "{
   \"driver_name\": \"nfsv3driver\",
   \"create_config\": {
     \"Name\": \"nfs-volume-name\",
-    \"Opts\": {\"source\":\"$SOURCE\"}
+    \"Opts\": {\"source\":\"$SOURCE\",\"uid\":\"2000\",\"gid\":\"2000\"}
   }
 } "  > $NFS_RELEASE_DIR/tmp/fixture.json
 
