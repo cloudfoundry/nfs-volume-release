@@ -100,5 +100,5 @@
 	branch = master
 [submodule "src/gopkg.in/DATA-DOG/"]
 	path = src/gopkg.in/DATA-DOG/
-	url = https://github.com/cloudfoundry-incubator/nfs-volume-release.git
+	url = https://github.com/DATA-DOG/go-sqlmock	
 	branch = master
