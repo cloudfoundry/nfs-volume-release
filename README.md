@@ -462,6 +462,14 @@ The user running the application inside the docker image must either have uid 0 
 | 0:0 | Docker Default User -- Root User | Success |
 | 20:20 | Custom User Created | Failure |
 
+> ## Security Note
+> Because connecting to NFS shares will require you to open your NFS mountpoint to all Diego cells, and outbound traffic from application containers is NATed to the Diego cell IP address, there is a risk that an application could initiate an NFS IP connection to your share and gain unauthorized access to data.
+> 
+> To mitigate this risk, consider one or more of the following steps:
+> * Avoid using `insecure` NFS exports, as that will allow non-root users to connect on port 2049 to your share.
+> * Avoid enabling Docker application support as that will allow root users to connect on port 111 even when your share is not `insecure`.
+> * Use [CF Security groups](https://docs.cloudfoundry.org/adminguide/app-sec-groups.html) to block direct application access to your NFS server IP, especially on ports 111 and 2049.
 
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
+
