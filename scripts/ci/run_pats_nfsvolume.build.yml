@@ -29,5 +29,6 @@ params:
   DB_PASSWORD:
   TEST_MULTI_CELL: true
   TEST_MOUNT_OPTIONS: false
+  TEST_READ_ONLY: true
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup

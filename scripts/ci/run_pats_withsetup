@@ -27,6 +27,7 @@ check_param SERVER_ADDRESS
 check_param SHARE
 check_param TEST_MULTI_CELL
 check_param TEST_MOUNT_OPTIONS
+check_param TEST_READ_ONLY
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
