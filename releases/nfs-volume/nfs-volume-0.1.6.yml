@@ -1,0 +1,55 @@
+---
+packages:
+- name: cf_cli
+  version: 5bbc894cef20c4c984d48b8aa55a8d06f9b43a9e
+  fingerprint: 5bbc894cef20c4c984d48b8aa55a8d06f9b43a9e
+  sha1: 4f287551729f8e06d56451c1e20ab520f9ade9f0
+  dependencies: []
+- name: fuse-nfs
+  version: 7069549e78f281d68c928523198e910c7f462cd2
+  fingerprint: 7069549e78f281d68c928523198e910c7f462cd2
+  sha1: 38769591a2a52c9f8cfb709e87e063dcfd445f95
+  dependencies: []
+- name: golang-nfsvolume
+  version: bfef694ebb81e79df9fa1b52485520e8f3bca68f
+  fingerprint: bfef694ebb81e79df9fa1b52485520e8f3bca68f
+  sha1: af0d9f7e1ef518750e072e6acab61c33db7b8c15
+  dependencies: []
+- name: nfsbroker
+  version: 2880282ec9d8fcf18cb4045698a8d92df40fb965
+  fingerprint: 2880282ec9d8fcf18cb4045698a8d92df40fb965
+  sha1: bc6dbf7dc9667de3c4413eece2f0619fc749e512
+  dependencies:
+  - golang-nfsvolume
+- name: nfsv3driver
+  version: 2324a6294352249757b8865528303d839d874885
+  fingerprint: 2324a6294352249757b8865528303d839d874885
+  sha1: 598f5d3db14e16e363eaa98cfcea857ffc45fc8e
+  dependencies:
+  - fuse-nfs
+  - golang-nfsvolume
+jobs:
+- name: nfsbroker
+  version: 19ba3472c24d2cb3883257e355e6f58a3236083e
+  fingerprint: 19ba3472c24d2cb3883257e355e6f58a3236083e
+  sha1: e2c74e9fa684322ea28c8d95eeee0e72dfa88045
+- name: nfsbrokerpush
+  version: e44889cb21514c86165f1db1a820278be52fa1e5
+  fingerprint: e44889cb21514c86165f1db1a820278be52fa1e5
+  sha1: 7265f1c66120e1ecc22eb3f19247eb51ca1069ca
+- name: nfstestserver
+  version: 3a64cdb5e4dbd8d7ec4ec3cb9b03d2bfcb09fe4b
+  fingerprint: 3a64cdb5e4dbd8d7ec4ec3cb9b03d2bfcb09fe4b
+  sha1: 498996a98e702f7aabf1f412c91b180aa2024f89
+- name: nfsv3driver
+  version: 8301629ad779b9105bcb8a5eb9c68beef6433dbf
+  fingerprint: 8301629ad779b9105bcb8a5eb9c68beef6433dbf
+  sha1: d97ed0b423282acbbe28b0e059b03a4ce226539a
+license:
+  version: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  fingerprint: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  sha1: 3b62c7156cd705556ddb8a2d30d3f83213070ae2
+commit_hash: 04a69570
+uncommitted_changes: true
+name: nfs-volume
+version: 0.1.6
