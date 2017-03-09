@@ -12,9 +12,9 @@ fuse-2.9.2.tar.gz:
   sha: fcfc005b1edcd5e8b325729a1b325ff0e8b2a5ab
   size: 560123
 fuse-nfs.tar.gz:
-  object_id: 2fd08aba-52ed-4a91-b196-96698dabd072
-  sha: 0a546823a6efab10a6438345188bdc2000dc75ce
-  size: 84996
+  object_id: 8f6260d5-7bac-463b-a2ff-60932225aacb
+  sha: 6612b88df3cb03315db3515c7c8a75fa320dbc79
+  size: 121615
 go1.7.linux-amd64.tar.gz:
   object_id: a4a82ed6-a022-431a-af06-5317422d3211
   sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
