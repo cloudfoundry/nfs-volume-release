@@ -439,7 +439,8 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 > ####Bind Parameters####
 > * **uid & gid:** When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.  The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
 > * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
-> ``` cf bind-service pora myVolume -c '{"uid":"0","gid":"0","mount":"/my/path"}'```
+> ``` cf bind-service pora myVolume -c '{"uid":"0","gid":"0","mount":"/var/path"}'```
+> > NOTE: As of this writing aufs used by Garden is not capable of creating new root level folders.  As a result, you must choose a path with a root level folder that already exists in the container.  (`/home`, `/usr` or `/var` are good choices.)  If you require a path that does not already exist in the container it is currently only possible if you upgrade your Diego deployment to use [GrootFS](https://github.com/cloudfoundry/grootfs-release) with Garden.  For details on how to generate a Diego manifest using GrootFS see [this note](https://github.com/cloudfoundry/diego-release/blob/develop/docs/manifest-generation.md#experimental--g-opt-into-using-grootfs-for-garden).  Eventually, GrootFS will become the standard file system for CF containers, and this limitation will go away.
 > * **readonly:** Set true if you want the mounted volume to be read only. 
 
 * Start the application
