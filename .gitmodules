@@ -102,3 +102,11 @@
 	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
 	url = https://github.com/DATA-DOG/go-sqlmock
 	branch = master
+[submodule "src/gopkg.in/asn1-ber.v1"]
+	path = src/gopkg.in/asn1-ber.v1
+	url = https://gopkg.in/asn1-ber.v1
+	branch = master
+[submodule "src/gopkg.in/ldap.v2"]
+	path = src/gopkg.in/ldap.v2
+	url = https://gopkg.in/ldap.v2
+	branch = master

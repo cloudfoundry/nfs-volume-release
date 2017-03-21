@@ -16,6 +16,7 @@ files:
   - code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
   - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/ldapshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/nfsdriver/*.go # gosub
@@ -31,3 +32,5 @@ files:
   - github.com/tedsuo/ifrit/http_server/*.go # gosub
   - github.com/tedsuo/ifrit/sigmon/*.go # gosub
   - github.com/tedsuo/rata/*.go # gosub
+  - gopkg.in/asn1-ber.v1/*.go # gosub
+  - gopkg.in/ldap.v2/*.go # gosub
