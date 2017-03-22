@@ -37,6 +37,14 @@ case $1 in
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
     export PATH=/usr/local/bin:$PATH
 
+    # ldap connection and credential info are passed via environment
+    export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
+    export LDAP_SVC_PASS="<%= p("nfsv3driver.ldap_svc_password") %>"
+    export LDAP_HOST="<%= p("nfsv3driver.ldap_host") %>"
+    export LDAP_PORT="<%= p("nfsv3driver.ldap_port") %>"
+    export LDAP_PROTO="<%= p("nfsv3driver.ldap_proto") %>"
+    export LDAP_USER_FQDN="<%= p("nfsv3driver.ldap_user_fqdn") %>"
+
     exec chpst -u cvcap:cvcap /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
       --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
       --transport="tcp" \
