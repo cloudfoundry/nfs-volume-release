@@ -45,21 +45,21 @@ properties:
    example: "allow_root:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true"
    default: "auto_cache:true"
  nfsv3driver.ldap_svc_user:
-   description: "ldap service account user name (optional)"
+   description: "ldap service account user name (required for LDAP integration only)"
    default: ""
  nfsv3driver.ldap_svc_password:
-   description: "ldap service account password (optional)"
+   description: "ldap service account password (required for LDAP integration only)"
    default: ""
  nfsv3driver.ldap_host:
-   description: "ldap server host name or ip address (optional)"
+   description: "ldap server host name or ip address (required for LDAP integration only)"
    default: ""
  nfsv3driver.ldap_port:
-   description: "ldap server port (optional)"
+   description: "ldap server port (required for LDAP integration only)"
    default: 389
  nfsv3driver.ldap_proto:
-   description: "ldap server port (optional)"
+   description: "ldap server protocol (required for LDAP integration only)"
    default: tcp
  nfsv3driver.ldap_user_fqdn:
-   description: "ldap fqdn for user records we will search against when looking up user uids (optional)"
+   description: "ldap fqdn for user records we will search against when looking up user uids (required for LDAP integration only)"
    example: "cn=Users,dc=corp,dc=test,dc=com"
    default: ""

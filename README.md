@@ -304,7 +304,6 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
     cf purge-service-offering nfs -f
     cf delete-service-broker nfsbroker -f
     ```
-    > Stay tuned for the CF pushable version of this broker.
 #### Generate the Deployment Manifest
 * run the following script:
 
@@ -456,7 +455,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 For most buildpack applications, the workflow described above will enable NFS volume services (we have tested go, java, php and python). There are special situations to note however when using a Docker image as discussed below:
 
 ## Special notes for Docker Image based apps
-The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. Below is a table showcasing what we have tested with success and failures.
+The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. Below is a table showing the results we saw when tesing with different uids.
 
 | uid:gid | Description | Result |
 |:----------|:-------------|:-----|
@@ -472,5 +471,7 @@ The user running the application inside the docker image must either have uid 0 
 > * Avoid enabling Docker application support as that will allow root users to connect on port 111 even when your share is not `insecure`.
 > * Use [CF Security groups](https://docs.cloudfoundry.org/adminguide/app-sec-groups.html) to block direct application access to your NFS server IP, especially on ports 111 and 2049.
 
+# LDAP Support (:pill: :pill: EXPERIMENTAL :pill: :pill:)
+As of version 0.1.7 it is possible to configure your deployment of nfs-volume-release to connect to an LDAP server to resolve user credentials into uids.  See [this note](USING_LDAP.md) for more details.
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
