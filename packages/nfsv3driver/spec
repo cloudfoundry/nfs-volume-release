@@ -9,7 +9,6 @@ files:
   - code.cloudfoundry.org/cfhttp/*.go # gosub
   - code.cloudfoundry.org/cfhttp/handlers/*.go # gosub
   - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
-  - code.cloudfoundry.org/cflager/*.go # gosub
   - code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/goshims/execshim/*.go # gosub
@@ -19,6 +18,7 @@ files:
   - code.cloudfoundry.org/goshims/ldapshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/nfsdriver/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver/*.go # gosub
