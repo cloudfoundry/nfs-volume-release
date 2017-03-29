@@ -50,9 +50,9 @@ cat << EOF > ${CONFIG}
       "name_prefix": "PATs",
       "server_addr": "${10}",
       "share": "${11}",
-      "bind_config": "${12}"
+      "bind_config": "${12}",
       "pushed_broker_name": "${13}",
-      "sql_service_name": "${14}",
+      "sql_service_name": "${14}"
     }
 EOF
 
