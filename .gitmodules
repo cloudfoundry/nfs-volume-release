@@ -110,3 +110,7 @@
 	path = src/gopkg.in/ldap.v2
 	url = https://gopkg.in/ldap.v2
 	branch = master
+[submodule "src/golang.org/x/crypto"]
+	path = src/golang.org/x/crypto
+	url = https://go.googlesource.com/crypto
+	branch = master
