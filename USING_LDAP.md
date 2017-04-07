@@ -8,6 +8,9 @@ The principal benefit to this feature is that it secures the nfs-volume-release 
 to an NFS share using an arbitrary UID and potentially gain access to sensitive data stored by another user or application.  Once LDAP support is
 enabled and regular UID and GID parameters are disabled, application developers will need to provide credentials for any user they wish to bind as.
 
+### :BANGBANG: WARNING: LEAKED CREDENTIALS :BANGBANG:
+If you are using a version of Diego before v1.12.0, the Diego Rep will leak LDAP credentials into logs at levels **info** and **debug**. We strongly recommend you install a newer version of diego, or set your rep log level to warn.
+
 ## Changes to your LDAP server
 It is not generally necessary to make adjustments to your LDAP server to enable integration, but you will need the following:
 - Your LDAP server must be reachable through the network from the Diego cell VMs on the port you will use to connect (normally 389 or 636)
