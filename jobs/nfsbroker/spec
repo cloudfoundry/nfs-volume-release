@@ -10,10 +10,10 @@ packages:
 
 properties:
   nfsbroker.username:
-    description: "Basic auth username to verify on incoming Service Broker requests"
+    description: "basic auth username to verify on incoming Service Broker requests"
     default: "admin"
   nfsbroker.password:
-    description: "Basic auth password to verify on incoming Service Broker requests"
+    description: "basic auth password to verify on incoming Service Broker requests"
   nfsbroker.listen_addr:
     description: "(optional) address nfsbroker listens on"
     default: "0.0.0.0:8999"
@@ -47,19 +47,11 @@ properties:
   nfsbroker.db_ca_cert:
     default: ""
     description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
-  nfsbroker.allowed-in-source:
-    description: "Comma separated list of white-listed options that may be configured as supported in the mount_config.source URL query params. If a non-white-listed option is received from a user as arbitrary params, then the broker will reject the user request."
-    example: "uid,gid"
-    default: "uid,gid"
-  nfsbroker.default-in-source:
-    description: "Comma separated list of default values for options in the mount_config.source URL query params, formatted as 'option:default'. If an option is not specified in the provisioning arbitrary params, or an option is specified but not white-listed, then the specified default value will be applied."
-    example: "uid:1000,gid:1000"
-    default: ""
-  nfsbroker.allowed-in-mount:
-    description: "Comma separated list of white-listed options that may be configured in supported in the mount_config options. If a non-white-listed option is received from a user as arbitrary params, then the broker will reject the user request."
-    example: "allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,fsname,username,password"
-    default: "auto_cache,username,password"
-  nfsbroker.default-in-mount:
-    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the binding arbitrary params, or an option is specified but is not white-listed, then the specified default value will be applied."
-    example: "allow_root:false,allow_other:false,nfs_uid:2000,nfs_gid:2000,auto_cache:false"
+  nfsbroker.allowed_options:
+    description: "comma separated list of white-listed options that may be set during create or bind operations."
+    example: "uid,gid,allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,fsname,username,password"
+    default: "uid,gid,auto_cache,username,password"
+  nfsbroker.default_options:
+    description: "comma separated list default values for options. If a default is specified but the option is not in the allowed-options, then the default value will be set and cannot be overridden."
+    example: "uid:1000,gid:1000,allow_root:false,allow_other:false,nfs_uid:2000,nfs_gid:2000,auto_cache:false"
     default: "auto_cache:true"
