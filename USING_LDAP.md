@@ -19,19 +19,16 @@ It is not generally necessary to make adjustments to your LDAP server to enable 
 ### Broker changes
 Because the actual connection to the LDAP server occurs at mount time in the volume driver, the service broker is only minimally involved in
 LDAP integration.  Essentially the only change to the broker is that it should accept `username` and `password` configuration options at 
-service bind time, and it should *not* accept `uid` or `gid`.  Acceptable options for the broker are specified in the following properties:
-- `nfsbroker.allowed-in-source`: Comma separated list of white-listed options that may be configured as supported in the mount_config.source URL 
-  query params.
-- `nfsbroker.allowed-in-mount`: Comma separated list of white-listed options that may be configured in supported in the mount_config options.
+service bind time, and it should **not** accept `uid` or `gid`.  Acceptable options for the broker are specified in the following property:
+- `nfsbroker.allowed_options`: Comma separated list of white-listed options that may be set during create or bind operations. 
 
 #### `bosh deploy`ed brokers:
-If you are bosh deploying your service broker, modify your manifest to set `nfsbroker.allowed-in-source` to "" and set `nfsbroker.allowed-in-mount` 
-to `username,password` and redeploy.
+If you are bosh deploying your service broker, modify your manifest to set `nfsbroker.allowed_options` to `auto_cache,username,password` and redeploy.
 You should see that new service bindings fail if `uid` or `gid` are specified through the `-c` option. 
 
 #### `cf push`ed brokers:
 If you are pushing your broker to cloudfoundry, the same options can be set on the command line.  Modify `Procfile` under nfsbroker to include 
-`--sourceFlagAllowed="" --mountFlagAllowed=="username,password"` in the command line arguments for nfsbroker, then `cf push` your broker app.
+`--allowedOptions="auto_cache,username,password"` in the command line arguments for nfsbroker, then `cf push` your broker app.
 
 ### Driver changes
 LDAP integration in the driver is configured with the following BOSH properties:
