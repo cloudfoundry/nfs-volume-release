@@ -10,6 +10,11 @@ packages:
   - golang-nfsvolume
   - cf_cli
 
+consumes:
+  - name: database
+    type: database
+    optional: true
+
 properties:
   nfsbrokerpush.domain:
     description: 'Cloud Foundry System Domain'

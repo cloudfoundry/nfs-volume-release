@@ -1,4 +1,12 @@
 ---
+<%
+  database_host = nil
+  if_p('properties.nfsbrokerpush.db.host') do |host|
+    database_host = host
+  end.else do
+    database_host = link('database').instances[0].address
+  end
+%>
   buildpack: binary_buildpack
   domain: "<%= properties.nfsbrokerpush.app_domain %>"
   env:
@@ -9,7 +17,7 @@
     PASSWORD: "<%= properties.nfsbrokerpush.password %>"
     LOGLEVEL: info
     DBDRIVERNAME: "<%= properties.nfsbrokerpush.db.driver %>"
-    DBHOST: "<%= properties.nfsbrokerpush.db.host %>"
+    DBHOST: "<%= database_host %>"
     DBPORT: "<%= properties.nfsbrokerpush.db.port %>"
     DBNAME: "<%= properties.nfsbrokerpush.db.name %>"
     DB_USERNAME: "<%= properties.nfsbrokerpush.db.username %>"
