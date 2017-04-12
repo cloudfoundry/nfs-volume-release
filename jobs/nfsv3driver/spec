@@ -4,6 +4,7 @@ name: nfsv3driver
 templates:
   install.erb: bin/pre-start
   ctl.erb: bin/nfsv3driver_ctl
+  drain.erb: bin/drain
 
 packages:
 - fuse-nfs
@@ -16,6 +17,9 @@ properties:
  nfsv3driver.debug_addr:
    description: "address nfsv3driver will serve debug info"
    default: "127.0.0.1:7689"
+ nfsv3driver.admin_addr:
+    description: "address nfsv3driver listens on for admin requests"
+    default: "127.0.0.1:7590"
  nfsv3driver.driver_path:
    description: "path to place driver spec/json file for volman to discover"
    default: "/var/vcap/data/voldrivers"

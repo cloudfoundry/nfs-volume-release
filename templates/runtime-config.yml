@@ -1,0 +1,13 @@
+---
+releases:
+- name: nfs-volume
+  version: "0.2.1+dev.18"
+addons:
+- name: voldrivers
+  include:
+    deployments: [cf-warden-diego]
+    jobs: [{name: rep, release: diego}]
+  jobs:
+  - name: nfsv3driver
+    release: nfs-volume
+    properties: {}
