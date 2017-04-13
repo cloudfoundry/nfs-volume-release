@@ -3,7 +3,15 @@
 set -e -x
 
 # make sure there arent any existing fuse-nfs mounts
-pkill -f fuse-nfs | true
+pkill fuse-nfs | true
+for i in {1..60}; do
+  if pgrep fuse-nfs > /dev/null; then
+    echo "waiting for fuse-nfs to expire"
+    sleep 1
+  else
+    break
+  fi
+done
 
 echo "Copying libfuse Shared Objects and installing fusermount"
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
