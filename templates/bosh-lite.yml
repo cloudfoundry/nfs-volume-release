@@ -39,7 +39,9 @@ networks:
     gateway: 10.244.8.1
     range: 10.244.8.0/24
     static:
-    - 10.244.8.8
+    - 10.244.8.11
+    reserved:
+    - 10.244.8.2 - 10.244.8.10
   type: manual
 properties:
   nfsbroker:
