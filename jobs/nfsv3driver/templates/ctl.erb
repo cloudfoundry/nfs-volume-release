@@ -1,10 +1,18 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 RUN_DIR=/var/vcap/sys/run/nfsv3driver
 LOG_DIR=/var/vcap/sys/log/nfsv3driver
 PIDFILE=$RUN_DIR/nfsv3driver.pid
+
+SCRIPT=$(basename $0)
+mkdir -p /var/vcap/sys/log/monit
+
+exec 1>> /var/vcap/sys/log/monit/$SCRIPT.log
+exec 2>> /var/vcap/sys/log/monit/$SCRIPT.err.log
+
+echo "------------ `basename $0` $* at `date` --------------" | tee /dev/stderr
 
 case $1 in
 
