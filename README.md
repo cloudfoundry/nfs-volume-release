@@ -471,6 +471,9 @@ The user running the application inside the docker image must either have uid 0 
 > * Avoid enabling Docker application support as that will allow root users to connect on port 111 even when your share is not `insecure`.
 > * Use [CF Security groups](https://docs.cloudfoundry.org/adminguide/app-sec-groups.html) to block direct application access to your NFS server IP, especially on ports 111 and 2049.
 
+## File Locking via flock() and lockf()/fcntl()
+If your application relies on file locking either through unix system calls such as flock() and fcntl() or through script commands such as `flock` **please be aware that the lock will not be enforced across diego cells**.  This is because the file locking implementations in the underlying fuse-nfs executable are not implemented, so locking is limited to local locks between precesses on the same VM.  If you have a legitimate requirement for file locking, please document your use case in a comment on [this github issue](https://github.com/cloudfoundry-incubator/nfs-volume-release/issues/13) and we'll see what we can do.
+
 # LDAP Support (:pill: :pill: EXPERIMENTAL :pill: :pill:)
 As of version 0.1.7 it is possible to configure your deployment of nfs-volume-release to connect to an LDAP server to resolve user credentials into uids.  See [this note](USING_LDAP.md) for more details.
 # Troubleshooting
