@@ -10,10 +10,6 @@
 	path = src/code.cloudfoundry.org/cfhttp
 	url = https://github.com/cloudfoundry/cfhttp
 	branch = master
-[submodule "src/code.cloudfoundry.org/cflager"]
-	path = src/code.cloudfoundry.org/cflager
-	url = https://github.com/cloudfoundry/cflager
-	branch = master
 [submodule "src/code.cloudfoundry.org/clock"]
 	path = src/code.cloudfoundry.org/clock
 	url = https://github.com/cloudfoundry/clock
@@ -89,10 +85,6 @@
 [submodule "src/github.com/lib/pq"]
 	path = src/github.com/lib/pq
 	url = https://github.com/lib/pq
-	branch = master
-[submodule "src/code.cloudfoundry.org/kerbdriver"]
-	path = src/code.cloudfoundry.org/kerbdriver
-	url = https://github.com/cloudfoundry-incubator/kerbdriver
 	branch = master
 [submodule "src/github.com/go-sql-driver/mysql"]
 	path = src/github.com/go-sql-driver/mysql
