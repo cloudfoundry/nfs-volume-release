@@ -42,8 +42,8 @@ case $1 in
     # Allowed number of open file descriptors
     ulimit -n 100000
 
-    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-    export PATH=/usr/local/bin:$PATH
+    export LD_LIBRARY_PATH=/var/vcap/packages/fuse-nfs/lib:$LD_LIBRARY_PATH
+    export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
 
     # ldap connection and credential info are passed via environment
     export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
