@@ -17,19 +17,17 @@ echo "Copying libfuse Shared Objects and installing fusermount"
 
 mkdir -p /var/vcap/packages/fuse-nfs/bin
 chown cvcap /var/vcap/packages/fuse-nfs/bin || true
-mkdir -p /var/vcap/packages/fuse-nfs/lib
-chown cvcap /var/vcap/packages/fuse-nfs/lib || true
 
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
-cp lib/.libs/*.so /var/vcap/packages/fuse-nfs/lib
+cp lib/.libs/*.so /usr/lib
 cp util/fusermount /var/vcap/packages/fuse-nfs/bin
 setcap 'cap_sys_admin=+ep' /var/vcap/packages/fuse-nfs/bin/fusermount
 popd
 
 echo "Copying libnfs Shared Objects"
 pushd /var/vcap/packages/fuse-nfs/libnfs-1.11.0
-cp lib/.libs/*.so /var/vcap/packages/fuse-nfs/lib
-cp lib/.libs/*.so.8 /var/vcap/packages/fuse-nfs/lib
+cp lib/.libs/*.so /usr/lib
+cp lib/.libs/*.so.8 /usr/lib
 popd
 
 echo "Adding fuse-nfs to PATH"
