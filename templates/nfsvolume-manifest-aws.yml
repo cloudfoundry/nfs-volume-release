@@ -73,6 +73,10 @@ resource_pools:
     stemcell: (( merge ))
     cloud_properties: (( merge ))
 
+  - name: small
+    network: nfsvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
 update:
   canaries: 1
   max_in_flight: 3
