@@ -433,7 +433,7 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 
 * Bind the service to your app supplying the correct uid and gid corresponding to what is seen on the nfs server.
     ```bash
-    $ cf bind-service pora myVolume -c '{"uid":"0","gid":"0"}'
+    $ cf bind-service pora myVolume -c '{"uid":"1000","gid":"1000"}'
     ```
 > ####Bind Parameters####
 > * **uid & gid:** When binding the nfs service to the application, the uid and gid specified are supplied to the fuse-nfs driver.  The fuse-nfs driver acts as a middle layer (translation table) to mask the running user id and group id as the true owner shown on the nfs server.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
