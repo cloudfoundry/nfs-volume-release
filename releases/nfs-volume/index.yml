@@ -48,4 +48,6 @@ builds:
     version: 1.0.2
   a4977db9-ddc6-46f5-8fff-23458d1e2a74:
     version: 1.0.3
+  995a0b6b-172c-4545-94e1-8f87111d3df7:
+    version: 1.0.4
 format-version: '2'
