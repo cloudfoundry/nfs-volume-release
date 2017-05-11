@@ -13,11 +13,11 @@ This broker/driver pair allows you to provision existing NFS volumes and bind th
 
 ## Create and Upload this Release
 
-1. Check out nfs-volume-release (master branch) from git:
+1. Clone nfs-volume-release (master branch) from git:
 
     ```bash
     $ cd ~/workspace
-    $ git clone https://github.com/cloudfoundry-incubator/nfs-volume-release.git
+    $ git clone https://github.com/cloudfoundry/nfs-volume-release.git
     $ cd ~/workspace/nfs-volume-release
     $ git checkout master
     $ ./scripts/update
