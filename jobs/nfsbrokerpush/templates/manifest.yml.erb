@@ -1,7 +1,7 @@
 ---
 <%
   database_host = nil
-  if_p('properties.nfsbrokerpush.db.host') do |host|
+  if_p('nfsbrokerpush.db.host') do |host|
     database_host = host
   end.else do
     database_host = link('database').instances[0].address
