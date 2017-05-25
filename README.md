@@ -387,7 +387,7 @@ If you do not have an existing NFS Server then you can optionally deploy the tes
           public_ips: [<--- PUBLIC IP ADDRESS --->]
     ```
 
-NB: manually edit to fix hard-coded ip ranges, security groups and subnets to match your deployment.
+> NB: manually edit to fix hard-coded ip ranges, security groups and subnets to match your deployment.
 
 * run the following script:
 
@@ -396,6 +396,12 @@ NB: manually edit to fix hard-coded ip ranges, security groups and subnets to ma
     ```
 
 to generate `nfs-test-server-aws-manifest.yml` into the current directory.
+
+> NB: by default, the nfs test server expects that your CF deployment is deployed to a 10.x.x.x subnet.  If you are deploying to a subnet that is not 10.x.x.x (e.g. 192.168.x.x) then you will need to override the `export_cidr` property.
+> Edit the generated manifest, and replace this line:
+> `  nfstestserver: {}`
+> with something like this:
+> `  nfstestserver: {export_cidr: 192.168.0.0/16}`
 
 ### Deploy the NFS Server
 * Deploy the NFS server using the generated manifest:

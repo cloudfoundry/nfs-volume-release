@@ -27,13 +27,13 @@ chown root:vcap /export/vol2
 chown root:vcap /export/vol3
 
 cat << EOF > /etc/exports
-/export        10.0.0.0/8(rw,fsid=0,no_subtree_check,async)
-/export/users  10.0.0.0/8(rw,nohide,no_subtree_check,async)
-/export/vol1   10.0.0.0/8(rw,nohide,no_subtree_check,async)
-/export/vol2   10.0.0.0/8(rw,nohide,no_subtree_check,async)
-/export/vol3   10.0.0.0/8(rw,nohide,no_subtree_check,async)
-/export2       10.0.0.0/8(rw,fsid=1,no_subtree_check,async,insecure)
-/export2/certs 10.0.0.0/8(rw,nohide,no_subtree_check,async,insecure)
+/export        <%= p("nfstestserver.export_cidr") %>(rw,fsid=0,no_subtree_check,async)
+/export/users  <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol1   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol2   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol3   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export2       <%= p("nfstestserver.export_cidr") %>(rw,fsid=1,no_subtree_check,async,insecure)
+/export2/certs <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
 EOF
 
 exit 0
