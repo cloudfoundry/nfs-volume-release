@@ -11,4 +11,6 @@ properties:
  nfstestserver.export_cidr:
     description: "cidr range to use for nfs exports"
     default: "10.0.0.0/8"
-
+ nfstestserver.export_root_path:
+    description: "NFS root path"
+    default: "/var/vcap/store/nfstestserver"
