@@ -21,7 +21,7 @@ chown cvcap /var/vcap/packages/fuse-nfs/bin || true
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
 cp lib/.libs/*.so /usr/lib
 cp util/fusermount /var/vcap/packages/fuse-nfs/bin
-setcap 'cap_sys_admin=+ep' /var/vcap/packages/fuse-nfs/bin/fusermount
+chmod u+s /var/vcap/packages/fuse-nfs/bin/fusermount
 popd
 
 echo "Copying libnfs Shared Objects"
