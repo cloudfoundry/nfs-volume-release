@@ -14,20 +14,6 @@ function has_upstream() {
 
 set -x -e
 
-if uname -a | grep Darwin; then
-    if brew list | grep git-secrets; then
-        echo "git secrets already installed"
-    else
-        brew install git-secrets
-    fi
-    git secrets --register-aws --global || true
-fi
-
-echo "$(dirname "$scripts_dir")/.git"
-if [ -d "$(dirname "$scripts_dir")/../.git" ] ; then
-  "$scripts_dir"/install-git-hooks
-fi
-
 has_upstream && git pull -r
 
 if [[ "$(git --version | grep 'version 1.7')x" != "x" ]]; then
