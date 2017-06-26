@@ -15,10 +15,6 @@ fuse-nfs.tar.gz:
   object_id: 8f6260d5-7bac-463b-a2ff-60932225aacb
   sha: 6612b88df3cb03315db3515c7c8a75fa320dbc79
   size: 121615
-go1.7.linux-amd64.tar.gz:
-  object_id: a4a82ed6-a022-431a-af06-5317422d3211
-  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
-  size: 81573766
 libnfs-1.11.0.tar.gz:
   object_id: 737f769d-c0e0-4bf2-a748-bc1aff64c1ff
   sha: b675d6696aa88d0e44f25e9862cf46c1a1fd41f9
@@ -31,3 +27,7 @@ cf-cli_6.23.1_linux_x86-64.tgz:
   object_id: 53270c4b-ab0d-4f23-ba1b-384e04631c60
   sha: a195e99cae5ab17b453b0a0747508c8f3eee5cae
   size: 6692717
+go1.8.3.linux-amd64.tar.gz:
+  object_id: 1258a05c-42d7-4d52-a8e2-65359c15d098
+  sha: 838c415896ef5ecd395dfabde5e7e6f8ac943c8e
+  size: 90029041
