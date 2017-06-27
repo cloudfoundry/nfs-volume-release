@@ -7,33 +7,33 @@ echo "Installing nfs server"
 apt-get update
 apt-get --assume-yes install nfs-kernel-server
 
-mkdir -p /export/users
-mkdir -p /export/vol1
-mkdir -p /export/vol2
-mkdir -p /export/vol3
-mkdir -p /export2/certs
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export/users
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol1
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol2
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol3
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export2/certs
 
-chmod 777 /export
-chmod 777 /export2
-chmod 775 /export/users
-chmod 775 /export/vol1
-chmod 775 /export/vol2
-chmod 775 /export/vol3
-chmod 777 /export2/certs
+chmod 777 <%= p("nfstestserver.export_root_path") %>/export
+chmod 777 <%= p("nfstestserver.export_root_path") %>/export2
+chmod 775 <%= p("nfstestserver.export_root_path") %>/export/users
+chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol1
+chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol2
+chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol3
+chmod 777 <%= p("nfstestserver.export_root_path") %>/export2/certs
 
-chown root:vcap /export/users
-chown root:vcap /export/vol1
-chown root:vcap /export/vol2
-chown root:vcap /export/vol3
+chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/users
+chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol1
+chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol2
+chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol3
 
 cat << EOF > /etc/exports
-/export        <%= p("nfstestserver.export_cidr") %>(rw,fsid=0,no_subtree_check,async)
-/export/users  <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol1   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol2   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol3   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export2       <%= p("nfstestserver.export_cidr") %>(rw,fsid=1,no_subtree_check,async,insecure)
-/export2/certs <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
+<%= p("nfstestserver.export_root_path") %>/export        <%= p("nfstestserver.export_cidr") %>(rw,fsid=0,no_subtree_check,async)
+<%= p("nfstestserver.export_root_path") %>/export/users  <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+<%= p("nfstestserver.export_root_path") %>/export/vol1   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+<%= p("nfstestserver.export_root_path") %>/export/vol2   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+<%= p("nfstestserver.export_root_path") %>/export/vol3   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+<%= p("nfstestserver.export_root_path") %>/export2       <%= p("nfstestserver.export_cidr") %>(rw,fsid=1,no_subtree_check,async,insecure)
+<%= p("nfstestserver.export_root_path") %>/export2/certs <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
 EOF
 
 exit 0
