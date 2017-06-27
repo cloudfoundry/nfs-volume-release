@@ -50,7 +50,7 @@ if [ ! -e /proc/$pid ]; then
 fi
 
 # wait for rep
-while pgrep -x "rep_as_vcap" > /dev/null; do
+while pgrep -x "rep" > /dev/null; do
     echo "$(date): waiting for rep..."
     sleep 3
 done
