@@ -12,9 +12,9 @@ fuse-2.9.2.tar.gz:
   sha: fcfc005b1edcd5e8b325729a1b325ff0e8b2a5ab
   size: 560123
 fuse-nfs.tar.gz:
-  object_id: 8f6260d5-7bac-463b-a2ff-60932225aacb
-  sha: 6612b88df3cb03315db3515c7c8a75fa320dbc79
-  size: 121615
+  object_id: 00b81950-6a81-4219-aeb6-78f78e9318e4
+  sha: 965ca58c6e5decdb3ecf0b1c3e247fc2ac9287d6
+  size: 137738
 libnfs-1.11.0.tar.gz:
   object_id: 737f769d-c0e0-4bf2-a748-bc1aff64c1ff
   sha: b675d6696aa88d0e44f25e9862cf46c1a1fd41f9
