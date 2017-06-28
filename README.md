@@ -461,13 +461,15 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 For most buildpack applications, the workflow described above will enable NFS volume services (we have tested go, java, php and python). There are special situations to note however when using a Docker image as discussed below:
 
 ## Special notes for Docker Image based apps
-The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. Below is a table showing the results we saw when tesing with different uids.
+The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. At this time, it is perferable to run your docker app as uid 2000 in order to best mimic the behavior of a buildpack application.  Below is a table showing the results we saw when tesing with different uids.
 
 | uid:gid | Description | Result |
 |:----------|:-------------|:-----|
 | 2000:2000 | Any CF Buildpack Default User -- CVCAP User | Success |
-| 0:0 | Docker Default User -- Root User | Success |
+| 0:0 | Docker Default User -- Root User | Partial Success* |
 | 20:20 | Custom User Created | Failure |
+
+*When running docker apps as the default (root) user, most operations appear to work *provided* that the mounted directory has world read/write permissions.  The fuse-nfs driver will map outbound requests to the server to whatever uid is provided in the service binding configuration, and then map that uid back to uid 2000 in data responses.  Since the container thinks that the user is root, it will allow most operations to proceed even though the user does not match.  But in some cases, the cell OS will intervene because the container root user is not root on the cell, and also is not uid 2000.
 
 > ## Security Note
 > Because connecting to NFS shares will require you to open your NFS mountpoint to all Diego cells, and outbound traffic from application containers is NATed to the Diego cell IP address, there is a risk that an application could initiate an NFS IP connection to your share and gain unauthorized access to data.
