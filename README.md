@@ -461,15 +461,12 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
 For most buildpack applications, the workflow described above will enable NFS volume services (we have tested go, java, php and python). There are special situations to note however when using a Docker image as discussed below:
 
 ## Special notes for Docker Image based apps
-The user running the application inside the docker image must either have uid 0 and gid 0 (This is the root user and default docker user), or have uid 2000 and gid 2000. At this time, it is perferable to run your docker app as uid 2000 in order to best mimic the behavior of a buildpack application.  Below is a table showing the results we saw when tesing with different uids.
+Prior to release v1.0.6, Docker image based apps did not work fully with bound nfs services unless the application was running
+as uid 2000.  Applications running as the default (root) user worked partially, but lacked write access to the share unless 
+the share was open with world write POSIX permissions.
 
-| uid:gid | Description | Result |
-|:----------|:-------------|:-----|
-| 2000:2000 | Any CF Buildpack Default User -- CVCAP User | Success |
-| 0:0 | Docker Default User -- Root User | Partial Success* |
-| 20:20 | Custom User Created | Failure |
-
-*When running docker apps as the default (root) user, most operations appear to work *provided* that the mounted directory has world read/write permissions.  The fuse-nfs driver will map outbound requests to the server to whatever uid is provided in the service binding configuration, and then map that uid back to uid 2000 in data responses.  Since the container thinks that the user is root, it will allow most operations to proceed even though the user does not match.  But in some cases, the cell OS will intervene because the container root user is not root on the cell, and also is not uid 2000.
+As of release v1.0.6, we have altered the uid mapping behavior so that nfs services should work with any docker application.  
+Note however, that when `uid` and `gid` are specified in the service binding configuration, any user running in the container will be mapped to the same uid on the nfs server.  In the unlikely event that you are running multiple processes in your docker container with different uids, consider omitting the `uid` and `gid` which will disable the mapping and allow the container uids to flow to the nfs server unaltered.  (The exception is container `root` which is mapped by Garden to `MAX_UID-1`)
 
 > ## Security Note
 > Because connecting to NFS shares will require you to open your NFS mountpoint to all Diego cells, and outbound traffic from application containers is NATed to the Diego cell IP address, there is a risk that an application could initiate an NFS IP connection to your share and gain unauthorized access to data.
