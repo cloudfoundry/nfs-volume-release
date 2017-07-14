@@ -2,31 +2,31 @@
 
 export PATH="/var/vcap/packages/cf_cli/bin:$PATH"
 export CF_HOME=`pwd`/home/cf
-export CF_DIAL_TIMEOUT=<%= properties.nfsbrokerpush.cf.dial_timeout %>
+export CF_DIAL_TIMEOUT=<%= p(nfsbrokerpush.cf.dial_timeout') %>
 
 SCHEME=https
-DOMAIN=<%= properties.nfsbrokerpush.domain %>
-ADMIN_USER=<%= properties.nfsbrokerpush.cf.admin_user %>
-ADMIN_PASSWORD="<%= properties.nfsbrokerpush.cf.admin_password %>"
+DOMAIN=<%= p('nfsbrokerpush.domain') %>
+ADMIN_USER=<%= p('nfsbrokerpush.cf.admin_user') %>
+ADMIN_PASSWORD="<%= p('nfsbrokerpush.cf.admin_password') %>"
 API_ENDPOINT=$SCHEME://api.$DOMAIN
-ORG=<%= properties.nfsbrokerpush.organization %>
-SPACE=<%= properties.nfsbrokerpush.space %>
+ORG=<%= p('nfsbrokerpush.organization') %>
+SPACE=<%= p('nfsbrokerpush.space') %>
 APP_NAME=nfsbroker
 SERVICE_BROKER_NAME=nfsbroker
-SERVICE_NAME="<%= properties.nfsbrokerpush.service_name %>"
-SYSLOG_URL="<%= properties.nfsbrokerpush.syslog_url %>"
+SERVICE_NAME="<%= p('nfsbrokerpush.service_name') %>"
+SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
-USERNAME="<%= properties.nfsbrokerpush.username %>"
-PASSWORD="<%= properties.nfsbrokerpush.password %>"
+USERNAME="<%= p('nfsbrokerpush.username') %>"
+PASSWORD="<%= p('nfsbrokerpush.password') %>"
 APP_URL=$SCHEME://$APP_NAME.$DOMAIN
 
 mkdir -p $CF_HOME
 
-ERROR_EXIT_CODE=<%= properties.nfsbrokerpush.error_on_misconfiguration ? 1 : 0 %>
+ERROR_EXIT_CODE=<%= p('nfsbrokerpush.error_on_misconfiguration) ? 1 : 0 %>
 DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
-  cf api $API_ENDPOINT <% if properties.nfsbrokerpush.skip_cert_verify %>--skip-ssl-validation<% end %>
+  cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
   cf auth $ADMIN_USER "$ADMIN_PASSWORD"
   cf create-org $ORG
   cf target -o $ORG

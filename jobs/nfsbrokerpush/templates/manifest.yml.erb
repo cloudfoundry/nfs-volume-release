@@ -8,17 +8,17 @@
   end
 %>
   buildpack: binary_buildpack
-  domain: "<%= properties.nfsbrokerpush.app_domain %>"
+  domain: "<%= p('nfsbrokerpush.app_domain') %>"
   env:
     GOPACKAGENAME: nfsbroker
     GOVERSION: go1.7
-    SERVICENAME: "<%= properties.nfsbrokerpush.service_name %>"
-    USERNAME: "<%= properties.nfsbrokerpush.username %>"
-    PASSWORD: "<%= properties.nfsbrokerpush.password %>"
+    SERVICENAME: "<%= p('nfsbrokerpush.service_name') %>"
+    USERNAME: "<%= p('nfsbrokerpush.username') %>"
+    PASSWORD: "<%= p('nfsbrokerpush.password') %>"
     LOGLEVEL: info
-    DBDRIVERNAME: "<%= properties.nfsbrokerpush.db.driver %>"
+    DBDRIVERNAME: "<%= p('nfsbrokerpush.db.driver') %>"
     DBHOST: "<%= database_host %>"
-    DBPORT: "<%= properties.nfsbrokerpush.db.port %>"
-    DBNAME: "<%= properties.nfsbrokerpush.db.name %>"
-    DB_USERNAME: "<%= properties.nfsbrokerpush.db.username %>"
-    DB_PASSWORD: "<%= properties.nfsbrokerpush.db.password %>"
+    DBPORT: "<%= p('nfsbrokerpush.db.port') %>"
+    DBNAME: "<%= p('nfsbrokerpush.db.name') %>"
+    DB_USERNAME: "<%= p('nfsbrokerpush.db.username') %>"
+    DB_PASSWORD: "<%= p('nfsbrokerpush.db.password') %>"
