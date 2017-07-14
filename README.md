@@ -468,6 +468,8 @@ the share was open with world write POSIX permissions.
 As of release v1.0.6, we have altered the uid mapping behavior so that nfs services should work with any docker application.  
 Note however, that when `uid` and `gid` are specified in the service binding configuration, any user running in the container will be mapped to the same uid on the nfs server.  In the unlikely event that you are running multiple processes in your docker container with different uids, consider omitting the `uid` and `gid` which will disable the mapping and allow the container uids to flow to the nfs server unaltered.  (The exception is container `root` which is mapped by Garden to `MAX_UID-1`)
 
+If you find that your app crashes at startup after you bind a volume service to it, it may be due to the aufs limitation on root folder creation described in the bind parameters section above.  Docker applications that do not have a `/var` folder in the root directory will not start when bound with the default `mount` path.  If you are using such an application, you can either modify it to include a `/var` folder, or provide a `mount` value in the bind configuration that includes an existing root level folder in your docker image.
+
 > ## Security Note
 > Because connecting to NFS shares will require you to open your NFS mountpoint to all Diego cells, and outbound traffic from application containers is NATed to the Diego cell IP address, there is a risk that an application could initiate an NFS IP connection to your share and gain unauthorized access to data.
 > 
