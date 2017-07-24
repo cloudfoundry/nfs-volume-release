@@ -54,6 +54,7 @@ cat << EOF > manifest.yml
     DBNAME: ${DB_NAME}
     DB_USERNAME: ${DB_USERNAME}
     DB_PASSWORD: ${DB_PASSWORD}
+    ALLOWED_OPTIONS: "uid,gid,auto_cache,username,password"
 EOF
 
   fi
