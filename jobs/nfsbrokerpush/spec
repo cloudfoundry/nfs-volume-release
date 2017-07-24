@@ -60,3 +60,6 @@ properties:
   nfsbrokerpush.skip_cert_verify:
     description: 'true if the cf api uses test certs that should not be verified'
     default: false
+  nfsbrokerpush.ldap_enabled:
+    description: 'true if the broker should use ldap username/password bind config instead of uid/gid'
+    default: false
