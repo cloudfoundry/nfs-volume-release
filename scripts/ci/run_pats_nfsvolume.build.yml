@@ -5,10 +5,11 @@ rootfs_uri: docker:///cloudfoundry/diego-pipeline
 
 inputs:
   - name: nfs-volume-release
+  - name: vars-store         # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
 
 params:
   CF_USERNAME: replace-me
-  CF_PASSWORD: replace-me
+  CF_PASSWORD:
   CF_API_ENDPOINT: replace-me
   APPS_DOMAIN: replace-me
   APPLICATION_PATH: replace-me
@@ -17,7 +18,7 @@ params:
   PLAN_NAME: replace-me
   BROKER_URL: replace-me
   BROKER_USER: replace-me
-  BROKER_PASSWORD: replace-me
+  BROKER_PASSWORD:
   SERVER_ADDRESS: replace-me
   SHARE: replace-me
   PUSHED_BROKER_NAME:
