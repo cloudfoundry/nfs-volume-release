@@ -20,7 +20,7 @@ check_param APPS_DOMAIN
 check_param SERVICE_NAME
 check_param PLAN_NAME
 check_param BROKER_URL
-check_param BROKER_PASSWORD
+check_param BROKER_USER
 check_param SERVER_ADDRESS
 check_param SHARE
 check_param BIND_CONFIG
@@ -45,9 +45,6 @@ if [ -z "$BROKER_PASSWORD" ]; then
         BROKER_PASSWORD=`grep nfs-broker-password vars-store/deployment-vars.yml | awk  '{print $2}'`
     fi
 fi
-
-check_param BROKER_USER
-check_param CF_PASSWORD
 
 pushd ${scripts_path}/../src/code.cloudfoundry.org/nfsbroker
   GOOS=linux GOARCH=amd64 go build -o bin/nfsbroker
