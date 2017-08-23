@@ -30,7 +30,7 @@ case $1 in
     chmod 777 /var/vcap/data/voldrivers
 
     mkdir -p "<%= p("nfsv3driver.cell_mount_path") %>"
-    chown -R cvcap:cvcap "<%= p("nfsv3driver.cell_mount_path") %>"
+    chown cvcap:cvcap "<%= p("nfsv3driver.cell_mount_path") %>"
 
     export GOMAXPROCS=$(nproc)
 
