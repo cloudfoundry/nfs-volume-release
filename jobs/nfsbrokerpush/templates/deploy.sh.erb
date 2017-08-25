@@ -2,7 +2,7 @@
 
 export PATH="/var/vcap/packages/cf_cli/bin:$PATH"
 export CF_HOME=`pwd`/home/cf
-export CF_DIAL_TIMEOUT=<%= p(nfsbrokerpush.cf.dial_timeout') %>
+export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
 SCHEME=https
 DOMAIN=<%= p('nfsbrokerpush.domain') %>
