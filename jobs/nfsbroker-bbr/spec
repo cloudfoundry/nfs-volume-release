@@ -1,0 +1,34 @@
+---
+# This job name should be unique, as several backup and restore scripts for different components could be collocated on the same machine.
+# The directory structure will be organized by job name.
+name: nfsbroker-bbr
+
+templates:
+  config.json.erb: config/config.json
+  backup.sh.erb: bin/bbr/backup
+  restore.sh.erb: bin/bbr/restore
+
+packages: []
+
+properties:
+  nfsbroker.db_driver:
+    default: ""
+    description: "(optional) database driver name when using SQL to store broker state"
+  nfsbroker.db_username:
+    default: ""
+    description: "(optional) database username when using SQL to store broker state"
+  nfsbroker.db_password:
+    default: ""
+    description: "(optional) database password when using SQL to store broker state"
+  nfsbroker.db_hostname:
+    default: ""
+    description: "(optional) database hostname when using SQL to store broker state"
+  nfsbroker.db_port:
+    default: ""
+    description: "(optional) database port when using SQL to store broker state"
+  nfsbroker.db_name:
+    default: ""
+    description: "(optional) database name when using SQL to store broker state"
+  nfsbroker.db_ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
