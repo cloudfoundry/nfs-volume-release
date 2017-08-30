@@ -22,7 +22,7 @@ APP_URL=$SCHEME://$APP_NAME.$DOMAIN
 
 mkdir -p $CF_HOME
 
-ERROR_EXIT_CODE=<%= p('nfsbrokerpush.error_on_misconfiguration) ? 1 : 0 %>
+ERROR_EXIT_CODE=<%= p('nfsbrokerpush.error_on_misconfiguration') ? 1 : 0 %>
 DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
