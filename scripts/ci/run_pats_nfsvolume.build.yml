@@ -19,8 +19,6 @@ params:
   BROKER_URL: replace-me
   BROKER_USER: replace-me
   BROKER_PASSWORD:
-  SERVER_ADDRESS: replace-me
-  SHARE: replace-me
   PUSHED_BROKER_NAME:
   DB_DRIVER_NAME:
   DB_HOST:
