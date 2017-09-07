@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password server_addr share"
+    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config pushed_broker_name sql_service_name]"
     exit 1
 }
 
@@ -48,11 +48,10 @@ cat << EOF > ${CONFIG}
       "skip_ssl_validation": true,
       "default_timeout": 30,
       "name_prefix": "PATs",
-      "server_addr": "${10}",
-      "share": "${11}",
-      "bind_config": "${12}",
-      "pushed_broker_name": "${13}",
-      "sql_service_name": "${14}"
+      "create_config": "${10}",
+      "bind_config": "${11}",
+      "pushed_broker_name": "${12}",
+      "sql_service_name": "${13}"
     }
 EOF
 
