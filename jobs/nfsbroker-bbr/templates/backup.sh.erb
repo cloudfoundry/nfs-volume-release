@@ -9,4 +9,6 @@ SDK_PATH="/var/vcap/jobs/database-backup-restorer"
 BBR_ARTIFACT_FILE_PATH="${BBR_ARTIFACT_DIRECTORY}/nfsbroker-db"
 CONFIG_PATH="${JOB_PATH}/config/config.json"
 
-"${SDK_PATH}/bin/backup" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"
+<% if p('nfsbroker.release_level_backup') %>
+  "${SDK_PATH}/bin/backup" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"
+<% end %>
