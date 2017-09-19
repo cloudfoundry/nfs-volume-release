@@ -19,6 +19,7 @@ params:
   BROKER_URL: replace-me
   BROKER_USER: replace-me
   BROKER_PASSWORD:
+  BROKER_PASSWORD_KEY: nfs-broker-password
   PUSHED_BROKER_NAME:
   DB_DRIVER_NAME:
   DB_HOST:
