@@ -16,6 +16,7 @@ files:
   - code.cloudfoundry.org/nfsbroker/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
+  - github.com/cloudfoundry-incubator/service-broker-store/brokerstore/*.go # gosub
   - github.com/go-sql-driver/mysql/*.go # gosub
   - github.com/gorilla/mux/*.go # gosub
   - github.com/lib/pq/*.go # gosub
