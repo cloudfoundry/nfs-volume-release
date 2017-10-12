@@ -106,3 +106,6 @@
 	path = src/golang.org/x/crypto
 	url = https://go.googlesource.com/crypto
 	branch = master
+[submodule "src/github.com/cloudfoundry-incubator/service-broker-store"]
+	path = src/github.com/cloudfoundry-incubator/service-broker-store
+	url = https://github.com/cloudfoundry-incubator/service-broker-store.git
