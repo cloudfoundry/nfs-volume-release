@@ -1,7 +1,0 @@
----
-name: cf_cli
-
-dependencies:
-
-files:
-  - cf-cli_*.tgz
