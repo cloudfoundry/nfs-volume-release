@@ -1,0 +1,59 @@
+---
+packages:
+- name: cf_cli
+  version: 5bbc894cef20c4c984d48b8aa55a8d06f9b43a9e
+  fingerprint: 5bbc894cef20c4c984d48b8aa55a8d06f9b43a9e
+  sha1: 4f287551729f8e06d56451c1e20ab520f9ade9f0
+  dependencies: []
+- name: fuse-nfs
+  version: ff9d9a7481ee6ae4d44c2da502205c0d12a3d540
+  fingerprint: ff9d9a7481ee6ae4d44c2da502205c0d12a3d540
+  sha1: 99eeb50ddc44e5176b25677286b8b64c38571754
+  dependencies: []
+- name: golang-nfsvolume
+  version: 0cd52679e5855617897ccd431f40c655976d58c2
+  fingerprint: 0cd52679e5855617897ccd431f40c655976d58c2
+  sha1: 76d6764e4a3e023d90180d6857d10427f2e96429
+  dependencies: []
+- name: nfsbroker
+  version: ba55cf743e61a6ecd27225ff392ab5c46580e14a
+  fingerprint: ba55cf743e61a6ecd27225ff392ab5c46580e14a
+  sha1: 6e46897a347e21e2aaa1b98d92575dcbde27e9e8
+  dependencies:
+  - golang-nfsvolume
+- name: nfsv3driver
+  version: 4570366cd4c2436032fd84fda17add0bd5a7a212
+  fingerprint: 4570366cd4c2436032fd84fda17add0bd5a7a212
+  sha1: 5f3f353a96d6d2db7027ac96f6bc6410b07edc9a
+  dependencies:
+  - fuse-nfs
+  - golang-nfsvolume
+jobs:
+- name: nfsbroker-bbr
+  version: dbc077205c4f64b8ed494ceb9b6f38a874413323
+  fingerprint: dbc077205c4f64b8ed494ceb9b6f38a874413323
+  sha1: 1815efc72bac9cca1c0c48e7b52bc34994299e32
+- name: nfsbroker
+  version: d9fed78cacf0623a9bb565360bc31b6e5d57b938
+  fingerprint: d9fed78cacf0623a9bb565360bc31b6e5d57b938
+  sha1: 157048b306c201775e016288ad3b50cf2562c6db
+- name: nfsbrokerpush
+  version: 82d931e3bbd080d98589a9f3f579155e83426ad5
+  fingerprint: 82d931e3bbd080d98589a9f3f579155e83426ad5
+  sha1: 2e33a086b2ace8b18ce919119203f5b70dfde2f8
+- name: nfstestserver
+  version: 642ec3dd9d500fc9de1651ccc1350f168808e956
+  fingerprint: 642ec3dd9d500fc9de1651ccc1350f168808e956
+  sha1: ed8f36e28f02d533c1571350172d0317e06fc7e9
+- name: nfsv3driver
+  version: 26561afc0ef6b7943f56f72d6c5a131020b9b62e
+  fingerprint: 26561afc0ef6b7943f56f72d6c5a131020b9b62e
+  sha1: a2139ae4f761e05d3260266940837e8d5187ff2b
+license:
+  version: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  fingerprint: db3153794b12044b7fe5c9ad10105dcc846bcde1
+  sha1: 3b62c7156cd705556ddb8a2d30d3f83213070ae2
+commit_hash: 280e398a
+uncommitted_changes: true
+name: nfs-volume
+version: 1.1.1
