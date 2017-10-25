@@ -1,7 +1,15 @@
+<%
+  database_host = nil
+  if_p('nfsbroker.db_hostname') do |host|
+    database_host = host
+  end.else do
+    database_host = link('database').instances[0].address
+  end
+%>
 {
   "username":"<%= p('nfsbroker.db_username') %>",
   "password":"<%= p('nfsbroker.db_password') %>",
-  "host":"<%= p('nfsbroker.db_hostname') %>",
+  "host":"<%= database_host %>",
   "port":<%= p('nfsbroker.db_port') %>,
   "database":"<%= p('nfsbroker.db_name') %>",
   "adapter":"<%= p('nfsbroker.db_driver') %>"
