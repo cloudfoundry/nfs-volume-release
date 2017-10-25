@@ -64,4 +64,6 @@ builds:
     version: 1.1.0
   802ac75c-0c40-481d-90bc-6d550ec71da0:
     version: 1.1.1
+  88728eb0-9cc3-4c4f-989f-46a3943e9250:
+    version: 1.1.2
 format-version: '2'
