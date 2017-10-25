@@ -10,6 +10,11 @@ templates:
 
 packages: []
 
+consumes:
+  - name: database
+    type: database
+    optional: true
+
 properties:
   nfsbroker.db_driver:
     default: ""
