@@ -50,6 +50,7 @@ function create_logging_service() {
     echo "Syslog URL is not set."
 
     if [[ $exit_code -eq 0 ]]; then
+      cf unbind-service $APP_NAME $LOGGER_NAME
       cf delete-service $LOGGER_NAME -f
     fi
 
