@@ -481,7 +481,7 @@ If you find that your app crashes at startup after you bind a volume service to 
 ## File Locking via flock() and lockf()/fcntl()
 If your application relies on file locking either through unix system calls such as flock() and fcntl() or through script commands such as `flock` **please be aware that the lock will not be enforced across diego cells**.  This is because the file locking implementations in the underlying fuse-nfs executable are not implemented, so locking is limited to local locks between precesses on the same VM.  If you have a legitimate requirement for file locking, please document your use case in a comment on [this github issue](https://github.com/cloudfoundry-incubator/nfs-volume-release/issues/13) and we'll see what we can do.
 
-# LDAP Support (:pill: :pill: EXPERIMENTAL :pill: :pill:)
-As of version 0.1.7 it is possible to configure your deployment of nfs-volume-release to connect to an LDAP server to resolve user credentials into uids.  See [this note](USING_LDAP.md) for more details.
+# LDAP Support
+It is possible to configure your deployment of nfs-volume-release to connect to an external LDAP server to resolve user credentials into uids.  See [this note](USING_LDAP.md) for more details.
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
