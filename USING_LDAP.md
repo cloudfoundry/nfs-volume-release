@@ -1,4 +1,4 @@
-# EXPERIMENTAL: Integrating nfs-volume-release with an LDAP Server
+# Integrating nfs-volume-release with an LDAP Server
 
 As of version 0.1.7 it is possible to configure your deployment of `nfs-volume-release` to connect to an LDAP server.  This enables nfsv3driver to:
 - Ensure that the application developer has valid credentials (according to the ldap server) to use an account.
