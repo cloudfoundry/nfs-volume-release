@@ -17,20 +17,17 @@ echo "------------ `basename $0` $* at `date` --------------" | tee /dev/stderr
 case $1 in
 
   start)
-    # make a new container cvcap user if it doesn't already exist
-    id -u cvcap &>/dev/null || useradd -u 2000 cvcap
-
     mkdir -p $RUN_DIR
-    chown -R cvcap:cvcap $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
 
     mkdir -p $LOG_DIR
-    chown -R cvcap:cvcap $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
 
     mkdir -p /var/vcap/data/voldrivers
     chmod 777 /var/vcap/data/voldrivers
 
     mkdir -p "<%= p("nfsv3driver.cell_mount_path") %>"
-    chown cvcap:cvcap "<%= p("nfsv3driver.cell_mount_path") %>"
+    chown vcap:vcap "<%= p("nfsv3driver.cell_mount_path") %>"
 
     export GOMAXPROCS=$(nproc)
 
@@ -52,7 +49,7 @@ case $1 in
     export LDAP_PROTO="<%= p("nfsv3driver.ldap_proto") %>"
     export LDAP_USER_FQDN="<%= p("nfsv3driver.ldap_user_fqdn") %>"
 
-    exec chpst -u cvcap:cvcap /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
+    exec chpst /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
       --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
       --transport="tcp" \
       --debugAddr="<%= p("nfsv3driver.debug_addr") %>" \

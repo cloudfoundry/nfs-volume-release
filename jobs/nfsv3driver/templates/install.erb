@@ -16,7 +16,7 @@ done
 echo "Copying libfuse Shared Objects and installing fusermount"
 
 mkdir -p /var/vcap/packages/fuse-nfs/bin
-chown cvcap /var/vcap/packages/fuse-nfs/bin || true
+chown vcap /var/vcap/packages/fuse-nfs/bin || true
 
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
 cp lib/.libs/*.so /usr/lib
@@ -36,11 +36,7 @@ cp fuse/fuse-nfs /var/vcap/packages/fuse-nfs/bin
 setcap 'cap_net_bind_service=+ep' /var/vcap/packages/fuse-nfs/bin/fuse-nfs
 popd
 
-# make a new container cvcap user if it doesn't already exist
-id -u cvcap &>/dev/null || useradd -u 2000 cvcap
-
 groupadd fuse | true
-adduser cvcap fuse
 chown root:fuse /dev/fuse
 
 cat << EOF > /etc/fuse.conf
