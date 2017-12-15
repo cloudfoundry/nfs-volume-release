@@ -37,6 +37,7 @@ function sync_package() {
 
 sync_package nfsv3driver       -app code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver
 sync_package nfsbroker         -app code.cloudfoundry.org/nfsbroker
+sync_package mapfs             -app code.cloudfoundry.org/mapfs
 
 wait
 

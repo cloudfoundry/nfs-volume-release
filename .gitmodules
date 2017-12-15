@@ -109,3 +109,9 @@
 [submodule "src/code.cloudfoundry.org/service-broker-store"]
 	path = src/code.cloudfoundry.org/service-broker-store
 	url = https://github.com/cloudfoundry/service-broker-store.git
+[submodule "src/code.cloudfoundry.org/mapfs"]
+	path = src/code.cloudfoundry.org/mapfs
+	url = https://github.com/cloudfoundry/mapfs
+[submodule "src/github.com/hanwen/go-fuse"]
+	path = src/github.com/hanwen/go-fuse
+	url = https://github.com/hanwen/go-fuse
