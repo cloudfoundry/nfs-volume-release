@@ -115,3 +115,7 @@
 [submodule "src/github.com/hanwen/go-fuse"]
 	path = src/github.com/hanwen/go-fuse
 	url = https://github.com/hanwen/go-fuse
+	branch = master
+[submodule "src/golang.org/x/sys"]
+	path = src/golang.org/x/sys
+	url = https://go.googlesource.com/sys

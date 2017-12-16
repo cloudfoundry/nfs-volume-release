@@ -6,6 +6,7 @@ dependencies:
 
 
 files:
+  - golang.org/x/sys/unix/*
   - code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
   - code.cloudfoundry.org/mapfs/*.go # gosub
   - code.cloudfoundry.org/mapfs/mapfs/*.go # gosub
