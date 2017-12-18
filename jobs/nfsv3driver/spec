@@ -8,6 +8,7 @@ templates:
 
 packages:
 - fuse-nfs
+- mapfs
 - nfsv3driver
 
 properties:
