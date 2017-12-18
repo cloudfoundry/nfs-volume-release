@@ -24,6 +24,9 @@ pushd fuse-nfs
     make install
 popd
 
+sudo service start rpcbind || true
+sleep 5
+
 pushd nfs-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
