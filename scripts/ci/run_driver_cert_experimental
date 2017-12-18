@@ -24,7 +24,7 @@ pushd fuse-nfs
     make install
 popd
 
-sudo service start rpcbind || true
+service rpcbind start || true
 sleep 5
 
 pushd nfs-volume-release
