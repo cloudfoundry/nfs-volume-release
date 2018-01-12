@@ -50,7 +50,7 @@ $NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="$listen_address" -transport="$TRAN
       --allowed-in-source="uid,gid" \
       --default-in-source="" \
       --allowed-in-mount="auto_cache" \
-      --default-in-mount="" &
+      --default-in-mount="multithread:1" &
 
 pushd $NFS_RELEASE_DIR
     ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert
