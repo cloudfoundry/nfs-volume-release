@@ -16,9 +16,9 @@ fuse-nfs.tar.gz:
   sha: 7d3a9ea3a737e12a4a7512dbaac9c9c6a00cc7bb
   size: 97950
 libnfs-1.11.0.tar.gz:
-  object_id: 737f769d-c0e0-4bf2-a748-bc1aff64c1ff
-  sha: b675d6696aa88d0e44f25e9862cf46c1a1fd41f9
-  size: 686400
+  object_id: 73d1fedb-73df-440c-93ea-b0c225858d28
+  sha: 3b96d020ff7815ddf7786ab34b0efc673ddf2290
+  size: 3317828
 libtool-2.4.6.tar.gz:
   object_id: 04657ae3-fe12-48ad-ab2f-d6ddcb5c96ab
   sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
