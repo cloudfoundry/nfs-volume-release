@@ -32,12 +32,13 @@ mount --bind <%= p("nfstestserver.export_root_path") %>/export /export || true
 mount --bind <%= p("nfstestserver.export_root_path") %>/export2 /export2 || true
 
 cat << EOF > /etc/exports
-/export        <%= p("nfstestserver.export_cidr") %>(rw,fsid=0,no_subtree_check,async)
+/              <%= p("nfstestserver.export_cidr") %>(r0,fsid=0,async)
+/export        <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async)
 /export/users  <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
 /export/vol1   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
 /export/vol2   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
 /export/vol3   <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export2       <%= p("nfstestserver.export_cidr") %>(rw,fsid=1,no_subtree_check,async,insecure)
+/export2       <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async,insecure)
 /export2/certs <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
 EOF
 
