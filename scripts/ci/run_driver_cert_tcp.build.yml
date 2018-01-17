@@ -11,6 +11,7 @@ inputs:
 params:
   TRANSPORT: tcp
   SOURCE: ~
+  MULTITHREAD: 0
 
 run:
   path: nfs-volume-release/scripts/ci/run_driver_cert
