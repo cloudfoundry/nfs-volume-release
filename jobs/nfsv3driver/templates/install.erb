@@ -26,8 +26,7 @@ popd
 
 echo "Copying libnfs Shared Objects"
 pushd /var/vcap/packages/fuse-nfs/libnfs-1.11.0
-cp lib/.libs/*.so /usr/lib
-cp lib/.libs/*.so.8 /usr/lib
+cp -d lib/.libs/libnfs.so* /usr/lib
 popd
 
 echo "Adding fuse-nfs to PATH"
