@@ -47,7 +47,7 @@ killall -9 nfsv3driver || true
 mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
 
 $NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$drivers_path" \
-      --allowed-in-source="uid,gid" \
+      --allowed-in-source="uid,gid,version" \
       --default-in-source="" \
       --allowed-in-mount="auto_cache,multithread" \
       --default-in-mount="" &
