@@ -34,7 +34,11 @@ cp -R fuse-2.9.2 ${BOSH_INSTALL_TARGET}
 
 tar xzf libnfs-1.11.0.tar.gz
 pushd libnfs-1.11.0
-  autoreconf -i
+  libtoolize
+  aclocal
+  autoheader
+  autoconf
+  automake --add-missing
   ./configure
   make install
 popd
