@@ -50,7 +50,7 @@ $NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="$listen_address" -transport="$TRAN
       --allowed-in-source="uid,gid,version" \
       --default-in-source="" \
       --allowed-in-mount="auto_cache,multithread" \
-      --default-in-mount=""
+      --default-in-mount="" \
       --logLevel="debug" &
 
 pushd $NFS_RELEASE_DIR
