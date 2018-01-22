@@ -2,6 +2,9 @@
 
 set -e -x
 
+# Figure out where the libraries should be installed.
+libdir="/usr/$(dirname "$(ldconfig -p | awk '/libc.so/ { print $NF }')")"
+
 # make sure there arent any existing fuse-nfs mounts
 pkill fuse-nfs | true
 for i in {1..60}; do
@@ -19,14 +22,14 @@ mkdir -p /var/vcap/packages/fuse-nfs/bin
 chown vcap /var/vcap/packages/fuse-nfs/bin || true
 
 pushd /var/vcap/packages/fuse-nfs/fuse-2.9.2
-cp lib/.libs/*.so /usr/lib
+cp lib/.libs/*.so "${libdir}"
 cp util/fusermount /var/vcap/packages/fuse-nfs/bin
 chmod u+s /var/vcap/packages/fuse-nfs/bin/fusermount
 popd
 
 echo "Copying libnfs Shared Objects"
 pushd /var/vcap/packages/fuse-nfs/libnfs-1.11.0
-cp -d lib/.libs/libnfs.so* /usr/lib
+cp -d lib/.libs/libnfs.so* "${libdir}"
 popd
 
 echo "Adding fuse-nfs to PATH"
