@@ -428,6 +428,19 @@ to generate `nfs-test-server-aws-manifest.yml` into the current directory.
     $ cf services
     ```
 
+### NFS v4 (Experimental):
+
+To provide our existing nfs capabilities we use a libfuse implementation that supports nfsv3 and operates synchronously.    
+  
+If you require nfsv4 or better performance or both then you can try the new nfsv4 (experimental) support offered through a new nfsbroker plan called `nfs-experimental`.  
+
+* type the following:
+
+   ```bash
+    $ cf create-service nfs-experimental Existing myVolume -c '{"share":"<PRIVATE_IP>/export/vol1"}'
+    $ cf services
+    ```
+
 ## Deploy the pora test app, first by pushing the source code to CloudFoundry
 * type the following:
 
