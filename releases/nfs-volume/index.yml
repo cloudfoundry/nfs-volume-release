@@ -68,4 +68,6 @@ builds:
     version: 1.1.2
   e17cd663-72dc-4177-a2ce-625bd1a157c3:
     version: 1.1.3
+  4be797b8-fa4c-42d7-abaf-d3f0b660ca20:
+    version: 1.2.0
 format-version: '2'
