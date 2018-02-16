@@ -1,15 +1,12 @@
 # Integrating nfs-volume-release with an LDAP Server
 
-As of version 0.1.7 it is possible to configure your deployment of `nfs-volume-release` to connect to an LDAP server.  This enables nfsv3driver to:
+For better data security, it is recommended to configure your deployment of `nfs-volume-release` to connect to an LDAP server.  This enables nfsv3driver to:
 - Ensure that the application developer has valid credentials (according to the ldap server) to use an account.
 - Translate user credentials into a valid UID and GID for that user.
 
-The principal benefit to this feature is that it secures the nfs-volume-release so that it is no longer possible for an application develop to bind
+The principal benefit to this feature is that it secures the nfs-volume-release so that it is no longer possible for an application developer to bind
 to an NFS share using an arbitrary UID and potentially gain access to sensitive data stored by another user or application.  Once LDAP support is
-enabled and regular UID and GID parameters are disabled, application developers will need to provide credentials for any user they wish to bind as.
-
-### :bangbang: WARNING: LEAKED CREDENTIALS :bangbang:
-If you are using a version of Diego before v1.12.0, the Diego Rep will leak LDAP credentials into logs at levels **info** and **debug**. We strongly recommend you install a newer version of diego, or set your rep log level to warn.
+enabled and regular UID and GID parameters are disabled, application developers will need to provide credentials for any user they wish to use on the nfs server.
 
 ## Changes to your LDAP server
 It is not generally necessary to make adjustments to your LDAP server to enable integration, but you will need the following:
@@ -19,71 +16,45 @@ It is not generally necessary to make adjustments to your LDAP server to enable 
   and adding it to the `Read-only Domain Controllers` group.
   
 ## Changes to your `nfs-volume-release` deployment.
-### Broker changes
-Because the actual connection to the LDAP server occurs at mount time in the volume driver, the service broker is only minimally involved in
-LDAP integration.  Essentially the only change to the broker is that it should accept `username` and `password` configuration options at 
-service bind time, and it should **not** accept `uid` or `gid`.  Acceptable options for the broker are specified in the following property:
-- `nfsbroker.allowed_options`: Comma separated list of white-listed options that may be set during create or bind operations. 
-
-#### `bosh deploy`ed brokers:
-If you are bosh deploying your service broker, modify your manifest to set `nfsbroker.allowed_options` to `auto_cache,username,password` and redeploy.
-You should see that new service bindings fail if `uid` or `gid` are specified through the `-c` option. 
-
-#### `cf push`ed brokers:
-If you are pushing your broker to cloudfoundry, the same options can be set on the command line.  Modify `Procfile` under nfsbroker to include 
-`--allowedOptions="auto_cache,username,password"` in the command line arguments for nfsbroker, then `cf push` your broker app.
-
-### Driver changes
-LDAP integration in the driver is configured with the following BOSH properties:
- `nfsv3driver.allowed-in-source`: Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params.
- `nfsv3driver.allowed-in-mount`: Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
- `nfsv3driver.ldap_svc_user`: ldap service account user name
- `nfsv3driver.ldap_svc_password`: ldap service account password
- `nfsv3driver.ldap_host`: ldap server host name or ip address
- `nfsv3driver.ldap_port`: ldap server port
- `nfsv3driver.ldap_proto`: ldap server protocol (tcp or udp)"
- `nfsv3driver.ldap_user_fqdn`: ldap fqdn for user records we will search against when looking up user uids
-   
-Depending on the technique you are using to deploy nfsv3driver into your release, you will need to add these properties either to your runtime-config or directly 
-to your diego manifest, and then redeploy Diego.  Assuming that you are using runtime-config, your configuration should look something like this:
-
-```yaml
--------
-releases:
-- name: nfs-volume
-  version: 0.1.7
-addons:
-- name: voldrivers
-  include:
-    deployments: [cf-warden-diego]
-    jobs: [{name: rep, release: diego}]
-  jobs:
-  - name: nfsv3driver
-    release: nfs-volume
-    properties:
-      nfsv3driver:
-        allowed-in-source: ""
-        allowed-in-mount: auto_cache,username,password
-        ldap_svc_user: readonlyuserguy
-        ldap_svc_password: sup3rSecret!!!
-        ldap_host: ldap.myawesomedomain.com
-        ldap_port: 389
-        ldap_proto: tcp
-        ldap_user_fqdn: cn=Users,dc=corp,dc=myawesomedomain,dc=com
-```
+Assuming that you have used the `enable-nfs-volume-service.yml` operations file to include `nfs-volume-release` in your deployment, you can use the
+[`enable-nfs-ldap`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/enable-nfs-ldap.yml) operations file to make the additional changes
+required to turn on LDAP authentication.  You will need to provide the following variables in a variables file or with the `-v` option on the BOSH command line:
+- `nfs-ldap-service-user`: ldap service account user name
+- `nfs-ldap-service-password`: ldap service account password
+- `nfs-ldap-host`: ldap server host name or ip address
+- `nfs-ldap-port`: ldap server port
+- `nfs-ldap-proto`: ldap server protocol (tcp or udp)
+- `nfs-ldap-fqdn`: ldap fqdn for user records we will search against when looking up user uids
 
 ## Testing
 
+If you want to test against a reference LDAP implementation rather than connecting to your own LDAP server, then you can deploy a sample server by building and uploading this 
+[openldap_boshrelease](https://github.com/EMC-Dojo/openldap-boshrelease) release.  This is a fork from a release in `cloudfoundry-community` that also sets up some test 
+accounts for you, and installs schema to mirror default user records found in ADFS.
+
+Once you have built and uploaded this bosh release, you can add the LDAP server VM by including the following operations file in your Cloud Foundry
+deployment:
+[https://github.com/cloudfoundry/persi-ci/blob/master/operations/use-openldap-release.yml](https://github.com/cloudfoundry/persi-ci/blob/master/operations/use-openldap-release.yml)
+
+If you're using this test server, you can use these variable values to connect to it:
+- `nfs-ldap-service-user`: cn=admin,dc=domain,dc=com
+- `nfs-ldap-service-password`: secret
+- `nfs-ldap-host`: openldap.service.cf.internal 
+- `nfs-ldap-port`: 389
+- `nfs-ldap-proto`: tcp
+- `nfs-ldap-fqdn`: ou=Users,dc=domain,dc=com
+
+
 Once you have redeployed your broker and driver, steps to test will be more or less the same as before, except that when you bind your 
-application to your volume, you must specify `username` and `password` instead of UID and GID.  Accordingly, your bind-service command should look something like this:
+application to your volume, you must specify `username` and `password` instead of UID and GID.  Accordingly, to use the test LDAP server with the nfstestserver, your 
+create-service and bind-service commands should look something like this:
 
 ```bash
-$ cf bind-service pora myVolume -c '{"username":"janJansson","password":"fromW1sconson!"}'
+$ cf create-service nfs Existing myVolume -c '{"share":"nfstestserver.service.cf.internal/export/users"}'
+$ cf bind-service pora myVolume -c '{"username":"user1000","password":"secret"}'
 ```
-
-Assuming that your ldap server has a user with the above credentials, and that that user has access to the share your're binding to, the app should work as before.
 
 ## Credential Rotation
 
-Note that user credentials will be stored as part of the service binding and checked whenever an application is placed on a cell.  Hence, if the password changes, the 
-application must be re-bound to the service and restaged, otherwise it will fail the next time the application is restarted or scaled.
+Note that user credentials will be stored as part of the service binding and checked whenever an application is placed on a cell.  Hence, if the password changes on your
+LDAP server, the  application must be re-bound to the service and restaged, otherwise it will fail the next time the application is restarted or scaled.
