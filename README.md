@@ -17,8 +17,6 @@ As of version 1.2.0 we no longer support old cf-release deployments with bosh v1
 
 1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
 
-2. If you don't already have it, install spiff according to its [README](https://github.com/cloudfoundry-incubator/spiff). spiff is a tool for generating BOSH manifests that is required in some of the scripts used below.
-
 ## Redeploy Cloud Foundry with nfs enabled
 
 1. You should have it already after deploying Cloud Foundry, but if not clone the cf-deployment repository from git:
