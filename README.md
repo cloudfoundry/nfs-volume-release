@@ -48,16 +48,6 @@ If you wish to also deploy the NFS test server, you can fetch the operations fil
 
 # Testing or Using this Release
 
-
-### Deploy the NFS Server
-* Deploy the NFS server using the generated manifest:
-
-    ```bash
-    $ bosh -d nfs-test-server-aws-manifest.yml deploy
-    ```
-
-* Note the default **gid** & **uid** which are 0 and 0 respectively (root).
-
 ## Register nfs-broker
 * Register the broker and grant access to its service with the following commands:
 
