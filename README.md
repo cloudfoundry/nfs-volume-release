@@ -15,7 +15,7 @@ As of version 1.2.0 we no longer support old cf-release deployments with bosh v1
 
 ## Pre-requisites
 
-1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Deploying CF and Diego to AWS](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
+1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Overview of Deploying Cloud Foundry](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
 
 ## Redeploy Cloud Foundry with nfs enabled
 
@@ -35,7 +35,7 @@ As of version 1.2.0 we no longer support old cf-release deployments with bosh v1
 **Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o operations/enable-nfs-volume-service.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount nfs volumes.  Unless you have explicitly defined a variable for your nfsbroker password, BOSH will generate one for you.  You can find the password for use in broker registration via the `bosh interpolate` command:
-    ```bash
+    ```
     bosh int deployment-vars.yml --path /nfs-broker-password
     ```
 
@@ -52,7 +52,7 @@ If you wish to also deploy the NFS test server, you can fetch the operations fil
 * Register the broker and grant access to its service with the following commands:
 
     ```bash
-    $ cf create-service-broker nfsbroker <BROKER_USERNAME> <BROKER_PASSWORD> http://nfs-broker.YOUR.DOMAIN.com
+    $ cf create-service-broker nfsbroker nfs-broker <BROKER_PASSWORD> http://nfs-broker.YOUR.DOMAIN.com
     $ cf enable-service-access nfs
     ```
     Again, if you have not explicitly set a variable value for your service broker password, you can find the value bosh has assigned using the `bosh interpolate` command described above.
@@ -70,12 +70,12 @@ If you wish to also deploy the NFS test server, you can fetch the operations fil
 
 To provide our existing `nfs` service capabilities we use a libfuse implementation that only supports nfsv3 and has some performance constraints.    
   
-If you require nfsv4 or better performance or both then you can try the new nfsv4 (experimental) support offered through a new nfsbroker plan called `nfs-experimental`.  
+If you require nfsv4 or better performance or both then you can try the new nfsv4 (experimental) support offered through a new nfsbroker plan called `nfs-experimental`.  The `nfs-experimental` plan accepts a `version` parameter to determine which nfs protocol version to use.
 
 * type the following:
 
    ```bash
-    $ cf create-service nfs-experimental Existing myVolume -c '{"share":"nfstestserver.service.cf.internal/export/vol1"}'
+    $ cf create-service nfs-experimental Existing myVolume -c '{"share":"nfstestserver.service.cf.internal/export/vol1","version":"4.1"}'
     $ cf services
     ```
 
