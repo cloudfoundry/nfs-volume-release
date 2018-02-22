@@ -1,0 +1,10 @@
+dn: dc=domain,dc=com
+objectClass: organization
+objectClass: dcObject
+o: Users
+dc: domain
+
+dn: ou=Users,dc=domain,dc=com
+objectClass: organizationalUnit
+ou: Users
+

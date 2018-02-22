@@ -1,0 +1,5 @@
+check process nfstestldapserver
+  with pidfile /var/vcap/sys/run/nfstestldapserver/nfstestldapserver.pid
+  start program "/var/vcap/jobs/nfstestldapserver/bin/monit_debugger nfstestldapserver_ctl '/var/vcap/jobs/nfstestldapserver/bin/ctl start'"
+  stop program "/var/vcap/jobs/nfstestldapserver/bin/monit_debugger nfstestldapserver_ctl '/var/vcap/jobs/nfstestldapserver/bin/ctl stop'"
+  group vcap

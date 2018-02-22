@@ -1,0 +1,44 @@
+---
+name: nfstestldapserver
+packages:
+- openldap
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  data/properties.sh.erb: data/properties.sh
+  config/core.ldif: config/core.ldif
+  config/core.schema: config/core.schema
+  config/addou.ldif: config/addou.ldif
+  config/adduser.ldif: config/adduser.ldif
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  slapd.ldif.erb: config/slapd.ldif
+  ca.crt.erb: config/certs/ca.crt
+  server.key.erb: config/certs/server.key
+  server.crt.erb: config/certs/server.crt
+  post-start.erb: bin/post-start
+properties:
+  ldap.reloadConfigOnRestart:
+    description: "Should the config database be deleted and recreated on each deployment, this will destroy all configuration that was loaded during runtime"
+    default: true
+  ldap.configDatabasePW:
+    description: "The root password to access the config database"
+    default: secret
+  ldap.olcSuffix:
+    description: "Default domain components of the database"
+    default: "dc=domain,dc=com"
+  ldap.olcRootDN:
+    description: "The DN for root access to the database"
+    default: "cn=admin,dc=domain,dc=com"
+  ldap.olcRootPW:
+    description: "The root password of the database"
+    default: secret
+  ldap.ssl.active:
+    description: "Configure SSL for slapd"
+    default: false
+  ldap.ssl.ca_cert:
+    description: "PEM-encoded CA certificate"
+  ldap.ssl.server_cert:
+    description: "PEM-encoded server certificate"
+  ldap.ssl.server_key:
+    description: "PEM-encoded server key"

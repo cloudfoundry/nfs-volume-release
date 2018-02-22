@@ -1,0 +1,126 @@
+#
+# See slapd-config(5) for details on configuration options.
+# This file should NOT be world readable.
+#
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+#<% if p('ldap.ssl.active') %>
+# TLS certs:
+olcTLSCACertificateFile: /var/vcap/jobs/nfstestldapserver/config/certs/ca.crt
+olcTLSCertificateFile: /var/vcap/jobs/nfstestldapserver/config/certs/server.crt
+olcTLSCertificateKeyFile: /var/vcap/jobs/nfstestldapserver/config/certs/server.key
+#<% end %>
+#
+# Define global ACLs to disable default read access.
+#
+olcArgsFile: /var/vcap/sys/run/nfstestldapserver/nfstestldapserver.args
+olcPidFile: /var/vcap/sys/run/nfstestldapserver/nfstestldapserver.pid
+#
+# Do not enable referrals until AFTER you have a working directory
+# service AND an understanding of referrals.
+#olcReferral:	ldap://root.openldap.org
+#
+# Sample security restrictions
+#	Require integrity protection (prevent hijacking)
+#	Require 112-bit (3DES or better) encryption for updates
+#	Require 64-bit encryption for simple bind
+#olcSecurity: ssf=1 update_ssf=112 simple_bind=64
+
+
+#
+# Load dynamic backend modules:
+#
+#dn: cn=module,cn=config
+#objectClass: olcModuleList
+#cn: module
+#olcModulepath:	/var/vcap/packages/openldap/libexec/openldap
+#olcModuleload:	back_bdb.la
+#olcModuleload:	back_hdb.la
+#olcModuleload:	back_ldap.la
+#olcModuleload:	back_passwd.la
+#olcModuleload:	back_shell.la
+
+
+dn: cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: schema
+
+include: file:///var/vcap/jobs/nfstestldapserver/config/core.ldif
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/cosine.ldif
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/nis.ldif
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/inetorgperson.ldif
+
+# Frontend settings
+#
+dn: olcDatabase=frontend,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcFrontendConfig
+olcDatabase: frontend
+#
+# Sample global access control policy:
+#	Root DSE: allow anyone to read it
+#	Subschema (sub)entry DSE: allow anyone to read it
+#	Other DSEs:
+#		Allow self write access
+#		Allow authenticated users read access
+#		Allow anonymous users to authenticate
+#
+#olcAccess: to dn.base="" by * read
+#olcAccess: to dn.base="cn=Subschema" by * read
+#olcAccess: to *
+#	by self write
+#	by users read
+#	by anonymous auth
+#
+# if no access controls are present, the default policy
+# allows anyone and everyone to read anything but restricts
+# updates to rootdn.  (e.g., "access to * by * read")
+#
+# rootdn can always read and write EVERYTHING!
+#
+
+
+# set a rootpw for the config database so we can bind.
+# deny access to everyone else.
+dn: olcDatabase=config,cn=config
+objectClass: olcDatabaseConfig
+olcDatabase: config
+olcRootPW: <%= p('ldap.configDatabasePW') %>
+olcAccess: to * by * none
+
+#######################################################################
+# LMDB database definitions
+#######################################################################
+#
+dn: olcDatabase=mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: mdb
+olcSuffix: <%= p('ldap.olcSuffix') %>
+olcRootDN: <%= p('ldap.olcRootDN') %>
+# Cleartext passwords, especially for the rootdn, should
+# be avoided.  See slappasswd(8) and slapd-config(5) for details.
+# Use of strong authentication encouraged.
+olcRootPW: <%= p('ldap.olcRootPW') %>
+# The database directory MUST exist prior to running slapd AND
+# should only be accessible by the slapd and slap tools.
+# Mode 700 recommended.
+olcDbDirectory: /var/vcap/store/nfstestldapserver/data
+# Indices to maintain
+olcDbIndex: objectClass eq
+# Allow users to change their own password
+# Allow anonymous to authenticate against the password
+# Allow admin to change any password
+olcAccess: to attrs=userPassword
+  by self write
+  by anonymous auth
+  by dn.base="<%= p('ldap.olcRootDN') %>" write
+  by dn.base="cn=admin,ou=Users,<%= p('ldap.olcSuffix') %>" read
+  by * none
+# Allow users to change their own record
+# Allow anyone to read directory
+olcAccess: to *
+  by self write
+  by dn.base="<%= p('ldap.olcRootDN') %>" write
+  by * read
