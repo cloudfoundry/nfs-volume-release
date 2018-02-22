@@ -132,5 +132,23 @@ If your application relies on file locking either through unix system calls such
 # LDAP Support
 For better security, it is recommended to configure your deployment of nfs-volume-release to connect to an external LDAP server to resolve user credentials into uids.  See [this note](USING_LDAP.md) for more details.
 
+# BBR Support
+If you are using [Bosh Backup and Restore](https://docs.cloudfoundry.org/bbr/) (BBR) to keep backups of your Cloud Foundry deployment, consider including the [enable-nfs-broker-backup.yml](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/experimental/enable-nfs-broker-backup.yml) operations file from cf-deployment when you redeploy Cloud Foundry.  This file will install the requiste backup and restore scripts for nfs service broker metadata on the backup/restore VM.
+
+# Deploying the NFS Broker to Cloud Foundry via `cf push`
+You may wish to run the service broker in Cloud Foundry using `cf push` instead of bosh deploying it.  That has the benefit of using
+one less virtual machine.  To do that, you will first need to modify the `enable-nfs-volume-service.yml` operations file to
+remove the service broker, and then push the broker instead using the steps below.
+
+When the service broker is `cf push`ed, it must be bound to a MySql or Postgres database service instance.  (Since Cloud Foundry applications are stateless, it is not safe to store state on the local filesystem, so we require a database to do simple bookkeeping.)
+
+Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
+- `cd src/code.cloudfoundry.org/nfsbroker`
+- `GOOS=linux GOARCH=amd64 go build -o bin/nfsbroker`
+- edit `manifest.yml` to set up broker username/password and sql db driver name and cf service name.  If you are using the [cf-mysql-release](http://bosh.io/releases/github.com/cloudfoundry/cf-mysql-release) from bosh.io, then the database parameters in manifest.yml will already be correct.
+- `cf push <broker app name> --no-start`
+- `cf bind-service <broker app name> <sql service instance name>`
+- `cf start <broker app name>`
+
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
