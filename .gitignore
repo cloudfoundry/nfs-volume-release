@@ -15,7 +15,7 @@ releases/nfs-volume/*.tgz
 
 ## goPath system specifics
 pkg
-bin/
+/bin
 
 ## vim plugins to ignore
 src/9fans.net/

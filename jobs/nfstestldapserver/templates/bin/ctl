@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the webapp_ctl script
+source /var/vcap/jobs/nfstestldapserver/helpers/ctl_setup.sh 'nfstestldapserver'
+
+export PORT=${PORT:-5000}
+export LANG=en_US.UTF-8
+
+export OPENLDAP=/var/vcap/packages/openldap
+export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:$PATH
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE $JOB_NAME
+
+    DATA_DIR=$STORE_DIR/data
+    if [ ! -d "$DATA_DIR" ]
+    then
+      echo "Data storeage directory doesn't exist. Creating $DATA_DIR."
+      mkdir -p $DATA_DIR
+      chown vcap:vcap $DATA_DIR
+      chmod 700 $DATA_DIR
+    fi
+
+    conf_file=$CONF_DIR/slapd.ldif
+    conf_db=$STORE_DIR/slapd.d
+    if [ -n "$RELOAD_CONFIG_ON_RESTART" ]
+    then
+      echo "Deleting existing configuration"
+      rm -rf $conf_db
+    fi
+
+    if [ ! -d "$conf_db" ]
+    then
+      mkdir -p $conf_db
+      chown vcap:vcap $conf_db
+      echo "Creating config database from $conf_file"
+      sudo slapadd -F $conf_db -n 0 -l $conf_file
+    fi
+
+    if [ -n "$SSL_ACTIVE" ]
+    then
+      protocols="ldap:/// ldaps:///"
+    else
+      protocols="ldap:///"
+    fi
+
+    sudo slapd -h "$protocols" -d stats,acl -F $conf_db >>$LOG_DIR/$JOB_NAME.log 2>&1
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+  *)
+    echo "Usage: nfstestldapserver_ctl {start|stop}"
+
+    ;;
+
+esac
+exit 0
