@@ -35,9 +35,9 @@ As of version 1.2.0 we no longer support old cf-release deployments with bosh v1
 **Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o operations/enable-nfs-volume-service.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount nfs volumes.  Unless you have explicitly defined a variable for your nfsbroker password, BOSH will generate one for you.  You can find the password for use in broker registration via the `bosh interpolate` command:
-    ```
-    bosh int deployment-vars.yml --path /nfs-broker-password
-    ```
+```bash
+bosh int deployment-vars.yml --path /nfs-broker-password
+```
 
 If you wish to also deploy the NFS test server, you can fetch the operations file from the [persi-ci github repository](https://github.com/cloudfoundry/persi-ci/blob/master/operations/enable-nfs-test-server.yml) and include that operation with a `-o` flag also.  That will create a separate VM with nfs exports that you can use to experiment with volume mounts.
 > NB: by default, the nfs test server expects that your CF deployment is deployed to a 10.x.x.x subnet.  If you are deploying to a subnet that is not 10.x.x.x (e.g. 192.168.x.x) then you will need to override the `export_cidr` property.
