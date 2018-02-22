@@ -1,0 +1,5 @@
+---
+name: openldap
+dependencies: [berkeleydb]
+files:
+- openldap/openldap-2.4.44.tgz
