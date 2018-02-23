@@ -38,7 +38,7 @@ required to turn on LDAP authentication.  You will need to provide the following
 - `nfs-ldap-proto`: ldap server protocol (tcp or udp)
 - `nfs-ldap-fqdn`: ldap fqdn for user records we will search against when looking up user uids
 
-If you're using this reference implementation, you can use these variable values to connect to it:
+If you're using the test ldap server, you can use these variable values to connect to it:
 - `nfs-ldap-service-user`: cn=admin,dc=domain,dc=com
 - `nfs-ldap-service-password`: secret
 - `nfs-ldap-host`: nfstestldapserver.service.cf.internal 
