@@ -9,13 +9,25 @@ to an NFS share using an arbitrary UID and potentially gain access to sensitive 
 enabled and regular UID and GID parameters are disabled, application developers will need to provide credentials for any user they wish to use on the nfs server.
 
 ## Changes to your LDAP server
+
+Preferably you will use your own ldap server, but we also ship a test ldap server based on openldap.
+
+### Use your own ldap server
+
 It is not generally necessary to make adjustments to your LDAP server to enable integration, but you will need the following:
-- Your LDAP server must be reachable through the network from the Diego cell VMs on the port you will use to connect (normally 389 or 636)
-- You should provision (or reuse) a service account on the LDAP server that has read-only access to user records.  This account will be used by 
-  nfsv3driver to look up usernames and convert them to UIDs.  In Windows server 2008 or later this can be accomplished by creating a new user
-  and adding it to the `Read-only Domain Controllers` group.
-  
+  - Your LDAP server must be reachable through the network from the Diego cell VMs on the port you will use to connect (normally 389 or 636)
+  - You should provision (or reuse) a service account on the LDAP server that has read-only access to user records.  This account will be used by 
+    nfsv3driver to look up usernames and convert them to UIDs.  In Windows server 2008 or later this can be accomplished by creating a new user
+    and adding it to the `Read-only Domain Controllers` group.
+
+### Deploy our nfs test ldap server:
+
+If you want to test against this reference LDAP implementation rather than connecting to your own LDAP server, then you can deploy our nfs test ldap server by including the following operations file in your Cloud Foundry
+deployment:
+[https://github.com/cloudfoundry/persi-ci/blob/master/operations/enable-nfs-test-ldapserver.yml](https://github.com/cloudfoundry/persi-ci/blob/master/operations/enable-nfs-test-ldapserver.yml)
+
 ## Changes to your `nfs-volume-release` deployment.
+
 Assuming that you have used the `enable-nfs-volume-service.yml` operations file to include `nfs-volume-release` in your deployment, you can use the
 [`enable-nfs-ldap`](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/enable-nfs-ldap.yml) operations file to make the additional changes
 required to turn on LDAP authentication.  You will need to provide the following variables in a variables file or with the `-v` option on the BOSH command line:
@@ -26,28 +38,17 @@ required to turn on LDAP authentication.  You will need to provide the following
 - `nfs-ldap-proto`: ldap server protocol (tcp or udp)
 - `nfs-ldap-fqdn`: ldap fqdn for user records we will search against when looking up user uids
 
-## Testing
-
-If you want to test against a reference LDAP implementation rather than connecting to your own LDAP server, then you can deploy a sample server by building and uploading this 
-[openldap_boshrelease](https://github.com/EMC-Dojo/openldap-boshrelease) release.  This is a fork from a release in `cloudfoundry-community` that also sets up some test 
-accounts for you, and installs schema to mirror default user records found in ADFS.
-
-Once you have built and uploaded this bosh release, you can add the LDAP server VM by including the following operations file in your Cloud Foundry
-deployment:
-[https://github.com/cloudfoundry/persi-ci/blob/master/operations/use-openldap-release.yml](https://github.com/cloudfoundry/persi-ci/blob/master/operations/use-openldap-release.yml)
-
-If you're using this test server, you can use these variable values to connect to it:
+If you're using this reference implementation, you can use these variable values to connect to it:
 - `nfs-ldap-service-user`: cn=admin,dc=domain,dc=com
 - `nfs-ldap-service-password`: secret
-- `nfs-ldap-host`: openldap.service.cf.internal 
+- `nfs-ldap-host`: nfstestldapserver.service.cf.internal 
 - `nfs-ldap-port`: 389
 - `nfs-ldap-proto`: tcp
 - `nfs-ldap-fqdn`: ou=Users,dc=domain,dc=com
 
+## Testing
 
-Once you have redeployed your broker and driver, steps to test will be more or less the same as before, except that when you bind your 
-application to your volume, you must specify `username` and `password` instead of UID and GID.  Accordingly, to use the test LDAP server with the nfstestserver, your 
-create-service and bind-service commands should look something like this:
+Once you have redeployed your broker and driver, steps to test will be more or less the same as before, except that when you bind your application to your volume, you must specify `username` and `password` instead of UID and GID.  Accordingly, to use the test LDAP server with the nfstestserver, your `create-service` and `bind-service` commands should look something like this:
 
 ```bash
 $ cf create-service nfs Existing myVolume -c '{"share":"nfstestserver.service.cf.internal/export/users"}'
