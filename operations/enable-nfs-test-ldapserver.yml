@@ -1,0 +1,25 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: nfstestldapserver
+    azs: [z1]
+    instances: 1
+    stemcell: default
+    vm_type: small
+    networks: [ name: default ]
+    jobs:
+    - name: consul_agent
+      release: consul
+      consumes:
+        consul_common: {from: consul_common_link}
+        consul_server: nil
+        consul_client: {from: consul_client_link}
+      properties:
+        consul:
+          agent:
+            services:
+              nfstestldapserver:
+                name: nfstestldapserver
+                check: {}
+    - name: nfstestldapserver
+      release: nfs-volume
