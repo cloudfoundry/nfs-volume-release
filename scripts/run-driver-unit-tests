@@ -6,8 +6,11 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 pushd src/code.cloudfoundry.org/nfsv3driver
-  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+  ginkgo -keepGoing -p -race -trace -randomizeAllSpecs -progress "$@"
+popd
+pushd src/code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver
+  ginkgo -keepGoing -trace -race -randomizeAllSpecs -progress "$@"
 popd
 pushd src/code.cloudfoundry.org/nfsdriver
-  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+  ginkgo -r -keepGoing -p -race -trace -randomizeAllSpecs -progress "$@"
 popd
