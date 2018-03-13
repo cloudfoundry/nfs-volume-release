@@ -14,6 +14,7 @@
 %>
   buildpack: binary_buildpack
   domain: "<%= p('nfsbrokerpush.app_domain') %>"
+  memory: "<%= p('nfsbrokerpush.memory_in_mb') %>M"
   env:
     GOPACKAGENAME: nfsbroker
     GOVERSION: go1.7

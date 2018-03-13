@@ -31,6 +31,9 @@ properties:
     description: 'Organization that hosts the app'
   nfsbrokerpush.space:
     description: 'Space that hosts the app'
+  nfsbrokerpush.memory_in_mb:
+    description: 'Amount of memory allocated to the broker app'
+    default: 256
   nfsbrokerpush.username:
     description: 'service broker username'
   nfsbrokerpush.password:
