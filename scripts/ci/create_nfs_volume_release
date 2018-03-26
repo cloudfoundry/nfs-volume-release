@@ -3,10 +3,8 @@
 set -x -e
 
 version=`cat nfs-volume-version/number`
+tarball_name=nfs-volume-$version.tgz
 pushd nfs-volume-release
-
-rm -rf .final_builds
-
-bosh -n --parallel 10 create release --version $version --name nfs-volume --force --with-tarball
-mv dev_releases/nfs-volume/nfs-volume-$version.tgz ../created-nfs-volume-release/nfsvolume-$version.tgz
+  bosh -n create-release --version=$version --force --tarball=$tarball_name
+  mv $tarball_name ../created-nfs-volume-release
 popd
