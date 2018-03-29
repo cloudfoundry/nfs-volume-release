@@ -19,6 +19,7 @@ pushd `dirname $0`
     CONFIG=${PWD}/config
     mkdir -p ${CONFIG}
     CONFIG=${CONFIG}/pats.json
+    randval=`openssl rand -hex 3`
 
     set +e
     which cf
@@ -47,7 +48,7 @@ cat << EOF > ${CONFIG}
       "broker_password": "${9}",
       "skip_ssl_validation": true,
       "default_timeout": 30,
-      "name_prefix": "PATs",
+      "name_prefix": "${randval}",
       "create_config": "${10}",
       "bind_config": "${11}",
       "pushed_broker_name": "${12}",
