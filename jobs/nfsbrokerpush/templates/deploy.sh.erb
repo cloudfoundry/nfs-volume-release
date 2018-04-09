@@ -87,7 +87,9 @@ function push_app() {
 }
 
 function register_service() {
-  cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  <% if p('nfsbrokerpush.register_broker') %>
+    cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  <% end %>
 }
 
 function print_deployment_status() {
