@@ -33,6 +33,7 @@
           space: nfs-broker-space
           password: ((nfs-broker-password))
           username: nfs-broker
+          syslog_url: ""
           db:
             driver: mysql
             host: sql-db.service.cf.internal
