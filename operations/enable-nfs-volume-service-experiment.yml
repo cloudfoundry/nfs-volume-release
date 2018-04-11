@@ -34,6 +34,7 @@
           password: ((nfs-broker-password))
           username: nfs-broker
           syslog_url: ""
+          skip_cert_verify: true
           db:
             driver: mysql
             host: sql-db.service.cf.internal
