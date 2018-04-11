@@ -14,6 +14,11 @@
     password: ((nfs-broker-database-password))
     username: nfs-broker
 - type: replace
+  path: /instance_groups/name=database/jobs/name=mysql/provides?/-
+  value:
+    name: database
+    type: conn
+- type: replace
   path: /instance_groups/-
   value:
     azs: [z1]
@@ -21,6 +26,9 @@
     instances: 1
     jobs:
     - name: nfsbrokerpush
+      consumes:
+        name: database
+        type: conn
       properties:
         nfsbrokerpush:
           domain: ((system_domain))
@@ -37,7 +45,6 @@
           skip_cert_verify: true
           db:
             driver: mysql
-            host: sql-db.service.cf.internal
             name: nfs-broker
             password: ((nfs-broker-database-password))
             port: 3306
