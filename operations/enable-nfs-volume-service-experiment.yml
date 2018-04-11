@@ -16,8 +16,9 @@
 - type: replace
   path: /instance_groups/name=database/jobs/name=mysql/provides?/-
   value:
-    name: database
-    type: conn
+    database:
+      as: system_db
+      type: conn
 - type: replace
   path: /instance_groups/-
   value:
@@ -27,8 +28,9 @@
     jobs:
     - name: nfsbrokerpush
       consumes:
-        name: database
-        type: conn
+        database:
+          from: system_db
+          type: conn
       properties:
         nfsbrokerpush:
           domain: ((system_domain))
