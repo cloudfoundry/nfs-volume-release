@@ -87,9 +87,7 @@ function push_app() {
 }
 
 function register_service() {
-  <% if p('nfsbrokerpush.register_broker') %>
-    cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
-  <% end %>
+  cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
 }
 
 function print_deployment_status() {
@@ -107,5 +105,7 @@ authenticate_and_target
 create_manifest
 push_app
 create_logging_service
-register_service
+<% if p('nfsbrokerpush.register_broker') %>
+  register_service
+<% end %>
 print_deployment_status
