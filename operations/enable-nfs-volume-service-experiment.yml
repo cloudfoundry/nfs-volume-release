@@ -14,10 +14,6 @@
     password: ((nfs-broker-database-password))
     username: nfs-broker
 - type: replace
-  path: /instance_groups/name=database/jobs/name=proxy/provides?/-
-  value:
-    mysql-database: { as: system_db }
-- type: replace
   path: /instance_groups/-
   value:
     azs: [z1]
@@ -25,8 +21,6 @@
     instances: 1
     jobs:
     - name: nfsbrokerpush
-      consumes:
-        database: { from: system_db }
       properties:
         nfsbrokerpush:
           domain: ((system_domain))
