@@ -11,7 +11,7 @@ ADMIN_PASSWORD="<%= p('nfsbrokerpush.cf.admin_password') %>"
 API_ENDPOINT=$SCHEME://api.$DOMAIN
 ORG=<%= p('nfsbrokerpush.organization') %>
 SPACE=<%= p('nfsbrokerpush.space') %>
-APP_NAME=nfsbroker
+APP_NAME=<%= p('nfsbrokerpush.app_name') %>
 SERVICE_BROKER_NAME=nfsbroker
 SERVICE_NAME="<%= p('nfsbrokerpush.service_name') %>"
 SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"

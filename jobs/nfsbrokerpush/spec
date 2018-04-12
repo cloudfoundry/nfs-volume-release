@@ -69,3 +69,6 @@ properties:
   nfsbrokerpush.register_broker:
     description: 'true if the errand should register the service broker after pushing it to cf'
     default: true
+  nfsbrokerpush.app_name:
+    description: 'application name to use when pushing the broker to cloud foundry and setting the route'
+    default: nfsbroker

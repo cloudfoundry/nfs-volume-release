@@ -23,6 +23,7 @@
     - name: nfsbrokerpush
       properties:
         nfsbrokerpush:
+          app_name: nfs-broker
           domain: ((system_domain))
           app_domain: ((system_domain))
           register_broker: false
