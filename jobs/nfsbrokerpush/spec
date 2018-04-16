@@ -17,22 +17,22 @@ consumes:
 
 properties:
   nfsbrokerpush.domain:
-    description: 'Cloud Foundry System Domain'
+    description: 'Cloud Foundry system domain'
   nfsbrokerpush.app_domain:
-    description: 'Domain used to host the broker app'
+    description: 'domain used to host the broker app'
   nfsbrokerpush.cf.admin_user:
-    description: 'Username of the CF admin user'
+    description: 'username of the CF admin user'
   nfsbrokerpush.cf.admin_password:
-    description: 'Password of the CF admin user'
+    description: 'password of the CF admin user'
   nfsbrokerpush.cf.dial_timeout:
     description: 'CF CLI connection dial timeout'
     default: 5
   nfsbrokerpush.organization:
-    description: 'Organization that hosts the app'
+    description: 'organization that hosts the app'
   nfsbrokerpush.space:
-    description: 'Space that hosts the app'
+    description: 'space that hosts the app'
   nfsbrokerpush.memory_in_mb:
-    description: 'Amount of memory allocated to the broker app'
+    description: 'amount of memory allocated to the broker app'
     default: 256
   nfsbrokerpush.username:
     description: 'service broker username'
@@ -56,15 +56,18 @@ properties:
   nfsbrokerpush.db.name:
     description: 'database name'
   nfsbrokerpush.syslog_url:
-    description: 'External log service URL'
+    description: 'external log service URL'
   nfsbrokerpush.error_on_misconfiguration:
-    description: 'Throw error on service misconfiguration during deployment'
+    description: 'throw error on service misconfiguration during deployment'
     default: true
   nfsbrokerpush.skip_cert_verify:
     description: 'true if the cf api uses test certs that should not be verified'
     default: false
   nfsbrokerpush.ldap_enabled:
     description: 'true if the broker should use ldap username/password bind config instead of uid/gid'
+    default: false
+  nfsbrokerpush.ldap_test_mode:
+    description: 'true if the broker should allow either ldap username/password bind config or uid/gid'
     default: false
   nfsbrokerpush.register_broker:
     description: 'true if the errand should register the service broker after pushing it to cf'
