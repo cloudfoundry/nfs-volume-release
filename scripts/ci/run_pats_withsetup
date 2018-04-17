@@ -50,26 +50,6 @@ fi
 pushd ${scripts_path}/../src/code.cloudfoundry.org/nfsbroker
   GOOS=linux GOARCH=amd64 go build -o bin/nfsbroker
   export BROKER_APPLICATION_PATH=$PWD
-
-  if [ -n "$PUSHED_BROKER_NAME" ]; then
-cat << EOF > manifest.yml
----
-  buildpack: binary_buildpack
-  env:
-    DBDRIVERNAME: ${DB_DRIVER_NAME}
-    SERVICENAME: ${SERVICE_NAME}
-    USERNAME: ${BROKER_USER}
-    PASSWORD: ${BROKER_PASSWORD}
-    LOGLEVEL: debug
-    DBHOST: ${DB_HOST}
-    DBPORT: ${DB_PORT}
-    DBNAME: ${DB_NAME}
-    DB_USERNAME: ${DB_USERNAME}
-    DB_PASSWORD: ${DB_PASSWORD}
-    ALLOWED_OPTIONS: "uid,gid,auto_cache,username,password"
-EOF
-
-  fi
 popd
 
 go get github.com/onsi/ginkgo/ginkgo
@@ -85,6 +65,4 @@ ${BROKER_URL} \
 ${BROKER_USER} \
 ${BROKER_PASSWORD} \
 ${CREATE_CONFIG} \
-${BIND_CONFIG} \
-${PUSHED_BROKER_NAME} \
-${DB_SERVICE_INSTANCE_NAME}
+${BIND_CONFIG}

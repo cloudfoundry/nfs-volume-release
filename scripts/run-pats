@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config pushed_broker_name sql_service_name]"
+    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config]"
     exit 1
 }
 
@@ -51,8 +51,6 @@ cat << EOF > ${CONFIG}
       "name_prefix": "${randval}",
       "create_config": "${10}",
       "bind_config": "${11}",
-      "pushed_broker_name": "${12}",
-      "sql_service_name": "${13}"
     }
 EOF
 
