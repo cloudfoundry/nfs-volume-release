@@ -35,7 +35,7 @@ function authenticate_and_target() {
 }
 
 function create_sql_security_group() {
-  cf create-security-group sql_open /var/vcap/packages/nfsbrokerpush/sql.json
+  cf create-security-group sql_open /var/vcap/jobs/nfsbrokerpush/sql.json
   cf bind-running-security-group sql_open
 }
 
