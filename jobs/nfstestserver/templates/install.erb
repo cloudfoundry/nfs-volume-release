@@ -24,6 +24,7 @@ chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol3
 chmod 777 <%= p("nfstestserver.export_root_path") %>/export2/certs
 
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/users
+chown root:2000 <%= p("nfstestserver.export_root_path") %>/export/users2000
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol1
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol2
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol3
