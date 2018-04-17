@@ -34,6 +34,11 @@ function authenticate_and_target() {
   cf target -s $SPACE
 }
 
+function create_sql_security_group() {
+  cf create-security-group sql_open /var/vcap/packages/nfsbrokerpush/sql.json
+  cf bind-running-security-group sql_open
+}
+
 function create_manifest() {
   cat $MANIFEST
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
@@ -103,6 +108,9 @@ cf -v
 
 authenticate_and_target
 create_manifest
+<% if p('nfsbrokerpush.create_sql_security_group') %>
+  create_sql_security_group
+<% end %>
 push_app
 create_logging_service
 <% if p('nfsbrokerpush.register_broker') %>

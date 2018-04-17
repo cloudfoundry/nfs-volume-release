@@ -4,6 +4,7 @@ name: nfsbrokerpush
 templates:
   deploy.sh.erb: bin/run
   manifest.yml.erb: manifest.yml
+  sql.json.erb: sql.json
 
 packages:
   - nfsbroker
@@ -75,3 +76,6 @@ properties:
   nfsbrokerpush.app_name:
     description: 'application name to use when pushing the broker to cloud foundry and setting the route'
     default: nfsbroker
+  nfsbrokerpush.create_sql_security_group:
+    description: 'true if the errand should create a security group to allow traffic to any ip on ports 3306,5432'
+    default: true
