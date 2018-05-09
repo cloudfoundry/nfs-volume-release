@@ -12,6 +12,3 @@ files:
   - github.com/hanwen/go-fuse/fuse/*.go # gosub
   - github.com/hanwen/go-fuse/fuse/nodefs/*.go # gosub
   - github.com/hanwen/go-fuse/fuse/pathfs/*.go # gosub
-  - github.com/hanwen/go-fuse/splice/*.go # gosub
-  - golang.org/x/sys/unix/*.go # gosub
-  - golang.org/x/sys/unix/*.s # gosub

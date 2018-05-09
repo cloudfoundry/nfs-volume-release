@@ -20,6 +20,7 @@ files:
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/nfsdriver/*.go # gosub
+  - code.cloudfoundry.org/nfsdriver/oshelper/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/driveradmin/*.go # gosub
