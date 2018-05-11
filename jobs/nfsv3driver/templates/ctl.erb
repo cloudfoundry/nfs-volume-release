@@ -39,7 +39,8 @@ case $1 in
     # Allowed number of open file descriptors
     ulimit -n 100000
 
-    export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
+    # use mapfs from collocated mapfs-release
+    export PATH=/var/vcap/packages/fuse-nfs/bin:/var/vcap/packages/mapfs/bin:$PATH
 
     # ldap connection and credential info are passed via environment
     export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
