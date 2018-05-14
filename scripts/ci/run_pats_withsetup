@@ -25,9 +25,12 @@ check_param SERVER_ADDRESS
 check_param SHARE
 check_param CREATE_CONFIG
 check_param BIND_CONFIG
+check_param CREATE_BOGUS_CONFIG
+check_param BIND_BOGUS_CONFIG
 check_param TEST_MULTI_CELL
 check_param TEST_MOUNT_OPTIONS
 check_param TEST_READ_ONLY
+check_param TEST_MOUNT_FAIL_LOGGING
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
@@ -65,4 +68,6 @@ ${BROKER_URL} \
 ${BROKER_USER} \
 ${BROKER_PASSWORD} \
 ${CREATE_CONFIG} \
-${BIND_CONFIG}
+${BIND_CONFIG} \
+${CREATE_BOGUS_CONFIG} \
+${BIND_BOGUS_CONFIG}

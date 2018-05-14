@@ -21,10 +21,13 @@ params:
   BROKER_PASSWORD:
   BROKER_PASSWORD_KEY: nfs-broker-password
   CREATE_CONFIG:
+  CREATE_BOGUS_CONFIG:
   BIND_CONFIG:
+  BIND_BOGUS_CONFIG:
   TEST_MULTI_CELL: true
   TEST_MOUNT_OPTIONS: false
   TEST_READ_ONLY: true
   TEST_DOCKER_PORA: false
+  TEST_MOUNT_FAIL_LOGGING: false
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup

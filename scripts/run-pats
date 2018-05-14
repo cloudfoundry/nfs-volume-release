@@ -50,7 +50,9 @@ cat << EOF > ${CONFIG}
       "default_timeout": 30,
       "name_prefix": "${randval}",
       "create_config": "${10}",
-      "bind_config": "${11}"
+      "bind_config": "${11}",
+      "create_bogus_config": "${12}",
+      "bind_bogus_config": "${13}"
     }
 EOF
 
