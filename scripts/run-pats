@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config]"
+    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config parallel_nodes]"
     exit 1
 }
 
@@ -60,6 +60,6 @@ EOF
     export ASSETS_PATH="${PWD}/../src/code.cloudfoundry.org/persi-acceptance-tests/assets"
 
     pushd  ../src/code.cloudfoundry.org/persi-acceptance-tests
-        CONFIG=${CONFIG} ginkgo --slowSpecThreshold=300 -r -p -v .
+        CONFIG=${CONFIG} ginkgo --slowSpecThreshold=300 -r -nodes ${PARALLEL_NODES} -v .
     popd
 popd
