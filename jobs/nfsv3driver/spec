@@ -67,3 +67,10 @@ properties:
    description: "ldap fqdn for user records we will search against when looking up user uids (required for LDAP integration only)"
    example: "cn=Users,dc=corp,dc=test,dc=com"
    default: ""
+ nfsv3driver.ldap_ca_cert:
+   description: "ldap server CA certificate. If not provided driver will be connecting to LDAP server without TLS"
+   example: "|
+     -----BEGIN CERTIFICATE-----
+     ...
+     -----END CERTIFICATE-----"
+   default: ""
