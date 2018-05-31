@@ -23,3 +23,10 @@
                 check: {}
     - name: nfstestldapserver
       release: nfs-volume
+      properties:
+        ldap:
+          ssl:
+            active: ((nfs-test-ldap-server-ssl-active))
+            ca_cert: ((nfs-test-ldap-server-ca-cert))
+            server_cert: ((nfs-test-ldap-server-cert))
+            server_key: ((nfs-test-ldap-server-key))

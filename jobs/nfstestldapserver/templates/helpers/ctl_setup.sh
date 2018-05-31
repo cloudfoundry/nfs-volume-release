@@ -61,7 +61,7 @@ chown -R vcap:vcap "${CONF_DIR}"
 export CERT_DIR=$CONF_DIR/certs/
 chown vcap:vcap ${CERT_DIR}/*.{crt,key}
 
-chmod 640 ${CERT_DIR}/*.{crt,key}
+chmod 600 ${CERT_DIR}/*.key
 
 PIDFILE=$RUN_DIR/$output_label.pid
 
