@@ -1,0 +1,7 @@
+---
+- type: replace
+  path: /instance_groups/name=nfs-broker-push/jobs/name=nfsbrokerpush/properties/nfsbrokerpush/db/host?
+  value: sql-db.service.cf.internal
+- type: replace
+  path: /instance_groups/name=nfs-broker-push/jobs/name=nfsbrokerpush/properties/nfsbrokerpush/db/ca_cert?
+  value: ((pxc_server_ca.certificate))

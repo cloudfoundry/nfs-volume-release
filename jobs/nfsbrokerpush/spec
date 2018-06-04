@@ -56,6 +56,9 @@ properties:
     description: 'database password'
   nfsbrokerpush.db.name:
     description: 'database name'
+  nfsbrokerpush.db.ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify SSL connection. If not included connection will not be encrypted"
   nfsbrokerpush.syslog_url:
     description: 'external log service URL'
   nfsbrokerpush.error_on_misconfiguration:
