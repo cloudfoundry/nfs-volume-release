@@ -26,6 +26,9 @@ If you want to test against this reference LDAP implementation rather than conne
 deployment:
 [https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver.yml](https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver.yml)
 
+If you want to use test LDAP server with TLS, use the following operations file instead:
+[https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver-tls.yml](https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver-tls.yml)
+
 ## Changes to your `nfs-volume-release` deployment.
 
 Assuming that you have used the `enable-nfs-volume-service.yml` operations file to include `nfs-volume-release` in your deployment, you can use the
