@@ -1,0 +1,9 @@
+---
+- type: replace
+  path: /addons/name=bosh-dns/jobs/name=bosh-dns/properties/aliases/nfstestserver.service.cf.internal?
+  value:
+    - "*.nfstestserver.default.cf.bosh"
+- type: replace
+  path: /addons/name=bosh-dns/jobs/name=bosh-dns/properties/aliases/nfstestldapserver.service.cf.internal?
+  value:
+    - "*.nfstestldapserver.default.cf.bosh"
