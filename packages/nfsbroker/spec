@@ -31,12 +31,13 @@ files:
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/github.com/cloudfoundry/socks5-proxy/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/github.com/hashicorp/go-version/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.go # gosub
-  - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.{h,s} # gosub
+  - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.h # gosub
+  - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.s # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/ed25519/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/ed25519/internal/edwards25519/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/internal/chacha20/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/poly1305/*.go # gosub
-  - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/poly1305/*.{h,s} # gosub
+  - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/poly1305/*.s # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/crypto/ssh/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/net/context/*.go # gosub
   - github.com/cloudfoundry-incubator/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
