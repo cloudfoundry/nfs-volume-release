@@ -47,6 +47,15 @@ properties:
   nfsbroker.db_ca_cert:
     default: ""
     description: "(optional) CA Cert to verify SSL connection. If not included connection will not be encrypted"
+  nfsbroker.credhub_url:
+    default: ""
+    description: "(optional) CredHub URL when using CredHub to store broker state"
+  nfsbroker.uaa_client_id:
+    default: ""
+    description: "(optional) UAA client ID when using CredHub to store broker state"
+  nfsbroker.uaa_client_secret:
+    default: ""
+    description: "(optional) UAA client secret when using CredHub to store broker state"
   nfsbroker.allowed_options:
     description: "comma separated list of white-listed options that may be set during create or bind operations."
     example: "uid,gid,allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,fsname,username,password"
