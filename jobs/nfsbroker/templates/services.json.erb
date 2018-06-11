@@ -1,0 +1,27 @@
+<%=
+  config = []
+  p("nfsbroker.services").each do |service|
+    plans = []
+    service["plans"].each do |plan|
+      plans << {
+        "id":plan["id"],
+        "name": plan["name"],
+        "description": plan["description"],
+      }
+    end
+
+    config << {
+      "id": service["id"],
+      "name": service["name"],
+      "description": service["description"],
+      "bindable": service["bindable"],
+      "plan_updateable": service["plan_updatable"],
+      "tags": service["tags"],
+      "plans": plans,
+      "requires": services["requires"]
+    }
+  end
+
+  require 'json'
+  JSON.dump(config)
+%>

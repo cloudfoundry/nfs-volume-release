@@ -3,6 +3,7 @@ name: nfsbroker
 
 templates:
   ctl.erb: bin/nfsbroker_ctl
+  services.json.erb: config/services.json
 
 packages:
 - golang-nfsvolume
@@ -17,12 +18,6 @@ properties:
   nfsbroker.listen_addr:
     description: "(optional) address nfsbroker listens on"
     default: "0.0.0.0:8999"
-  nfsbroker.service_name:
-    description: "(optional) name of the service to be registered with cf"
-    default: "nfs"
-  nfsbroker.service_id:
-    description: "(optional) Id of the service to be registered with cf"
-    default: "nfs-service-guid"
   nfsbroker.data_dir:
     description: "(optional) Directory on broker VM to persist instance and binding state"
     default: "/var/vcap/store/nfsbroker"
@@ -64,3 +59,28 @@ properties:
     description: "comma separated list default values for options. If a default is specified but the option is not in the allowed-options, then the default value will be set and cannot be overridden."
     example: "uid:1000,gid:1000,allow_root:false,allow_other:false,nfs_uid:2000,nfs_gid:2000,auto_cache:false"
     default: "auto_cache:true"
+  nfsbroker.services:
+    description: "List of services and plans supported by broker"
+    default:
+    - id: nfs-service-guid
+      name: "nfs"
+      description: "Existing NFSv3 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
+      bindable: true
+      plan_updatable: false
+      tags: ["nfs"]
+      requires: ["volume_mount"]
+      plans:
+      - id: Existing
+        name: "Existing"
+        description: "A preexisting filesystem"
+    - id: "c997f8f26-e10c-11e7-80c1-9a214cf093ae"
+      name: "nfs-experimental"
+      description: "Experimental support for NFSv3 and v4"
+      bindable: true
+      plan_updatable: false
+      tags: ["nfs", "experimental"]
+      requires: ["volume_mount"]
+      plans:
+      - id: 09a09260-1df5-4445-9ed7-1ba56dadbbc8
+        name: "Existing"
+        description: "A preexisting filesystem"

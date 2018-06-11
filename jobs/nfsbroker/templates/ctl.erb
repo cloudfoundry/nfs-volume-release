@@ -41,8 +41,6 @@ case $1 in
 
     exec chpst -u vcap:vcap /var/vcap/packages/nfsbroker/bin/nfsbroker \
       --listenAddr="<%= p("nfsbroker.listen_addr") %>" \
-      --serviceName="<%= p("nfsbroker.service_name") %>" \
-      --serviceId="<%= p("nfsbroker.service_id") %>" \
       --dataDir="<%= p("nfsbroker.data_dir") %>" \
       --dbDriver="<%= p("nfsbroker.db_driver") %>" \
       --dbHostname="<%= p("nfsbroker.db_hostname") %>" \
@@ -54,6 +52,7 @@ case $1 in
       --uaaClientSecret="<%= p("nfsbroker.uaa_client_secret") %>" \
       --allowedOptions="<%= p("nfsbroker.allowed_options") %>" \
       --defaultOptions="<%= p("nfsbroker.default_options") %>" \
+      --servicesConfig=/var/vcap/jobs/nfsbroker/config/services.json \
       >> $LOG_DIR/nfsbroker.stdout.log \
       2>> $LOG_DIR/nfsbroker.stderr.log
     ;;
