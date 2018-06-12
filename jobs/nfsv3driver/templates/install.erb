@@ -2,8 +2,29 @@
 
 set -e -x
 
+install_if_missing ()
+{
+    set +e
+    dpkg -s $1
+    not_installed=$(echo $?)
+    set -e
+    if [ not_installed ]; then
+      dpkg  --force-confdef -i $2
+    fi
+}
+
+codename=$(lsb_release -c | grep xenial | awk '{print $2}')
+if [ "$codename" == "xenial" ]; then
+    echo "Installing NFS packages"
+    install_if_missing rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.2_amd64.deb
+    install_if_missing keyutils /var/vcap/packages/nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb
+    install_if_missing libevent-2.0-5 /var/vcap/packages/nfs-debs/libevent-2.0-5_2.0.21-stable-2ubuntu0.16.04.1_amd64.deb
+    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/libnfsidmap2_0.25-5_amd64.deb
+    install_if_missing nfs-common /var/vcap/packages/nfs-debs/nfs-common_1%3a1.2.8-9ubuntu12.1_amd64.deb
+fi
+
 # Figure out where the libraries should be installed.
-libdir="/usr/$(dirname "$(ldconfig -p | awk '/libc.so/ { print $NF }')")"
+libdir="/usr/$(dirname "$(ldconfig -p | awk '/gnu\/libc.so/ { print $NF }')")"
 
 # make sure there arent any existing fuse-nfs mounts
 pkill fuse-nfs | true

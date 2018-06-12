@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e -x
+
+cp -a ${BOSH_COMPILE_TARGET}/nfs-debs/*.deb ${BOSH_INSTALL_TARGET}/
