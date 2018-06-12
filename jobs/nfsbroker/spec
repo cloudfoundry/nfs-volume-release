@@ -62,7 +62,7 @@ properties:
   nfsbroker.services:
     description: "List of services and plans supported by broker"
     default:
-    - id: nfs-service-guid
+    - id: nfsbroker
       name: "nfs"
       description: "Existing NFSv3 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
       bindable: true

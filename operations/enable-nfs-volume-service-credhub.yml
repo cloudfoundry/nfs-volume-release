@@ -1,0 +1,143 @@
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/volume_services_enabled?
+  value: true
+- type: replace
+  path: /instance_groups/name=cc-worker/jobs/name=cloud_controller_worker/properties/cc/volume_services_enabled?
+  value: true
+- type: replace
+  path: /instance_groups/name=scheduler/jobs/name=cloud_controller_clock/properties/cc/volume_services_enabled?
+  value: true
+- type: replace
+  path: /instance_groups/name=database/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  value:
+    name: nfs-broker-credhub
+    password: ((nfs-broker-credhub-database-password))
+    username: nfs-broker
+- type: replace
+  path: /instance_groups/-
+  value:
+    azs: [z1]
+    lifecycle: errand
+    instances: 1
+    jobs:
+    - name: nfsbrokerpush
+      properties:
+        nfsbrokerpush:
+          app_name: nfs-broker-credhub
+          domain: ((system_domain))
+          app_domain: ((system_domain))
+          register_broker: false
+          cf:
+            admin_password: ((cf_admin_password))
+            admin_user: admin
+          organization: system
+          space: nfs-broker-space
+          password: ((nfs-broker-credhub-password))
+          username: nfs-broker
+          syslog_url: ""
+          skip_cert_verify: true
+          db:
+            driver: mysql
+            name: nfs-broker-credhub
+            password: ((nfs-broker-credhub-database-password))
+            port: 3306
+            username: nfs-broker
+          services:
+          - id: "2b1ae04-6a97-4d6f-8979-fbe0bb3331c1"
+            name: "nfs-credhub"
+            description: "Existing NFSv3 volumes with CredHub as a store"
+            bindable: true
+            plan_updatable: false
+            tags: ["nfs"]
+            requires: ["volume_mount"]
+            plans:
+            - id: "6316d9ca-9d05-44c2-b652-b83d60cf2f93"
+              name: "Existing"
+              description: "A preexisting filesystem"
+          - id: "d8ab29a9-81d0-4e45-afcd-fb9ed858ccf4"
+            name: "nfs-experimental"
+            description: "Experimental support for NFSv3 and v4 with CredHub as a store"
+            bindable: true
+            plan_updatable: false
+            tags: ["nfs", "experimental"]
+            requires: ["volume_mount"]
+            plans:
+            - id: "2e315570-802f-44fd-886c-1a2d6676da9d"
+              name: "Existing"
+              description: "A preexisting filesystem"
+      release: nfs-volume
+    name: nfs-broker-credhub-push
+    networks:
+    - name: default
+    stemcell: default
+    vm_type: minimal
+- type: replace
+  path: /instance_groups/-
+  value:
+    azs:
+    - z1
+    instances: 1
+    jobs:
+    - name: broker-registrar
+      properties:
+        cf:
+          api_url: api.((system_domain))
+          password: ((cf_admin_password))
+          skip_ssl_validation: true
+          username: admin
+        servicebroker:
+          name: nfs-broker-credhub
+          password: ((nfs-broker-password))
+          url: http://nfs-broker-credhub.((system_domain))
+          username: nfs-broker
+      release: broker-registrar
+    lifecycle: errand
+    name: nfs-broker-credhub-registrar
+    networks:
+    - name: default
+    stemcell: default
+    vm_type: minimal
+- type: replace
+  path: /instance_groups/name=diego-cell/jobs/-
+  value:
+    name: nfsv3driver
+    properties: {}
+    release: nfs-volume
+- type: replace
+  path: /instance_groups/name=diego-cell/jobs/name=mapfs?
+  value:
+    name: mapfs
+    release: mapfs
+
+- type: replace
+  path: /variables/-
+  value:
+    name: nfs-broker-credhub-password
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: nfs-broker-credhub-database-password
+    type: password
+
+- type: replace
+  path: /releases/-
+  value:
+    name: nfs-volume
+    sha1: de807ffa3fc84949bb92edac6a4152245826d6da
+    url: https://bosh.io/d/github.com/cloudfoundry/nfs-volume-release?v=1.2.0
+    version: 1.2.0
+- type: replace
+  path: /releases/name=broker-registrar?
+  value:
+    name: broker-registrar
+    sha1: d44d9af8fd06ecf6d50004c9bfd5516a6e482201
+    url: https://bosh.io/d/github.com/cloudfoundry-community/broker-registrar-boshrelease?v=3.4.0
+    version: 3.4.0
+- type: replace
+  path: /releases/name=mapfs?
+  value:
+    name: "mapfs"
+    version: "1.0.1"
+    url: "https://bosh.io/d/github.com/cloudfoundry/mapfs-release?v=1.0.1"
+    sha1: "9dcea268d327caff76690229ac09f57a0c83cf65"
