@@ -44,7 +44,7 @@ function create_sql_security_group() {
 function create_manifest() {
   cat $MANIFEST
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
-  cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile.yml
+  cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile
 <% if p('nfsbrokerpush.db.ca_cert') %>
   cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
 <% end %>
