@@ -16,6 +16,8 @@ SERVICE_BROKER_NAME=nfsbroker
 SERVICE_NAME="<%= p('nfsbrokerpush.service_name') %>"
 SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
+PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
+DB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/db_ca.crt
 USERNAME="<%= p('nfsbrokerpush.username') %>"
 PASSWORD="<%= p('nfsbrokerpush.password') %>"
 APP_URL=$SCHEME://$APP_NAME.$DOMAIN
@@ -42,6 +44,11 @@ function create_sql_security_group() {
 function create_manifest() {
   cat $MANIFEST
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
+  cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile.yml
+<% if p('nfsbrokerpush.db.ca_cert') %>
+  cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
+<% end %>
+
 }
 
 function create_logging_service() {

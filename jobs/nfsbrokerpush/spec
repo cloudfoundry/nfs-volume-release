@@ -4,6 +4,8 @@ name: nfsbrokerpush
 templates:
   deploy.sh.erb: bin/run
   manifest.yml.erb: manifest.yml
+  Procfile.erb: Procfile
+  db_ca.crt.erb: db_ca.crt
   sql.json.erb: sql.json
 
 packages:
