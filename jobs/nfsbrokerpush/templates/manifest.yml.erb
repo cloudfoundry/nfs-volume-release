@@ -21,9 +21,9 @@
   env:
     GOPACKAGENAME: nfsbroker
     GOVERSION: go1.7
-    SERVICENAME: "<%= p('nfsbrokerpush.service_name') %>"
     USERNAME: "<%= p('nfsbrokerpush.username') %>"
     PASSWORD: "<%= p('nfsbrokerpush.password') %>"
+    SERVICES_CONFIG: "./services.json"
     LOGLEVEL: info
     DBDRIVERNAME: "<%= p('nfsbrokerpush.db.driver') %>"
     DBHOST: "<%= database_host %>"

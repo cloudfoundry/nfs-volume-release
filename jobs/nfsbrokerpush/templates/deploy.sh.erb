@@ -45,6 +45,7 @@ function create_manifest() {
   cat $MANIFEST
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
   cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile
+  cp -f $SERVICES_CONFIG /var/vcap/packages/nfsbroker/services.json
 <% if p('nfsbrokerpush.db.ca_cert') %>
   cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
 <% end %>
