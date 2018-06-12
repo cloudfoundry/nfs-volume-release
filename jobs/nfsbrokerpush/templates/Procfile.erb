@@ -1,6 +1,6 @@
 <% if p('nfsbrokerpush.db.ca_cert') %>
-web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="default_services.json" --serviceId="nfsbroker" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS" --dbCACert=<(cat db_ca.crt)
+web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS" --dbCACert=<(cat db_ca.crt)
 <% else %>
-web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="default_services.json" --serviceId="nfsbroker" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS"
+web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS"
 <% end %>
 
