@@ -62,6 +62,15 @@ properties:
   nfsbrokerpush.db.ca_cert:
     default: ""
     description: "(optional) CA Cert to verify SSL connection. If not included connection will not be encrypted"
+  nfsbrokerpush.credhub_url:
+    default: ""
+    description: "(optional) CredHub URL when using CredHub to store broker state"
+  nfsbrokerpush.uaa_client_id:
+    default: ""
+    description: "(optional) UAA client ID when using CredHub to store broker state"
+  nfsbrokerpush.uaa_client_secret:
+    default: ""
+    description: "(optional) UAA client secret when using CredHub to store broker state"
   nfsbrokerpush.syslog_url:
     description: 'external log service URL'
   nfsbrokerpush.error_on_misconfiguration:

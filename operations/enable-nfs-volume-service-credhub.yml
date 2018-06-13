@@ -8,11 +8,12 @@
   path: /instance_groups/name=scheduler/jobs/name=cloud_controller_clock/properties/cc/volume_services_enabled?
   value: true
 - type: replace
-  path: /instance_groups/name=database/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/login/uaa/clients/-
   value:
-    name: nfs-broker-credhub
-    password: ((nfs-broker-credhub-database-password))
-    username: nfs-broker
+    nfsbroker-credhub-client:
+      authorities: credhub.read,credhub.write
+      authorized-grant-types: client_credentials
+      secret: ((nfs-broker-credhub-uaa-client-secret))
 - type: replace
   path: /instance_groups/-
   value:
@@ -36,12 +37,9 @@
           username: nfs-broker
           syslog_url: ""
           skip_cert_verify: true
-          db:
-            driver: mysql
-            name: nfs-broker-credhub
-            password: ((nfs-broker-credhub-database-password))
-            port: 3306
-            username: nfs-broker
+          credhub_url: https://credhub.service.cf.internal
+          uaa_client_id: nfs-broker-credhub-client
+          uaa_client_secret: ((nfs-broker-credhub-uaa-client-secret))
           services:
           - id: "2b1ae04-6a97-4d6f-8979-fbe0bb3331c1"
             name: "nfs-credhub"
@@ -117,7 +115,7 @@
 - type: replace
   path: /variables/-
   value:
-    name: nfs-broker-credhub-database-password
+    name: nfs-broker-credhub-uaa-client-secret
     type: password
 
 - type: replace

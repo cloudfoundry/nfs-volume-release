@@ -1,2 +1,30 @@
-web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS"<% if p('nfsbrokerpush.db.ca_cert') %> --dbCACertPath="./db_ca.crt"<% end %>
+<%
+  database_host = nil
+  if_p('nfsbrokerpush.db.host') do |host|
+    database_host = host
+  end.else do
+    database_host = link('database').instances[0].address
+  end
+
+  allowed_options = 'uid,gid,auto_cache,version'
+  if p('nfsbrokerpush.ldap_enabled')
+    allowed_options = 'auto_cache,username,password,version'
+  end
+  if p('nfsbrokerpush.ldap_test_mode')
+    allowed_options = 'auto_cache,uid,gid,username,password,version'
+  end
+%>
+web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
+                   <% if_p('nfsbrokerpush.db.driver') do |db_driver| %> \
+                   --dbDriver="<%= db_driver %>" --dbHostname="<%= database_host %>" \
+                   --dbPort="<%= p('nfsbrokerpush.db.port') %>" --dbName="<%= p('nfsbrokerpush.db.name') %>" \
+                   <% end %> \
+                   <% if_p('nfsbrokerpush.credhub_url') do |credhub_url| %> \
+                   --credhubURL="<%= credhub_url %>" --uaaClientID="<%= p('nfsbrokerpush.uaa_client_id') %>" \
+                   --uaaClientSecret="<%= p('nfsbrokerpush.uaa_client_secret') %>" \
+                   <% end %> \
+                   --logLevel="info" --allowedOptions="<%= allowed_options %>" \
+                   <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
+                   --dbCACertPath="./db_ca.crt"
+                   <% end %>
 
