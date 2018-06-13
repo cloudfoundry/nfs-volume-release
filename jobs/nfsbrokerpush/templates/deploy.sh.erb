@@ -17,6 +17,7 @@ SERVICES_CONFIG=/var/vcap/jobs/nfsbrokerpush/config/services.json
 SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
 PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
+STARTUP_SCRIPT=/var/vcap/jobs/nfsbrokerpush/start.sh
 DB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/db_ca.crt
 USERNAME="<%= p('nfsbrokerpush.username') %>"
 PASSWORD="<%= p('nfsbrokerpush.password') %>"
@@ -45,6 +46,7 @@ function create_manifest() {
   cat $MANIFEST
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
   cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile
+  cp -f $STARTUP_SCRIPT /var/vcap/packages/nfsbroker/start.sh
   cp -f $SERVICES_CONFIG /var/vcap/packages/nfsbroker/services.json
 <% if p('nfsbrokerpush.db.ca_cert') %>
   cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
