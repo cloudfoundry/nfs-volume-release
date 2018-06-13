@@ -95,7 +95,7 @@
     stemcell: default
     vm_type: minimal
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/-
+  path: /instance_groups/name=diego-cell/jobs/name=nfsv3driver?
   value:
     name: nfsv3driver
     properties: {}
