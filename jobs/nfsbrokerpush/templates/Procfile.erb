@@ -1,2 +1,2 @@
-web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS"<% if p('nfsbrokerpush.db.ca_cert') %> --dbCACert=<(cat db_ca.crt)<% end %>
+web: bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --dbDriver="$DBDRIVERNAME" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS"<% if p('nfsbrokerpush.db.ca_cert') %> --dbCACertPath="./db_ca.crt"<% end %>
 
