@@ -118,7 +118,7 @@
     type: password
 
 - type: replace
-  path: /releases/-
+  path: /releases/name=nfs-volume?
   value:
     name: nfs-volume
     sha1: de807ffa3fc84949bb92edac6a4152245826d6da

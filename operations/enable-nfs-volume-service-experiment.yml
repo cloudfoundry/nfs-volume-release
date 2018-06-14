@@ -75,7 +75,7 @@
     stemcell: default
     vm_type: minimal
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/-
+  path: /instance_groups/name=diego-cell/jobs/name=nfsv3driver?
   value:
     name: nfsv3driver
     properties: {}
@@ -98,7 +98,7 @@
     type: password
 
 - type: replace
-  path: /releases/-
+  path: /releases/name=nfs-volume?
   value:
     name: nfs-volume
     sha1: de807ffa3fc84949bb92edac6a4152245826d6da
