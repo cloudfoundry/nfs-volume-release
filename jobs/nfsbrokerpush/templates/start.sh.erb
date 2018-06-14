@@ -15,9 +15,9 @@
   end
 %>
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
-              <% if_p('nfsbrokerpush.db.driver') do |db_driver| %> \
+              <% if_p('nfsbrokerpush.db.driver', 'nfsbrokerpush.db.port', 'nfsbrokerpush.db.name') do |db_driver, db_port, db_name| %> \
               --dbDriver="<%= db_driver %>" --dbHostname="<%= database_host %>" \
-              --dbPort="<%= p('nfsbrokerpush.db.port') %>" --dbName="<%= p('nfsbrokerpush.db.name') %>" \
+              --dbPort="<%= db_port %>" --dbName="<%= db_name %>" \
               <% end %> \
               <% if_p('nfsbrokerpush.credhub_url') do |credhub_url| %> \
               --credhubURL="<%= credhub_url %>" --uaaClientID="<%= p('nfsbrokerpush.uaa_client_id') %>" \
