@@ -27,6 +27,8 @@
           domain: ((system_domain))
           app_domain: ((system_domain))
           register_broker: false
+          create_sql_security_group: false
+          create_credhub_security_group: true
           cf:
             admin_password: ((cf_admin_password))
             admin_user: admin

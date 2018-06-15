@@ -7,6 +7,7 @@ templates:
   Procfile.erb: Procfile
   db_ca.crt.erb: db_ca.crt
   sql.json.erb: sql.json
+  credhub.json.erb: credhub.json
   services.json.erb: config/services.json
   start.sh.erb: start.sh
 
@@ -93,8 +94,11 @@ properties:
     description: 'application name to use when pushing the broker to cloud foundry and setting the route'
     default: nfsbroker
   nfsbrokerpush.create_sql_security_group:
-    description: 'true if the errand should create a security group to allow traffic to any ip on ports 3306,5432,8844'
+    description: 'true if the errand should create a security group to allow traffic to any ip on ports 3306,5432'
     default: true
+  nfsbrokerpush.create_credhub_security_group:
+    description: 'true if the errand should create a security group to allow traffic to any ip on ports 8844'
+    default: false
   nfsbrokerpush.services:
     description: "List of services and plans supported by broker"
     default:

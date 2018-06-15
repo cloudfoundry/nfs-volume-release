@@ -38,9 +38,15 @@ function authenticate_and_target() {
 }
 
 function create_sql_security_group() {
-  cf delete-security-group sql_open -f
   cf create-security-group sql_open /var/vcap/jobs/nfsbrokerpush/sql.json
+  cf update-security-group sql_open /var/vcap/jobs/nfsbrokerpush/sql.json
   cf bind-security-group sql_open $ORG $SPACE
+}
+
+function create_credhub_security_group() {
+  cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
+  cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
+  cf bind-security-group credhub_open $ORG $SPACE
 }
 
 function create_manifest() {
@@ -122,6 +128,9 @@ authenticate_and_target
 create_manifest
 <% if p('nfsbrokerpush.create_sql_security_group') %>
   create_sql_security_group
+<% end %>
+<% if p('nfsbrokerpush.create_credhub_security_group') %>
+  create_credhub_security_group
 <% end %>
 push_app
 create_logging_service
