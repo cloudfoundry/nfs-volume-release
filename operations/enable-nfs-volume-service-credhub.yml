@@ -38,9 +38,10 @@
           username: nfs-broker
           syslog_url: ""
           skip_cert_verify: true
-          credhub_url: https://credhub.service.cf.internal:8844
-          uaa_client_id: nfs-broker-credhub-client
-          uaa_client_secret: ((nfs-broker-credhub-uaa-client-secret))
+          credhub:
+            url: https://credhub.service.cf.internal:8844
+            uaa_client_id: nfs-broker-credhub-client
+            uaa_client_secret: ((nfs-broker-credhub-uaa-client-secret))
           services:
           - id: "2b1ae04-6a97-4d6f-8979-fbe0bb3331c1"
             name: "nfs-credhub"

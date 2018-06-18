@@ -19,6 +19,7 @@ MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
 PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
 STARTUP_SCRIPT=/var/vcap/jobs/nfsbrokerpush/start.sh
 DB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/db_ca.crt
+CREDHUB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/credhub_ca.crt
 USERNAME="<%= p('nfsbrokerpush.username') %>"
 PASSWORD="<%= p('nfsbrokerpush.password') %>"
 APP_URL=$SCHEME://$APP_NAME.$DOMAIN
@@ -56,8 +57,11 @@ function create_manifest() {
   cp -f $STARTUP_SCRIPT /var/vcap/packages/nfsbroker/start.sh
   chmod +x /var/vcap/packages/nfsbroker/start.sh
   cp -f $SERVICES_CONFIG /var/vcap/packages/nfsbroker/services.json
-<% if p('nfsbrokerpush.db.ca_cert') %>
+<% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %>
   cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
+<% end %>
+<% if_p('nfsbrokerpush.credhub.ca_cert') do |ca_cert| %>
+  cp -f $CREDHUB_CA_CERT /var/vcap/packages/nfsbroker/credhub_ca.crt
 <% end %>
 
 }
@@ -79,7 +83,6 @@ function create_logging_service() {
 
     return
   fi
-
 
   if [[ $exit_code -ne 0 ]]; then
     cf create-user-provided-service $LOGGER_NAME -l $SYSLOG_URL

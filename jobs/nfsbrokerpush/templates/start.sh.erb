@@ -19,7 +19,7 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
               --dbDriver="<%= db_driver %>" --dbHostname="<%= database_host %>" \
               --dbPort="<%= db_port %>" --dbName="<%= db_name %>" \
               <% end %> \
-              <% if_p('nfsbrokerpush.credhub_url', 'nfsbrokerpush.uaa_client_id', 'nfsbrokerpush.uaa_client_secret') do |credhub_url, uaa_client_id, uaa_client_secret| %> \
+              <% if_p('nfsbrokerpush.credhub.url', 'nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |credhub_url, uaa_client_id, uaa_client_secret| %> \
               --credhubURL="<%= credhub_url %>" --uaaClientID="<%= uaa_client_id %>" \
               --uaaClientSecret="<%= uaa_client_secret %>" \
               <% end %> \

@@ -4,6 +4,8 @@ name: nfsbroker
 templates:
   ctl.erb: bin/nfsbroker_ctl
   services.json.erb: config/services.json
+  db_ca.crt.erb: db_ca.crt
+  credhub_ca.crt.erb: credhub_ca.crt
 
 packages:
 - golang-nfsvolume
@@ -41,14 +43,17 @@ properties:
     description: "(optional) database name when using SQL to store broker state"
   nfsbroker.db_ca_cert:
     default: ""
-    description: "(optional) CA Cert to verify SSL connection. If not included connection will not be encrypted"
-  nfsbroker.credhub_url:
+    description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
+  nfsbroker.credhub.url:
     default: ""
     description: "(optional) CredHub URL when using CredHub to store broker state"
-  nfsbroker.uaa_client_id:
+  nfsbroker.credhub.ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify credhub SSL connection. If not included connection will not be encrypted"
+  nfsbroker.credhub.uaa_client_id:
     default: ""
     description: "(optional) UAA client ID when using CredHub to store broker state"
-  nfsbroker.uaa_client_secret:
+  nfsbroker.credhub.uaa_client_secret:
     default: ""
     description: "(optional) UAA client secret when using CredHub to store broker state"
   nfsbroker.allowed_options:

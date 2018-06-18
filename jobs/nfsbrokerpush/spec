@@ -63,14 +63,14 @@ properties:
     description: 'database name'
   nfsbrokerpush.db.ca_cert:
     default: ""
-    description: "(optional) CA Cert to verify SSL connection. If not included connection will not be encrypted"
-  nfsbrokerpush.credhub_url:
+    description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
+  nfsbrokerpush.credhub.url:
     default: ""
     description: "(optional) CredHub URL when using CredHub to store broker state"
-  nfsbrokerpush.uaa_client_id:
+  nfsbrokerpush.credhub.uaa_client_id:
     default: ""
     description: "(optional) UAA client ID when using CredHub to store broker state"
-  nfsbrokerpush.uaa_client_secret:
+  nfsbrokerpush.credhub.uaa_client_secret:
     default: ""
     description: "(optional) UAA client secret when using CredHub to store broker state"
   nfsbrokerpush.syslog_url:
