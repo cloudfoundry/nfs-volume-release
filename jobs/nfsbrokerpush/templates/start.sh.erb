@@ -23,6 +23,7 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
               --credhubURL="<%= credhub_url %>" --uaaClientID="<%= uaa_client_id %>" \
               --uaaClientSecret="<%= uaa_client_secret %>" \
               <% end %> \
+              --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               --logLevel="info" --allowedOptions="<%= allowed_options %>" \
               <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
               --dbCACertPath="./db_ca.crt"
