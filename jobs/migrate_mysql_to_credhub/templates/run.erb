@@ -1,0 +1,20 @@
+#!/bin/bash -exu
+
+<%
+  database_host = nil
+  if_p('db.host') do |host|
+    database_host = host
+  end.else do
+    database_host = link('database').instances[0].address
+  end
+%>
+/var/vcap/packages/migrate_mysql_to_credhub/bin/migrate \
+              --dbDriver="<%= p('db.driver') %>" --dbHostname="<%= database_host %>" \
+              --dbPort="<%= p('db.port') %>" --dbName="<%= p('db.name') %>" \
+              --dbUsername="<%= p('db.username') %>" --dbPassword="<%= p('db.password') %>" \
+              <% if_p('db.ca_cert') do |ca_cert| %> \
+              --dbCACertPath="./db_ca.crt" \
+              <% end %> \
+              --credhubURL="<%= p('credhub.url') %>" --uaaClientID="<%= p('credhub.uaa_client_id') %>" \
+              --uaaClientSecret="<%= p('credhub.uaa_client_secret') %>" \
+              --storeID="<%= p('store_id') %>"

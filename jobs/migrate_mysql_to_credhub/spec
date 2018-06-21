@@ -1,0 +1,44 @@
+---
+name: migrate_mysql_to_credhub
+
+templates:
+  run.erb: bin/run
+
+packages:
+  - migrate_mysql_to_credhub
+
+consumes:
+  - name: database
+    type: database
+    optional: true
+
+properties:
+  db.driver:
+    description: 'mysql or postgres'
+    default: mysql
+  db.host:
+    description: 'database host'
+  db.port:
+    description: 'database port'
+    default: 3306
+  db.username:
+    description: 'database username'
+  db.password:
+    description: 'database password'
+  db.name:
+    description: 'database name'
+  db.ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
+  credhub.url:
+    default: ""
+    description: "(optional) CredHub URL when using CredHub to store broker state"
+  credhub.uaa_client_id:
+    default: ""
+    description: "(optional) UAA client ID when using CredHub to store broker state"
+  credhub.uaa_client_secret:
+    default: ""
+    description: "(optional) UAA client secret when using CredHub to store broker state"
+  store_id:
+    default: "nfsbroker"
+    description: "(optional) Store ID used to namespace instance details and bindings in store (CredHub only)"

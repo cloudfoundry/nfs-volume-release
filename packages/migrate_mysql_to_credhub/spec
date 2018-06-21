@@ -1,0 +1,45 @@
+---
+name: migrate_mysql_to_credhub
+
+dependencies:
+- golang-nfsvolume
+
+files:
+  - code.cloudfoundry.org/credhub-cli/credhub/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/auth/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/auth/uaa/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/credentials/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/credentials/generate/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/credentials/values/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/permissions/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/credhub/server/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/errors/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/github.com/cloudfoundry/go-socks5/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/github.com/cloudfoundry/socks5-proxy/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/github.com/hashicorp/go-version/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.h # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/curve25519/*.s # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/ed25519/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/ed25519/internal/edwards25519/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/internal/chacha20/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/poly1305/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/poly1305/*.s # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/ssh/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/context/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
+  - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
+  - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
+  - code.cloudfoundry.org/migrate_mysql_to_credhub/*.go # gosub
+  - code.cloudfoundry.org/service-broker-store/brokerstore/*.go # gosub
+  - code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims/*.go # gosub
+  - github.com/go-sql-driver/mysql/*.go # gosub
+  - github.com/gorilla/mux/*.go # gosub
+  - github.com/jessevdk/go-flags/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/*.go # gosub
+  - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
+  - golang.org/x/crypto/bcrypt/*.go # gosub
+  - golang.org/x/crypto/blowfish/*.go # gosub
