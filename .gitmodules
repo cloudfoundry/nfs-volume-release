@@ -119,3 +119,9 @@
 [submodule "src/code.cloudfoundry.org/credhub-cli"]
 	path = src/code.cloudfoundry.org/credhub-cli
 	url = https://github.com/cloudfoundry-incubator/credhub-cli
+[submodule "src/github.com/jessevdk/go-flags"]
+	path = src/github.com/jessevdk/go-flags
+	url = https://github.com/jessevdk/go-flags.git
+[submodule "src/code.cloudfoundry.org/migrate_mysql_to_credhub"]
+	path = src/code.cloudfoundry.org/migrate_mysql_to_credhub
+	url = https://github.com/cloudfoundry-incubator/migrate_mysql_to_credhub
