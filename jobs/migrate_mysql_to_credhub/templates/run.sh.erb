@@ -21,7 +21,7 @@ cf stop <%= p('app_name') %>
               --dbPort="<%= p('db.port') %>" --dbName="<%= p('db.name') %>" \
               --dbUsername="<%= p('db.username') %>" --dbPassword="<%= p('db.password') %>" \
               <% if_p('db.ca_cert') do |ca_cert| %> \
-              --dbCACertPath="./db_ca.crt" \
+              --dbCACertPath="/var/vcap/jobs/migrate_mysql_to_credhub/db_ca.crt" \
               <% end %> \
               --credhubURL="<%= p('credhub.url') %>" --uaaClientID="<%= p('credhub.uaa_client_id') %>" \
               --uaaClientSecret="<%= p('credhub.uaa_client_secret') %>" \
