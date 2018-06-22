@@ -16,7 +16,7 @@ cf stop <%= p('app_name') %>
     database_host = link('database').instances[0].address
   end
 %>
-/var/vcap/packages/migrate_mysql_to_credhub/bin/migrate \
+/var/vcap/packages/migrate_mysql_to_credhub/bin/migrate_mysql_to_credhub \
               --dbDriver="<%= p('db.driver') %>" --dbHostname="<%= database_host %>" \
               --dbPort="<%= p('db.port') %>" --dbName="<%= p('db.name') %>" \
               --dbUsername="<%= p('db.username') %>" --dbPassword="<%= p('db.password') %>" \
