@@ -1,11 +1,17 @@
 - type: replace
   path: /instance_groups/-
   value:
+    name: migrate-mysql-to-credhub
+    networks:
+    - name: default
+    stemcell: default
+    vm_type: minimal
     azs: [z1]
     lifecycle: errand
     instances: 1
     jobs:
     - name: migrate_mysql_to_credhub
+      release: nfs-volume
       properties:
         app_name: nfs-broker
         domain: ((system_domain))
@@ -25,9 +31,3 @@
           url: https://credhub.service.cf.internal:8844
           uaa_client_id: nfs-broker-credhub-client
           uaa_client_secret: ((nfs-broker-credhub-uaa-client-secret))
-      release: nfs-volume
-    name: migrate-mysql-to-credhub
-    networks:
-    - name: default
-    stemcell: default
-    vm_type: minimal
