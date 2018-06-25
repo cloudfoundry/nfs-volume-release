@@ -174,3 +174,8 @@
   value:
     name: nfs-broker-migration-test-database-password
     type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: nfs-broker-migration-test-credhub-uaa-client-secret
+    type: password
