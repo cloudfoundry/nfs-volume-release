@@ -3,7 +3,7 @@
   value:
     name: nfs-broker-migration-test
     password: ((nfs-broker-migration-test-database-password))
-    username: nfs-broker
+    username: nfs-broker-migration-test
 - type: replace
   path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/nfs-broker-migration-test-credhub-client?
   value:
@@ -44,7 +44,7 @@
             name: nfs-broker-migration-test
             password: ((nfs-broker-migration-test-database-password))
             port: 3306
-            username: nfs-broker
+            username: nfs-broker-migration-test
           services:
           - id: "671d5cae-6524-42db-ab2b-0f0e262856c8"
             name: "nfs-migration-test-mysql"
@@ -129,10 +129,10 @@
         skip_cert_verify: true
         db:
           driver: mysql
-          name: nfs-broker
+          name: nfs-broker-migration-test
           password: ((nfs-broker-migration-test-password))
           port: 3306
-          username: nfs-broker
+          username: nfs-broker-migration-test
         credhub:
           url: https://credhub.service.cf.internal:8844
           uaa_client_id: nfs-broker-migration-test-credhub-client
