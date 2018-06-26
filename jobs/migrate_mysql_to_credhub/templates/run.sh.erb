@@ -27,4 +27,7 @@ cf stop <%= p('app_name') %>
               <% end %> \
               --credhubURL="<%= p('credhub.url') %>" --uaaClientID="<%= p('credhub.uaa_client_id') %>" \
               --uaaClientSecret="<%= p('credhub.uaa_client_secret') %>" \
+              <% if_p('credhub.ca_cert') do |ca_cert| %> \
+              --credhubCACertPath="/var/vcap/jobs/migrate_mysql_to_credhub/credhub_ca.crt" \
+              <% end %> \
               --storeID="<%= p('store_id') %>"

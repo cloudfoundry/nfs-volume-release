@@ -56,6 +56,8 @@ properties:
   credhub.uaa_client_secret:
     default: ""
     description: "(optional) UAA client secret when using CredHub to store broker state"
+  credhub.ca_cert:
+    description: "(optional) CA Cert to verify CredHub SSL connection. If not included connection will not be encrypted"
   store_id:
     default: "nfsbroker"
     description: "(optional) Store ID used to namespace instance details and bindings in store (CredHub only)"

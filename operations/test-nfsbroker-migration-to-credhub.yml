@@ -130,13 +130,15 @@
         db:
           driver: mysql
           name: nfs-broker-migration-test
-          password: ((nfs-broker-migration-test-password))
+          password: ((nfs-broker-migration-test-database-password))
           port: 3306
           username: nfs-broker-migration-test
         credhub:
           url: https://credhub.service.cf.internal:8844
           uaa_client_id: nfs-broker-migration-test-credhub-client
           uaa_client_secret: ((nfs-broker-migration-test-credhub-uaa-client-secret))
+          ca_cert: |
+            ((credhub_ca.certificate))
 - type: replace
   path: /instance_groups/-
   value:
