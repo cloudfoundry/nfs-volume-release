@@ -30,4 +30,7 @@ cf stop <%= p('app_name') %>
               <% if_p('credhub.ca_cert') do |ca_cert| %> \
               --credhubCACertPath="/var/vcap/jobs/migrate_mysql_to_credhub/credhub_ca.crt" \
               <% end %> \
+              <% if_p('credhub.uaa_ca_cert') do |ca_cert| %> \
+              --uaaCACertPath="/var/vcap/jobs/migrate_mysql_to_credhub/uaa_ca.crt" \
+              <% end %> \
               --storeID="<%= p('store_id') %>"

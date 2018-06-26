@@ -31,3 +31,7 @@
           url: https://credhub.service.cf.internal:8844
           uaa_client_id: nfs-broker-credhub-client
           uaa_client_secret: ((nfs-broker-credhub-uaa-client-secret))
+          ca_cert: |
+            ((credhub_ca.certificate))
+          uaa_ca_cert: |
+            ((uaa_ca.certificate))

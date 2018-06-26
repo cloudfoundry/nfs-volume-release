@@ -49,6 +49,7 @@ case $1 in
       --dbCACertPath=/var/vcap/jobs/nfsbroker/db_ca.crt \
       --credhubURL="<%= p("nfsbroker.credhub.url") %>" \
       --credhubCACertPath=/var/vcap/jobs/nfsbroker/credhub_ca.crt \
+      --uaaCACertPath=/var/vcap/jobs/nfsbroker/uaa_ca.crt \
       --uaaClientID="<%= p("nfsbroker.credhub.uaa_client_id") %>" \
       --uaaClientSecret="<%= p("nfsbroker.credhub.uaa_client_secret") %>" \
       --storeID="<%= p("nfsbroker.store_id") %>" \

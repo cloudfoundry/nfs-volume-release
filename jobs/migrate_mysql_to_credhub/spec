@@ -5,6 +5,7 @@ templates:
   run.sh.erb: bin/run
   db_ca.crt.erb: db_ca.crt
   credhub_ca.crt.erb: credhub_ca.crt
+  uaa_ca.crt.erb: uaa_ca.crt
 
 packages:
   - migrate_mysql_to_credhub
@@ -58,7 +59,9 @@ properties:
     default: ""
     description: "(optional) UAA client secret when using CredHub to store broker state"
   credhub.ca_cert:
-    description: "(optional) CA Cert to verify credhub SSL connection. If not included connection will not be encrypted"
+    description: "(optional) CA Cert to verify credhub SSL connection"
+  credhub.uaa_ca_cert:
+    description: "(optional) CA Cert to verify UAA SSL connection when using CredHub to store broker state"
   store_id:
     default: "nfsbroker"
     description: "(optional) Store ID used to namespace instance details and bindings in store (CredHub only)"

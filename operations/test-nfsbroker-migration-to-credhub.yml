@@ -139,6 +139,8 @@
           uaa_client_secret: ((nfs-broker-migration-test-credhub-uaa-client-secret))
           ca_cert: |
             ((credhub_ca.certificate))
+          uaa_ca_cert: |
+            ((uaa_ca.certificate))
 - type: replace
   path: /instance_groups/-
   value:
