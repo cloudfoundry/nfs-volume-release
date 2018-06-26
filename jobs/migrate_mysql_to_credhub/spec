@@ -46,7 +46,6 @@ properties:
   db.name:
     description: 'Database name'
   db.ca_cert:
-    default: ""
     description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
   credhub.url:
     default: ""

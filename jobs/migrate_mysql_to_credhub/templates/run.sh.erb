@@ -3,6 +3,8 @@
 export PATH="/var/vcap/packages/cf-cli-nfsvolume/bin:$PATH"
 export CF_HOME=`pwd`/home/cf
 
+mkdir -p $CF_HOME
+
 cf api https://api.<%= p('domain') %> <% if p('skip_cert_verify') %>--skip-ssl-validation<% end %>
 cf auth <%= p('cf.admin_user') %> "<%= p('cf.admin_password') %>"
 cf target -o <%= p('organization') %> -s <%= p('space') %>
