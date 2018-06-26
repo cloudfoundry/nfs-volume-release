@@ -1,1 +1,1 @@
-<%= p("credhub.ca_cert") %>
+<% if_p("credhub.ca_cert") do |ca_cert| %><%= ca_cert %><% end %>
