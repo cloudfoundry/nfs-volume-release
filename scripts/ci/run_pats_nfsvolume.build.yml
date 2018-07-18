@@ -30,5 +30,6 @@ params:
   TEST_DOCKER_PORA: false
   TEST_MOUNT_FAIL_LOGGING: false
   PARALLEL_NODES: 4
+  TEST_ISOLATION_SEGMENT:
 run:
   path: nfs-volume-release/scripts/ci/run_pats_withsetup
