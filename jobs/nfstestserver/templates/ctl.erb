@@ -19,9 +19,7 @@ case $1 in
   start)
     mkdir -p $LOG_DIR
 
-    /etc/init.d/rpcbind start
-
-    /etc/init.d/nfs-kernel-server start \
+    service nfs-kernel-server start \
       >> $LOG_DIR/nfstestserver.stdout.log \
       2>> $LOG_DIR/nfstestserver.stderr.log
 
@@ -37,9 +35,7 @@ case $1 in
     ;;
 
   stop)
-    /etc/init.d/nfs-kernel-server stop
-
-    /etc/init.d/rpcbind stop
+    service nfs-kernel-server stop
     ;;
 
   *)
