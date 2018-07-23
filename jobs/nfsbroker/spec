@@ -84,7 +84,7 @@ properties:
       - id: Existing
         name: "Existing"
         description: "A preexisting filesystem"
-    - id: "c997f8f26-e10c-11e7-80c1-9a214cf093ae"
+    - id: "997f8f26-e10c-11e7-80c1-9a214cf093ae"
       name: "nfs-experimental"
       description: "Experimental support for NFSv3 and v4"
       bindable: true
