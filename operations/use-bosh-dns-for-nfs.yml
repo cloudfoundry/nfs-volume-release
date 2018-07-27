@@ -4,7 +4,7 @@
   value:
     domain: 'nfstestserver.service.cf.internal'
     targets:
-    - query: '*'
+    - query: *
       instance_group: nfstestserver
       deployment: cf
       network: default
@@ -14,7 +14,7 @@
   value:
     domain: 'nfstestldapserver.service.cf.internal'
     targets:
-    - query: '*'
+    - query: *
       instance_group: nfstestldapserver
       deployment: cf
       network: default
