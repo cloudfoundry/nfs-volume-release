@@ -1,11 +1,16 @@
 ---
 platform: linux
 
-rootfs_uri: docker:///cloudfoundry/diego-pipeline
+image_resource:
+  type: docker-image
+  source:
+    repository: relintdockerhubpushbot/cf-deployment-concourse-tasks
+    tag: v5.2.0
 
 inputs:
   - name: nfs-volume-release
-  - name: vars-store         # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
+  - name: persi-ci
+  - name: director-state        # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
 
 params:
   CF_USERNAME: replace-me
