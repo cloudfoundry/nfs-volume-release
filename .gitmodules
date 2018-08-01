@@ -90,10 +90,6 @@
 	path = src/github.com/go-sql-driver/mysql
 	url = https://github.com/go-sql-driver/mysql
 	branch = master
-[submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
-	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
-	url = https://github.com/DATA-DOG/go-sqlmock
-	branch = master
 [submodule "src/gopkg.in/asn1-ber.v1"]
 	path = src/gopkg.in/asn1-ber.v1
 	url = https://gopkg.in/asn1-ber.v1
@@ -108,20 +104,20 @@
 	branch = master
 [submodule "src/code.cloudfoundry.org/service-broker-store"]
 	path = src/code.cloudfoundry.org/service-broker-store
-	url = https://github.com/cloudfoundry/service-broker-store.git
-[submodule "src/github.com/hanwen/go-fuse"]
-	path = src/github.com/hanwen/go-fuse
-	url = https://github.com/hanwen/go-fuse
-	branch = master
-[submodule "src/golang.org/x/sys"]
-	path = src/golang.org/x/sys
-	url = https://go.googlesource.com/sys
+	url = https://github.com/cloudfoundry/service-broker-store
 [submodule "src/code.cloudfoundry.org/credhub-cli"]
 	path = src/code.cloudfoundry.org/credhub-cli
 	url = https://github.com/cloudfoundry-incubator/credhub-cli
-[submodule "src/github.com/jessevdk/go-flags"]
-	path = src/github.com/jessevdk/go-flags
-	url = https://github.com/jessevdk/go-flags.git
+[submodule "src/github.com/zbiljic/go-filelock"]
+	path = src/github.com/zbiljic/go-filelock
+	url = https://github.com/zbiljic/go-filelock
+	branch = master
 [submodule "src/code.cloudfoundry.org/migrate_mysql_to_credhub"]
 	path = src/code.cloudfoundry.org/migrate_mysql_to_credhub
 	url = https://github.com/cloudfoundry/migrate_mysql_to_credhub
+[submodule "src/github.com/jessevdk/go-flags"]
+	path = src/github.com/jessevdk/go-flags
+	url = https://github.com/jessevdk/go-flags
+[submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
+	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
+	url = https://github.com/DATA-DOG/go-sqlmock
