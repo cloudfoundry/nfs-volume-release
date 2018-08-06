@@ -1,0 +1,17 @@
+dn: uid=user2000,ou=Users,dc=domain,dc=com
+changetype: add
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: User
+cn: user2000
+uid: user2000
+uidNumber: 2000
+homeDirectory: /home/eve
+loginShell: /bin/bash
+gecos: eve
+userPassword: secret2
+shadowLastChange: 0
+shadowMax: 0
+shadowWarning: 0
