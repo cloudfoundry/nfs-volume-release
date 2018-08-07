@@ -10,7 +10,6 @@ templates:
   config/core.schema: config/core.schema
   config/addou.ldif: config/addou.ldif
   config/adduser.ldif: config/adduser.ldif
-  config/adduser_missing_gid.ldif: config/adduser_missing_gid.ldif
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   slapd.ldif.erb: config/slapd.ldif
