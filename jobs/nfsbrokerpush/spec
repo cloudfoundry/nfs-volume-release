@@ -40,6 +40,9 @@ properties:
   nfsbrokerpush.memory_in_mb:
     description: 'amount of memory allocated to the broker app'
     default: 256
+  nfsbrokerpush.stack:
+    description: 'the stack to use when pushing the broker app'
+    default: cflinuxfs2
   nfsbrokerpush.username:
     description: 'service broker username'
   nfsbrokerpush.password:

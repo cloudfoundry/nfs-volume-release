@@ -101,7 +101,7 @@ function push_app() {
 
   pushd /var/vcap/packages/nfsbroker > /dev/null
     set +e
-      cf push "${APP_NAME}" -i 1
+      cf push "${APP_NAME}" -i 1 -s <%= p(nfsbrokerpush.stack) %>
       exit_code=$?
     set -e
 
