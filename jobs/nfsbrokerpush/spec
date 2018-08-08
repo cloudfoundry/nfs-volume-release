@@ -30,6 +30,10 @@ properties:
     description: 'username of the CF admin user'
   nfsbrokerpush.cf.admin_password:
     description: 'password of the CF admin user'
+  nfsbrokerpush.cf.client_id:
+    description: 'ID of the CF client'
+  nfsbrokerpush.cf.client_secret:
+    description: 'Secret of the CF client'
   nfsbrokerpush.cf.dial_timeout:
     description: 'CF CLI connection dial timeout'
     default: 5

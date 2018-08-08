@@ -6,8 +6,6 @@ export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
 SCHEME=https
 DOMAIN=<%= p('nfsbrokerpush.domain') %>
-ADMIN_USER=<%= p('nfsbrokerpush.cf.admin_user') %>
-ADMIN_PASSWORD="<%= p('nfsbrokerpush.cf.admin_password') %>"
 API_ENDPOINT=$SCHEME://api.$DOMAIN
 ORG=<%= p('nfsbrokerpush.organization') %>
 SPACE=<%= p('nfsbrokerpush.space') %>
@@ -31,7 +29,11 @@ DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
   cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
-  cf auth $ADMIN_USER "$ADMIN_PASSWORD"
+  <% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
+    cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+  <% end.else do %>
+    cf auth "<%= p('nfsbrokerpush.cf.admin_user') %>" "<%= p('nfsbrokerpush.cf.admin_password') %>"
+  <% end %>
   cf create-org $ORG
   cf target -o $ORG
   cf create-space $SPACE
