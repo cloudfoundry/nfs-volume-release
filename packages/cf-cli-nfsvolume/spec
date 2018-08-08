@@ -1,7 +1,0 @@
----
-name: cf-cli-nfsvolume
-
-dependencies:
-
-files:
-  - cf-cli_*.tgz

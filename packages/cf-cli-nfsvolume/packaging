@@ -1,6 +1,0 @@
-# abort script on any command that exits with a non zero value
-set -e
-
-mkdir -p ${BOSH_INSTALL_TARGET}/bin
-tar zxvf cf-cli_6.23.1_linux_x86-64.tgz
-cp cf ${BOSH_INSTALL_TARGET}/bin/

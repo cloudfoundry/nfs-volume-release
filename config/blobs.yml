@@ -10,10 +10,6 @@ berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
-cf-cli_6.23.1_linux_x86-64.tgz:
-  size: 6692717
-  object_id: 53270c4b-ab0d-4f23-ba1b-384e04631c60
-  sha: a195e99cae5ab17b453b0a0747508c8f3eee5cae
 fuse-2.9.2.tar.gz:
   size: 560123
   object_id: 3194fa81-68be-4b39-bc88-1786b2f95f4a

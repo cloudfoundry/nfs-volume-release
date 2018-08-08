@@ -14,7 +14,6 @@ templates:
 packages:
   - nfsbroker
   - golang-nfsvolume
-  - cf-cli-nfsvolume
 
 consumes:
   - name: database
