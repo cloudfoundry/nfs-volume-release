@@ -14,12 +14,6 @@
     authorized-grant-types: client_credentials
     secret: ((nfs-broker-credhub-uaa-client-secret))
 - type: replace
-  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/nfs-broker-push-credhub-client?
-  value:
-    authorities: cloud_controller.read,cloud_controller.write
-    authorized-grant-types: client_credentials
-    secret: ((nfs-broker-push-credhub-uaa-client-secret))
-- type: replace
   path: /instance_groups/-
   value:
     azs: [z1]
@@ -36,8 +30,8 @@
           create_sql_security_group: false
           create_credhub_security_group: true
           cf:
-            client_id: nfs-broker-push-credhub-client
-            client_secret: ((nfs-broker-push-credhub-uaa-client-secret))
+            admin_password: ((cf_admin_password))
+            admin_user: admin
           organization: system
           space: nfs-broker-space
           password: ((nfs-broker-credhub-password))
@@ -124,11 +118,6 @@
   path: /variables/-
   value:
     name: nfs-broker-credhub-uaa-client-secret
-    type: password
-- type: replace
-  path: /variables/-
-  value:
-    name: nfs-broker-push-credhub-uaa-client-secret
     type: password
 
 - type: replace
