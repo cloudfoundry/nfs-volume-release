@@ -1,12 +1,16 @@
 #!/bin/bash -exu
 
-export PATH="/var/vcap/packages/cf-cli-nfsvolume/bin:$PATH"
+export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
 export CF_HOME=`pwd`/home/cf
 
 mkdir -p $CF_HOME
 
 cf api https://api.<%= p('domain') %> <% if p('skip_cert_verify') %>--skip-ssl-validation<% end %>
-cf auth <%= p('cf.admin_user') %> "<%= p('cf.admin_password') %>"
+<% if_p('cf.client_id', 'cf.client_secret') do |client_id, client_secret| %>
+  cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+<% end.else do %>
+  cf auth "<%= p('cf.admin_user') %>" "<%= p('cf.admin_password') %>"
+<% end %>
 cf target -o <%= p('organization') %> -s <%= p('space') %>
 cf stop <%= p('app_name') %>
 

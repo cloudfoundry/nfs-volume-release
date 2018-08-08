@@ -9,7 +9,6 @@ templates:
 
 packages:
   - migrate_mysql_to_credhub
-  - cf-cli-nfsvolume
 
 consumes:
   - name: database
@@ -23,6 +22,10 @@ properties:
     description: 'Username of the CF admin user'
   cf.admin_password:
     description: 'Password of the CF admin user'
+  cf.client_id:
+    description: 'ID of the CF client'
+  cf.client_secret:
+    description: 'Secret of the CF client'
   organization:
     description: 'Organization that hosts the app'
   space:
