@@ -148,33 +148,6 @@
     - name: cf-cli-6-linux
       release: cf-cli
 - type: replace
-  path: /instance_groups/-
-  value:
-    name: nfs-broker-registrar-migration-test
-    networks:
-    - name: default
-    stemcell: default
-    vm_type: minimal
-    azs:
-    - z1
-    instances: 1
-    lifecycle: errand
-    jobs:
-    - name: broker-registrar
-      release: broker-registrar
-      properties:
-        cf:
-          api_url: api.((system_domain))
-          password: ((cf_admin_password))
-          skip_ssl_validation: true
-          username: admin
-        servicebroker:
-          name: nfs-broker-migration-test
-          password: ((nfs-broker-migration-test-password))
-          url: http://nfs-broker-migration-test.((system_domain))
-          username: nfs-broker
-
-- type: replace
   path: /variables/-
   value:
     name: nfs-broker-migration-test-password
