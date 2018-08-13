@@ -21,10 +21,10 @@ params:
   NAME_PREFIX: efsvolume
   SERVICE_NAME: replace-me
   PLAN_NAME: replace-me
-  BROKER_URL: replace-me
-  BROKER_USER: replace-me
+  BROKER_URL:
+  BROKER_USER:
   BROKER_PASSWORD:
-  BROKER_PASSWORD_KEY: nfs-broker-password
+  BROKER_PASSWORD_KEY:
   CREATE_CONFIG:
   CREATE_BOGUS_CONFIG:
   BIND_CONFIG:

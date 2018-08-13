@@ -20,8 +20,6 @@ check_param CF_API_ENDPOINT
 check_param APPS_DOMAIN
 check_param SERVICE_NAME
 check_param PLAN_NAME
-check_param BROKER_URL
-check_param BROKER_USER
 check_param SERVER_ADDRESS
 check_param SHARE
 check_param CREATE_CONFIG
@@ -50,7 +48,7 @@ if [ -z "$CF_PASSWORD" ]; then
     CF_PASSWORD=`credhub find -j -n ${bosh_manifest_password_variable_name} | jq -r .credentials[].name | xargs credhub get -j -n | jq -r .value`
 fi
 
-if [ -z "$BROKER_PASSWORD" ]; then
+if [ ! -z "$BROKER_PASSWORD_KEY" ]; then
     ${root_path}/persi-ci/scripts/ci/bbl_get_bosh_env
     source bosh-env/set-env.sh
 
