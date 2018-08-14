@@ -56,7 +56,7 @@
               name: "Existing"
               description: "A preexisting filesystem"
           - id: "d8ab29a9-81d0-4e45-afcd-fb9ed858ccf4"
-            name: "nfs-experimental"
+            name: "nfs-credhub-experimental"
             description: "Experimental support for NFSv3 and v4 with CredHub as a store"
             bindable: true
             plan_updatable: false
