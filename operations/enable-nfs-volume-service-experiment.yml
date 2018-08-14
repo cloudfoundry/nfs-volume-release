@@ -34,6 +34,7 @@
           space: nfs-broker-space
           password: ((nfs-broker-password))
           username: nfs-broker
+          broker_name: nfs-experimental-broker
           syslog_url: ""
           skip_cert_verify: true
           db:

@@ -10,7 +10,7 @@ API_ENDPOINT=$SCHEME://api.$DOMAIN
 ORG=<%= p('nfsbrokerpush.organization') %>
 SPACE=<%= p('nfsbrokerpush.space') %>
 APP_NAME=<%= p('nfsbrokerpush.app_name') %>
-SERVICE_BROKER_NAME=nfsbroker
+SERVICE_BROKER_NAME=<%= p('nfsbrokerpush.broker_name') %>
 SERVICES_CONFIG=/var/vcap/jobs/nfsbrokerpush/config/services.json
 SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml

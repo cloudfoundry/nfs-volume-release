@@ -36,6 +36,7 @@
           space: nfs-broker-space
           password: ((nfs-broker-credhub-password))
           username: nfs-broker
+          broker_name: nfs-credhub-broker
           syslog_url: ""
           skip_cert_verify: true
           credhub:
