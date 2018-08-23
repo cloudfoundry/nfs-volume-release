@@ -31,7 +31,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 #### prepare for acceptance
 ######################################################################################
 
-pushd nfs-volume-release-concourse-tasks
+pushd nfs-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
 
