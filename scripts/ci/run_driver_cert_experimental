@@ -27,7 +27,7 @@ popd
 service rpcbind start || true
 sleep 5
 
-pushd nfs-volume-release
+pushd nfs-volume-release-concourse-tasks
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
 

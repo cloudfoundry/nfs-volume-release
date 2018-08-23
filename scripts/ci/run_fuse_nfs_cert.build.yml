@@ -8,6 +8,7 @@ image_resource:
     tag: latest
 
 inputs:
+  - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
   - name: lib-nfs
   - name: fuse-nfs
@@ -17,4 +18,4 @@ params:
   - NFS_MOUNT: ~
 
 run:
-  path: nfs-volume-release/scripts/ci/run_fuse_nfs_cert
+  path: nfs-volume-release-concourse-tasks/scripts/ci/run_fuse_nfs_cert

@@ -4,6 +4,7 @@ platform: linux
 rootfs_uri: docker:///cloudfoundry/diego-pipeline
 
 inputs:
+  - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
   - name: nfs-volume-version
 
@@ -13,4 +14,4 @@ outputs:
 params: []
 
 run:
-  path: nfs-volume-release/scripts/ci/create_nfs_volume_release
+  path: nfs-volume-release-concourse-tasks/scripts/ci/create_nfs_volume_release

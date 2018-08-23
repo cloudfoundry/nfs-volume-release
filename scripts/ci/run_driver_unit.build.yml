@@ -4,7 +4,8 @@ platform: linux
 rootfs_uri: docker:///cloudfoundry/inigo-ci
 
 inputs:
+  - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
 
 run:
-  path: nfs-volume-release/scripts/ci/run_driver_unit
+  path: nfs-volume-release-concourse-tasks/scripts/ci/run_driver_unit

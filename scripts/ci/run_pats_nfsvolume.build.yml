@@ -8,6 +8,7 @@ image_resource:
     tag: v5.15.0
 
 inputs:
+  - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
   - name: persi-ci
   - name: director-state        # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
@@ -38,4 +39,4 @@ params:
   PARALLEL_NODES: 15
   TEST_ISOLATION_SEGMENT:
 run:
-  path: nfs-volume-release/scripts/ci/run_pats_withsetup
+  path: nfs-volume-release-concourse-tasks/scripts/ci/run_pats_withsetup

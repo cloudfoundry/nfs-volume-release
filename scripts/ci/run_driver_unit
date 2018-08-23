@@ -3,7 +3,7 @@
 
 set -e
 
-cd nfs-volume-release/
+cd nfs-volume-release-concourse-tasks
 
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
