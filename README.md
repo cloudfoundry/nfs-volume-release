@@ -14,6 +14,8 @@ The test NFS and LDAP servers provide easy test targets with which you can try o
 
 As of version 1.2.0 we no longer support old cf-release deployments with bosh v1 manifests.  Nfs-volume-release jobs should be added to your cf-deployment using provided ops files.
 
+Please note that the following steps will not work with bosh-lite.
+
 ## Pre-requisites
 
 1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Overview of Deploying Cloud Foundry](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
