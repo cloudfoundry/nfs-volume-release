@@ -1,0 +1,13 @@
+---
+processes:
+- name: nfsv3driver
+  executable: /var/vcap/jobs/nfsv3driver/bin/start.sh
+  unsafe:
+    privileged: true
+  limits:
+    open_files: 100000
+  additional_volumes:
+    - path: "<%= p("nfsv3driver.cell_mount_path") %>"
+      writable: true
+    - path: "<%= p("nfsv3driver.driver_path") %>"
+      writable: true

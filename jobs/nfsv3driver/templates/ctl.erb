@@ -3,68 +3,29 @@
 set -e
 
 RUN_DIR=/var/vcap/sys/run/nfsv3driver
-LOG_DIR=/var/vcap/sys/log/nfsv3driver
 PIDFILE=$RUN_DIR/nfsv3driver.pid
 
 SCRIPT=$(basename $0)
 mkdir -p /var/vcap/sys/log/monit
 
-exec 1>> /var/vcap/sys/log/monit/$SCRIPT.log
-exec 2>> /var/vcap/sys/log/monit/$SCRIPT.err.log
+exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
+exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
 
 echo "------------ `basename $0` $* at `date` --------------" | tee /dev/stderr
 
 case $1 in
 
   start)
-    mkdir -p $RUN_DIR
-    chown -R vcap:vcap $RUN_DIR
-
-    mkdir -p $LOG_DIR
-    chown -R vcap:vcap $LOG_DIR
-
-    mkdir -p /var/vcap/data/voldrivers
-    chmod 777 /var/vcap/data/voldrivers
+    mkdir -p "<%= p("nfsv3driver.driver_path") %>"
+    chmod 777 "<%= p("nfsv3driver.driver_path") %>"
 
     mkdir -p "<%= p("nfsv3driver.cell_mount_path") %>"
     chown vcap:vcap "<%= p("nfsv3driver.cell_mount_path") %>"
 
-    export GOMAXPROCS=$(nproc)
-
-    # Work around for GOLANG 1.5.3 DNS bug
-    export GODEBUG=netdns=cgo
-
-    echo $$ > $PIDFILE
-
     # Allowed number of open file descriptors
     ulimit -n 100000
 
-    export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
-    source /var/vcap/packages/mapfs/runtime.env
-
-    # ldap connection and credential info are passed via environment
-    export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
-    export LDAP_SVC_PASS="<%= p("nfsv3driver.ldap_svc_password") %>"
-    export LDAP_HOST="<%= p("nfsv3driver.ldap_host") %>"
-    export LDAP_PORT="<%= p("nfsv3driver.ldap_port") %>"
-    export LDAP_PROTO="<%= p("nfsv3driver.ldap_proto") %>"
-    export LDAP_USER_FQDN="<%= p("nfsv3driver.ldap_user_fqdn") %>"
-    export LDAP_CA_CERT="<%= p("nfsv3driver.ldap_ca_cert") %>"
-
-    exec chpst /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
-      --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
-      --transport="tcp" \
-      --debugAddr="<%= p("nfsv3driver.debug_addr") %>" \
-      --adminAddr="<%= p("nfsv3driver.admin_addr") %>" \
-      --driversPath="<%= p("nfsv3driver.driver_path") %>" \
-      --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
-      --logLevel="<%= p("nfsv3driver.log_level") %>" \
-      --allowed-in-source="<%= p("nfsv3driver.allowed-in-source") %>" \
-      --default-in-source="<%= p("nfsv3driver.default-in-source") %>" \
-      --allowed-in-mount="<%= p("nfsv3driver.allowed-in-mount") %>" \
-      --default-in-mount="<%= p("nfsv3driver.default-in-mount") %>" \
-      >> $LOG_DIR/nfsv3driver.stdout.log \
-      2>> $LOG_DIR/nfsv3driver.stderr.log
+    exec chpst /var/vcap/jobs/nfsv3driver/bin/start.sh
 
     ;;
 

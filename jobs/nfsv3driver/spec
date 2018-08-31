@@ -2,8 +2,10 @@
 name: nfsv3driver
 
 templates:
+  bpm.yml.erb: config/bpm.yml
   install.erb: bin/pre-start
   ctl.erb: bin/nfsv3driver_ctl
+  start.sh.erb: bin/start.sh
   drain.erb: bin/drain
 
 packages:
@@ -12,6 +14,9 @@ packages:
 - nfsv3driver
 
 properties:
+ bpm.enabled:
+   description: "Experimental: use the BOSH Process Manager to manage the nfsv3driver process."
+   default: false
  nfsv3driver.listen_addr:
     description: "address nfsv3driver listens on"
     default: "127.0.0.1:7589"
