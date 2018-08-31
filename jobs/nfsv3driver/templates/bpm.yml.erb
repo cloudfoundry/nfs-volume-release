@@ -9,5 +9,6 @@ processes:
   additional_volumes:
     - path: "<%= p("nfsv3driver.cell_mount_path") %>"
       writable: true
+      shared: true
     - path: "<%= p("nfsv3driver.driver_path") %>"
       writable: true
