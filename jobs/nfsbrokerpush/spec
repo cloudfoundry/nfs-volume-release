@@ -23,7 +23,7 @@ consumes:
 properties:
   nfsbrokerpush.domain:
     description: 'Cloud Foundry system domain'
-  nfsbrokerpush.a`/cpp_domain:
+  nfsbrokerpush.app_domain:
     description: 'domain used to host the broker app'
   nfsbrokerpush.cf.admin_user:
     description: 'username of the CF admin user'
