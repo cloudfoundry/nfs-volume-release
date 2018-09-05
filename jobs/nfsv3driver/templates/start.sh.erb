@@ -20,7 +20,6 @@ export GOMAXPROCS=$(nproc)
 export GODEBUG=netdns=cgo
 
 export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
-source /var/vcap/packages/mapfs/runtime.env
 
 # ldap connection and credential info are passed via environment
 export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
@@ -39,6 +38,7 @@ export LDAP_CA_CERT="<%= p("nfsv3driver.ldap_ca_cert") %>"
   --driversPath="<%= p("nfsv3driver.driver_path") %>" \
   --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
   --logLevel="<%= p("nfsv3driver.log_level") %>" \
+  --mapfsPath="<%= link("mapfs").p("path") %>" \
   --allowed-in-source="<%= p("nfsv3driver.allowed-in-source") %>" \
   --default-in-source="<%= p("nfsv3driver.default-in-source") %>" \
   --allowed-in-mount="<%= p("nfsv3driver.allowed-in-mount") %>" \
