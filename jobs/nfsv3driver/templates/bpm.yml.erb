@@ -4,6 +4,10 @@ processes:
   executable: /var/vcap/jobs/nfsv3driver/bin/start.sh
   unsafe:
     privileged: true
+    unrestricted_volumes:
+    - path: /dev/fuse
+      allow_executions: true
+      mount_only: true
   limits:
     open_files: 100000
   additional_volumes:
