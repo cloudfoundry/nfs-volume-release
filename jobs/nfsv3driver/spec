@@ -18,69 +18,69 @@ consumes:
   type: mapfs
 
 properties:
- bpm.enabled:
-   description: "Experimental: use the BOSH Process Manager to manage the nfsv3driver process."
-   default: false
- nfsv3driver.listen_addr:
-    description: "address nfsv3driver listens on"
-    default: "127.0.0.1:7589"
- nfsv3driver.debug_addr:
-   description: "address nfsv3driver will serve debug info"
-   default: "127.0.0.1:7689"
- nfsv3driver.admin_addr:
-    description: "address nfsv3driver listens on for admin requests"
-    default: "127.0.0.1:7590"
- nfsv3driver.driver_path:
-   description: "path to place driver spec/json file for volman to discover"
-   default: "/var/vcap/data/voldrivers"
- nfsv3driver.cell_mount_path:
-   description: "path to mount volumes into on the cell"
-   default: "/var/vcap/data/volumes/nfs"
- nfsv3driver.log_level:
-   description: "nfsv3driver log level"
-   default: "info"
- nfsv3driver.disable:
-   description: "disable nfsv3driver"
-   default: false
- nfsv3driver.allowed-in-source:
-   description: "Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params"
-   example: "uid,gid,auto-traverse-mounts,dircache"
-   default: "uid,gid"
- nfsv3driver.default-in-source:
-   description: "Comma separated list of default values for options in the source URL query params, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be applied."
-   example: "uid:1000,gid=1000,auto-traverse-mounts=1"
-   default: ""
- nfsv3driver.allowed-in-mount:
-   description: "Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
-   example: "allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,sloppy_mount,fsname,version"
-   default: "auto_cache,version"
- nfsv3driver.default-in-mount:
-   description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
-   example: "allow_root:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true,version:4.1"
-   default: "auto_cache:true"
- nfsv3driver.ldap_svc_user:
-   description: "ldap service account user name (required for LDAP integration only)"
-   default: ""
- nfsv3driver.ldap_svc_password:
-   description: "ldap service account password (required for LDAP integration only)"
-   default: ""
- nfsv3driver.ldap_host:
-   description: "ldap server host name or ip address (required for LDAP integration only)"
-   default: ""
- nfsv3driver.ldap_port:
-   description: "ldap server port (required for LDAP integration only)"
-   default: 389
- nfsv3driver.ldap_proto:
-   description: "ldap server protocol (required for LDAP integration only)"
-   default: tcp
- nfsv3driver.ldap_user_fqdn:
-   description: "ldap fqdn for user records we will search against when looking up user uids (required for LDAP integration only)"
-   example: "cn=Users,dc=corp,dc=test,dc=com"
-   default: ""
- nfsv3driver.ldap_ca_cert:
-   description: "ldap server CA certificate. If not provided driver will be connecting to LDAP server without TLS"
-   example: "|
-     -----BEGIN CERTIFICATE-----
-     ...
-     -----END CERTIFICATE-----"
-   default: ""
+  bpm.enabled:
+    description: "Experimental: use the BOSH Process Manager to manage the nfsv3driver process."
+    default: false
+  nfsv3driver.listen_addr:
+     description: "address nfsv3driver listens on"
+     default: "127.0.0.1:7589"
+  nfsv3driver.debug_addr:
+    description: "address nfsv3driver will serve debug info"
+    default: "127.0.0.1:7689"
+  nfsv3driver.admin_addr:
+     description: "address nfsv3driver listens on for admin requests"
+     default: "127.0.0.1:7590"
+  nfsv3driver.driver_path:
+    description: "path to place driver spec/json file for volman to discover"
+    default: "/var/vcap/data/voldrivers"
+  nfsv3driver.cell_mount_path:
+    description: "path to mount volumes into on the cell"
+    default: "/var/vcap/data/volumes/nfs"
+  nfsv3driver.log_level:
+    description: "nfsv3driver log level"
+    default: "info"
+  nfsv3driver.disable:
+    description: "disable nfsv3driver"
+    default: false
+  nfsv3driver.allowed-in-source:
+    description: "Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params"
+    example: "uid,gid,auto-traverse-mounts,dircache"
+    default: "uid,gid"
+  nfsv3driver.default-in-source:
+    description: "Comma separated list of default values for options in the source URL query params, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be applied."
+    example: "uid:1000,gid=1000,auto-traverse-mounts=1"
+    default: ""
+  nfsv3driver.allowed-in-mount:
+    description: "Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
+    example: "allow_root,allow_other,nfs_uid,nfs_gid,auto_cache,sloppy_mount,fsname,version"
+    default: "auto_cache,version"
+  nfsv3driver.default-in-mount:
+    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
+    example: "allow_root:false,nfs_uid:2000,nfs_gid:2000,auto_cache:true,sloppy_mount:true,version:4.1"
+    default: "auto_cache:true"
+  nfsv3driver.ldap_svc_user:
+    description: "ldap service account user name (required for LDAP integration only)"
+    default: ""
+  nfsv3driver.ldap_svc_password:
+    description: "ldap service account password (required for LDAP integration only)"
+    default: ""
+  nfsv3driver.ldap_host:
+    description: "ldap server host name or ip address (required for LDAP integration only)"
+    default: ""
+  nfsv3driver.ldap_port:
+    description: "ldap server port (required for LDAP integration only)"
+    default: 389
+  nfsv3driver.ldap_proto:
+    description: "ldap server protocol (required for LDAP integration only)"
+    default: tcp
+  nfsv3driver.ldap_user_fqdn:
+    description: "ldap fqdn for user records we will search against when looking up user uids (required for LDAP integration only)"
+    example: "cn=Users,dc=corp,dc=test,dc=com"
+    default: ""
+  nfsv3driver.ldap_ca_cert:
+    description: "ldap server CA certificate. If not provided driver will be connecting to LDAP server without TLS"
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+    default: ""
