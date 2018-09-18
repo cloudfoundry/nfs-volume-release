@@ -30,9 +30,15 @@ export LDAP_PROTO="<%= p("nfsv3driver.ldap_proto") %>"
 export LDAP_USER_FQDN="<%= p("nfsv3driver.ldap_user_fqdn") %>"
 export LDAP_CA_CERT="<%= p("nfsv3driver.ldap_ca_cert") %>"
 
+ENABLE_UNIQUE_VOLUME_IDS=""
+<% if p("nfsv3driver.enable_unique_volume_ids") %>
+ENABLE_UNIQUE_VOLUME_IDS="--uniqueVolumeIds"
+<% end %>
+
 /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
-  --transport="tcp" \
+  --transport="tcp-json" \
+  ${ENABLE_UNIQUE_VOLUME_IDS} \
   --debugAddr="<%= p("nfsv3driver.debug_addr") %>" \
   --adminAddr="<%= p("nfsv3driver.admin_addr") %>" \
   --driversPath="<%= p("nfsv3driver.driver_path") %>" \
