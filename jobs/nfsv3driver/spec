@@ -84,6 +84,6 @@ properties:
       ...
       -----END CERTIFICATE-----"
     default: ""
-  nfsv3driver.enable_unique_volume_ds:
+  nfsv3driver.enable_unique_volume_ids:
     description: "opt-in to unique volume IDs"
     default: true
