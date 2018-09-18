@@ -29,7 +29,6 @@ var _ = Describe("Certify with: ", func() {
 		err        error
 
 		output []byte
-		attrs  syscall.SysProcAttr
 
 		source     string
 		mountPoint string
@@ -49,13 +48,6 @@ var _ = Describe("Certify with: ", func() {
 
 		mountPoint = os.Getenv("NFS_MOUNT")
 		Expect(source).NotTo(Equal(""))
-
-		attrs = syscall.SysProcAttr{
-			Credential: &syscall.Credential{
-				Uid: PCAP,
-				Gid: PCAP,
-			},
-		}
 
 		filename = randomString(10)
 	})
