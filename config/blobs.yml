@@ -18,10 +18,10 @@ fuse-nfs.tar.gz:
   size: 97950
   object_id: 82c7526c-d4e3-40d9-88d3-6925081883bb
   sha: 7d3a9ea3a737e12a4a7512dbaac9c9c6a00cc7bb
-go1.10.linux-amd64.tar.gz:
-  size: 119905205
-  object_id: 5259f8b6-2f58-4738-6502-fd42697cf97d
-  sha: 693e2dfd99ef2d608b41c450efd9d277bf2a7f2f
+go1.11.linux-amd64.tar.gz:
+  size: 127163815
+  object_id: 0c8cb4ba-df09-4892-58fe-c772fae4eda8
+  sha: 8ffb718cab4371df3495d8f6c0b15c7e6dc28fea
 libnfs-1.11.0.tar.gz:
   size: 2590449
   object_id: e5211f5a-a5d9-43ac-a134-402926ae1485
