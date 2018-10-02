@@ -112,8 +112,8 @@ properties:
     description: "List of services and plans supported by broker"
     default:
     - id: nfsbroker
-      name: "nfs"
-      description: "Existing NFSv3 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
+      name: "nfs-legacy"
+      description: "Existing NFSv3 volumes (Deprecated)"
       bindable: true
       plan_updatable: false
       tags: ["nfs"]
@@ -123,8 +123,8 @@ properties:
         name: "Existing"
         description: "A preexisting filesystem"
     - id: "997f8f26-e10c-11e7-80c1-9a214cf093ae"
-      name: "nfs-experimental"
-      description: "Experimental support for NFSv3 and v4"
+      name: "nfs"
+      description: "Existing NFSv3 and v4 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
       bindable: true
       plan_updatable: false
       tags: ["nfs", "experimental"]
