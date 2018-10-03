@@ -17,14 +17,14 @@
   path: /instance_groups/name=credhub/jobs/name=credhub/properties/credhub/authorization/permissions/-
   value:
     actors:
-      - uaa-client:nfs-broker-credhub-client
-      operations:
-      - read
-      - write
-      - delete
-      - read_acl
-      - write_acl
-      path: /*
+    - uaa-client:nfs-broker-credhub-client
+    operations:
+    - read
+    - write
+    - delete
+    - read_acl
+    - write_acl
+    path: /*
 - type: replace
   path: /instance_groups/-
   value:
