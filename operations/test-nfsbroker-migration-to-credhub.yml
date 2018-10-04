@@ -11,6 +11,18 @@
     authorized-grant-types: client_credentials
     secret: ((nfs-broker-migration-test-credhub-uaa-client-secret))
 - type: replace
+  path: /instance_groups/name=credhub/jobs/name=credhub/properties/credhub/authorization/permissions/-
+  value:
+    actors:
+    - uaa-client:nfs-broker-migration-test-credhub-client
+    operations:
+    - read
+    - write
+    - delete
+    - read_acl
+    - write_acl
+    path: /nfsbroker/*
+- type: replace
   path: /instance_groups/-
   value:
     name: nfs-broker-migration-test-mysql-push
@@ -57,6 +69,7 @@
             - id: "c4bfb829-b172-49a5-88a0-2198e883ad68"
               name: "Existing"
               description: "A preexisting filesystem"
+          store_id: nfsbroker
     - name: cf-cli-6-linux
       release: cf-cli
 - type: replace
