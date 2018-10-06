@@ -8,19 +8,17 @@
     vm_type: small
     networks: [ name: default ]
     jobs:
-    - name: consul_agent
-      release: consul
-      consumes:
-        consul_common: {from: consul_common_link}
-        consul_server: nil
-        consul_client: {from: consul_client_link}
-      properties:
-        consul:
-          agent:
-            services:
-              nfstestldapserver:
-                name: nfstestldapserver
-                check: {}
     - name: nfstestldapserver
       release: nfs-volume
       properties: {}
+
+- type: replace
+  path: /addons/name=bosh-dns-aliases/jobs/name=bosh-dns-aliases/properties/aliases/domain=nfstestldapserver.service.cf.internal?
+  value:
+    domain: nfstestldapserver.service.cf.internal
+    targets:
+      query: '*'
+      instance_group: nfstestldapserver
+      deployment: cf
+      network: default
+      domain: bosh
