@@ -23,7 +23,7 @@
   value:
     domain: nfstestldapserver.service.cf.internal
     targets:
-      query: '*'
+    - query: '*'
       instance_group: nfstestldapserver
       deployment: cf
       network: default

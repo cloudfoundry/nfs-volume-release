@@ -18,7 +18,7 @@
   value:
     domain: nfstestserver.service.cf.internal
     targets:
-      query: '*'
+    - query: '*'
       instance_group: nfstestserver
       deployment: cf
       network: default
