@@ -56,6 +56,8 @@ case $1 in
       --allowedOptions="<%= p("nfsbroker.allowed_options") %>" \
       --defaultOptions="<%= p("nfsbroker.default_options") %>" \
       --servicesConfig=/var/vcap/jobs/nfsbroker/config/services.json \
+      --logLevel="<%= p("nfsbroker.log_level") %>" \
+      --logFormat="<%= p("nfsbroker.log_format") %>" \
       >> $LOG_DIR/nfsbroker.stdout.log \
       2>> $LOG_DIR/nfsbroker.stderr.log
     ;;

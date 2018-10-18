@@ -39,6 +39,9 @@ properties:
   nfsv3driver.log_level:
     description: "nfsv3driver log level"
     default: "info"
+  nfsv3driver.log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"
   nfsv3driver.disable:
     description: "disable nfsv3driver"
     default: false

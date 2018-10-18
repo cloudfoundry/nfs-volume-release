@@ -133,3 +133,9 @@ properties:
       - id: 09a09260-1df5-4445-9ed7-1ba56dadbbc8
         name: "Existing"
         description: "A preexisting filesystem"
+  nfsbrokerpush.log_level:
+    description: "nfsbroker log level"
+    default: "info"
+  nfsbrokerpush.log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"

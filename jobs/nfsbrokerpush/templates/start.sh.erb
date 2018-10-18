@@ -14,17 +14,23 @@
     allowed_options = 'auto_cache,uid,gid,username,password,version'
   end
 %>
-bin/nfsbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
+bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
+              --servicesConfig="./services.json" \
               <% if_p('nfsbrokerpush.db.driver', 'nfsbrokerpush.db.port', 'nfsbrokerpush.db.name') do |db_driver, db_port, db_name| %> \
-              --dbDriver="<%= db_driver %>" --dbHostname="<%= database_host %>" \
-              --dbPort="<%= db_port %>" --dbName="<%= db_name %>" \
+              --dbDriver="<%= db_driver %>" \
+              --dbHostname="<%= database_host %>" \
+              --dbPort="<%= db_port %>" \
+              --dbName="<%= db_name %>" \
               <% end %> \
               <% if_p('nfsbrokerpush.credhub.url', 'nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |credhub_url, uaa_client_id, uaa_client_secret| %> \
-              --credhubURL="<%= credhub_url %>" --uaaClientID="<%= uaa_client_id %>" \
+              --credhubURL="<%= credhub_url %>" \
+              --uaaClientID="<%= uaa_client_id %>" \
               --uaaClientSecret="<%= uaa_client_secret %>" \
               <% end %> \
               --storeID="<%= p('nfsbrokerpush.store_id') %>" \
-              --logLevel="info" --allowedOptions="<%= allowed_options %>" \
+              --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
+              --logFormat="<%= p("nfsbrokerpush.log_format") %>" \
+              --allowedOptions="<%= allowed_options %>" \
               <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
               --dbCACertPath="./db_ca.crt"
               <% end %>
