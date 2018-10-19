@@ -1,13 +1,14 @@
 ---
-buildpack: binary_buildpack
-domain: "<%= p('nfsbrokerpush.app_domain') %>"
-memory: "<%= p('nfsbrokerpush.memory_in_mb') %>M"
-env:
-  GOPACKAGENAME: nfsbroker
-  GOVERSION: go1.7
-  USERNAME: "<%= p('nfsbrokerpush.username') %>"
-  PASSWORD: "<%= p('nfsbrokerpush.password') %>"
-  <% if_p('nfsbrokerpush.db.username', 'nfsbrokerpush.db.password') do |username, password| %>
-  DB_USERNAME: "<%= username %>"
-  DB_PASSWORD: "<%= password %>"
-  <% end %>
+applications:
+- name: "<%= p('nfsbrokerpush.app_name') %>"
+  buildpacks:
+  - binary_buildpack
+  domain: "<%= p('nfsbrokerpush.app_domain') %>"
+  memory: "<%= p('nfsbrokerpush.memory_in_mb') %>M"
+  env:
+    USERNAME: "<%= p('nfsbrokerpush.username') %>"
+    PASSWORD: "<%= p('nfsbrokerpush.password') %>"
+    <% if_p('nfsbrokerpush.db.username', 'nfsbrokerpush.db.password') do |username, password| %>
+    DB_USERNAME: "<%= username %>"
+    DB_PASSWORD: "<%= password %>"
+    <% end %>
