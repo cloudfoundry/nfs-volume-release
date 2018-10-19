@@ -29,7 +29,7 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               <% end %> \
               --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
-              --logFormat="<%= p("nfsbrokerpush.log_format") %>" \
+              --timeFormat="<%= p("nfsbrokerpush.log_time_format") %>" \
               --allowedOptions="<%= allowed_options %>" \
               <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
               --dbCACertPath="./db_ca.crt"
