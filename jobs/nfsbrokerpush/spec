@@ -116,7 +116,7 @@ properties:
       description: "Existing NFSv3 volumes (Deprecated)"
       bindable: true
       plan_updatable: false
-      tags: ["nfs"]
+      tags: ["nfs", "legacy"]
       requires: ["volume_mount"]
       plans:
       - id: Existing
@@ -127,7 +127,7 @@ properties:
       description: "Existing NFSv3 and v4 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
       bindable: true
       plan_updatable: false
-      tags: ["nfs", "experimental"]
+      tags: ["nfs"]
       requires: ["volume_mount"]
       plans:
       - id: 09a09260-1df5-4445-9ed7-1ba56dadbbc8
