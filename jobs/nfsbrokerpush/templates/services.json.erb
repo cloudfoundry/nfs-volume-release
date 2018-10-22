@@ -17,11 +17,11 @@
       }
     end
 
-    display_name = plan["metadata"] ? plan["metadata"]["display_name"] : ""
-    image_url = plan["metadata"] ? plan["metadata"]["image_url"] : ""
-    long_description = plan["metadata"] ? plan["metadata"]["long_description"] : ""
-    provider_display_name = plan["metadata"] ? plan["metadata"]["provider_display_name"] : ""
-    documentation_url = plan["metadata"] ? plan["metadata"]["documentation_url"] : ""
+    display_name = service["metadata"] ? service["metadata"]["display_name"] : ""
+    image_url = service["metadata"] ? service["metadata"]["image_url"] : ""
+    long_description = service["metadata"] ? service["metadata"]["long_description"] : ""
+    provider_display_name = service["metadata"] ? service["metadata"]["provider_display_name"] : ""
+    documentation_url = service["metadata"] ? service["metadata"]["documentation_url"] : ""
 
     config << {
       "id": service["id"],
