@@ -7,6 +7,10 @@
         "id":plan["id"],
         "name": plan["name"],
         "description": plan["description"],
+        "metadata": {
+          "costs": plan["metadata"]["costs"],
+          "displayName": plan["metadata"]["display_name"]
+        }
       }
     end
 
@@ -18,7 +22,14 @@
       "plan_updateable": service["plan_updatable"],
       "tags": service["tags"],
       "plans": plans,
-      "requires": service["requires"]
+      "requires": service["requires"],
+      "metadata": {
+        "displayName": service["metadata"]["display_name"],
+        "imageUrl": service["metadata"]["image_url"],
+        "longDescription": service["metadata"]["long_description"],
+        "providerDisplayName": service["metadata"]["provider_display_name"],
+        "documentationUrl": service["metadata"]["documentation_url"]
+      }
     }
   end
 
