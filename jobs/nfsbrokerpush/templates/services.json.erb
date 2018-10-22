@@ -3,16 +3,25 @@
   p("nfsbrokerpush.services").each do |service|
     plans = []
     service["plans"].each do |plan|
+      costs = plan["metadata"] ? plan["metadata"]["costs"] : []
+      display_name = plan["metadata"] ? plan["metadata"]["display_name"] : ""
+
       plans << {
         "id":plan["id"],
         "name": plan["name"],
         "description": plan["description"],
         "metadata": {
-          "costs": plan["metadata"]["costs"],
-          "displayName": plan["metadata"]["display_name"]
+          "costs": costs,
+          "displayName": display_name
         }
       }
     end
+
+    display_name = plan["metadata"] ? plan["metadata"]["display_name"] : ""
+    image_url = plan["metadata"] ? plan["metadata"]["image_url"] : ""
+    long_description = plan["metadata"] ? plan["metadata"]["long_description"] : ""
+    provider_display_name = plan["metadata"] ? plan["metadata"]["provider_display_name"] : ""
+    documentation_url = plan["metadata"] ? plan["metadata"]["documentation_url"] : ""
 
     config << {
       "id": service["id"],
@@ -24,11 +33,11 @@
       "plans": plans,
       "requires": service["requires"],
       "metadata": {
-        "displayName": service["metadata"]["display_name"],
-        "imageUrl": service["metadata"]["image_url"],
-        "longDescription": service["metadata"]["long_description"],
-        "providerDisplayName": service["metadata"]["provider_display_name"],
-        "documentationUrl": service["metadata"]["documentation_url"]
+        "displayName": display_name,
+        "imageUrl": image_url,
+        "longDescription": long_description,
+        "providerDisplayName": provider_display_name,
+        "documentationUrl": documentation_url
       }
     }
   end
