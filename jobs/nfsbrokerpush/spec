@@ -67,6 +67,9 @@ properties:
   nfsbrokerpush.db.ca_cert:
     default: ""
     description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
+  nfsbrokerpush.db.skip_hostname_validation:
+    description: 'skip database server hostname validation (MySQL only)'
+    default: false
   nfsbrokerpush.credhub.url:
     default: ""
     description: "(optional) CredHub URL when using CredHub to store broker state"
