@@ -12,7 +12,7 @@
     host: database_host,
     port: p('nfsbroker.db_port'),
     database: p('nfsbroker.db_name'),
-    adapter: p('nfsbroker.db_driver')
+    adapter: p('nfsbroker.db_driver'),
   }
 
   if_p('nfsbroker.db_ca_cert') do |ca_cert|
