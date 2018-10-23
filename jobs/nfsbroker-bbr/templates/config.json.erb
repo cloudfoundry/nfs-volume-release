@@ -15,12 +15,12 @@
     adapter: p('nfsbroker.db_driver'),
   }
 
-  if_p('nfsbroker.db_ca_cert') do |ca_cert|
+  if p('nfsbroker.db_ca_cert') != ""
     config[:tls] = {}
     config[:tls][:cert] = {}
-    config[:tls][:cert][:ca] = ca_cert
+    config[:tls][:cert][:ca] = p('nfsbroker.db_ca_cert')
 
-    if p('nfsbroker.db_skip_hostname_validation') do
+    if p('nfsbroker.db_skip_hostname_validation') == true
       config[:tls][:skip_host_verify] = true
     end
   end
