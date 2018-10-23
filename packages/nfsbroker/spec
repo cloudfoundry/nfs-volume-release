@@ -32,6 +32,7 @@ files:
   - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/mysqlshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
