@@ -19,6 +19,10 @@
     config[:tls] = {}
     config[:tls][:cert] = {}
     config[:tls][:cert][:ca] = ca_cert
+
+    if p('nfsbroker.db_skip_hostname_validation') do
+      config[:tls][:skip_host_verify] = true
+    end
   end
 
   config.to_json

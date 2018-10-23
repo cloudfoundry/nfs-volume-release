@@ -37,6 +37,9 @@ properties:
   nfsbroker.db_ca_cert:
     default: ""
     description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
+  nfsbroker.db_skip_hostname_validation:
+    default: false
+    description: "(optional) Skip verification of hostname in database TLS certificate"
   nfsbroker.release_level_backup:
     default: false
     description: "Enable bbr scripts"
