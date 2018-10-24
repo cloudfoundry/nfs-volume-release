@@ -6,7 +6,7 @@ scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
 
 usage () {
-    echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config disallowed_ldap_bind_config create_bogus_config bind_bogus_config isolation_segment]"
+	echo "Usage: run-pats admin_user admin_password api_host apps_domain service_name plan_name broker_url broker_user broker_password [create_config bind_config disallowed_ldap_bind_config create_bogus_config bind_bogus_config create_lazy_unmount_config lazy_unmount_vm_instance isolation_segment]"
     exit 1
 }
 
@@ -54,7 +54,9 @@ cat << EOF > ${CONFIG}
       "disallowed_ldap_bind_config": "${12}",
       "create_bogus_config": "${13}",
       "bind_bogus_config": "${14}",
-      "isolation_segment": "${15}"
+      "create_lazy_unmount_config": "${15}",
+      "lazy_unmount_vm_instance": "${16}",
+      "isolation_segment": "${17}"
     }
 EOF
 
