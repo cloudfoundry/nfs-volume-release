@@ -14,6 +14,11 @@ if [[ ! -r "${CONFIG}" ]]; then
   exit 1
 fi
 
+set +x
+${PWD}/persi-ci/scripts/ci/bbl_get_bosh_env
+source bosh-env/set-env.sh
+set -x
+
 pushd  nfs-volume-release
   export GOPATH="${PWD}"
   export PATH="${GOPATH}/bin:${PATH}"
@@ -23,7 +28,7 @@ pushd  nfs-volume-release
     export TEST_APPLICATION_PATH="${ASSETS_PATH}/pora"
 
     if [[ -n "${PARALLEL_NODES}" ]]; then
-      ginkgo --slowSpecThreshold=300 -r -nodes ${PARALLEL_NODES} .
+      ginkgo --slowSpecThreshold=300 -r -nodes "${PARALLEL_NODES}" .
     else
       ginkgo --slowSpecThreshold=300 -r -p .
     fi

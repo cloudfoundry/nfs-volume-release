@@ -8,11 +8,15 @@ image_resource:
     tag: v5.15.0
 
 inputs:
+- name: director-state
 - name: nfs-volume-release-concourse-tasks
 - name: nfs-volume-release
 - name: pats-config
+- name: persi-ci
 
 params:
+  BBL_IAAS: gcp
+  BBL_STATE_DIR: bbl-state-gcp
   CONFIG_FILE_PATH: pats-config/pats.json
   PARALLEL_NODES:
   TEST_DOCKER_PORA: false
