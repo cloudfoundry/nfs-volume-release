@@ -35,7 +35,7 @@ ENABLE_UNIQUE_VOLUME_IDS=""
 ENABLE_UNIQUE_VOLUME_IDS="--uniqueVolumeIds"
 <% end %>
 
-/var/vcap/packages/nfsv3driver/bin/nfsv3driver \
+exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
   --transport="tcp-json" \
   ${ENABLE_UNIQUE_VOLUME_IDS} \
