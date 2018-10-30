@@ -26,11 +26,6 @@ case $1 in
     mkdir -p "<%= p("nfsbroker.data_dir") %>"
     chown -R vcap:vcap "<%= p("nfsbroker.data_dir") %>"
 
-    export GOMAXPROCS=$(nproc)
-
-    # Work around for go DNS bug (fix slated for v1.7)
-    export GODEBUG=netdns=cgo
-
     echo $$ > $PIDFILE
 
     # pass credentials in through the environment for safety

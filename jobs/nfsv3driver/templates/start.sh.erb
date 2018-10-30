@@ -14,11 +14,6 @@ chown -R vcap:vcap $RUN_DIR
 
 echo $$ > $PIDFILE
 
-export GOMAXPROCS=$(nproc)
-
-# Work around for GOLANG 1.5.3 DNS bug
-export GODEBUG=netdns=cgo
-
 export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
 
 # ldap connection and credential info are passed via environment
