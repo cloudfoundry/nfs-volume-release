@@ -117,3 +117,6 @@
 [submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
 	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
 	url = https://github.com/DATA-DOG/go-sqlmock
+[submodule "src/code.cloudfoundry.org/volumedriver"]
+	path = src/code.cloudfoundry.org/volumedriver
+	url = https://github.com/cloudfoundry/volumedriver

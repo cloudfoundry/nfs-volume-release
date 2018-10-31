@@ -11,6 +11,6 @@ popd
 pushd src/code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver
   ginkgo -keepGoing -trace -race -randomizeAllSpecs -progress "$@"
 popd
-pushd src/code.cloudfoundry.org/nfsdriver
+pushd src/code.cloudfoundry.org/volumedriver
   ginkgo -r -keepGoing -p -race -trace -randomizeAllSpecs -progress "$@"
 popd

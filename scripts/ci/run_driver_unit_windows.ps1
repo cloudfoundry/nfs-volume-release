@@ -24,7 +24,7 @@ $env:PATH="$PWD/bin;$env:PATH"
 
 go install github.com/onsi/ginkgo/ginkgo
 
-cd src/code.cloudfoundry.org/nfsdriver/mountchecker
+cd src/code.cloudfoundry.org/volumedriver/mountchecker
 ginkgo -v -r -keepGoing -p -trace -randomizeAllSpecs -progress --race
 
 CheckLastExitCode
