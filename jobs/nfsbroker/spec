@@ -9,7 +9,6 @@ templates:
   uaa_ca.crt.erb: uaa_ca.crt
 
 packages:
-- golang-nfsvolume
 - nfsbroker
 
 properties:

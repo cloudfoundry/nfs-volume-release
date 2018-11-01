@@ -2,7 +2,7 @@
 name: nfsv3driver
 
 dependencies:
-- golang-nfsvolume
+- golang-1-linux
 - fuse-nfs
 
 files:

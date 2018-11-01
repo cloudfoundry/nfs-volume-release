@@ -2,7 +2,7 @@
 name: nfsbroker
 
 dependencies:
-- golang-nfsvolume
+- golang-1-linux
 
 files:
   - code.cloudfoundry.org/nfsbroker/Procfile

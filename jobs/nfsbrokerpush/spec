@@ -13,7 +13,6 @@ templates:
 
 packages:
   - nfsbroker
-  - golang-nfsvolume
 
 consumes:
   - name: database

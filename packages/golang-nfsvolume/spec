@@ -1,5 +1,0 @@
----
-name: golang-nfsvolume
-
-files:
-  - go1.11.linux-amd64.tar.gz
