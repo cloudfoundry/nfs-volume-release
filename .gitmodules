@@ -1,7 +1,3 @@
-[submodule "src/code.cloudfoundry.org/voldriver"]
-	path = src/code.cloudfoundry.org/voldriver
-	url = https://github.com/cloudfoundry/voldriver
-	branch = master
 [submodule "src/code.cloudfoundry.org/goshims"]
 	path = src/code.cloudfoundry.org/goshims
 	url = https://github.com/cloudfoundry/goshims
