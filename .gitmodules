@@ -116,3 +116,6 @@
 [submodule "src/code.cloudfoundry.org/volumedriver"]
 	path = src/code.cloudfoundry.org/volumedriver
 	url = https://github.com/cloudfoundry/volumedriver
+[submodule "src/code.cloudfoundry.org/dockerdriver"]
+	path = src/code.cloudfoundry.org/dockerdriver
+	url = https://github.com/cloudfoundry/dockerdriver
