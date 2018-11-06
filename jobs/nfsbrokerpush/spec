@@ -76,7 +76,6 @@ properties:
     default: ""
     description: "(optional) UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:
-    default: ""
     description: "(optional) UAA client secret when using CredHub to store broker state"
   nfsbrokerpush.store_id:
     default: "nfsbroker"

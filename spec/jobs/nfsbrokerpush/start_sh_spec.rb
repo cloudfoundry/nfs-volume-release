@@ -8,7 +8,7 @@ describe 'nfsbrokerpush job' do
   describe 'start.sh' do
     let(:template) { job.template('start.sh') }
 
-    context 'when configured with all database properties' do
+    context 'when fully configured with all required database properties' do
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
@@ -17,7 +17,6 @@ describe 'nfsbrokerpush job' do
               "port" => "some-db-port",
               "name" => "some-db-name",
               "driver" => "some-db-driver",
-              "ca_cert" => "some-ca-cert",
             },
             "store_id" => "some-store-id",
             "log_level" => "some-log-level",
@@ -26,23 +25,44 @@ describe 'nfsbrokerpush job' do
         }
       end
 
-      it 'successfully renders the script with the db flags' do
+      it 'successfully renders the script' do
         tpl_output = template.render(manifest_properties)
 
         expect(tpl_output).to include("bin/nfsbroker --listenAddr=\"0.0.0.0:$PORT\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
-        expect(tpl_output).to include("--dbDriver=\"some-db-driver\"")
-        expect(tpl_output).to include("--dbHostname=\"some-db-host\"")
-        expect(tpl_output).to include("--dbPort=\"some-db-port\"")
-        expect(tpl_output).to include("--dbName=\"some-db-name\"")
-        expect(tpl_output).to include("--credhubURL=\"\"")
-        expect(tpl_output).to include("--uaaClientID=\"\"")
-        expect(tpl_output).to include("--uaaClientSecret=\"\"")
         expect(tpl_output).to include("--storeID=\"some-store-id\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
         expect(tpl_output).to include("--allowedOptions=\"uid,gid,auto_cache,version\"")
-        expect(tpl_output).to include("--dbCACertPath=\"./db_ca.crt\"")
+      end
+
+      it 'includes the db flags in the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).to include("--dbDriver=\"some-db-driver\"")
+        expect(tpl_output).to include("--dbHostname=\"some-db-host\"")
+        expect(tpl_output).to include("--dbPort=\"some-db-port\"")
+        expect(tpl_output).to include("--dbName=\"some-db-name\"")
+      end
+
+      it 'omits the dbSkipHostnameValidation flag from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--dbSkipHostnameValidation")
+      end
+
+      it 'omits the dbCACertPath flag from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--dbCACertPath=")
+      end
+
+      it 'omits the credhub flags from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--credhubURL=")
+        expect(tpl_output).not_to include("--uaaClientID=")
+        expect(tpl_output).not_to include("--uaaClientSecret=")
       end
     end
 
@@ -54,7 +74,6 @@ describe 'nfsbrokerpush job' do
               "port" => "some-db-port",
               "name" => "some-db-name",
               "driver" => "some-db-driver",
-              "ca_cert" => "some-ca-cert",
             }
           }
         }
@@ -71,7 +90,10 @@ describe 'nfsbrokerpush job' do
 
         tpl_output = template.render(manifest_properties, consumes: links)
 
+        expect(tpl_output).to include("--dbDriver=\"some-db-driver\"")
         expect(tpl_output).to include("--dbHostname=\"some-db-host-from-link\"")
+        expect(tpl_output).to include("--dbPort=\"some-db-port\"")
+        expect(tpl_output).to include("--dbName=\"some-db-name\"")
       end
     end
 
@@ -84,7 +106,6 @@ describe 'nfsbrokerpush job' do
               "port" => "some-db-port",
               "name" => "some-db-name",
               "driver" => "some-db-driver",
-              "ca_cert" => "some-ca-cert",
               "skip_hostname_validation" => true,
             }
           }
@@ -98,13 +119,32 @@ describe 'nfsbrokerpush job' do
       end
     end
 
-    context 'when configured with all credhub properties' do
+    context 'when configured with a database CA cert' do
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
             "db" => {
               "host" => "some-db-host",
-            },
+              "port" => "some-db-port",
+              "name" => "some-db-name",
+              "driver" => "some-db-driver",
+              "ca_cert" => "some-ca-cert",
+            }
+          }
+        }
+      end
+
+      it 'includes the dbCACertPath flag in the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).to include("--dbCACertPath=\"./db_ca.crt\"")
+      end
+    end
+
+    context 'when configured with all required credhub properties' do
+      let(:manifest_properties) do
+        {
+          "nfsbrokerpush" => {
             "credhub" => {
               "url" => "some-credhub-url",
               "uaa_client_id" => "some-uaa-client-id",
@@ -114,12 +154,62 @@ describe 'nfsbrokerpush job' do
         }
       end
 
-      it 'includes the credhub flags' do
+      it 'includes the credhub flags in the script' do
         tpl_output = template.render(manifest_properties)
 
         expect(tpl_output).to include("--credhubURL=\"some-credhub-url\"")
         expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
         expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
+      end
+
+      it 'omits the database flags from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--dbDriver=")
+        expect(tpl_output).not_to include("--dbHostname=")
+        expect(tpl_output).not_to include("--dbPort=")
+        expect(tpl_output).not_to include("--dbName=")
+      end
+    end
+
+    context 'when configured with no credhub or database properties' do
+      let(:manifest_properties) do
+        {}
+      end
+
+      it 'omits the credhub flags from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--credhubURL=")
+        expect(tpl_output).not_to include("--uaaClientID=")
+        expect(tpl_output).not_to include("--uaaClientSecret=")
+      end
+
+      it 'omits the database flags from the script' do
+        tpl_output = template.render(manifest_properties)
+
+        expect(tpl_output).not_to include("--dbDriver=")
+        expect(tpl_output).not_to include("--dbHostname=")
+        expect(tpl_output).not_to include("--dbPort=")
+        expect(tpl_output).not_to include("--dbName=")
+      end
+    end
+
+    context 'when configured without a database host property or link' do
+      let(:manifest_properties) do
+        {
+          "nfsbrokerpush" => {
+            "db" => {
+              "port" => "some-db-port",
+              "name" => "some-db-name",
+              "driver" => "some-db-driver",
+            }
+          }
+        }
+      end
+
+      it 'raises an error' do
+        expect{template.render(manifest_properties)}.to raise_error('missing database host property or link')
       end
     end
 
@@ -127,9 +217,6 @@ describe 'nfsbrokerpush job' do
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
-            "db" => {
-              "host" => "some-db-host",
-            },
             "ldap_enabled" => true,
           }
         }
@@ -146,9 +233,6 @@ describe 'nfsbrokerpush job' do
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
-            "db" => {
-              "host" => "some-db-host",
-            },
             "ldap_test_mode" => true,
           }
         }
