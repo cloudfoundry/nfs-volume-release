@@ -52,8 +52,8 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               <% if p('nfsbrokerpush.db.skip_hostname_validation') %> \
               --dbSkipHostnameValidation \
               <% end %> \
-              <% if database_ca_cert != '' %>
-              --dbCACertPath="./db_ca.crt"
+              <% if database_ca_cert != '' %> \
+              --dbCACertPath="./db_ca.crt" \
               <% end %> \
               <% end %> \
               <% if credhub_url != '' %> \
