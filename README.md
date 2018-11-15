@@ -51,7 +51,7 @@ Your CF deployment will now have a running service broker and volume drivers, re
 > * Use [CF Security groups](https://docs.cloudfoundry.org/adminguide/app-sec-groups.html) to block direct application access to your NFS server IP, especially on ports 111 and 2049.
 
 ### Test NFS Server
-If you wish to also deploy the NFS test server, you can include this [operations file](https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-server.yml) with a `-o` flag also.  That will create a separate VM with nfs exports that you can use to experiment with volume mounts.
+If you wish to also deploy the NFS test server, you can include this [operations file](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/test/enable-nfs-test-server.yml) with a `-o` flag also.  That will create a separate VM with nfs exports that you can use to experiment with volume mounts.
 > Note: by default, the nfs test server expects that your CF deployment is deployed to a 10.x.x.x subnet.  If you are deploying to a subnet that is not 10.x.x.x (e.g. 192.168.x.x) then you will need to override the `export_cidr` property.
 > Edit the generated manifest, and replace this line:
 > `  nfstestserver: {}`
