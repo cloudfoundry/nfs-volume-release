@@ -1,4 +1,4 @@
-#!/bin/bash -exu
+#!/bin/bash -eu
 
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
 export CF_HOME=`pwd`/home/cf
@@ -29,13 +29,11 @@ DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
   cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
-  set +x
   <% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
     cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
   <% end.else do %>
     cf auth "<%= p('nfsbrokerpush.cf.admin_user') %>" "<%= p('nfsbrokerpush.cf.admin_password') %>"
   <% end %>
-  set -x
   cf create-org $ORG
   cf target -o $ORG
   cf create-space $SPACE

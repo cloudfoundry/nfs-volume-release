@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 export OPENLDAP=/var/vcap/packages/openldap
 export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
 
@@ -9,4 +8,3 @@ ldapadd -x -w secret -h 127.0.0.1 -p 389 -D "cn=admin,dc=domain,dc=com" -f addou
 ldapadd -x -w secret -h 127.0.0.1 -p 389 -D "cn=admin,dc=domain,dc=com" -f adduser.ldif
 
 exit 0
-
