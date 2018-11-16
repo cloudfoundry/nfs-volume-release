@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 # Figure out where the libraries should be installed.
 libdir="/usr/$(dirname "$(ldconfig -p | awk '/libc.so/ { print $NF }')")"
