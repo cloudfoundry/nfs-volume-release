@@ -35,7 +35,7 @@ function authenticate_and_target() {
 }
 
 function create_manifest() {
-  cat $MANIFEST
+  cat $MANIFEST | sed 's/PASSWORD: "[^"]*"/PASSWORD: ****/g'
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
 }
 
