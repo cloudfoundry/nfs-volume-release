@@ -53,7 +53,7 @@ function create_credhub_security_group() {
 }
 
 function create_manifest() {
-  cat $MANIFEST
+  cat $MANIFEST | sed 's/PASSWORD: "[^"]*"/PASSWORD: ****/g'
   cp -f $MANIFEST /var/vcap/packages/nfsbroker/manifest.yml
   cp -f $PROCFILE /var/vcap/packages/nfsbroker/Procfile
   cp -f $STARTUP_SCRIPT /var/vcap/packages/nfsbroker/start.sh
