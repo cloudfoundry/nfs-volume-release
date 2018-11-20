@@ -1,12 +1,13 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 echo "Installing nfs server"
 
 apt-get update
 apt-get --assume-yes install nfs-kernel-server
 
+echo "Creating export directories..."
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/users
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/users2000
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol1
@@ -34,6 +35,7 @@ mkdir -p /export2
 mount --bind <%= p("nfstestserver.export_root_path") %>/export /export || true
 mount --bind <%= p("nfstestserver.export_root_path") %>/export2 /export2 || true
 
+echo "Creating exports file..."
 cat << EOF > /etc/exports
 /                  <%= p("nfstestserver.export_cidr") %>(ro,fsid=0,async)
 /export            <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async)
