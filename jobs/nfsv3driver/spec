@@ -22,14 +22,14 @@ properties:
     description: "Experimental: use the BOSH Process Manager to manage the nfsv3driver process."
     default: false
   nfsv3driver.listen_addr:
-     description: "address nfsv3driver listens on"
-     default: "127.0.0.1:7589"
+    description: "address nfsv3driver listens on"
+    default: "127.0.0.1:7589"
   nfsv3driver.debug_addr:
     description: "address nfsv3driver will serve debug info"
     default: "127.0.0.1:7689"
   nfsv3driver.admin_addr:
-     description: "address nfsv3driver listens on for admin requests"
-     default: "127.0.0.1:7590"
+    description: "address nfsv3driver listens on for admin requests"
+    default: "127.0.0.1:7590"
   nfsv3driver.driver_path:
     description: "path to place driver spec/json file for volman to discover"
     default: "/var/vcap/data/voldrivers"
