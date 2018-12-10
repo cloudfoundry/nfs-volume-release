@@ -2,6 +2,7 @@
 
 set -e
 
+CERTS_DIR=/var/vcap/jobs/nfsv3driver/config/certs
 LOG_DIR=/var/vcap/sys/log/nfsv3driver
 RUN_DIR=/var/vcap/sys/run/nfsv3driver
 PIDFILE=$RUN_DIR/nfsv3driver.pid
@@ -30,9 +31,23 @@ ENABLE_UNIQUE_VOLUME_IDS=""
 ENABLE_UNIQUE_VOLUME_IDS="--uniqueVolumeIds"
 <% end %>
 
+ENABLE_INSECURE_SKIP_VERIFY=""
+<% if p("nfsv3driver.ssl.insecure_skip_verify") %>
+ENABLE_INSECURE_SKIP_VERIFY="--insecureSkipVerify"
+<% end %>
+
 exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --listenAddr="<%= p("nfsv3driver.listen_addr") %>" \
   --transport="tcp-json" \
+<% if p("nfsv3driver.tls.ca_cert") != '' %>\
+  --requireSSL \
+  --caFile="${CERTS_DIR}/ca.crt" \
+  --certFile="${CERTS_DIR}/server.crt" \
+  --keyFile="${CERTS_DIR}/server.key" \
+  --clientCertFile="${CERTS_DIR}/client.crt" \
+  --clientKeyFile="${CERTS_DIR}/client.key" \
+  ${ENABLE_INSECURE_SKIP_VERIFY} \
+<% end %>\
   ${ENABLE_UNIQUE_VOLUME_IDS} \
   --debugAddr="<%= p("nfsv3driver.debug_addr") %>" \
   --adminAddr="<%= p("nfsv3driver.admin_addr") %>" \

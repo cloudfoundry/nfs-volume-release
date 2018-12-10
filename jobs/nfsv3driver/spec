@@ -3,6 +3,11 @@ name: nfsv3driver
 
 templates:
   bpm.yml.erb: config/bpm.yml
+  ca.crt.erb: config/certs/ca.crt
+  client.crt.erb: config/certs/client.crt
+  client.key.erb: config/certs/client.key
+  server.crt.erb: config/certs/server.crt
+  server.key.erb: config/certs/server.key
   install.erb: bin/pre-start
   ctl.erb: bin/nfsv3driver_ctl
   start.sh.erb: bin/start.sh
@@ -90,3 +95,41 @@ properties:
   nfsv3driver.enable_unique_volume_ids:
     description: "opt-in to unique volume IDs"
     default: true
+  nfsv3driver.tls.ca_cert:
+    description: "PEM encoded CA certificate. If not provided, driver will not accept TLS connections"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  nfsv3driver.tls.server_cert:
+    description: "PEM encoded server certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  nfsv3driver.tls.server_key:
+    description: "PEM encoded server private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  nfsv3driver.tls.client_cert:
+    description: "PEM encoded client certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  nfsv3driver.tls.client_key:
+    description: "PEM encoded client private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  nfsv3driver.ssl.insecure_skip_verify:
+    description: "When connecting over SSL, skip verification of server IP addresses in the certificate"
+    default: false
