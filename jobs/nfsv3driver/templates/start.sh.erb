@@ -2,7 +2,8 @@
 
 set -e
 
-CERTS_DIR=/var/vcap/jobs/nfsv3driver/config/certs
+CLIENT_CERTS_DIR=<%= p('nfsv3driver.driver_path') %>/certs/nfsv3driver
+SERVER_CERTS_DIR=/var/vcap/jobs/nfsv3driver/config/certs
 LOG_DIR=/var/vcap/sys/log/nfsv3driver
 RUN_DIR=/var/vcap/sys/run/nfsv3driver
 PIDFILE=$RUN_DIR/nfsv3driver.pid
@@ -41,11 +42,11 @@ exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --transport="tcp-json" \
 <% if p("nfsv3driver.tls.ca_cert") != '' %>\
   --requireSSL \
-  --caFile="${CERTS_DIR}/ca.crt" \
-  --certFile="${CERTS_DIR}/server.crt" \
-  --keyFile="${CERTS_DIR}/server.key" \
-  --clientCertFile="${CERTS_DIR}/client.crt" \
-  --clientKeyFile="${CERTS_DIR}/client.key" \
+  --certFile="${SERVER_CERTS_DIR}/server.crt" \
+  --keyFile="${SERVER_CERTS_DIR}/server.key" \
+  --caFile="${CLIENT_CERTS_DIR}/ca.crt" \
+  --clientCertFile="${CLIENT_CERTS_DIR}/client.crt" \
+  --clientKeyFile="${CLIENT_CERTS_DIR}/client.key" \
   ${ENABLE_INSECURE_SKIP_VERIFY} \
 <% end %>\
   ${ENABLE_UNIQUE_VOLUME_IDS} \

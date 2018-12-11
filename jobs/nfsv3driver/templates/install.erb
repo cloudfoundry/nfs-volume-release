@@ -13,6 +13,15 @@ install_if_missing ()
     fi
 }
 
+function copy_client_certs_to_spec_dir() {
+  local cert_dir="<%= p('nfsv3driver.driver_path') %>/certs/nfsv3driver"
+
+  mkdir -p ${cert_dir}
+  cp -p /var/vcap/jobs/nfsv3driver/config/certs/ca.crt ${cert_dir}
+  cp -p /var/vcap/jobs/nfsv3driver/config/certs/client.crt ${cert_dir}
+  cp -p /var/vcap/jobs/nfsv3driver/config/certs/client.key ${cert_dir}
+}
+
 codename=$(lsb_release -c | grep xenial | awk '{print $2}')
 if [ "$codename" == "xenial" ]; then
     echo "Installing NFS packages"
@@ -71,4 +80,8 @@ EOF
 chmod 644 /etc/fuse.conf
 
 echo "Installed fuse-nfs"
+
+echo "Copying client certs to data directory..."
+copy_client_certs_to_spec_dir
+
 exit 0
