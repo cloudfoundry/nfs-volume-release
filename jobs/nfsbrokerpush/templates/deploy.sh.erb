@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
-export CF_HOME=`pwd`/home/cf
+export CF_HOME=/var/vcap/data/nfsbrokerpush/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
 SCHEME=https
