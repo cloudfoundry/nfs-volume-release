@@ -13,6 +13,7 @@ mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol1
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol2
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/vol3
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export2/certs
+mkdir -p <%= p("nfstestserver.export_root_path") %>/export/user1000only
 
 chmod 777 <%= p("nfstestserver.export_root_path") %>/export
 chmod 777 <%= p("nfstestserver.export_root_path") %>/export2
@@ -22,7 +23,9 @@ chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol1
 chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol2
 chmod 775 <%= p("nfstestserver.export_root_path") %>/export/vol3
 chmod 777 <%= p("nfstestserver.export_root_path") %>/export2/certs
+chmod 700 <%= p("nfstestserver.export_root_path") %>/export/user1000only
 
+chown vcap:vcap <%= p("nfstestserver.export_root_path") %>/export/user1000only
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/users
 chown root:2000 <%= p("nfstestserver.export_root_path") %>/export/users2000
 chown root:vcap <%= p("nfstestserver.export_root_path") %>/export/vol1
@@ -36,15 +39,16 @@ mount --bind <%= p("nfstestserver.export_root_path") %>/export2 /export2 || true
 
 echo "Creating exports file..."
 cat << EOF > /etc/exports
-/                  <%= p("nfstestserver.export_cidr") %>(ro,fsid=0,async)
-/export            <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async)
-/export/users      <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/users2000  <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol1       <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol2       <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export/vol3       <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
-/export2           <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async,insecure)
-/export2/certs     <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
+/                    <%= p("nfstestserver.export_cidr") %>(ro,fsid=0,async)
+/export              <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async)
+/export/users        <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/users2000    <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol1         <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol2         <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/vol3         <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export/user1000only <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async)
+/export2             <%= p("nfstestserver.export_cidr") %>(rw,no_subtree_check,async,insecure)
+/export2/certs       <%= p("nfstestserver.export_cidr") %>(rw,nohide,no_subtree_check,async,insecure)
 EOF
 
 exit 0
