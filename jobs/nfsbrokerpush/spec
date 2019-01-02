@@ -117,7 +117,7 @@ properties:
       description: "Existing NFSv3 volumes (Deprecated)"
       bindable: true
       plan_updatable: false
-      tags: ["nfs", "legacy"]
+      tags: ["nfs"]
       requires: ["volume_mount"]
       metadata:
         display_name: "Legacy NFS V3 Volume Broker"
@@ -140,7 +140,7 @@ properties:
       description: "Existing NFSv3 and v4 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
       bindable: true
       plan_updatable: false
-      tags: ["nfs"]
+      tags: ["nfs", "experimental"]
       requires: ["volume_mount"]
       metadata:
         display_name: "NFS V3 / V4 Volume Broker"
