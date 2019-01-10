@@ -21,6 +21,7 @@ files:
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/ldapshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/*.go # gosub
