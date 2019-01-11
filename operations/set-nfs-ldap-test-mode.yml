@@ -1,4 +1,0 @@
----
-- type: replace
-  path: /instance_groups/name=nfs-broker-push/jobs/name=nfsbrokerpush/properties/nfsbrokerpush/ldap_test_mode?
-  value: true
