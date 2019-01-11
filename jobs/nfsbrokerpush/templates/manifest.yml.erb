@@ -1,8 +1,10 @@
 ---
 applications:
 - name: "<%= p('nfsbrokerpush.app_name') %>"
-  buildpack: binary_buildpack
-  domain: "<%= p('nfsbrokerpush.app_domain') %>"
+  buildpacks:
+  - binary_buildpack
+  routes:
+  - "<%= p('nfsbrokerpush.app_name') + '.' + p('nfsbrokerpush.app_domain') %>"
   memory: "<%= p('nfsbrokerpush.memory_in_mb') %>M"
   env:
     USERNAME: "<%= p('nfsbrokerpush.username') %>"
