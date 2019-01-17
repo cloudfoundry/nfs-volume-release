@@ -91,9 +91,6 @@ properties:
   nfsbrokerpush.ldap_enabled:
     description: 'true if the broker should use ldap username/password bind config instead of uid/gid'
     default: false
-  nfsbrokerpush.ldap_test_mode:
-    description: 'true if the broker should allow either ldap username/password bind config or uid/gid'
-    default: false
   nfsbrokerpush.register_broker:
     description: 'true if the errand should register the service broker after pushing it to cf'
     default: true

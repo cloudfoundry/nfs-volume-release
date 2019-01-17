@@ -37,10 +37,6 @@
   if p('nfsbrokerpush.ldap_enabled')
     allowed_options = 'auto_cache,username,password,version'
   end
-
-  if p('nfsbrokerpush.ldap_test_mode')
-    allowed_options = 'auto_cache,uid,gid,username,password,version'
-  end
 %>
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --servicesConfig="./services.json" \

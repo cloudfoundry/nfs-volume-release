@@ -228,21 +228,5 @@ describe 'nfsbrokerpush job' do
         expect(tpl_output).to include("--allowedOptions=\"auto_cache,username,password,version\"")
       end
     end
-
-    context 'when configured with ldap test mode enabled' do
-      let(:manifest_properties) do
-        {
-          "nfsbrokerpush" => {
-            "ldap_test_mode" => true,
-          }
-        }
-      end
-
-      it 'sets the allowedOptions flag correctly' do
-        tpl_output = template.render(manifest_properties)
-
-        expect(tpl_output).to include("--allowedOptions=\"auto_cache,uid,gid,username,password,version\"")
-      end
-    end
   end
 end
