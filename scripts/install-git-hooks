@@ -43,3 +43,9 @@ HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/volumedriver/hooks
 PRE_COMMIT=${HOOKS_DIR}/pre-commit
 mkdir -p ${HOOKS_DIR}
 install_pre_commit ${PRE_COMMIT}
+
+#dockerdriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/dockerdriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
