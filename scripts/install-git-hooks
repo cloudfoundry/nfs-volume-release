@@ -1,58 +1,39 @@
 #!/bin/bash
 
+install_pre_commit() {
+  if [ ! -f $1 ]; then
+    echo "#!/bin/bash" > $1
+    chmod +x $1
+  fi
+
+  if grep -q 'git-hooks/pre-commit' $1; then
+    echo "pre-commit already installed."
+  else
+    echo >> $1
+    echo './git-hooks/pre-commit' >> $1
+    echo "pre-commit installed."
+  fi
+}
+
+# nfs-volume-release hooks
 RELEASE=$(cd $(dirname $0)/.. && pwd)
 PRE_COMMIT=${RELEASE}/.git/hooks/pre-commit
+install_pre_commit ${PRE_COMMIT}
 
+# nfsv3driver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/nfsv3driver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
 
-if [ ! -f ${PRE_COMMIT} ]; then
-  echo "#!/bin/bash" > ${PRE_COMMIT}
-  chmod +x ${PRE_COMMIT}
-fi
+#nfsbroker hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/nfsbroker/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
 
-if grep -q 'git-hooks/pre-commit' ${PRE_COMMIT}; then
-  echo "pre-commit already installed."
-else
-  echo >> ${PRE_COMMIT}
-  echo './git-hooks/pre-commit' >> ${PRE_COMMIT}
-  echo "pre-commit installed."
-fi
-
-DRIVER_HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/nfsv3driver/hooks
-PRE_COMMIT=${DRIVER_HOOKS_DIR}/pre-commit
-
-if [ ! -d ${DRIVER_HOOKS_DIR} ]; then
-    mkdir -p ${DRIVER_HOOKS_DIR}
-fi
-
-if [ ! -f ${PRE_COMMIT} ]; then
-  echo "#!/bin/bash" > ${PRE_COMMIT}
-  chmod +x ${PRE_COMMIT}
-fi
-
-if grep -q 'git-hooks/pre-commit' ${PRE_COMMIT}; then
-  echo "pre-commit already installed."
-else
-  echo >> ${PRE_COMMIT}
-  echo './git-hooks/pre-commit' >> ${PRE_COMMIT}
-  echo "pre-commit installed."
-fi
-
-BROKER_HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/nfsbroker/hooks
-PRE_COMMIT=${BROKER_HOOKS_DIR}/pre-commit
-
-if [ ! -d ${BROKER_HOOKS_DIR} ]; then
-    mkdir -p ${BROKER_HOOKS_DIR}
-fi
-
-if [ ! -f ${PRE_COMMIT} ]; then
-  echo "#!/bin/bash" > ${PRE_COMMIT}
-  chmod +x ${PRE_COMMIT}
-fi
-
-if grep -q 'git-hooks/pre-commit' ${PRE_COMMIT}; then
-  echo "pre-commit already installed."
-else
-  echo >> ${PRE_COMMIT}
-  echo './git-hooks/pre-commit' >> ${PRE_COMMIT}
-  echo "pre-commit installed."
-fi
+#service-broker-store hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/service-broker-store/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
