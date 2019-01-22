@@ -12,10 +12,7 @@ inputs:
   - name: nfs-volume-release
   - name: lib-nfs
   - name: fuse-nfs
-
-params:
-  - FUSE_MOUNT: ~
-  - NFS_MOUNT: ~
+  - name: nfs-volume-info
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_fuse_nfs_cert

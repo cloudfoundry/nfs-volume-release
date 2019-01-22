@@ -29,6 +29,11 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 #### prepare for acceptance
 ######################################################################################
 
+FUSE_MOUNT="$(cat nfs-volume-info/fuse-nfs-volume-info)"
+export FUSE_MOUNT
+NFS_MOUNT="$(cat nfs-volume-info/nfs-volume-info)"
+export NFS_MOUNT
+
 pushd nfs-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH

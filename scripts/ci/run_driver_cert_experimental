@@ -27,6 +27,9 @@ popd
 service rpcbind start || true
 sleep 5
 
+SOURCE="$(cat nfs-volume-info/fuse-nfs-volume-info)"
+export SOURCE
+
 pushd nfs-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH

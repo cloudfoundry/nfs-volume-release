@@ -12,10 +12,10 @@ inputs:
   - name: nfs-volume-release
   - name: lib-nfs
   - name: fuse-nfs
+  - name: nfs-volume-info
 
 params:
   TRANSPORT: tcp
-  SOURCE: ~
   MULTITHREAD: 0
 
 run:
