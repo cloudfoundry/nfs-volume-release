@@ -74,7 +74,7 @@ var _ = Describe("Certify with: ", func() {
 				output, err = asUser(testLogger, PCAP, PCAP, "mkdir", "-p", pcapMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
-				output, err = asUser(testLogger, PCAP, PCAP, "fuse-nfs", "-n", source, "-m", fmt.Sprintf("%s?uid=3000&gid=3050", pcapMountPath))
+				output, err = asUser(testLogger, PCAP, PCAP, "fuse-nfs", "-n", fmt.Sprintf("%s?uid=3000&gid=3050", source), "-m", pcapMountPath)
 				Expect(err).NotTo(HaveOccurred())
 
 				// root mount
