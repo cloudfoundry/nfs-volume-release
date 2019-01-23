@@ -29,7 +29,7 @@ echo "{
   \"driver_name\": \"nfsv3driver\",
   \"create_config\": {
     \"Name\": \"nfs-volume-name\",
-    \"Opts\": {\"source\":\"$SOURCE\",\"uid\":\"2000\",\"gid\":\"2000\",\"multithread\":\"$MULTITHREAD\"}
+    \"Opts\": {\"source\":\"$SOURCE\",\"uid\":\"2000\",\"gid\":\"2000\"}
   }
 } "  > $NFS_RELEASE_DIR/tmp/fixture.json
 
@@ -49,7 +49,7 @@ mkdir -p $NFS_RELEASE_DIR/tmp/mountdir
 $NFS_RELEASE_DIR/tmp/nfsv3driver -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$drivers_path" \
       --allowed-in-source="uid,gid,version" \
       --default-in-source="" \
-      --allowed-in-mount="auto_cache,multithread" \
+      --allowed-in-mount="auto_cache" \
       --default-in-mount="" \
       --logLevel="debug" &
 
