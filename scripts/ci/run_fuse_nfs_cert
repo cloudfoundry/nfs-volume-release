@@ -12,7 +12,7 @@ pushd lib-nfs
     autoheader
     autoconf
     automake --add-missing
-    ./configure
+    ./configure --prefix=/usr
     make install
 popd
 
@@ -23,9 +23,7 @@ pushd fuse-nfs
     make install
 popd
 
-export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-
-#setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
+setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
 
 ######################################################################################
 #### prepare for acceptance
