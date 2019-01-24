@@ -25,7 +25,7 @@ popd
 
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
-setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
+#setcap 'cap_net_bind_service=+ep' /usr/local/bin/fuse-nfs
 
 ######################################################################################
 #### prepare for acceptance
