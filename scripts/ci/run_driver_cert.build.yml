@@ -16,7 +16,6 @@ inputs:
 
 params:
   TRANSPORT: tcp
-  NUM_FILES: 5
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_driver_cert

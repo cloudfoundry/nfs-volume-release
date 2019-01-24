@@ -2,6 +2,7 @@
 
 set -x -e
 
+### Install ruby and the the bosh cli
 sudo apt-get update
 sudo apt-get --assume-yes install autoconf automake libtool xsltproc libfuse-dev fuse nfs-common
 
@@ -24,8 +25,11 @@ pushd fuse-nfs
     make install
 popd
 
-service rpcbind start || true
-sleep 5
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+######################################################################################
+#### prepare for acceptance
+######################################################################################
 
 SOURCE="$(cat nfs-volume-info/fuse-nfs-volume-info)"
 export SOURCE
@@ -64,7 +68,7 @@ pushd nfs-volume-release
   "driver_name": "nfsv3driver",
   "create_config": {
     "Name": "nfs-volume-name",
-    "Opts": {"source":"${SOURCE}","uid":"2000","gid":"2000","experimental":1}
+    "Opts": {"source":"${SOURCE}","uid":"2000","gid":"2000"}
   }
 }
 EOT
@@ -72,13 +76,7 @@ EOT
   pushd src/code.cloudfoundry.org/nfsv3driver
     go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
 
-    export PATH=$PATH:$PWD
-
     go get -t code.cloudfoundry.org/volume_driver_cert
-
-    go get -t code.cloudfoundry.org/mapfs
-    mkdir -p /var/vcap/packages/mapfs/bin/
-    go build -o "/var/vcap/packages/mapfs/bin/mapfs" "../mapfs/main.go"
 
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 
@@ -86,7 +84,8 @@ EOT
           --allowed-in-source="uid,gid" \
           --default-in-source="" \
           --allowed-in-mount="auto_cache" \
-          --default-in-mount="auto_cache:true" &
+          --default-in-mount="" \
+          --logLevel="debug" &
   popd
 
   ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
