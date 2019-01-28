@@ -113,7 +113,7 @@ properties:
     description: "PEM encoded server private key"
     default: ""
     example: "|
-      -----BEGIN RSA PRIVATE KEY-----
+      -----BEGIN RSA PRIVATE KEY----- // EXAMPLE
       ...
       -----END RSA PRIVATE KEY-----"
   nfsv3driver.tls.client_cert:
@@ -127,7 +127,7 @@ properties:
     description: "PEM encoded client private key"
     default: ""
     example: "|
-      -----BEGIN RSA PRIVATE KEY-----
+      -----BEGIN RSA PRIVATE KEY----- // EXAMPLE
       ...
       -----END RSA PRIVATE KEY-----"
   nfsv3driver.ssl.insecure_skip_verify:
