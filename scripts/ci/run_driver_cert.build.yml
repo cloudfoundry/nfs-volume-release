@@ -10,8 +10,6 @@ image_resource:
 inputs:
   - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
-  - name: lib-nfs
-  - name: fuse-nfs
   - name: nfs-volume-info
 
 params:
