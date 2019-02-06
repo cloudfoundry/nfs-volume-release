@@ -137,7 +137,7 @@ properties:
       description: "Existing NFSv3 and v4 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)"
       bindable: true
       plan_updatable: false
-      tags: ["nfs", "experimental"]
+      tags: ["nfs"]
       requires: ["volume_mount"]
       metadata:
         display_name: "NFS V3 / V4 Volume Broker"

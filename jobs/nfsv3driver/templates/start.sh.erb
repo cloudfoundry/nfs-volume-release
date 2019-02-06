@@ -16,8 +16,6 @@ chown -R vcap:vcap $RUN_DIR
 
 echo $$ > $PIDFILE
 
-export PATH=/var/vcap/packages/fuse-nfs/bin:$PATH
-
 # ldap connection and credential info are passed via environment
 export LDAP_SVC_USER="<%= p("nfsv3driver.ldap_svc_user") %>"
 export LDAP_SVC_PASS="<%= p("nfsv3driver.ldap_svc_password") %>"

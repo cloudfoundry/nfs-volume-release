@@ -3,7 +3,6 @@ name: nfsv3driver
 
 dependencies:
 - golang-1-linux
-- fuse-nfs
 
 files:
   - code.cloudfoundry.org/cfhttp/*.go # gosub
