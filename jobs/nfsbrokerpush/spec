@@ -2,22 +2,28 @@
 name: nfsbrokerpush
 
 templates:
+  Procfile.erb: Procfile
+  credhub.json.erb: credhub.json
+  credhub_ca.crt.erb: credhub_ca.crt
+  db_ca.crt.erb: db_ca.crt
   deploy.sh.erb: bin/run
   manifest.yml.erb: manifest.yml
-  Procfile.erb: Procfile
-  db_ca.crt.erb: db_ca.crt
-  sql.json.erb: sql.json
-  credhub.json.erb: credhub.json
   services.json.erb: config/services.json
+  sql.json.erb: sql.json
   start.sh.erb: start.sh
+  uaa_ca.crt.erb: uaa_ca.crt
 
 packages:
   - nfsbroker
+  - migrate_mysql_to_credhub
+  - credhub-cli
 
 consumes:
   - name: database
     type: database
     optional: true
+  - name: credhub
+    type: credhub
 
 properties:
   nfsbrokerpush.domain:
@@ -69,14 +75,13 @@ properties:
   nfsbrokerpush.db.skip_hostname_validation:
     default: false
     description: "(optional) Skip verification of hostname in database TLS certificate (MySQL only)"
-  nfsbrokerpush.credhub.url:
-    default: ""
-    description: "(optional) CredHub URL when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_id:
     default: ""
     description: "(optional) UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:
     description: "(optional) UAA client secret when using CredHub to store broker state"
+  nfsbrokerpush.credhub.uaa_ca_cert:
+    description: "(optional) CA Cert to verify UAA SSL connection when using CredHub to store broker state"
   nfsbrokerpush.store_id:
     default: "nfsbroker"
     description: "(optional) Store ID used to namespace instance details and bindings in store (CredHub only)"

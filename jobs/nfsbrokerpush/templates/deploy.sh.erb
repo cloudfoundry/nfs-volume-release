@@ -4,23 +4,25 @@ export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
-SCHEME=https
-DOMAIN=<%= p('nfsbrokerpush.domain') %>
-API_ENDPOINT=$SCHEME://api.$DOMAIN
-ORG=<%= p('nfsbrokerpush.organization') %>
-SPACE=<%= p('nfsbrokerpush.space') %>
+API_ENDPOINT=https://api.<%= p('nfsbrokerpush.domain') %>
 APP_NAME=<%= p('nfsbrokerpush.app_name') %>
-SERVICE_BROKER_NAME=<%= p('nfsbrokerpush.broker_name') %>
-SERVICES_CONFIG=/var/vcap/jobs/nfsbrokerpush/config/services.json
-SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
-MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
-PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
-STARTUP_SCRIPT=/var/vcap/jobs/nfsbrokerpush/start.sh
+APP_URL=https://<%= p('nfsbrokerpush.app_name') %>.<%= p('nfsbrokerpush.domain') %>
+export CREDHUB_CA_CERT="<%= link('credhub').p('credhub.ca_certificate') %>"
+export CREDHUB_CLIENT="<%= p('nfsbrokerpush.credhub.uaa_client_id') %>"
+export CREDHUB_SECRET="<%= p('nfsbrokerpush.credhub.uaa_client_secret') %>"
+export CREDHUB_SERVER="<%= link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s %>"
 DB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/db_ca.crt
-CREDHUB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/credhub_ca.crt
-USERNAME="<%= p('nfsbrokerpush.username') %>"
+MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
+ORG=<%= p('nfsbrokerpush.organization') %>
 PASSWORD="<%= p('nfsbrokerpush.password') %>"
-APP_URL=$SCHEME://$APP_NAME.$DOMAIN
+PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
+SERVICES_CONFIG=/var/vcap/jobs/nfsbrokerpush/config/services.json
+SERVICE_BROKER_NAME=<%= p('nfsbrokerpush.broker_name') %>
+SPACE=<%= p('nfsbrokerpush.space') %>
+STARTUP_SCRIPT=/var/vcap/jobs/nfsbrokerpush/start.sh
+STORE_ID="<%= p('nfsbrokerpush.store_id') %>"
+SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
+USERNAME="<%= p('nfsbrokerpush.username') %>"
 
 
 ERROR_EXIT_CODE=<%= p('nfsbrokerpush.error_on_misconfiguration') ? 1 : 0 %>
@@ -60,12 +62,12 @@ function create_manifest() {
   cp -f $STARTUP_SCRIPT /var/vcap/packages/nfsbroker/start.sh
   chmod +x /var/vcap/packages/nfsbroker/start.sh
   cp -f $SERVICES_CONFIG /var/vcap/packages/nfsbroker/services.json
-<% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %>
-  cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
-<% end %>
-<% if_p('nfsbrokerpush.credhub.ca_cert') do |ca_cert| %>
-  cp -f $CREDHUB_CA_CERT /var/vcap/packages/nfsbroker/credhub_ca.crt
-<% end %>
+  if [[ -r ${DB_CA_CERT} ]]; then
+    cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
+  fi
+  if [[ -r ${CREDHUB_CA_CERT} ]]; then
+    cp -f $CREDHUB_CA_CERT /var/vcap/packages/nfsbroker/credhub_ca.crt
+  fi
 }
 
 function create_logging_service() {
@@ -93,6 +95,53 @@ function create_logging_service() {
   fi
 
   cf bind-service $APP_NAME $LOGGER_NAME
+}
+
+function migrate_data_to_credhub() {
+  # Check if migration has run. If so, return.
+  export PATH="/var/vcap/packages/credhub-cli/bin:${PATH}"
+  local migrated_key="/${STORE_ID}/migrated"
+
+  if credhub get -n "${migrated_key}" > /dev/null; then
+    echo "Data already migrated to Credhub."
+    return
+  fi
+
+  # Stop broker
+  cf stop "${APP_NAME}"
+
+  # Run migration
+  <%
+    database_host = nil
+    if_p('nfsbrokerpush.db.host') do |host|
+      database_host = host
+    end.else_if_link('database') do |db_link|
+      database_host = db_link.instances[0].address
+    end
+
+    if database_host == ''
+      raise 'missing database host property or link'
+    end
+  %>
+  /var/vcap/packages/migrate_mysql_to_credhub/bin/migrate_mysql_to_credhub \
+    --dbDriver="<%= p('nfsbrokerpush.db.driver') %>" \
+    --dbHostname="<%= database_host %>" \
+    --dbPort="<%= p('nfsbrokerpush.db.port') %>" \
+    --dbName="<%= p('nfsbrokerpush.db.name') %>" \
+    --dbUsername="<%= p('nfsbrokerpush.db.username') %>" \
+    --dbPassword="<%= p('nfsbrokerpush.db.password') %>" \
+    <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
+    --dbCACertPath="/var/vcap/jobs/nfsbrokerpush/db_ca.crt" \
+    <% end %> \
+    --credhubURL="<%= link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s %>" \
+    --uaaClientID="<%= p('nfsbrokerpush.credhub.uaa_client_id') %>" \
+    --uaaClientSecret="<%= p('nfsbrokerpush.credhub.uaa_client_secret') %>" \
+    --credhubCACertPath="/var/vcap/jobs/nfsbrokerpush/credhub_ca.crt" \
+    --uaaCACertPath="/var/vcap/jobs/nfsbrokerpush/uaa_ca.crt" \
+    --storeID="<%= p('nfsbrokerpush.store_id') %>"
+
+  # Add migration flag to credhub
+  credhub set -n "${migrated_key}" -t value -v true
 }
 
 function push_app() {
@@ -148,6 +197,9 @@ create_manifest
 <% end %>
 <% if p('nfsbrokerpush.create_credhub_security_group') %>
   create_credhub_security_group
+<% end %>
+<% if link('credhub').instances.length > 0 %>
+  migrate_data_to_credhub
 <% end %>
 push_app
 create_logging_service
