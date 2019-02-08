@@ -1,0 +1,6 @@
+
+---
+name: credhub-cli
+
+files:
+- credhub-*.tgz

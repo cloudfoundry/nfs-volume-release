@@ -10,6 +10,9 @@ berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
+credhub-linux-2.2.1.tgz:
+  size: 5168251
+  sha: 8423ebfd3c4375f733a53178591d8ddc3b1d4ddb
 fuse-2.9.2.tar.gz:
   size: 560123
   object_id: 3194fa81-68be-4b39-bc88-1786b2f95f4a
