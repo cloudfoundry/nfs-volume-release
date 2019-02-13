@@ -10,11 +10,18 @@ sleep 5
 
 SOURCE="$(cat nfs-volume-info/nfs-volume-info)"
 export SOURCE
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+
+pushd mapfs-release
+  export GOPATH=$PWD
+  export PATH=$PWD/bin:$PATH
+
+  mkdir -p /var/vcap/packages/mapfs/bin/
+  go build -o "/var/vcap/packages/mapfs/bin/mapfs" "src/code.cloudfoundry.org/mapfs/main.go"
+popd
 
 pushd nfs-volume-release
-  export GOROOT=/usr/local/go
-  export PATH=$GOROOT/bin:$PATH
-
   export GOPATH=$PWD
   export PATH=$PWD/bin:$PATH
 
@@ -56,10 +63,6 @@ EOT
     export PATH=$PATH:$PWD
 
     go get -t code.cloudfoundry.org/volume_driver_cert
-
-    go get -t code.cloudfoundry.org/mapfs
-    mkdir -p /var/vcap/packages/mapfs/bin/
-    go build -o "/var/vcap/packages/mapfs/bin/mapfs" "../mapfs/main.go"
 
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 

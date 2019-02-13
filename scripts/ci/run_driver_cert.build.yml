@@ -11,6 +11,7 @@ inputs:
   - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
   - name: nfs-volume-info
+  - name: mapfs-release
 
 params:
   TRANSPORT: tcp
