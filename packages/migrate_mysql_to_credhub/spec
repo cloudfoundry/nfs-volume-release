@@ -35,6 +35,7 @@ files:
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/migrate_mysql_to_credhub/*.go # gosub
+  - code.cloudfoundry.org/migrate_mysql_to_credhub/migrator/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims/*.go # gosub
   - github.com/go-sql-driver/mysql/*.go # gosub

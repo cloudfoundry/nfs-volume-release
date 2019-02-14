@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-
-mkdir -p ${BOSH_INSTALL_TARGET}/bin
-tar zxvf credhub-*.tgz
-cp credhub ${BOSH_INSTALL_TARGET}/bin/

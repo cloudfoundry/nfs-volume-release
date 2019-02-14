@@ -16,7 +16,6 @@ templates:
 packages:
   - nfsbroker
   - migrate_mysql_to_credhub
-  - credhub-cli
 
 consumes:
   - name: database
