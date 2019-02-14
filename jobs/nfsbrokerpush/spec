@@ -69,13 +69,11 @@ properties:
   nfsbrokerpush.db.name:
     description: 'database name'
   nfsbrokerpush.db.ca_cert:
-    default: ""
     description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
   nfsbrokerpush.db.skip_hostname_validation:
     default: false
     description: "(optional) Skip verification of hostname in database TLS certificate (MySQL only)"
   nfsbrokerpush.credhub.uaa_client_id:
-    default: ""
     description: "(optional) UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:
     description: "(optional) UAA client secret when using CredHub to store broker state"
