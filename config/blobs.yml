@@ -1,31 +1,7 @@
-autoconf-2.69.tar.gz:
-  size: 1927468
-  object_id: 088016b1-790d-4bbd-8144-b75583956015
-  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
-automake-1.15.tar.gz:
-  size: 2244206
-  object_id: 599da939-8df8-4876-ab1b-f6576c2a595b
-  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
 berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
-fuse-2.9.2.tar.gz:
-  size: 560123
-  object_id: 3194fa81-68be-4b39-bc88-1786b2f95f4a
-  sha: fcfc005b1edcd5e8b325729a1b325ff0e8b2a5ab
-fuse-nfs.tar.gz:
-  size: 97950
-  object_id: 82c7526c-d4e3-40d9-88d3-6925081883bb
-  sha: 7d3a9ea3a737e12a4a7512dbaac9c9c6a00cc7bb
-libnfs-1.11.0.tar.gz:
-  size: 2590449
-  object_id: e5211f5a-a5d9-43ac-a134-402926ae1485
-  sha: 6de3ea24278badf40e25457f6178059563c5af89
-libtool-2.4.6.tar.gz:
-  size: 1806697
-  object_id: 04657ae3-fe12-48ad-ab2f-d6ddcb5c96ab
-  sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
 nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb:
   size: 47054
   object_id: 79ec8102-01f0-4e62-7d5a-cac385c29c03
