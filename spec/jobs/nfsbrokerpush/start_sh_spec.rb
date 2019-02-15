@@ -30,7 +30,6 @@ describe 'nfsbrokerpush job' do
 
         expect(tpl_output).to include("bin/nfsbroker --listenAddr=\"0.0.0.0:$PORT\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
-        expect(tpl_output).to include("--storeID=\"some-store-id\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
         expect(tpl_output).to include("--allowedOptions=\"uid,gid,auto_cache,version\"")
@@ -142,6 +141,22 @@ describe 'nfsbrokerpush job' do
     end
 
     context 'when configured with all required credhub properties' do
+      let(:links) do 
+        [
+          Bosh::Template::Test::Link.new(
+            name: 'credhub',
+            instances: [Bosh::Template::Test::LinkInstance.new(address: 'credhub.service.cf.internal')],
+            properties: {
+              'credhub' => {
+                'internal_url' => 'some-credhub-url',
+                'port' => 4321,
+                'ca_certificate' => 'some-certificate',
+              }
+            }
+          )
+        ]
+      end
+      
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
@@ -155,15 +170,15 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'includes the credhub flags in the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: links)
 
-        expect(tpl_output).to include("--credhubURL=\"some-credhub-url\"")
+        expect(tpl_output).to include("--credhubURL=\"some-credhub-url:4321\"")
         expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
         expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
       end
 
       it 'omits the database flags from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: links)
 
         expect(tpl_output).not_to include("--dbDriver=")
         expect(tpl_output).not_to include("--dbHostname=")
