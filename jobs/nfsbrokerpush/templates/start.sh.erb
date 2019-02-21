@@ -8,11 +8,20 @@
   database_name = ''
   database_ca_cert = ''
 
-  if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |client_id, client_secret|
+  if link('credhub').instances.length > 0
     credhub_url = link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s
+
+    if credhub_url !~ /^https?:\/\//
+      credhub_url = 'https://'+credhub_url
+    end
+  end
+
+  if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |client_id, client_secret|
     uaa_client_id = client_id
     uaa_client_secret = client_secret
-  end.else_if_p('nfsbrokerpush.db.driver', 'nfsbrokerpush.db.port', 'nfsbrokerpush.db.name') do |db_driver, db_port, db_name|
+  end
+
+  if_p('nfsbrokerpush.db.driver', 'nfsbrokerpush.db.port', 'nfsbrokerpush.db.name') do |db_driver, db_port, db_name|
     database_driver = db_driver
     database_port = db_port
     database_name = db_name
@@ -40,7 +49,12 @@
 %>
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --servicesConfig="./services.json" \
-              <% if database_driver != '' %> \
+              <% if credhub_url != '' && uaa_client_id != '' && uaa_client_secret != '' %> \
+              --credhubURL="<%= credhub_url %>" \
+              --uaaClientID="<%= uaa_client_id %>" \
+              --uaaClientSecret="<%= uaa_client_secret %>" \
+              --storeID="<%= p('nfsbrokerpush.store_id') %>" \
+              <% elsif database_driver != '' && database_host != '' && database_port != '' && database_name != '' %> \
               --dbDriver="<%= database_driver %>" \
               --dbHostname="<%= database_host %>" \
               --dbPort="<%= database_port %>" \
@@ -51,12 +65,6 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               <% if database_ca_cert != '' %> \
               --dbCACertPath="./db_ca.crt" \
               <% end %> \
-              <% end %> \
-              <% if credhub_url != '' %> \
-              --credhubURL="<%= credhub_url %>" \
-              --uaaClientID="<%= uaa_client_id %>" \
-              --uaaClientSecret="<%= uaa_client_secret %>" \
-              --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               <% end %> \
               --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
               --timeFormat="<%= p("nfsbrokerpush.log_time_format") %>" \

@@ -193,8 +193,10 @@ create_manifest
 <% if p('nfsbrokerpush.create_credhub_security_group') %>
   create_credhub_security_group
 <% end %>
-<% if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do %>
-  migrate_data_to_credhub
+<% if link('credhub').instances.length > 0 %>
+  <% if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do %>
+    migrate_data_to_credhub
+  <% end %>
 <% end %>
 push_app
 create_logging_service
