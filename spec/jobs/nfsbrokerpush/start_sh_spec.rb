@@ -7,6 +7,19 @@ describe 'nfsbrokerpush job' do
 
   describe 'start.sh' do
     let(:template) { job.template('start.sh') }
+    credhub_link = [
+      Bosh::Template::Test::Link.new(
+        name: 'credhub',
+        instances: [Bosh::Template::Test::LinkInstance.new(address: 'credhub.service.cf.internal')],
+        properties: {
+          'credhub' => {
+            'internal_url' => 'some-credhub-url',
+            'port' => 4321,
+            'ca_certificate' => 'some-certificate',
+          }
+        }
+      )
+    ]
 
     context 'when fully configured with all required database properties' do
       let(:manifest_properties) do
@@ -26,7 +39,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'successfully renders the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("bin/nfsbroker --listenAddr=\"0.0.0.0:$PORT\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
@@ -36,7 +49,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'includes the db flags in the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--dbDriver=\"some-db-driver\"")
         expect(tpl_output).to include("--dbHostname=\"some-db-host\"")
@@ -45,19 +58,19 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'omits the dbSkipHostnameValidation flag from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--dbSkipHostnameValidation")
       end
 
       it 'omits the dbCACertPath flag from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--dbCACertPath=")
       end
 
       it 'omits the credhub flags from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--credhubURL=")
         expect(tpl_output).not_to include("--uaaClientID=")
@@ -79,7 +92,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'sets the dbHostname flag from the link address' do
-        links = [
+        db_link = [
           Bosh::Template::Test::Link.new(
             name: 'database',
             instances: [Bosh::Template::Test::LinkInstance.new(address: 'some-db-host-from-link')],
@@ -87,7 +100,7 @@ describe 'nfsbrokerpush job' do
           )
         ]
 
-        tpl_output = template.render(manifest_properties, consumes: links)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link + db_link)
 
         expect(tpl_output).to include("--dbDriver=\"some-db-driver\"")
         expect(tpl_output).to include("--dbHostname=\"some-db-host-from-link\"")
@@ -112,7 +125,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'includes the dbSkipHostnameValidation flag in the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--dbSkipHostnameValidation")
       end
@@ -134,34 +147,17 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'includes the dbCACertPath flag in the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--dbCACertPath=\"./db_ca.crt\"")
       end
     end
 
     context 'when configured with all required credhub properties' do
-      let(:links) do 
-        [
-          Bosh::Template::Test::Link.new(
-            name: 'credhub',
-            instances: [Bosh::Template::Test::LinkInstance.new(address: 'credhub.service.cf.internal')],
-            properties: {
-              'credhub' => {
-                'internal_url' => 'some-credhub-url',
-                'port' => 4321,
-                'ca_certificate' => 'some-certificate',
-              }
-            }
-          )
-        ]
-      end
-      
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
             "credhub" => {
-              "url" => "some-credhub-url",
               "uaa_client_id" => "some-uaa-client-id",
               "uaa_client_secret" => "some-uaa-client-secret",
             }
@@ -170,15 +166,16 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'includes the credhub flags in the script' do
-        tpl_output = template.render(manifest_properties, consumes: links)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
-        expect(tpl_output).to include("--credhubURL=\"some-credhub-url:4321\"")
+        expect(tpl_output).to include("--credhubURL=\"https://some-credhub-url:4321\"")
         expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
         expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
+        expect(tpl_output).to include("--storeID=\"nfsbroker\"")
       end
 
       it 'omits the database flags from the script' do
-        tpl_output = template.render(manifest_properties, consumes: links)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--dbDriver=")
         expect(tpl_output).not_to include("--dbHostname=")
@@ -193,7 +190,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'omits the credhub flags from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--credhubURL=")
         expect(tpl_output).not_to include("--uaaClientID=")
@@ -201,7 +198,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'omits the database flags from the script' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).not_to include("--dbDriver=")
         expect(tpl_output).not_to include("--dbHostname=")
@@ -224,7 +221,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'raises an error' do
-        expect{template.render(manifest_properties)}.to raise_error('missing database host property or link')
+        expect{template.render(manifest_properties, consumes: credhub_link)}.to raise_error('missing database host property or link')
       end
     end
 
@@ -238,7 +235,7 @@ describe 'nfsbrokerpush job' do
       end
 
       it 'sets the allowedOptions flag correctly' do
-        tpl_output = template.render(manifest_properties)
+        tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--allowedOptions=\"auto_cache,username,password,version\"")
       end
