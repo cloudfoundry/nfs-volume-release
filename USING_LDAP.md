@@ -24,10 +24,7 @@ It is not generally necessary to make adjustments to your LDAP server to enable 
 
 If you want to test against this reference LDAP implementation rather than connecting to your own LDAP server, then you can deploy our nfs test ldap server by including the following operations file in your Cloud Foundry
 deployment:
-[https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver.yml](https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver.yml)
-
-If you want to use test LDAP server with TLS, use the following operations file instead:
-[https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver-tls.yml](https://github.com/cloudfoundry/nfs-volume-release/blob/master/operations/enable-nfs-test-ldapserver-tls.yml)
+[https://github.com/cloudfoundry/cf-deployment/blob/master/operations/test/enable-nfs-test-ldapserver.yml](https://github.com/cloudfoundry/cf-deployment/blob/master/operations/test/enable-nfs-test-ldapserver.yml)
 
 ## Changes to your `nfs-volume-release` deployment.
 
