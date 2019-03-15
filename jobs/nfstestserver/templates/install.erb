@@ -3,8 +3,11 @@
 set -e
 
 echo "Installing nfs server..."
+(
+flock -x 200
 apt-get update
 apt-get --assume-yes install nfs-kernel-server
+) 200>/var/vcap/data/dpkg.lock
 
 echo "Creating export directories..."
 mkdir -p <%= p("nfstestserver.export_root_path") %>/export/users
