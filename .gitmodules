@@ -105,3 +105,6 @@
 	path = src/code.cloudfoundry.org/dockerdriver
 	url = https://github.com/cloudfoundry/dockerdriver
 	branch = master
+[submodule "src/code.cloudfoundry.org/existingvolumebroker"]
+	path = src/code.cloudfoundry.org/existingvolumebroker
+	url = https://github.com/cloudfoundry/existingvolumebroker.git
