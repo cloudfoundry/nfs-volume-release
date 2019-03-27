@@ -14,7 +14,7 @@ config/dev.yml
 releases/nfs-volume/*.tgz
 
 ## goPath system specifics
-pkg
+/pkg
 /bin
 
 ## vim plugins to ignore

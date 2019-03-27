@@ -111,3 +111,6 @@
 [submodule "src/code.cloudfoundry.org/volume-mount-options"]
 	path = src/code.cloudfoundry.org/volume-mount-options
 	url = https://github.com/cloudfoundry/volume-mount-options.git
+[submodule "src/github.com/pkg/errors"]
+	path = src/github.com/pkg/errors
+	url = https://github.com/pkg/errors.git
