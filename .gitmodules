@@ -108,3 +108,6 @@
 [submodule "src/code.cloudfoundry.org/existingvolumebroker"]
 	path = src/code.cloudfoundry.org/existingvolumebroker
 	url = https://github.com/cloudfoundry/existingvolumebroker.git
+[submodule "src/code.cloudfoundry.org/volume-mount-options"]
+	path = src/code.cloudfoundry.org/volume-mount-options
+	url = https://github.com/cloudfoundry/volume-mount-options.git

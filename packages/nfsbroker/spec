@@ -31,6 +31,7 @@ files:
   - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/context/*.go # gosub
   - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/existingvolumebroker/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/mysqlshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
@@ -38,16 +39,16 @@ files:
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/nfsbroker/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/utils/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
   - github.com/go-sql-driver/mysql/*.go # gosub
   - github.com/gorilla/mux/*.go # gosub
-  - github.com/lib/pq/*.go # gosub
-  - github.com/lib/pq/oid/*.go # gosub
   - github.com/pivotal-cf/brokerapi/*.go # gosub
   - github.com/pivotal-cf/brokerapi/auth/*.go # gosub
+  - github.com/pkg/errors/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
   - github.com/tedsuo/ifrit/http_server/*.go # gosub
