@@ -25,12 +25,12 @@ function cf_auth_and_target() {
 	echo -e  "********************\n"
 
 	if ! cf target -o $ORG -s $SPACE ; then
-		echo "nfsbroker org/space not found; exiting"
+		echo "org '$ORG' with space '$SPACE' not found; exiting"
 		exit 0
 	fi
 
 	if ! cf app $APP_NAME ; then
-		echo "nfsbroker app not deployed; exiting"
+		echo "'$APP_NAME' app not deployed; exiting"
 		exit 0
 	fi
 }
