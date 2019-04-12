@@ -7,6 +7,8 @@ templates:
   config.json.erb: config/config.json
   backup.sh.erb: bin/bbr/backup
   restore.sh.erb: bin/bbr/restore
+  metadata.sh.erb: bin/bbr/metadata
+  post-restore-unlock.sh.erb: bin/bbr/post-restore-unlock
 
 packages: []
 

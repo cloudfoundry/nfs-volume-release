@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+<% if p('nfsbroker.release_level_backup') %>
+
+set -ex
+
+PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
+
+API_ENDPOINT=https://api.<%= p('nfsbrokerpush.domain') %>
+ORG=<%= p('nfsbrokerpush.organization') %>
+SPACE=<%= p('nfsbrokerpush.space') %>
+APP_NAME=<%= p('nfsbrokerpush.app_name') %>
+
+function cf_auth_and_target() {
+	echo "Authenticate and target..."
+
+	cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
+
+    set +x
+	<% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
+        cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+    <% end.else do %>
+        cf auth "<%= p('nfsbrokerpush.cf.admin_user') %>" "<%= p('nfsbrokerpush.cf.admin_password') %>"
+    <% end %>
+	set -x
+	echo -e  "********************\n"
+
+	if ! cf target -o $ORG -s $SPACE ; then
+		echo "nfsbroker org/space not found; exiting"
+		exit 0
+	fi
+
+	if ! cf app $APP_NAME ; then
+		echo "nfsbroker app not deployed; exiting"
+		exit 0
+	fi
+}
+
+cf_auth_and_target
+
+if [[ -x /var/vcap/jobs/nfsbrokerpush/bin/run ]]; then
+    echo "\"nfsbrokerpush\" errand found: running"
+    /var/vcap/jobs/nfsbrokerpush/bin/run
+    echo "\"nfsbrokerpush\" errand found: finished"
+else
+    echo "\"nfsbrokerpush\" errand not found: starting app"
+    cf start $APP_NAME
+    echo "\"nfsbrokerpush\" errand found: finished"
+fi
+
+<% else %>
+    echo "script deactivated due to release_level_backup being set to FALSE\n"
+<% end %>
