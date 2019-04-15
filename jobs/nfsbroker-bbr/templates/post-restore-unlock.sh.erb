@@ -5,21 +5,24 @@ set -ex
 
 PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
 
-API_ENDPOINT=https://api.<%= p('nfsbrokerpush.domain') %>
-ORG=<%= p('nfsbrokerpush.organization') %>
-SPACE=<%= p('nfsbrokerpush.space') %>
-APP_NAME=<%= p('nfsbrokerpush.app_name') %>
+API_ENDPOINT=https://api.<%= p('nfsbroker.domain') %>
+ORG=<%= p('nfsbroker.organization') %>
+SPACE=<%= p('nfsbroker.space') %>
+APP_NAME=<%= p('nfsbroker.app_name') %>
+export CF_HOME=/var/vcap/data/nfsbrokerbbr_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
+mkdir -p $CF_HOME
+
 
 function cf_auth_and_target() {
 	echo "Authenticate and target..."
 
-	cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
+	cf api $API_ENDPOINT <% if p('nfsbroker.skip_cert_verify') %>--skip-ssl-validation<% end %>
 
     set +x
-	<% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
+	<% if_p('nfsbroker.cf.client_id', 'nfsbroker.cf.client_secret') do |client_id, client_secret| %>
         cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
     <% end.else do %>
-        cf auth "<%= p('nfsbrokerpush.cf.admin_user') %>" "<%= p('nfsbrokerpush.cf.admin_password') %>"
+        cf auth "<%= p('nfsbroker.cf.admin_user') %>" "<%= p('nfsbroker.cf.admin_password') %>"
     <% end %>
 	set -x
 	echo -e  "********************\n"
