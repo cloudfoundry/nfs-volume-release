@@ -47,7 +47,7 @@ if [[ -x /var/vcap/jobs/nfsbrokerpush/bin/run ]]; then
 else
     echo "\"nfsbrokerpush\" errand not found: starting app"
     cf start $APP_NAME
-    echo "\"nfsbrokerpush\" errand found: finished"
+    echo "\"nfsbrokerpush\" errand not found: finished"
 fi
 
 <% else %>
