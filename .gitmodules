@@ -62,10 +62,6 @@
 	path = src/code.cloudfoundry.org/nfsbroker
 	url = https://github.com/cloudfoundry/nfsbroker
 	branch = master
-[submodule "src/github.com/lib/pq"]
-	path = src/github.com/lib/pq
-	url = https://github.com/lib/pq
-	branch = master
 [submodule "src/github.com/go-sql-driver/mysql"]
 	path = src/github.com/go-sql-driver/mysql
 	url = https://github.com/go-sql-driver/mysql
@@ -94,6 +90,7 @@
 [submodule "src/github.com/jessevdk/go-flags"]
 	path = src/github.com/jessevdk/go-flags
 	url = https://github.com/jessevdk/go-flags
+	branch = master
 [submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
 	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
 	url = https://github.com/DATA-DOG/go-sqlmock
@@ -107,10 +104,15 @@
 	branch = master
 [submodule "src/code.cloudfoundry.org/existingvolumebroker"]
 	path = src/code.cloudfoundry.org/existingvolumebroker
-	url = https://github.com/cloudfoundry/existingvolumebroker.git
+	url = https://github.com/cloudfoundry/existingvolumebroker
 [submodule "src/code.cloudfoundry.org/volume-mount-options"]
 	path = src/code.cloudfoundry.org/volume-mount-options
-	url = https://github.com/cloudfoundry/volume-mount-options.git
+	url = https://github.com/cloudfoundry/volume-mount-options
 [submodule "src/github.com/pkg/errors"]
 	path = src/github.com/pkg/errors
-	url = https://github.com/pkg/errors.git
+	url = https://github.com/pkg/errors
+	branch = master
+[submodule "src/code.cloudfoundry.org/tlsconfig"]
+	path = src/code.cloudfoundry.org/tlsconfig
+	url = https://github.com/cloudfoundry/tlsconfig
+	branch = master

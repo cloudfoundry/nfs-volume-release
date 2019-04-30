@@ -28,6 +28,7 @@ files:
   - code.cloudfoundry.org/nfsv3driver/driveradmin/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminlocal/*.go # gosub
+  - code.cloudfoundry.org/tlsconfig/*.go # gosub
   - code.cloudfoundry.org/volumedriver/*.go # gosub
   - code.cloudfoundry.org/volumedriver/mountchecker/*.go # gosub
   - code.cloudfoundry.org/volumedriver/oshelper/*.go # gosub
