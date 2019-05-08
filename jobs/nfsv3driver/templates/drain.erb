@@ -16,7 +16,7 @@ exec 1>> $LOGFILE
 exec 2>> $LOGFILE
 
 evacuate() {
-  curl --fail --silent http://$ADDRESS/evacuate >/dev/null 2>&1
+  curl --fail --max-time 600 --silent http://$ADDRESS/evacuate >/dev/null 2>&1
 }
 
 heartbeat() {
@@ -32,6 +32,7 @@ output_for_bosh() {
     echo "$(date): evacuation failed"
   fi
 
+  #See https://www.pivotaltracker.com/story/show/165747144/comments/202416034
   echo $exit_code >&3
 }
 
@@ -57,7 +58,12 @@ done
 
 echo "$(date): rep is done..evacuating nfsv3driver"
 
-if evacuate; then
+set +e
+evacuate
+evacuate_exit_code=$?
+set -e
+
+if [ $evacuate_exit_code -eq 0 ]; then
   for i in {1..60}; do
     if heartbeat; then
       echo "$(date): waiting"
@@ -69,6 +75,10 @@ if evacuate; then
 
   kill -9 $pid || true
   rm -rf $PIDFILE || true
+elif [ $evacuate_exit_code -eq 28 ]; then
+   echo "$(date): Drain timed out"
+   kill -9 $pid || true
+   rm -rf $PIDFILE || true
 else
   exit 1
 fi
