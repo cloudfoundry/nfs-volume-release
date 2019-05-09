@@ -7,32 +7,15 @@ templates:
   config.json.erb: config/config.json
   backup.sh.erb: bin/bbr/backup
   restore.sh.erb: bin/bbr/restore
-  metadata.sh.erb: bin/bbr/metadata
-  post-restore-unlock.sh.erb: bin/bbr/post-restore-unlock
 
 packages: []
 
+consumes:
+  - name: database
+    type: database
+    optional: true
+
 properties:
-  nfsbroker.domain:
-    description: 'Cloud Foundry system domain'
-  nfsbroker.cf.admin_user:
-    description: 'username of the CF admin user'
-  nfsbroker.cf.admin_password:
-    description: 'password of the CF admin user'
-  nfsbroker.cf.client_id:
-    description: 'ID of the CF client'
-  nfsbroker.cf.client_secret:
-    description: 'Secret of the CF client'
-  nfsbroker.organization:
-    description: 'organization that hosts the app'
-  nfsbroker.space:
-    description: 'space that hosts the app'
-  nfsbroker.app_name:
-    description: 'application name to use when pushing the broker to cloud foundry and setting the route'
-    default: nfsbroker
-  nfsbroker.skip_cert_verify:
-    description: 'true if the cf api uses test certs that should not be verified'
-    default: false
   nfsbroker.db_driver:
     default: ""
     description: "(optional) database driver name when using SQL to store broker state"
