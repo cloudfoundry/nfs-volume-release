@@ -2,13 +2,11 @@
 
 set -x -e
 
-sudo apt-get update
-sudo apt-get --assume-yes install fuse nfs-common
-
-service rpcbind start || true
+/opt/start_nfs.sh &
 sleep 5
+chmod 777 /data/nfs
 
-SOURCE="$(cat nfs-volume-info/nfs-volume-info)"
+SOURCE="localhost:/"
 export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
@@ -34,6 +32,8 @@ pushd nfs-volume-release
   listen_address=0.0.0.0:7589
 
   drivers_path="${NFS_ACCEPTANCE_DIR}/voldriver_plugins"
+  mkdir -p $drivers_path
+  chmod 777 $drivers_path
 
   if [ "$TRANSPORT" == "tcp" ]
       then
