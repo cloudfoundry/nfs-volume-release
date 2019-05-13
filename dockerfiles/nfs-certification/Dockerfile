@@ -1,6 +1,6 @@
 FROM janeczku/nfs-ganesha
 
-RUN yum --disablerepo=centos-gluster37 install -y fuse
+RUN yum --disablerepo=centos-gluster37 install -y fuse git
 
 RUN curl -L https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz | tar -C /usr/local -xz
 
