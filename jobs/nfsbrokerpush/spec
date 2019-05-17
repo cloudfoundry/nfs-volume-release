@@ -24,6 +24,20 @@ consumes:
   - name: credhub
     type: credhub
 
+provides:
+  - name: nfsbrokerpush
+    type: nfsbrokerpush
+    properties:
+    - nfsbrokerpush.domain
+    - nfsbrokerpush.cf.admin_user
+    - nfsbrokerpush.cf.admin_password
+    - nfsbrokerpush.cf.client_id
+    - nfsbrokerpush.cf.client_secret
+    - nfsbrokerpush.organization
+    - nfsbrokerpush.space
+    - nfsbrokerpush.app_name
+    - nfsbrokerpush.skip_cert_verify
+
 properties:
   nfsbrokerpush.domain:
     description: 'Cloud Foundry system domain'

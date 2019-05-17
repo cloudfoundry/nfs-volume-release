@@ -7,27 +7,7 @@ templates:
 
 packages: []
 
-properties:
-  nfsbroker.domain:
-    description: 'Cloud Foundry system domain'
-  nfsbroker.cf.admin_user:
-    description: 'username of the CF admin user'
-  nfsbroker.cf.admin_password:
-    description: 'password of the CF admin user'
-  nfsbroker.cf.client_id:
-    description: 'ID of the CF client'
-  nfsbroker.cf.client_secret:
-    description: 'Secret of the CF client'
-  nfsbroker.organization:
-    description: 'organization that hosts the app'
-  nfsbroker.space:
-    description: 'space that hosts the app'
-  nfsbroker.app_name:
-    description: 'application name to use when pushing the broker to cloud foundry and setting the route'
-    default: nfsbroker
-  nfsbroker.skip_cert_verify:
-    description: 'true if the cf api uses test certs that should not be verified'
-    default: false
-  nfsbroker.release_level_backup:
-    default: false
-    description: "Enable bbr scripts"
+consumes:
+  - name: nfsbrokerpush
+    type: nfsbrokerpush
+

@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
-<% if p('nfsbroker.release_level_backup') %>
+set -euo pipefail
+set -x
 
-set -ex
+PATH="/var/vcap/packages/cf-cli-6-linux/bin:${PATH}"
 
-PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
-
-API_ENDPOINT=https://api.<%= p('nfsbroker.domain') %>
-ORG=<%= p('nfsbroker.organization') %>
-SPACE=<%= p('nfsbroker.space') %>
-APP_NAME=<%= p('nfsbroker.app_name') %>
+API_ENDPOINT=https://api.<%= link('nfsbrokerpush').p('nfsbrokerpush.domain') %>
+ORG=<%= link('nfsbrokerpush').p('nfsbrokerpush.organization') %>
+SPACE=<%= link('nfsbrokerpush').p('nfsbrokerpush.space') %>
+APP_NAME=<%= link('nfsbrokerpush').p('nfsbrokerpush.app_name') %>
 export CF_HOME=/var/vcap/data/nfsbrokerbbr_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 mkdir -p $CF_HOME
 
@@ -16,25 +15,25 @@ mkdir -p $CF_HOME
 function cf_auth_and_target() {
 	echo "Authenticate and target..."
 
-	cf api $API_ENDPOINT <% if p('nfsbroker.skip_cert_verify') %>--skip-ssl-validation<% end %>
+	cf api $API_ENDPOINT <% if link('nfsbrokerpush').p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
 
-    set +x
-	<% if_p('nfsbroker.cf.client_id', 'nfsbroker.cf.client_secret') do |client_id, client_secret| %>
+	set +x
+    <% link('nfsbrokerpush').if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
         cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
     <% end.else do %>
-        cf auth "<%= p('nfsbroker.cf.admin_user') %>" "<%= p('nfsbroker.cf.admin_password') %>"
+        cf auth "<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_user') %>" "<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_password') %>"
     <% end %>
 	set -x
 	echo -e  "********************\n"
 
 	if ! cf target -o $ORG -s $SPACE ; then
-		echo "org '$ORG' with space '$SPACE' not found; exiting"
-		exit 0
+	    echo "org '${ORG}' with space '${SPACE}' not found; exiting"
+	    exit 0
 	fi
 
 	if ! cf app $APP_NAME ; then
-		echo "'$APP_NAME' app not deployed; exiting"
-		exit 0
+	    echo "'${APP_NAME}' app not deployed; exiting"
+	    exit 0
 	fi
 }
 
@@ -49,7 +48,3 @@ else
     cf start $APP_NAME
     echo "\"nfsbrokerpush\" errand not found: finished"
 fi
-
-<% else %>
-    echo "script deactivated due to release_level_backup being set to FALSE\n"
-<% end %>
