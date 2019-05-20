@@ -1,0 +1,13 @@
+---
+name: nfsbroker-bbr-lock
+
+templates:
+  metadata.sh.erb: bin/bbr/metadata
+  post-restore-unlock.sh.erb: bin/bbr/post-restore-unlock
+
+packages: []
+
+consumes:
+  - name: nfsbrokerpush
+    type: nfsbrokerpush
+
