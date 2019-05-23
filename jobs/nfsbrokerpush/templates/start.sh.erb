@@ -41,10 +41,10 @@
     end
   end
 
-  allowed_options = 'source,uid,gid,auto_cache,readonly,version'
+  allowed_options = 'source,uid,gid,auto_cache,readonly,version,mount'
 
   if p('nfsbrokerpush.ldap_enabled')
-    allowed_options = 'source,auto_cache,username,password,readonly,version'
+    allowed_options = 'source,auto_cache,username,password,readonly,version,mount'
   end
 %>
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
