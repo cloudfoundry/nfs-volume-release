@@ -1,0 +1,38 @@
+name: bosh_release_test
+
+releases:
+  - name: nfs-volume
+    sha1: d5fccd5585842e241e889aea509671943f5ec430
+    url: https://bosh.io/d/github.com/cloudfoundry/nfs-volume-release?v=2.0.5
+    version: 2.0.5
+  - name: mapfs
+    sha1: 44c6dc3b8eeb7c5769e44b78484c32ee68cc97fc
+    url: https://bosh.io/d/github.com/cloudfoundry/mapfs-release?v=1.1.5
+    version: 1.1.5
+
+instance_groups:
+  - name: nfsv3driver
+    instances: 1
+    jobs:
+      - name: nfsv3driver
+        release: nfs-volume
+      - name: mapfs
+        release: mapfs
+    azs:
+      - z1
+    stemcell: default
+    networks:
+      - name: default
+    vm_type: default
+
+stemcells:
+  - alias: default
+    os: ubuntu-xenial
+    version: latest
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-1200000
+  max_in_flight: 1
+  serial: false
+  update_watch_time: 5000-1200000
