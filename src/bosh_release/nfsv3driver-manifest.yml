@@ -2,13 +2,11 @@ name: bosh_release_test
 
 releases:
   - name: nfs-volume
-    sha1: d5fccd5585842e241e889aea509671943f5ec430
-    url: https://bosh.io/d/github.com/cloudfoundry/nfs-volume-release?v=2.0.5
-    version: 2.0.5
+    url: ((path_to_nfs_volume_release))
+    version: create
   - name: mapfs
-    sha1: 44c6dc3b8eeb7c5769e44b78484c32ee68cc97fc
-    url: https://bosh.io/d/github.com/cloudfoundry/mapfs-release?v=1.1.5
-    version: 1.1.5
+    url: ((path_to_mapfs_release))
+    version: create
 
 instance_groups:
   - name: nfsv3driver

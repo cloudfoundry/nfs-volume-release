@@ -2,10 +2,12 @@ package bosh_release_test
 
 import (
 	"encoding/json"
+	"fmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"os"
 	"os/exec"
 	"time"
 
@@ -27,7 +29,14 @@ var _ = BeforeSuite(func() {
 })
 
 func deploy() {
-	boshDeployCmd := exec.Command("bosh", "deploy", "-n", "-d", "bosh_release_test", "./nfsv3driver-manifest.yml")
+	boshDeployCmd := exec.Command("bosh",
+		"deploy",
+		"-n",
+		"-d",
+		"bosh_release_test",
+		"./nfsv3driver-manifest.yml",
+		"-v", fmt.Sprintf("path_to_nfs_volume_release=%s", os.Getenv("NFS_VOLUME_RELEASE_PATH")),
+		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")))
 	session, err := gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 10*time.Minute).Should(gexec.Exit(0))
