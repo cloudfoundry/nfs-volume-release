@@ -1,6 +1,0 @@
-#!/bin/bash
-
-RELEASE_NAME=$(basename $PWD)
-NOTE_NAME="${RELEASE_NAME}-private-yml"
-echo "Retrieving private.yml from ${NOTE_NAME}..."
-lpass show --note "${NOTE_NAME}" > config/private.yml
