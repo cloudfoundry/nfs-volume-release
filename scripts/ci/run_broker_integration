@@ -5,13 +5,15 @@ set -e -x
 
 {
     cd credhub
-    ./scripts/start_server.sh -Dspring.profiles.active=dev,dev-h2
+    ./scripts/start_server.sh -Dspring.profiles.active=dev,dev-h2 > /tmp/start_credhub.log 2>&1
     kill -9 `ps --pid $$ -oppid=`; exit
 }&
 
 until curl -f -v http://localhost:9001/health; do
     sleep 10;
 done
+
+cp credhub/applications/credhub-api/src/test/resources/server_ca_cert.pem /tmp/server_ca_cert.pem
 
 pushd nfs-volume-release
     export GOPATH=$PWD
