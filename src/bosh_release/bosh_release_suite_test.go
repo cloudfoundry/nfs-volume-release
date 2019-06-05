@@ -39,7 +39,7 @@ func deploy() {
 		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")))
 	session, err := gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
-	Eventually(session, 10*time.Minute).Should(gexec.Exit(0))
+	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
 }
 
 func hasStemcell() bool {
