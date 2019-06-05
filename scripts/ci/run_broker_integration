@@ -1,0 +1,23 @@
+#!/bin/bash
+# vim: set ft=sh
+
+set -e -x
+
+{
+    cd credhub
+    ./scripts/start_server.sh -Dspring.profiles.active=dev,dev-h2
+    kill -9 `ps --pid $$ -oppid=`; exit
+}&
+
+until curl -f -v http://localhost:9001/health; do
+    sleep 10;
+done
+
+pushd nfs-volume-release
+    export GOPATH=$PWD
+    export PATH=$PWD/bin:$PATH
+
+    cd src/code.cloudfoundry.org/nfsbroker
+
+    ginkgo -keepGoing -p -trace -randomizeAllSpecs -progress .
+popd
