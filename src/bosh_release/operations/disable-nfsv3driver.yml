@@ -1,0 +1,5 @@
+- path: /instance_groups/name=nfsv3driver/jobs/name=nfsv3driver/properties?
+  type: replace
+  value:
+    nfsv3driver:
+      disable: true

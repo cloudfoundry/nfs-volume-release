@@ -1,5 +1,6 @@
 #!/bin/bash
-
+<% if p("nfsv3driver.disable") %>
+<% else %>
 set -e
 
 install_if_missing ()
@@ -39,3 +40,4 @@ echo "Copying client certs to data directory..."
 copy_client_certs_to_spec_dir
 
 exit 0
+<% end %>

@@ -20,6 +20,7 @@ func TestBoshReleaseTest(t *testing.T) {
 }
 
 var _ = BeforeSuite(func() {
+	SetDefaultEventuallyTimeout(10 * time.Minute)
 
 	if !hasStemcell() {
 		uploadStemcell()
@@ -28,15 +29,23 @@ var _ = BeforeSuite(func() {
 	deploy()
 })
 
-func deploy() {
-	boshDeployCmd := exec.Command("bosh",
-		"deploy",
+func deploy(opsfiles ...string) {
+	deployCmd := []string {"deploy",
 		"-n",
 		"-d",
 		"bosh_release_test",
 		"./nfsv3driver-manifest.yml",
 		"-v", fmt.Sprintf("path_to_nfs_volume_release=%s", os.Getenv("NFS_VOLUME_RELEASE_PATH")),
-		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")))
+		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")),
+	}
+
+	updatedDeployCmd := make([]string, len(deployCmd))
+	copy(updatedDeployCmd, deployCmd)
+	for _, optFile := range opsfiles {
+		updatedDeployCmd = append(updatedDeployCmd, "-o", optFile)
+	}
+
+	boshDeployCmd := exec.Command("bosh", updatedDeployCmd...)
 	session, err := gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
