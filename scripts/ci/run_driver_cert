@@ -2,9 +2,7 @@
 
 set -x -e
 
-/opt/start_nfs.sh &
-sleep 5
-chmod 777 /data/nfs
+/start.sh &
 
 SOURCE="localhost:/"
 export SOURCE
