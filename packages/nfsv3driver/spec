@@ -30,10 +30,13 @@ files:
   - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminlocal/*.go # gosub
   - code.cloudfoundry.org/tlsconfig/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
   - code.cloudfoundry.org/volumedriver/*.go # gosub
   - code.cloudfoundry.org/volumedriver/mountchecker/*.go # gosub
   - code.cloudfoundry.org/volumedriver/oshelper/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
+  - github.com/pkg/errors/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
   - github.com/tedsuo/ifrit/http_server/*.go # gosub
