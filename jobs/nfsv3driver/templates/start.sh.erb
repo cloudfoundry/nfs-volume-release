@@ -55,8 +55,6 @@ exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --logLevel="<%= p("nfsv3driver.log_level") %>" \
   --timeFormat="<%= p("nfsv3driver.log_time_format") %>" \
   --mapfsPath="<%= link("mapfs").p("path") %>" \
-  --allowed-in-source="<%= p("nfsv3driver.allowed-in-source") %>" \
-  --default-in-source="<%= p("nfsv3driver.default-in-source") %>" \
   --allowed-in-mount="<%= p("nfsv3driver.allowed-in-mount") %>" \
   --default-in-mount="<%= p("nfsv3driver.default-in-mount") %>" \
   >> $LOG_DIR/nfsv3driver.stdout.log \
