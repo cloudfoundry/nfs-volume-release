@@ -1,5 +1,13 @@
 #!/bin/bash -eux
 
+pushd ~/workspace/nfs-volume-release
+    bosh reset-release
+popd
+
+pushd ~/workspace/mapfs-release
+    bosh reset-release
+popd
+
 docker run \
 -t \
 -i \
