@@ -4,6 +4,12 @@ set -x -e
 
 /start.sh &
 
+function kill_ganesha {
+    pkill -9 ganesha || true
+}
+
+trap kill_ganesha EXIT
+
 SOURCE="localhost:/"
 export SOURCE
 export GOROOT=/usr/local/go
@@ -71,10 +77,13 @@ EOT
           --default-in-mount="auto_cache:true" &
   popd
 
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
+  function kill_nfsv3driver_and_ganesha {
+    pkill -9 ganesha || true
+    pkill -9 nfsv3driver || true
+  }
 
-  pkill -9 nfsv3driver || true
-  pkill -9 ganesha || true
+  trap kill_nfsv3driver_and_ganesha EXIT
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
 
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
