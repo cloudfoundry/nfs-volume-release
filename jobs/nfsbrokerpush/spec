@@ -69,24 +69,24 @@ properties:
     description: 'service name in marketplace'
     default: nfs
   nfsbrokerpush.db.driver:
-    description: 'mysql or postgres'
+    description: '[DEPRECATED] mysql or postgres'
     default: mysql
   nfsbrokerpush.db.host:
-    description: 'database host'
+    description: '[DEPRECATED] database host'
   nfsbrokerpush.db.port:
-    description: 'database port'
+    description: '[DEPRECATED] database port'
     default: 3306
   nfsbrokerpush.db.username:
-    description: 'database username'
+    description: '[DEPRECATED] database username'
   nfsbrokerpush.db.password:
-    description: 'database password'
+    description: '[DEPRECATED] database password'
   nfsbrokerpush.db.name:
-    description: 'database name'
+    description: '[DEPRECATED] database name'
   nfsbrokerpush.db.ca_cert:
-    description: "(optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
+    description: "[DEPRECATED] (optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
   nfsbrokerpush.db.skip_hostname_validation:
     default: false
-    description: "(optional) Skip verification of hostname in database TLS certificate (MySQL only)"
+    description: "[DEPRECATED] (optional) Skip verification of hostname in database TLS certificate (MySQL only)"
   nfsbrokerpush.credhub.uaa_client_id:
     description: "(optional) UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:

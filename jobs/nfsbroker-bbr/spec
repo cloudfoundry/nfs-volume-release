@@ -1,6 +1,4 @@
 ---
-# This job name should be unique, as several backup and restore scripts for different components could be collocated on the same machine.
-# The directory structure will be organized by job name.
 name: nfsbroker-bbr
 
 templates:
@@ -18,28 +16,28 @@ consumes:
 properties:
   nfsbroker.db_driver:
     default: ""
-    description: "(optional) database driver name when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database driver name when using SQL to store broker state"
   nfsbroker.db_username:
     default: ""
-    description: "(optional) database username when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database username when using SQL to store broker state"
   nfsbroker.db_password:
     default: ""
-    description: "(optional) database password when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database password when using SQL to store broker state"
   nfsbroker.db_hostname:
     default: ""
-    description: "(optional) database hostname when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database hostname when using SQL to store broker state"
   nfsbroker.db_port:
     default: ""
-    description: "(optional) database port when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database port when using SQL to store broker state"
   nfsbroker.db_name:
     default: ""
-    description: "(optional) database name when using SQL to store broker state"
+    description: "[DEPRECATED] (optional) database name when using SQL to store broker state"
   nfsbroker.db_ca_cert:
     default: ""
-    description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
+    description: "[DEPRECATED] (optional) CA Cert to verify SSL connection, if not include, connection will be plain"
   nfsbroker.db_skip_hostname_validation:
     default: false
-    description: "(optional) Skip verification of hostname in database TLS certificate"
+    description: "[DEPRECATED] (optional) Skip verification of hostname in database TLS certificate"
   nfsbroker.release_level_backup:
     default: false
     description: "Enable bbr scripts"
