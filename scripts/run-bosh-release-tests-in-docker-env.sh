@@ -1,5 +1,6 @@
 #!/bin/bash -eux
 
+export DOCKER_STORAGE_OPTIONS='--storage-opt dm.basesize=100G'
 start-bosh
 
 export DOCKER_TMP_DIR=$(find /tmp/ -name "tmp.*")
