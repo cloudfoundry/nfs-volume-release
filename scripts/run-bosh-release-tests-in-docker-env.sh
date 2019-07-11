@@ -27,4 +27,4 @@ docker \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 cfpersi/bosh-release-tests \
-ginkgo .
+ginkgo -v .
