@@ -1,4 +1,4 @@
-FROM golang:1.12.5
+FROM golang:1.12.7
 
 RUN wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.5.1/bosh-cli-5.5.1-linux-amd64
 RUN chmod +x bosh-cli-5.5.1-linux-amd64
