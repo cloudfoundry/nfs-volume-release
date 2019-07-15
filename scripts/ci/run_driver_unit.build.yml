@@ -4,7 +4,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: cloudfoundry/inigo-ci
+    repository: cfpersi/nfs-unit-tests
     tag: latest
 
 inputs:
