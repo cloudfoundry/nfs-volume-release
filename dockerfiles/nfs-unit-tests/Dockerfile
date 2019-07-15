@@ -5,7 +5,7 @@ RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1-linux.tgz | tar 
 
 FROM ubuntu
 
-RUN apt-get update && apt-get install -y git curl wget
+RUN apt-get update && apt-get install -y git gcc curl wget
 
 COPY --from=golang_version /tmp/golang_version /tmp/golang_version
 RUN wget https://dl.google.com/go/$(cat /tmp/golang_version).linux-amd64.tar.gz
