@@ -73,6 +73,36 @@ describe 'nfsbroker-bbr job' do
       end
     end
 
+    context 'when a CA cert is not specified' do
+      let(:manifest_properties) do
+        {
+            "nfsbroker" => {
+                "db_hostname" => "some-db-host",
+                "db_username" => "some-db-user",
+                "db_password" => "some-db-password",
+                "db_port" => "some-db-port",
+                "db_name" => "some-db-name",
+                "db_driver" => "some-db-driver",
+                "db_ca_cert" => nil,
+            }
+        }
+      end
+
+      it 'includes the CA cert' do
+        tpl_output = template.render(manifest_properties)
+
+        config = JSON.parse(tpl_output)
+        expect(config).to eq({
+                                 "username" => "some-db-user",
+                                 "password" => "some-db-password",
+                                 "host" => "some-db-host",
+                                 "port" => "some-db-port",
+                                 "database" => "some-db-name",
+                                 "adapter" => "some-db-driver",
+                             })
+      end
+    end
+
     context 'when db_skip_hostname_validation is true' do
       let(:manifest_properties) do
         {
