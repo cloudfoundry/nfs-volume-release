@@ -3,32 +3,29 @@
 <% else %>
 set -e
 
-wait_for_dpkg_lock() {
-for x in `seq 1 100`; do
-    if ! [[ `lsof /var/lib/dpkg/lock` ]]
-    then
-        return 0
-    fi
-    sleep 3
-done
-return 1
-}
 
 install_if_missing ()
 {
+    echo "Installing $1"
+
     set +e
     dpkg -s $1
-    not_installed=$(echo $?)
-    if [ not_installed ]; then
-    while :
-    do
-      dpkg  --force-confdef -i $2
-      if [ $? -ne 0 ] ; then
-        wait_for_dpkg_lock || exit 1
-      else
-       break
-      fi
-    done
+    dpkg_installed=$(echo $?)
+    if [ dpkg_installed ]; then
+        for x in `seq 1 100` :
+        do
+          dpkg  --force-confdef -i $2
+          if [ $? -ne 0 ] ; then
+            sleep 3
+          else
+           set -e
+           exit 0
+          fi
+        done
+        set -e
+        exit 1
+    else
+        echo "Skipping $1"
     fi
     set -e
 }
