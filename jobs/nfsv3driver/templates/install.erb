@@ -3,7 +3,6 @@
 <% else %>
 set -e
 
-
 install_if_missing ()
 {
     echo "Installing $1"
@@ -11,7 +10,7 @@ install_if_missing ()
     set +e
     dpkg -s $1
     dpkg_installed=$(echo $?)
-    if [ dpkg_installed ]; then
+    if [ "$dpkg_installed" != "0" ]; then
         for x in `seq 1 100` :
         do
           dpkg  --force-confdef -i $2
