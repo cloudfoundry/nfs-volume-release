@@ -3,15 +3,34 @@
 <% else %>
 set -e
 
+wait_for_dpkg_lock() {
+for x in `seq 1 100`; do
+    if ! [[ `lsof /var/lib/dpkg/lock` ]]
+    then
+        return 0
+    fi
+    sleep 3
+done
+return 1
+}
+
 install_if_missing ()
 {
     set +e
     dpkg -s $1
     not_installed=$(echo $?)
-    set -e
     if [ not_installed ]; then
+    while :
+    do
       dpkg  --force-confdef -i $2
+      if [ $? -ne 0 ] ; then
+        wait_for_dpkg_lock || exit 1
+      else
+       break
+      fi
+    done
     fi
+    set -e
 }
 
 function copy_client_certs_to_spec_dir() {
