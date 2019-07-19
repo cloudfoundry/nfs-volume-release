@@ -8,5 +8,5 @@ docker run -it \
 -e TRANSPORT=tcp \
 --privileged \
 -u root \
-cfpersi/nfs-certification \
-./nfs-volume-release/scripts/ci/run_driver_cert
+cfpersi/nfs-integration-tests \
+./nfs-volume-release/scripts/ci/run_docker_driver_integration_tests
