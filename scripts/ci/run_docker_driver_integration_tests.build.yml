@@ -16,4 +16,4 @@ params:
   TRANSPORT: tcp
 
 run:
-  path: nfs-volume-release-concourse-tasks/scripts/ci/run_driver_cert
+  path: nfs-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests

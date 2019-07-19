@@ -66,7 +66,7 @@ EOT
 
     export PATH=$PATH:$PWD
 
-    go get -t code.cloudfoundry.org/volume_driver_cert
+    go get -t code.cloudfoundry.org/docker-driver-integration-tests
 
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 
@@ -81,7 +81,7 @@ EOT
   }
 
   trap kill_nfsv3driver_and_ganesha EXIT
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker-driver-integration-tests -race
 
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
