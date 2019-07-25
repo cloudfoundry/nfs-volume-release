@@ -1,4 +1,9 @@
-#!/bin/bash -eux
+#!/bin/bash -ex
+
+COMMAND_TO_RUN='ginkgo -nodes 1 -v .'
+if [[ -n "$DEV" ]]; then
+    COMMAND_TO_RUN='bash'
+fi
 
 export DOCKER_STORAGE_OPTIONS='--storage-opt dm.basesize=100G'
 start-bosh
@@ -27,4 +32,4 @@ docker \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 cfpersi/bosh-release-tests \
-bash
+$COMMAND_TO_RUN

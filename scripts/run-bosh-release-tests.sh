@@ -12,6 +12,7 @@ docker run \
 -t \
 -i \
 --privileged \
+-e DEV=true \
 -v /Users/pivotal/workspace/nfs-volume-release/:/nfs-volume-release \
 -v /Users/pivotal/workspace/mapfs-release:/mapfs-release \
 --workdir=/ \
