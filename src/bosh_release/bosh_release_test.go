@@ -18,8 +18,12 @@ var _ = Describe("BoshReleaseTest", func() {
 	It("should have a nfsv3driver process running", func() {
 		expectDpkgInstalled("rpcbind")
 		expectDpkgInstalled("keyutils")
-		expectDpkgInstalled("libevent-2.0-5")
+		expectDpkgInstalled("libevent-2.1-6")
 		expectDpkgInstalled("libnfsidmap2")
+		expectDpkgInstalled("libkrb5support0")
+		expectDpkgInstalled("libk5crypto3")
+		expectDpkgInstalled("libkrb5-3")
+		expectDpkgInstalled("libgssapi-krb5-2")
 		expectDpkgInstalled("nfs-common")
 
 		state := findProcessState("nfsv3driver")
@@ -41,7 +45,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		It("should not install packages or run rpcbind", func() {
 			expectDpkgNotInstalled("rpcbind")
 			expectDpkgNotInstalled("keyutils")
-			expectDpkgNotInstalled("libevent-2.0-5")
+			expectDpkgNotInstalled("libevent-2.1-6")
 			expectDpkgNotInstalled("libnfsidmap2")
 			expectDpkgNotInstalled("nfs-common")
 
@@ -111,10 +115,11 @@ func expectDpkgNotInstalled(dpkgName string) {
 }
 
 func expectDpkgInstalled(dpkgName string) {
-  By(fmt.Sprintf("Expecting dpkg %s to be installed", dpkgName))
+	packageDebugMessage := fmt.Sprintf("Expecting dpkg %s to be installed", dpkgName)
+	By(packageDebugMessage)
 
   cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", fmt.Sprintf("dpkg -s %s", dpkgName))
   session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
-  Expect(err).NotTo(HaveOccurred())
-  Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+  Expect(err).NotTo(HaveOccurred(), packageDebugMessage)
+  Eventually(session).Should(gexec.Exit(0), packageDebugMessage + string(session.Out.Contents()))
 }
