@@ -38,7 +38,7 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
 
-			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo apt-get install nfs-common")
+			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo apt-get install -y nfs-common")
 			session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
