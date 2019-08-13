@@ -16,7 +16,7 @@ exec 1>> $LOGFILE
 exec 2>> $LOGFILE
 
 evacuate() {
-  curl --fail --max-time 600 --silent http://$ADDRESS/evacuate >/dev/null 2>&1
+  curl --fail --max-time 600 http://$ADDRESS/evacuate >/dev/null 2>&1
 }
 
 heartbeat() {
@@ -80,5 +80,5 @@ elif [ $evacuate_exit_code -eq 28 ]; then
    kill -9 $pid || true
    rm -rf $PIDFILE || true
 else
-  exit 1
+  exit 0
 fi

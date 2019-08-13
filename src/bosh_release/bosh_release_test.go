@@ -123,6 +123,45 @@ var _ = Describe("BoshReleaseTest", func() {
 			Eventually(session, 6 * time.Minute, 1 * time.Second).Should(gexec.Exit(1))
 		})
 	})
+
+	Context("nfsv3driver drain", func() {
+		It("should successfully drain", func() {
+			By("bosh stopping the nfsv3driver")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "nfsv3driver")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+		})
+
+		Context("when nfsv3driver is not reachable", func() {
+			BeforeEach(func() {
+				By("drain cannot reach the nfsv3driver")
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo iptables -t filter -A OUTPUT -p tcp --dport 7590  -j DROP")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+
+			AfterEach(func() {
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo iptables -t filter -D OUTPUT -p tcp --dport 7590  -j DROP")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+
+				cmd = exec.Command("bosh", "-d", "bosh_release_test", "start", "-n", "nfsv3driver")
+				session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+
+			It("should successfully drain", func() {
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "nfsv3driver")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+		})
+	})
 })
 
 func releaseDpkgLock() {
