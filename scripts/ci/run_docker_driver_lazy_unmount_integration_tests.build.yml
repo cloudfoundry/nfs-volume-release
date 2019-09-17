@@ -1,0 +1,19 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfpersi/nfs-integration-tests
+    tag: latest
+
+inputs:
+  - name: nfs-volume-release-concourse-tasks
+  - name: nfs-volume-release
+  - name: mapfs-release
+
+params:
+  TRANSPORT: tcp
+
+run:
+  path: nfs-volume-release-concourse-tasks/scripts/ci/run_docker_driver_lazy_unmount_integration_tests
