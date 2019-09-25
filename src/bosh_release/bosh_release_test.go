@@ -20,6 +20,12 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
 		})
+
+		stubSleep()
+	})
+
+	AfterEach(func() {
+		unstubSleep()
 	})
 
 	It("should have a nfsv3driver process running", func() {
@@ -114,6 +120,8 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 
 		It("should successfully dpkg install", func() {
+			unstubSleep()
+
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
@@ -171,6 +179,7 @@ var _ = Describe("BoshReleaseTest", func() {
 
 		Context("when the rep process takes longer than 15 minutes to exit", func() {
 			BeforeEach(func() {
+
 				By("bosh -d bosh_release_test scp"+repBuildPackagePath+"nfsv3driver:/tmp/rep", func() {
 					cmd := exec.Command("bosh", "-d", "bosh_release_test", "scp", repBuildPackagePath, "nfsv3driver:/tmp/rep")
 					session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
@@ -205,11 +214,25 @@ var _ = Describe("BoshReleaseTest", func() {
 				cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "nfsv3driver")
 				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 				Expect(err).NotTo(HaveOccurred())
-				Eventually(session, 16 * time.Minute).Should(gexec.Exit(0), string(session.Out.Contents()))
+				Eventually(session, 16*time.Minute).Should(gexec.Exit(0), string(session.Out.Contents()))
 			})
 		})
 	})
 })
+
+func unstubSleep() {
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo rm -f /usr/bin/sleep")
+	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+}
+
+func stubSleep() {
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo touch /usr/bin/sleep && sudo chmod +x /usr/bin/sleep")
+	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+}
 
 func releaseDpkgLock() {
 	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo pkill lock_dpkg")
