@@ -51,9 +51,13 @@ if [ ! -e /proc/$pid ]; then
 fi
 
 # wait for rep
-while pgrep -x "rep" > /dev/null; do
-    echo "$(date): waiting for rep..."
-    sleep 3
+for i in {1..90}; do
+    if pgrep -x "rep" > /dev/null; then
+        echo "$(date): waiting for rep..."
+        sleep 10
+    else
+        break
+    fi
 done
 
 echo "$(date): rep is done..evacuating nfsv3driver"

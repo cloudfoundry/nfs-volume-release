@@ -20,11 +20,15 @@ func TestBoshReleaseTest(t *testing.T) {
 }
 
 var dpkgLockBuildPackagePath string
+var repBuildPackagePath string
 
 var _ = BeforeSuite(func() {
 	var err error
 
 	dpkgLockBuildPackagePath, err = gexec.BuildIn("/nfs-volume-release", "bosh_release/assets/acquire_dpkg_lock")
+	Expect(err).ShouldNot(HaveOccurred())
+
+	repBuildPackagePath, err = gexec.BuildIn("/nfs-volume-release", "bosh_release/assets/rep")
 	Expect(err).ShouldNot(HaveOccurred())
 
 	SetDefaultEventuallyTimeout(10 * time.Minute)
