@@ -59,6 +59,10 @@ for i in {1..90}; do
         break
     fi
 done
+if [ $i == 90 ]; then
+    trap - EXIT
+    exit 1
+fi
 
 echo "$(date): rep is done..evacuating nfsv3driver"
 

@@ -209,12 +209,13 @@ var _ = Describe("BoshReleaseTest", func() {
 				})
 			})
 
-			It("should timeout and successfully drain", func() {
+			It("should timeout and fail drain", func() {
 				By("stopping nfsv3driver")
 				cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "nfsv3driver")
 				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 				Expect(err).NotTo(HaveOccurred())
-				Eventually(session, 16*time.Minute).Should(gexec.Exit(0), string(session.Out.Contents()))
+				Eventually(session.Out, 16*time.Minute).Should(gbytes.Say("drain scripts failed. Failed Jobs: nfsv3driver"))
+				Eventually(session, 16*time.Minute).Should(gexec.Exit(1), string(session.Out.Contents()))
 			})
 		})
 	})
