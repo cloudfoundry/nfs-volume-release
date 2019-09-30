@@ -23,6 +23,21 @@ heartbeat() {
   curl --fail --silent http://$ADDRESS/ping >/dev/null 2>&1
 }
 
+wait_for_apps_to_be_evacuated() {
+    for i in {1..90}; do
+        if pgrep -x "rep" > /dev/null; then
+            echo "$(date): waiting for rep..."
+            sleep 10
+        else
+            break
+        fi
+    done
+    if [ $i == 90 ]; then
+        trap - EXIT
+        exit 1
+    fi
+}
+
 output_for_bosh() {
   exit_code=$?
 
@@ -50,19 +65,7 @@ if [ ! -e /proc/$pid ]; then
   exit 0
 fi
 
-# wait for rep
-for i in {1..90}; do
-    if pgrep -x "rep" > /dev/null; then
-        echo "$(date): waiting for rep..."
-        sleep 10
-    else
-        break
-    fi
-done
-if [ $i == 90 ]; then
-    trap - EXIT
-    exit 1
-fi
+wait_for_apps_to_be_evacuated
 
 echo "$(date): rep is done..evacuating nfsv3driver"
 
