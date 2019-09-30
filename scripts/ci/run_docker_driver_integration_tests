@@ -20,7 +20,9 @@ pushd mapfs-release
   export PATH=$PWD/bin:$PATH
 
   mkdir -p /var/vcap/packages/mapfs/bin/
-  go build -o "/var/vcap/packages/mapfs/bin/mapfs" "src/code.cloudfoundry.org/mapfs/main.go"
+  pushd src/mapfs
+      GO111MODULE=on go build -mod=vendor -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
+  popd
 popd
 
 pushd nfs-volume-release
