@@ -68,21 +68,21 @@ EOT
 
     export PATH=$PATH:$PWD
 
-    go get -t code.cloudfoundry.org/docker_driver_integration_tests
-
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 
-    "${NFS_ACCEPTANCE_DIR}/nfsv3driver" -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$drivers_path" \
-          --allowed-in-mount="auto_cache" \
-          --default-in-mount="auto_cache:true" &
+    export DRIVER_CMD="${NFS_ACCEPTANCE_DIR}/nfsv3driver"
+    export DRIVER_OPTS="-listenAddr="$listen_address",-transport="$TRANSPORT",-driversPath="$drivers_path",--allowed-in-mount="auto_cache",--default-in-mount="auto_cache:true""
   popd
 
-  function kill_nfsv3driver_and_ganesha {
+  mkdir -p src/code.cloudfoundry.org/docker_driver_integration_tests
+  cp -R ../docker_driver_integration_tests/* src/code.cloudfoundry.org/docker_driver_integration_tests
+
+
+  function kill_ganesha {
     pkill -9 ganesha || true
-    pkill -9 nfsv3driver || true
   }
 
-  trap kill_nfsv3driver_and_ganesha EXIT
+  trap kill_ganesha EXIT
   ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests/lazy_unmount -race
 
   rm -rf "${NFS_ACCEPTANCE_DIR}"

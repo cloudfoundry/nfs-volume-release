@@ -11,6 +11,8 @@ inputs:
   - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
   - name: mapfs-release
+  - name: docker_driver_integration_tests
+
 
 params:
   TRANSPORT: tcp
