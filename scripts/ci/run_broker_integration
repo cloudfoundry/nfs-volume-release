@@ -18,7 +18,7 @@ cp credhub/applications/credhub-api/src/test/resources/server_ca_cert.pem /tmp/s
 pushd nfs-volume-release
     export GOPATH=$PWD
     export PATH=$PWD/bin:$PATH
-
+    export GO111MODULE=on
     cd src/code.cloudfoundry.org/nfsbroker
 
     ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress . "$@"
