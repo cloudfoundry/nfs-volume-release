@@ -31,8 +31,7 @@ pushd nfs-volume-release
   export GOPATH=$PWD
   export PATH=$PWD/bin:$PATH
 
-  go get github.com/onsi/ginkgo/ginkgo
-  go get github.com/onsi/gomega
+  go get -u github.com/onsi/ginkgo/ginkgo
 
   NFS_ACCEPTANCE_DIR="${PWD}/tmp"
   mkdir -p "${NFS_ACCEPTANCE_DIR}"
