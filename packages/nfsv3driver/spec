@@ -5,42 +5,5 @@ dependencies:
 - golang-1-linux
 
 files:
-  - code.cloudfoundry.org/cfhttp/*.go # gosub
-  - code.cloudfoundry.org/cfhttp/handlers/*.go # gosub
-  - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
-  - code.cloudfoundry.org/clock/*.go # gosub
-  - code.cloudfoundry.org/debugserver/*.go # gosub
-  - code.cloudfoundry.org/dockerdriver/*.go # gosub
-  - code.cloudfoundry.org/dockerdriver/driverhttp/*.go # gosub
-  - code.cloudfoundry.org/dockerdriver/invoker/*.go # gosub
-  - code.cloudfoundry.org/goshims/bufioshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/execshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
-  - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/ldapshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/osshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
-  - code.cloudfoundry.org/goshims/timeshim/*.go # gosub
-  - code.cloudfoundry.org/lager/*.go # gosub
-  - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/driveradmin/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminhttp/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/driveradmin/driveradminlocal/*.go # gosub
-  - code.cloudfoundry.org/tlsconfig/*.go # gosub
-  - code.cloudfoundry.org/volume-mount-options/*.go # gosub
-  - code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
-  - code.cloudfoundry.org/volumedriver/*.go # gosub
-  - code.cloudfoundry.org/volumedriver/mountchecker/*.go # gosub
-  - code.cloudfoundry.org/volumedriver/oshelper/*.go # gosub
-  - github.com/bmizerany/pat/*.go # gosub
-  - github.com/pkg/errors/*.go # gosub
-  - github.com/tedsuo/ifrit/*.go # gosub
-  - github.com/tedsuo/ifrit/grouper/*.go # gosub
-  - github.com/tedsuo/ifrit/http_server/*.go # gosub
-  - github.com/tedsuo/ifrit/sigmon/*.go # gosub
-  - github.com/tedsuo/rata/*.go # gosub
-  - gopkg.in/asn1-ber.v1/*.go # gosub
-  - gopkg.in/ldap.v2/*.go # gosub
+  - code.cloudfoundry.org/nfsv3driver/**
+  - code.cloudfoundry.org/nfsv3driver/vendor/**

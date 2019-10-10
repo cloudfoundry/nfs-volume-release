@@ -1,117 +1,11 @@
-[submodule "src/code.cloudfoundry.org/goshims"]
-	path = src/code.cloudfoundry.org/goshims
-	url = https://github.com/cloudfoundry/goshims
-	branch = master
-[submodule "src/code.cloudfoundry.org/cfhttp"]
-	path = src/code.cloudfoundry.org/cfhttp
-	url = https://github.com/cloudfoundry/cfhttp
-	branch = master
-[submodule "src/code.cloudfoundry.org/clock"]
-	path = src/code.cloudfoundry.org/clock
-	url = https://github.com/cloudfoundry/clock
-	branch = master
-[submodule "src/code.cloudfoundry.org/lager"]
-	path = src/code.cloudfoundry.org/lager
-	url = https://github.com/cloudfoundry/lager
-	branch = master
-[submodule "src/code.cloudfoundry.org/debugserver"]
-	path = src/code.cloudfoundry.org/debugserver
-	url = https://github.com/cloudfoundry/debugserver
-	branch = master
-[submodule "src/github.com/tedsuo/ifrit"]
-	path = src/github.com/tedsuo/ifrit
-	url = https://github.com/tedsuo/ifrit
-	branch = master
-[submodule "src/github.com/tedsuo/rata"]
-	path = src/github.com/tedsuo/rata
-	url = https://github.com/tedsuo/rata
-	branch = master
 [submodule "src/code.cloudfoundry.org/nfsv3driver"]
 	path = src/code.cloudfoundry.org/nfsv3driver
 	url = https://github.com/cloudfoundry/nfsv3driver
-	branch = master
-[submodule "src/github.com/bmizerany/pat"]
-	path = src/github.com/bmizerany/pat
-	url = https://github.com/bmizerany/pat
-	branch = master
-[submodule "src/github.com/onsi/gomega"]
-	path = src/github.com/onsi/gomega
-	url = https://github.com/onsi/gomega
-	branch = master
-[submodule "src/gopkg.in/yaml.v2"]
-	path = src/gopkg.in/yaml.v2
-	url = https://gopkg.in/yaml.v2
-	branch = v2
-[submodule "src/github.com/onsi/ginkgo"]
-	path = src/github.com/onsi/ginkgo
-	url = https://github.com/onsi/ginkgo
-	branch = master
-[submodule "src/github.com/gorilla/mux"]
-	path = src/github.com/gorilla/mux
-	url = https://github.com/gorilla/mux
-	branch = master
-[submodule "src/github.com/pivotal-cf/brokerapi"]
-	path = src/github.com/pivotal-cf/brokerapi
-	url = https://github.com/pivotal-cf/brokerapi
 	branch = master
 [submodule "src/code.cloudfoundry.org/nfsbroker"]
 	path = src/code.cloudfoundry.org/nfsbroker
 	url = https://github.com/cloudfoundry/nfsbroker
 	branch = master
-[submodule "src/github.com/go-sql-driver/mysql"]
-	path = src/github.com/go-sql-driver/mysql
-	url = https://github.com/go-sql-driver/mysql
-	branch = master
-[submodule "src/gopkg.in/asn1-ber.v1"]
-	path = src/gopkg.in/asn1-ber.v1
-	url = https://gopkg.in/asn1-ber.v1
-	branch = master
-[submodule "src/gopkg.in/ldap.v2"]
-	path = src/gopkg.in/ldap.v2
-	url = https://gopkg.in/ldap.v2
-	branch = master
-[submodule "src/golang.org/x/crypto"]
-	path = src/golang.org/x/crypto
-	url = https://go.googlesource.com/crypto
-	branch = master
-[submodule "src/code.cloudfoundry.org/service-broker-store"]
-	path = src/code.cloudfoundry.org/service-broker-store
-	url = https://github.com/cloudfoundry/service-broker-store
-	branch = master
-[submodule "src/code.cloudfoundry.org/credhub-cli"]
-	path = src/code.cloudfoundry.org/credhub-cli
-	url = https://github.com/cloudfoundry-incubator/credhub-cli
 [submodule "src/code.cloudfoundry.org/migrate_mysql_to_credhub"]
 	path = src/code.cloudfoundry.org/migrate_mysql_to_credhub
 	url = https://github.com/cloudfoundry/migrate_mysql_to_credhub
-[submodule "src/github.com/jessevdk/go-flags"]
-	path = src/github.com/jessevdk/go-flags
-	url = https://github.com/jessevdk/go-flags
-	branch = master
-[submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
-	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
-	url = https://github.com/DATA-DOG/go-sqlmock
-[submodule "src/code.cloudfoundry.org/volumedriver"]
-	path = src/code.cloudfoundry.org/volumedriver
-	url = https://github.com/cloudfoundry/volumedriver
-	branch = master
-[submodule "src/code.cloudfoundry.org/dockerdriver"]
-	path = src/code.cloudfoundry.org/dockerdriver
-	url = https://github.com/cloudfoundry/dockerdriver
-	branch = master
-[submodule "src/code.cloudfoundry.org/existingvolumebroker"]
-	path = src/code.cloudfoundry.org/existingvolumebroker
-	url = https://github.com/cloudfoundry/existingvolumebroker
-	branch = master
-[submodule "src/code.cloudfoundry.org/volume-mount-options"]
-	path = src/code.cloudfoundry.org/volume-mount-options
-	url = https://github.com/cloudfoundry/volume-mount-options
-	branch = master
-[submodule "src/github.com/pkg/errors"]
-	path = src/github.com/pkg/errors
-	url = https://github.com/pkg/errors
-	branch = master
-[submodule "src/code.cloudfoundry.org/tlsconfig"]
-	path = src/code.cloudfoundry.org/tlsconfig
-	url = https://github.com/cloudfoundry/tlsconfig
-	branch = master

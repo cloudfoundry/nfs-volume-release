@@ -4,8 +4,9 @@ source /var/vcap/packages/golang-1-linux/bosh/compile.env
 
 mkdir ../src && cp -a * ../src/ && mv ../src ./src
 mkdir $BOSH_INSTALL_TARGET/bin
+export GO111MODULE=on
 
-go build -o $BOSH_INSTALL_TARGET/bin/nfsbroker src/code.cloudfoundry.org/nfsbroker/*.go
-
-cp code.cloudfoundry.org/nfsbroker/Procfile ${BOSH_INSTALL_TARGET}
-
+pushd src/code.cloudfoundry.org/nfsbroker
+    go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsbroker *.go
+    cp ./Procfile ${BOSH_INSTALL_TARGET}
+popd
