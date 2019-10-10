@@ -189,8 +189,9 @@ var _ = Describe("BoshReleaseTest", func() {
 
 				By("bosh -d bosh_release_test ssh -c sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep", func() {
 					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep")
-					_, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+					session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 					Expect(err).NotTo(HaveOccurred())
+					Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
 				})
 
 				By("bosh -d bosh_release_test ssh -c rep", func() {
