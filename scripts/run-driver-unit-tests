@@ -1,9 +1,11 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 scripts_path=./$(dirname $0)
 eval $($scripts_path/get_paths.sh)
+
+export GO111MODULE=on
 
 pushd src/code.cloudfoundry.org/nfsv3driver
   ginkgo -keepGoing -p -race -trace -randomizeAllSpecs -progress "$@"
