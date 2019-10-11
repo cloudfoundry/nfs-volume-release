@@ -14,6 +14,7 @@ SOURCE="localhost:/"
 export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
+go get -u github.com/onsi/ginkgo/ginkgo
 
 pushd mapfs-release
   export GOPATH=$PWD
@@ -26,12 +27,6 @@ pushd mapfs-release
 popd
 
 pushd nfs-volume-release
-  export GOPATH=$PWD
-  export PATH=$PWD/bin:$PATH
-
-  go get github.com/onsi/ginkgo/ginkgo
-  go get github.com/onsi/gomega
-
   NFS_ACCEPTANCE_DIR="${PWD}/tmp"
   mkdir -p "${NFS_ACCEPTANCE_DIR}"
 
@@ -64,7 +59,7 @@ pushd nfs-volume-release
 EOT
 
   pushd src/code.cloudfoundry.org/nfsv3driver
-    go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
+    go build -mod=vendor -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
 
     export PATH=$PATH:$PWD
 
@@ -83,7 +78,8 @@ EOT
   }
 
   trap kill_ganesha EXIT
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests/lazy_unmount -race
-
+  pushd src/code.cloudfoundry.org/docker_driver_integration_tests/lazy_unmount
+    ginkgo -v -keepGoing . -race
+  popd
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
