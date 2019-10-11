@@ -14,7 +14,6 @@ SOURCE="localhost:/"
 export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
-export GO111MODULE=on
 
 
 pushd mapfs-release
@@ -23,7 +22,7 @@ pushd mapfs-release
 
   mkdir -p /var/vcap/packages/mapfs/bin/
   pushd src/mapfs
-    go build -mod=vendor -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
+    GO111MODULE=on go build -mod=vendor -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
   popd
 popd
 
@@ -65,7 +64,7 @@ pushd nfs-volume-release
 EOT
 
   pushd src/code.cloudfoundry.org/nfsv3driver
-    go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
+    GO111MODULE=on go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
 
     export PATH=$PATH:$PWD
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
@@ -84,7 +83,7 @@ EOT
   }
 
   trap kill_ganesha EXIT
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests -race
+  GO111MODULE=on ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests -race
 
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
