@@ -1,4 +1,11 @@
 #!/bin/bash
+
+<%
+if link('credhub').instances.length == 0
+        raise "credhub is required. Zero instances found."
+end
+%>
+
 <% if p("nfsv3driver.disable") %>
 <% else %>
 set -e

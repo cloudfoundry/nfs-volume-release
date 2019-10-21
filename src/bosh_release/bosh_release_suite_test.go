@@ -37,14 +37,22 @@ var _ = BeforeSuite(func() {
 		uploadStemcell()
 	}
 
-	deploy()
+	ensureDeploy()
 })
 
-func deploy(opsfiles ...string) {
+func ensureDeploy(opsfiles ...string) {
+	session, err := deploy(opsfiles...)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
+}
+
+func deploy(opsfiles ...string) (*gexec.Session, error) {
 	deployCmd := []string {"deploy",
 		"-n",
 		"-d",
 		"bosh_release_test",
+		"--vars-store",
+		"/tmp/store",
 		"./nfsv3driver-manifest.yml",
 		"-v", fmt.Sprintf("path_to_nfs_volume_release=%s", os.Getenv("NFS_VOLUME_RELEASE_PATH")),
 		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")),
@@ -57,9 +65,7 @@ func deploy(opsfiles ...string) {
 	}
 
 	boshDeployCmd := exec.Command("bosh", updatedDeployCmd...)
-	session, err := gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
-	Expect(err).NotTo(HaveOccurred())
-	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
+	return gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
 }
 
 func hasStemcell() bool {

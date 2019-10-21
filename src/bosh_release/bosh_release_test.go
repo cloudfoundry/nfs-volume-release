@@ -12,7 +12,7 @@ import (
 
 var _ = Describe("BoshReleaseTest", func() {
 	BeforeEach(func() {
-		deploy()
+		ensureDeploy()
 
 		By("bosh -d bosh_release_test start -n nfsv3driver", func() {
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "start", "-n", "nfsv3driver")
@@ -26,6 +26,24 @@ var _ = Describe("BoshReleaseTest", func() {
 
 	AfterEach(func() {
 		unstubSleep()
+	})
+
+	Context("when credhub has been set to zero instances", func() {
+		It("should fail on deployment", func() {
+			session, err := deploy("./operations/scale-credhub-to-zero.yml")
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gbytes.Say("credhub is required. Zero instances found."))
+			Eventually(session).Should(gexec.Exit(1))
+		})
+	})
+
+	Context("missing a credhub", func() {
+		It("should fail on deployment", func() {
+			session, err := deploy("./operations/remove-credhub.yml")
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gbytes.Say(`Failed to resolve link 'credhub' with type 'credhub' from job 'nfsv3driver' in instance group 'nfsv3driver'`))
+			Eventually(session).Should(gexec.Exit(1))
+		})
 	})
 
 	It("should have a nfsv3driver process running", func() {
@@ -46,12 +64,12 @@ var _ = Describe("BoshReleaseTest", func() {
 
 	Context("when an existing package is already installed", func() {
 		BeforeEach(func() {
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo dpkg -P nfs-common")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo dpkg -P nfs-common")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
 
-			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo apt-get install -y nfs-common")
+			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo apt-get update && sudo apt-get install -y nfs-common")
 			session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
@@ -60,7 +78,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		It("should upgrade the nfs-common package to the version specified in the pre-install script", func() {
 			expectDpkgInstalled("nfs-common", "1:1.2.8-9ubuntu12.2")
 
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
@@ -76,7 +94,7 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
 
-			deploy("./operations/disable-nfsv3driver.yml")
+			ensureDeploy("./operations/disable-nfsv3driver.yml")
 		})
 
 
@@ -94,12 +112,12 @@ var _ = Describe("BoshReleaseTest", func() {
 	Context("when another process has a dpkg lock", func() {
 
 		BeforeEach(func() {
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo dpkg -P nfs-common")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo dpkg -P nfs-common")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
 
-			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo rm -f /tmp/lock_dpkg")
+			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo rm -f /tmp/lock_dpkg")
 			session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
@@ -109,7 +127,7 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
 
-			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo /tmp/lock_dpkg")
+			cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo /tmp/lock_dpkg")
 			session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gbytes.Say("locked /var/lib/dpkg/lock"))
@@ -122,7 +140,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		It("should successfully dpkg install", func() {
 			unstubSleep()
 
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gbytes.Say("dpkg: error: dpkg status database is locked by another process"))
@@ -131,7 +149,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 
 		It("should eventually timeout when the dpkg lock is not released in a reasonable time", func() {
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gbytes.Say("dpkg: error: dpkg status database is locked by another process"))
@@ -187,15 +205,15 @@ var _ = Describe("BoshReleaseTest", func() {
 					Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
 				})
 
-				By("bosh -d bosh_release_test ssh -c sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep", func() {
-					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep")
+				By("bosh -d bosh_release_test ssh nfsv3driver -c sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep", func() {
+					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo chmod +x /tmp/rep && sudo mv /tmp/rep /bin/rep")
 					session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 					Expect(err).NotTo(HaveOccurred())
 					Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
 				})
 
-				By("bosh -d bosh_release_test ssh -c rep", func() {
-					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "rep")
+				By("bosh -d bosh_release_test ssh nfsv3driver -c rep", func() {
+					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "rep")
 					_, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 					Expect(err).NotTo(HaveOccurred())
 				})
@@ -254,7 +272,7 @@ func expectDpkgInstalled(dpkgName string, version string) {
 	packageDebugMessage := fmt.Sprintf("Expecting dpkg %s %s to be installed", dpkgName, version)
 	By(packageDebugMessage)
 
-  cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", fmt.Sprintf("dpkg -s %s | grep Version | grep -o '[0-9].*' | grep -E '^%s$'", dpkgName, version))
+  cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", fmt.Sprintf("dpkg -s %s | grep Version | grep -o '[0-9].*' | grep -E '^%s$'", dpkgName, version))
   session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
   Expect(err).NotTo(HaveOccurred(), packageDebugMessage)
   Eventually(session).Should(gexec.Exit(0), packageDebugMessage + string(session.Out.Contents()))

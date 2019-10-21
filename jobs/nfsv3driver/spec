@@ -19,6 +19,9 @@ packages:
 consumes:
 - name: mapfs
   type: mapfs
+- name: credhub
+  type: credhub
+  optional: false
 
 properties:
   nfsv3driver.listen_addr:

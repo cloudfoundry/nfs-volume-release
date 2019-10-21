@@ -1,0 +1,3 @@
+- path: /instance_groups/name=credhub/instances
+  type: replace
+  value: 0
