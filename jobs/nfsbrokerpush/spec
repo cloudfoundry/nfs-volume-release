@@ -88,9 +88,9 @@ properties:
     default: false
     description: "[DEPRECATED] (optional) Skip verification of hostname in database TLS certificate (MySQL only)"
   nfsbrokerpush.credhub.uaa_client_id:
-    description: "(optional) UAA client ID when using CredHub to store broker state"
+    description: "UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:
-    description: "(optional) UAA client secret when using CredHub to store broker state"
+    description: "UAA client secret when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_ca_cert:
     description: "(optional) CA Cert to verify UAA SSL connection when using CredHub to store broker state"
   nfsbrokerpush.store_id:
