@@ -9,7 +9,3 @@ applications:
   env:
     USERNAME: "<%= p('nfsbrokerpush.username') %>"
     PASSWORD: "<%= p('nfsbrokerpush.password') %>"
-    <% if_p('nfsbrokerpush.db.username', 'nfsbrokerpush.db.password') do |username, password| %>
-    DB_USERNAME: "<%= username %>"
-    DB_PASSWORD: "<%= password %>"
-    <% end %>
