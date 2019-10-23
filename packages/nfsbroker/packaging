@@ -8,5 +8,4 @@ export GO111MODULE=on
 
 pushd src/code.cloudfoundry.org/nfsbroker
     go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsbroker *.go
-    cp ./Procfile ${BOSH_INSTALL_TARGET}
 popd
