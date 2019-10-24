@@ -78,7 +78,7 @@ EOT
   }
 
   trap kill_ganesha EXIT
-  pushd src/code.cloudfoundry.org/docker_driver_integration_tests
+  pushd src/code.cloudfoundry.org/${TEST_PACKAGE}
     GO111MODULE=on ginkgo -v -keepGoing . -race
   popd
   rm -rf "${NFS_ACCEPTANCE_DIR}"

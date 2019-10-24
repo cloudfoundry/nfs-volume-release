@@ -15,6 +15,7 @@ inputs:
 
 params:
   TRANSPORT: tcp
+  TEST_PACKAGE:
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
