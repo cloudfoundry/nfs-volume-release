@@ -15,7 +15,9 @@ inputs:
 
 params:
   TRANSPORT: tcp
-  TEST_PACKAGE:
+  TEST_PACKAGE: docker_driver_integration_tests
+  BINDINGS_FILE: nfs-bindings.json
+  ERROR_CHECK_READONLY_MOUNTS: false
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
