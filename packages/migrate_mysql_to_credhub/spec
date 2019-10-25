@@ -2,7 +2,7 @@
 name: migrate_mysql_to_credhub
 
 dependencies:
-- golang-1-linux
+- golang-1.13-linux
 
 files:
   - code.cloudfoundry.org/credhub-cli/credhub/*.go # gosub
