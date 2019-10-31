@@ -31,7 +31,7 @@ var _ = Describe("BoshReleaseTest", func() {
 
 	Context("with no other cloud foundry control components", func() {
 		It("should succeed deploying", func() {
-			session, err := deploy("./operations/remove-credhub.yml")
+			session, err := deploy("./operations/remove-credhub.yml", "./operations/remove-nfsbrokerpush.yml")
 			Expect(err).NotTo(HaveOccurred())
 			Eventually(session).Should(gexec.Exit(0))
 		})

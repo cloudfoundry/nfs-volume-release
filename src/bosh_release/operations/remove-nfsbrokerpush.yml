@@ -1,0 +1,2 @@
+- path: /instance_groups/name=nfsbrokerpush
+  type: remove
