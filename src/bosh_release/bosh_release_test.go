@@ -29,20 +29,18 @@ var _ = Describe("BoshReleaseTest", func() {
 	})
 
 	Context("when credhub has been set to zero instances", func() {
-		It("should fail on deployment", func() {
+		It("should succeed deploying", func() {
 			session, err := deploy("./operations/scale-credhub-to-zero.yml")
 			Expect(err).NotTo(HaveOccurred())
-			Eventually(session).Should(gbytes.Say("credhub is required. Zero instances found."))
-			Eventually(session).Should(gexec.Exit(1))
+			Eventually(session).Should(gexec.Exit(0))
 		})
 	})
 
 	Context("missing a credhub", func() {
-		It("should fail on deployment", func() {
+		It("should succeed deploying", func() {
 			session, err := deploy("./operations/remove-credhub.yml")
 			Expect(err).NotTo(HaveOccurred())
-			Eventually(session).Should(gbytes.Say(`Failed to resolve link 'credhub' with type 'credhub' from job 'nfsv3driver' in instance group 'nfsv3driver'`))
-			Eventually(session).Should(gexec.Exit(1))
+			Eventually(session).Should(gexec.Exit(0))
 		})
 	})
 
