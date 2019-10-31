@@ -28,15 +28,8 @@ var _ = Describe("BoshReleaseTest", func() {
 		unstubSleep()
 	})
 
-	Context("when credhub has been set to zero instances", func() {
-		It("should succeed deploying", func() {
-			session, err := deploy("./operations/scale-credhub-to-zero.yml")
-			Expect(err).NotTo(HaveOccurred())
-			Eventually(session).Should(gexec.Exit(0))
-		})
-	})
 
-	Context("missing a credhub", func() {
+	Context("with no other cloud foundry control components", func() {
 		It("should succeed deploying", func() {
 			session, err := deploy("./operations/remove-credhub.yml")
 			Expect(err).NotTo(HaveOccurred())

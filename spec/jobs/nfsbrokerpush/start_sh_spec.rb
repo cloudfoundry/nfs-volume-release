@@ -7,7 +7,7 @@ describe 'nfsbrokerpush job' do
 
   describe 'start.sh' do
     let(:template) { job.template('start.sh') }
-    credhub_link = [
+    let(:credhub_link) { [
       Bosh::Template::Test::Link.new(
         name: 'credhub',
         instances: [Bosh::Template::Test::LinkInstance.new(address: 'credhub.service.cf.internal')],
@@ -19,7 +19,7 @@ describe 'nfsbrokerpush job' do
           }
         }
       )
-    ]
+    ]}
 
     context 'when fully configured with all required credhub and database properties' do
       let(:manifest_properties) do
@@ -84,6 +84,25 @@ describe 'nfsbrokerpush job' do
         expect(tpl_output).not_to include("--dbHostname=")
         expect(tpl_output).not_to include("--dbPort=")
         expect(tpl_output).not_to include("--dbName=")
+      end
+
+      context 'configured with credhub set to zero instances' do
+        let(:credhub_link) { [
+          Bosh::Template::Test::Link.new(
+            name: 'credhub',
+            instances: []
+          )
+        ]}
+
+        it 'a meaningful error message is returned' do
+          expect{template.render(manifest_properties, consumes: credhub_link)}.to raise_error('credhub is required. Zero instances found.')
+        end
+      end
+
+      context 'configured with no credhub link' do
+        it 'a meaningful error message is returned' do
+          expect{template.render(manifest_properties)}.to raise_error("Can't find link 'credhub'")
+        end
       end
     end
 

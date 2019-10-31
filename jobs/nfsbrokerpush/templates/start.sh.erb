@@ -1,4 +1,9 @@
 <%
+
+  if link('credhub').instances.length == 0
+    raise "credhub is required. Zero instances found."
+  end
+
   credhub_url = ''
   uaa_client_id = ''
   uaa_client_secret = ''
