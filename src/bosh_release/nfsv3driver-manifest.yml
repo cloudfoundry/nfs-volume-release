@@ -80,7 +80,6 @@ instance_groups:
       - name: default
     vm_type: default
 
-
   - name: nfsbrokerpush
     instances: 1
     jobs:
@@ -122,19 +121,6 @@ instance_groups:
     networks:
       - name: default
     vm_type: default
-
-#  - name: credhub
-#    instances: 1
-#    jobs:
-#      -
-#    azs:
-#      - z1
-#    stemcell: default
-#    networks:
-#      - name: default
-#    vm_type: default
-
-
 
 stemcells:
   - alias: default
