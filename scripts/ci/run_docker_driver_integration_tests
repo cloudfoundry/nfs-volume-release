@@ -61,12 +61,15 @@ pushd nfs-volume-release
 }
 EOT
 
+  git clone https://github.com/cloudfoundry/docker_driver_integration_tests.git src/code.cloudfoundry.org/docker_driver_integration_tests
+  pushd src/code.cloudfoundry.org/docker_driver_integration_tests
+      git checkout lts_nfs_2.3
+  popd
+
   pushd src/code.cloudfoundry.org/nfsv3driver
     go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
 
     export PATH=$PATH:$PWD
-
-    go get -t code.cloudfoundry.org/docker_driver_integration_tests
 
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 
