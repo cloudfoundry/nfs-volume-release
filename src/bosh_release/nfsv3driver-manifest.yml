@@ -1,0 +1,36 @@
+name: bosh_release_test
+
+releases:
+  - name: nfs-volume
+    url: ((path_to_nfs_volume_release))
+    version: create
+  - name: mapfs
+    url: ((path_to_mapfs_release))
+    version: create
+
+instance_groups:
+  - name: nfsv3driver
+    instances: 1
+    jobs:
+      - name: nfsv3driver
+        release: nfs-volume
+      - name: mapfs
+        release: mapfs
+    azs:
+      - z1
+    stemcell: default
+    networks:
+      - name: default
+    vm_type: default
+
+stemcells:
+  - alias: default
+    os: ubuntu-xenial
+    version: latest
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-1200000
+  max_in_flight: 1
+  serial: true
+  update_watch_time: 5000-1200000

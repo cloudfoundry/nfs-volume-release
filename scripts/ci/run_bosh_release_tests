@@ -1,0 +1,3 @@
+#!/bin/bash -eux
+
+./nfs-volume-release-concourse-tasks/scripts/run-bosh-release-tests-in-docker-env.sh
