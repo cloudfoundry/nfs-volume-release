@@ -10,7 +10,6 @@ image_resource:
 inputs:
   - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
-  - name: credhub
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_broker_integration
