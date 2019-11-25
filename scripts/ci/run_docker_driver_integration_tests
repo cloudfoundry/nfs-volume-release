@@ -1,0 +1,92 @@
+#!/bin/bash
+
+set -x -e
+
+# ./nfs-volume-release/packages/fuse-nfs/packaging
+
+/start.sh &
+
+function kill_ganesha {
+    pkill -9 ganesha || true
+}
+
+trap kill_ganesha EXIT
+
+SOURCE="localhost:/"
+export SOURCE
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+
+pushd mapfs-release
+  export GOPATH=$PWD
+  export PATH=$PWD/bin:$PATH
+
+  mkdir -p /var/vcap/packages/mapfs/bin/
+  go build -o "/var/vcap/packages/mapfs/bin/mapfs" "src/code.cloudfoundry.org/mapfs/main.go"
+popd
+
+pushd nfs-volume-release
+  export GOPATH=$PWD
+  export PATH=$PWD/bin:$PATH
+
+  go get github.com/onsi/ginkgo/ginkgo
+  go get github.com/onsi/gomega
+
+  NFS_ACCEPTANCE_DIR="${PWD}/tmp"
+  mkdir -p "${NFS_ACCEPTANCE_DIR}"
+
+  listen_address=0.0.0.0:7589
+
+  drivers_path="${NFS_ACCEPTANCE_DIR}/voldriver_plugins"
+  mkdir -p $drivers_path
+  chmod 777 $drivers_path
+
+  if [ "$TRANSPORT" == "tcp" ]
+      then
+          listen_address=0.0.0.0:7589
+          driver_address=http://$listen_address
+  else
+      listen_address=$drivers_path/nfsv3driver.sock
+      driver_address=$drivers_path/nfsv3driver.sock
+  fi
+
+  export FIXTURE_FILENAME="${NFS_ACCEPTANCE_DIR}/fixture.json"
+  cat << EOT > "${FIXTURE_FILENAME}"
+{
+  "volman_driver_path": "${drivers_path}",
+  "driver_address": "${driver_address}",
+  "driver_name": "nfsv3driver",
+  "create_config": {
+    "Name": "nfs-volume-name",
+    "Opts": {"source":"${SOURCE}","uid":"2000","gid":"2000","experimental": true, "version": "4"}
+  }
+}
+EOT
+
+  git clone https://github.com/cloudfoundry/docker_driver_integration_tests.git src/code.cloudfoundry.org/docker_driver_integration_tests
+  pushd src/code.cloudfoundry.org/docker_driver_integration_tests
+      git checkout lts_nfs_2.3
+  popd
+
+  pushd src/code.cloudfoundry.org/nfsv3driver
+    go build -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
+
+    export PATH=$PATH:$PWD
+
+    mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
+
+    "${NFS_ACCEPTANCE_DIR}/nfsv3driver" -listenAddr="$listen_address" -transport="$TRANSPORT" -driversPath="$drivers_path" \
+          --allowed-in-mount="auto_cache,uid,gid" \
+          --default-in-mount="auto_cache:true" &
+  popd
+
+  function kill_nfsv3driver_and_ganesha {
+    pkill -9 ganesha || true
+    pkill -9 nfsv3driver || true
+  }
+
+  trap kill_nfsv3driver_and_ganesha EXIT
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests -race
+
+  rm -rf "${NFS_ACCEPTANCE_DIR}"
+popd
