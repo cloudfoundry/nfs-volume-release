@@ -1,0 +1,6 @@
+bump nfsv3driver
+
+Submodule src/code.cloudfoundry.org/nfsv3driver de8b59a..12db9b8:
+  > build mapfs directly, instead of in mapfs-release when integration testing [#169684821](https://www.pivotaltracker.com/story/show/169684821)
+  > add integration tests that run directly from this repo [#169684821](https://www.pivotaltracker.com/story/show/169684821)
+  > add scripts to run units directly from this repo [#169684821](https://www.pivotaltracker.com/story/show/169684821)
