@@ -9,7 +9,6 @@ APP_NAME=<%= p('nfsbrokerpush.app_name') %>
 APP_URL=https://<%= p('nfsbrokerpush.app_name') %>.<%= p('nfsbrokerpush.domain') %>
 CREDHUB_CA_CERT="<%= link('credhub').p('credhub.ca_certificate') %>"
 CREDHUB_SERVER="<%= link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s %>"
-DB_CA_CERT=/var/vcap/jobs/nfsbrokerpush/db_ca.crt
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
 ORG=<%= p('nfsbrokerpush.organization') %>
 PASSWORD="<%= p('nfsbrokerpush.password') %>"
@@ -46,12 +45,6 @@ function authenticate_and_target() {
   cf target -s $SPACE
 }
 
-function create_sql_security_group() {
-  cf create-security-group sql_open /var/vcap/jobs/nfsbrokerpush/sql.json
-  cf update-security-group sql_open /var/vcap/jobs/nfsbrokerpush/sql.json
-  cf bind-security-group sql_open $ORG $SPACE
-}
-
 function create_credhub_security_group() {
   cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
@@ -65,9 +58,6 @@ function create_manifest() {
   cp -f $STARTUP_SCRIPT /var/vcap/packages/nfsbroker/start.sh
   chmod +x /var/vcap/packages/nfsbroker/start.sh
   cp -f $SERVICES_CONFIG /var/vcap/packages/nfsbroker/services.json
-  if [[ -r ${DB_CA_CERT} ]]; then
-    cp -f $DB_CA_CERT /var/vcap/packages/nfsbroker/db_ca.crt
-  fi
   if [[ -r ${CREDHUB_CA_CERT} ]]; then
     cp -f $CREDHUB_CA_CERT /var/vcap/packages/nfsbroker/credhub_ca.crt
   fi
@@ -98,45 +88,6 @@ function create_logging_service() {
   fi
 
   cf bind-service $APP_NAME $LOGGER_NAME
-}
-
-function migrate_data_to_credhub() {
-  # Stop broker
-  if cf app "${APP_NAME}" > /dev/null; then
-    cf stop "${APP_NAME}"
-  fi
-
-  # Run migration
-  <%
-    database_host = nil
-    if_p('nfsbrokerpush.db.host') do |host|
-      database_host = host
-    end.else_if_link('database') do |db_link|
-      database_host = db_link.instances[0].address
-    end
-
-    if database_host == ''
-      raise 'missing database host property or link'
-    end
-  %>
-  /var/vcap/packages/migrate_mysql_to_credhub/bin/migrate_mysql_to_credhub \
-    --dbDriver="<%= p('nfsbrokerpush.db.driver') %>" \
-    --dbHostname="<%= database_host %>" \
-    --dbPort="<%= p('nfsbrokerpush.db.port') %>" \
-    --dbName="<%= p('nfsbrokerpush.db.name') %>" \
-    --dbUsername="<%= p('nfsbrokerpush.db.username') %>" \
-    --dbPassword="<%= p('nfsbrokerpush.db.password') %>" \
-    <% if_p('nfsbrokerpush.db.ca_cert') do |ca_cert| %> \
-    --dbCACertPath="/var/vcap/jobs/nfsbrokerpush/db_ca.crt" \
-    <% end %> \
-    <% if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |client_id, client_secret| %> \
-    --credhubURL="${CREDHUB_SERVER}" \
-    --uaaClientID="<%= client_id %>" \
-    --uaaClientSecret="<%= client_secret %>" \
-    --credhubCACertPath="/var/vcap/jobs/nfsbrokerpush/credhub_ca.crt" \
-    --uaaCACertPath="/var/vcap/jobs/nfsbrokerpush/uaa_ca.crt" \
-    --storeID="<%= p('nfsbrokerpush.store_id') %>" \
-    <% end %>
 }
 
 function push_app() {
@@ -187,16 +138,8 @@ cf -v
 
 authenticate_and_target
 create_manifest
-<% if p('nfsbrokerpush.create_sql_security_group') %>
-  create_sql_security_group
-<% end %>
 <% if p('nfsbrokerpush.create_credhub_security_group') %>
   create_credhub_security_group
-<% end %>
-<% if link('credhub').instances.length > 0 %>
-  <% if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do %>
-    migrate_data_to_credhub
-  <% end %>
 <% end %>
 push_app
 create_logging_service

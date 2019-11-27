@@ -21,19 +21,13 @@ describe 'nfsbrokerpush job' do
       )
     ]}
 
-    context 'when fully configured with all required credhub and database properties' do
+    context 'when fully configured with all required credhub properties' do
       let(:manifest_properties) do
         {
           "nfsbrokerpush" => {
             "credhub" => {
                 "uaa_client_id" => "client-id",
                 "uaa_client_secret" => "client-secret",
-            },
-            "db" => {
-              "host" => "some-db-host",
-              "port" => "some-db-port",
-              "name" => "some-db-name",
-              "driver" => "some-db-driver",
             },
             "store_id" => "some-store-id",
             "log_level" => "some-log-level",
@@ -75,15 +69,6 @@ describe 'nfsbrokerpush job' do
         expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
         expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
         expect(tpl_output).to include("--storeID=\"nfsbroker\"")
-      end
-
-      it 'omits the database flags from the script' do
-        tpl_output = template.render(manifest_properties, consumes: credhub_link)
-
-        expect(tpl_output).not_to include("--dbDriver=")
-        expect(tpl_output).not_to include("--dbHostname=")
-        expect(tpl_output).not_to include("--dbPort=")
-        expect(tpl_output).not_to include("--dbName=")
       end
 
       context 'configured with credhub set to zero instances' do

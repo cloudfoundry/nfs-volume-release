@@ -5,22 +5,16 @@ templates:
   Procfile.erb: Procfile
   credhub.json.erb: credhub.json
   credhub_ca.crt.erb: credhub_ca.crt
-  db_ca.crt.erb: db_ca.crt
   deploy.sh.erb: bin/run
   manifest.yml.erb: manifest.yml
   services.json.erb: config/services.json
-  sql.json.erb: sql.json
   start.sh.erb: start.sh
   uaa_ca.crt.erb: uaa_ca.crt
 
 packages:
   - nfsbroker
-  - migrate_mysql_to_credhub
 
 consumes:
-  - name: database
-    type: database
-    optional: true
   - name: credhub
     type: credhub
 
@@ -68,25 +62,6 @@ properties:
   nfsbrokerpush.service_name:
     description: 'service name in marketplace'
     default: nfs
-  nfsbrokerpush.db.driver:
-    description: '[DEPRECATED] mysql or postgres'
-    default: mysql
-  nfsbrokerpush.db.host:
-    description: '[DEPRECATED] database host'
-  nfsbrokerpush.db.port:
-    description: '[DEPRECATED] database port'
-    default: 3306
-  nfsbrokerpush.db.username:
-    description: '[DEPRECATED] database username'
-  nfsbrokerpush.db.password:
-    description: '[DEPRECATED] database password'
-  nfsbrokerpush.db.name:
-    description: '[DEPRECATED] database name'
-  nfsbrokerpush.db.ca_cert:
-    description: "[DEPRECATED] (optional) CA Cert to verify database SSL connection. If not included connection will not be encrypted"
-  nfsbrokerpush.db.skip_hostname_validation:
-    default: false
-    description: "[DEPRECATED] (optional) Skip verification of hostname in database TLS certificate (MySQL only)"
   nfsbrokerpush.credhub.uaa_client_id:
     description: "UAA client ID when using CredHub to store broker state"
   nfsbrokerpush.credhub.uaa_client_secret:
@@ -113,9 +88,6 @@ properties:
   nfsbrokerpush.app_name:
     description: 'application name to use when pushing the broker to cloud foundry and setting the route'
     default: nfsbroker
-  nfsbrokerpush.create_sql_security_group:
-    description: 'true if the errand should create a security group to allow traffic to any ip on ports 3306,5432'
-    default: true
   nfsbrokerpush.create_credhub_security_group:
     description: 'true if the errand should create a security group to allow traffic to any ip on ports 8443,8844'
     default: false
