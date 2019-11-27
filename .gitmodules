@@ -6,6 +6,3 @@
 	path = src/code.cloudfoundry.org/nfsbroker
 	url = https://github.com/cloudfoundry/nfsbroker
 	branch = master
-[submodule "src/code.cloudfoundry.org/migrate_mysql_to_credhub"]
-	path = src/code.cloudfoundry.org/migrate_mysql_to_credhub
-	url = https://github.com/cloudfoundry/migrate_mysql_to_credhub
