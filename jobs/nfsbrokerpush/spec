@@ -90,7 +90,7 @@ properties:
     default: nfsbroker
   nfsbrokerpush.create_credhub_security_group:
     description: 'true if the errand should create a security group to allow traffic to any ip on ports 8443,8844'
-    default: false
+    default: true
   nfsbrokerpush.broker_name:
     description: 'name of the service broker registered in CF'
     default: nfsbroker
