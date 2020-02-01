@@ -32,4 +32,4 @@ docker \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 cfpersi/bosh-release-tests \
-echo " from the bash shell, run ginkgo -nodes 1 -r -v ." && $COMMAND_TO_RUN  > /dev/null
+    bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
