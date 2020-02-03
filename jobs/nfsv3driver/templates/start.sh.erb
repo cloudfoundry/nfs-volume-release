@@ -52,7 +52,5 @@ exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --logLevel="<%= p("nfsv3driver.log_level") %>" \
   --timeFormat="<%= p("nfsv3driver.log_time_format") %>" \
   --mapfsPath="<%= link("mapfs").p("path") %>" \
-  --allowed-in-mount="auto_cache,version" \
-  --default-in-mount="auto_cache:true" \
   >> $LOG_DIR/nfsv3driver.stdout.log \
   2>> $LOG_DIR/nfsv3driver.stderr.log
