@@ -17,12 +17,11 @@ export PATH=$GOROOT/bin:$PATH
 go get -u github.com/onsi/ginkgo/ginkgo
 
 pushd mapfs-release
-  export GOPATH=$PWD
   export PATH=$PWD/bin:$PATH
 
   mkdir -p /var/vcap/packages/mapfs/bin/
-  pushd src/code.cloudfoundry.org/mapfs
-    go build -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
+  pushd src/mapfs
+    go build -mod=vendor -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
   popd
 popd
 
