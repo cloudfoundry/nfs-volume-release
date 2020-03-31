@@ -16,12 +16,7 @@ files:
   - code.cloudfoundry.org/credhub-cli/credhub/permissions/*.go # gosub
   - code.cloudfoundry.org/credhub-cli/credhub/server/*.go # gosub
   - code.cloudfoundry.org/credhub-cli/errors/*.go # gosub
-  - code.cloudfoundry.org/credhub-cli/vendor/github.com/cloudfoundry/go-socks5/*.go # gosub
-  - code.cloudfoundry.org/credhub-cli/vendor/github.com/cloudfoundry/socks5-proxy/*.go # gosub
-  - code.cloudfoundry.org/credhub-cli/vendor/github.com/hashicorp/go-version/*.go # gosub
-  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/crypto/**
-  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/context/*.go # gosub
-  - code.cloudfoundry.org/credhub-cli/vendor/golang.org/x/net/proxy/*.go # gosub
+  - code.cloudfoundry.org/credhub-cli/vendor/**
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/existingvolumebroker/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
