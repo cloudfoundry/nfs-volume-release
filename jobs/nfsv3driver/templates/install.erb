@@ -95,7 +95,6 @@ if [ "$codename" == "xenial" ]; then
     echo "Installing NFS packages"
     (
     flock -x 200
-    install_if_missing rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.2_amd64.deb
     install_if_missing keyutils /var/vcap/packages/nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb
     install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
     install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/libnfsidmap2_0.25-5_amd64.deb
@@ -104,6 +103,8 @@ if [ "$codename" == "xenial" ]; then
     install_or_upgrade libkrb5-3 /var/vcap/packages/nfs-debs/libkrb5-3_1.15.1-2_amd64.deb
     configure_if_present libkrb5-3
     install_or_upgrade libgssapi-krb5-2 /var/vcap/packages/nfs-debs/libgssapi-krb5-2_1.15.1-2_amd64.deb
+    install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb
+    install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.6_amd64.deb
     install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb
     ) 200>/var/vcap/data/dpkg.lock
 fi

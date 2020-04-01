@@ -30,14 +30,18 @@ nfs-debs/libnfsidmap2_0.25-5_amd64.deb:
   size: 32182
   object_id: d666fb5d-2e46-4bb1-6dba-b2e6368c6048
   sha: f28b7370542daaf81cefb44d9057fa9b3fb43064
+nfs-debs/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb:
+  size: 80634
+  object_id: 671095cf-0251-4aab-63a8-ee86f9ec150d
+  sha: sha256:2176796081db99169c578dbfc1d958e2170047be7bff9722350204953623be44
 nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb:
   size: 205360
   object_id: 79011511-3a38-4446-4521-c05ff6ecfc63
   sha: sha256:d241607dacc6c922852e6d7ff7805912ba7cb1f8463e4e23033caac34481456c
-nfs-debs/rpcbind_0.2.3-0.2_amd64.deb:
-  size: 40252
-  object_id: ae195912-095a-4c3c-5af3-bebd199f2c97
-  sha: 8fa58cfcb1862c6d337d10496fada5f1a6e94a03
+nfs-debs/rpcbind_0.2.3-0.6_amd64.deb:
+  size: 45966
+  object_id: 34ce9d16-81b5-4f83-6e52-14259e667a38
+  sha: sha256:2338a1e969779c54d40ca9d53deb928afc721524e511dac38be76f1a61540f81
 openldap/openldap-2.4.44.tgz:
   size: 5658830
   object_id: daea5917-02c3-4fe5-4626-a8805979788d
