@@ -16,7 +16,9 @@ var _ = Describe("BoshReleaseTest", func() {
 	})
 
 	It("should have a nfsv3driver process running", func() {
-		expectDpkgInstalled("rpcbind", "0.2.3-0.2")
+		libtirpc1VersionRegex := `0.2.5-1.2\+deb9u1`
+		expectDpkgInstalled("libtirpc1", libtirpc1VersionRegex)
+		expectDpkgInstalled("rpcbind", "0.2.3-0.6")
 		expectDpkgInstalled("keyutils", "1.5.9-8ubuntu1")
 		expectDpkgInstalled("libevent-2.1-6", "2.1.8-stable-4build1")
 		expectDpkgInstalled("libnfsidmap2", "0.25-5")
@@ -68,6 +70,7 @@ var _ = Describe("BoshReleaseTest", func() {
 
 
 		It("should not install packages or run rpcbind", func() {
+			expectDpkgNotInstalled("libtirpc1")
 			expectDpkgNotInstalled("rpcbind")
 			expectDpkgNotInstalled("keyutils")
 			expectDpkgNotInstalled("libevent-2.1-6")
