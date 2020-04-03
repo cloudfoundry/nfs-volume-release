@@ -135,6 +135,8 @@ builds:
     version: 0.0.2
   fab6cd55-2c34-43a7-92f3-0d43f6795771:
     version: 0.0.5
+  fc7fa2aa-bc1d-4d1a-5946-7d0100f511a8:
+    version: 2.3.5
   feed4394-af36-4db1-8194-22c6010f7018:
     version: 0.0.1
 format-version: "2"
