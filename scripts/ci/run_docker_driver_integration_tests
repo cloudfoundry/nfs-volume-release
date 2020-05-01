@@ -64,7 +64,7 @@ EOT
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
 
     export DRIVER_CMD="${NFS_ACCEPTANCE_DIR}/nfsv3driver"
-    export DRIVER_OPTS="-listenAddr="$listen_address",-transport="$TRANSPORT",-driversPath="$drivers_path",--allowed-in-mount="auto_cache",--default-in-mount="auto_cache:true""
+    export DRIVER_OPTS="-listenAddr="$listen_address",-transport="$TRANSPORT",-driversPath="$drivers_path""
   popd
 
 
