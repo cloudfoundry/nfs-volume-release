@@ -115,3 +115,6 @@
 	path = src/code.cloudfoundry.org/tlsconfig
 	url = https://github.com/cloudfoundry/tlsconfig
 	branch = master
+[submodule "src/github.com/google/gofuzz"]
+	path = src/github.com/google/gofuzz
+	url = https://github.com/google/gofuzz

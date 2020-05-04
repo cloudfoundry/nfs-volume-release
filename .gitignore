@@ -23,6 +23,7 @@ src/9fans.net/
 src/github.com/alecthomas/
 src/github.com/golang/
 src/github.com/google/
+!src/github.com/google/gofuzz
 src/github.com/jstemmer/
 src/github.com/kisielk/
 src/github.com/klauspost/
