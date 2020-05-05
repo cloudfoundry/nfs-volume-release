@@ -4,7 +4,7 @@ This is a bosh release that packages:
 - an [nfs volume driver](https://github.com/cloudfoundry-incubator/nfsv3driver) 
 - an [nfs service broker](https://github.com/cloudfoundry-incubator/nfsbroker) 
 - a sample NFS server with test shares
-- a sample LDAP server with prepopulated accounts to match the NFS test server
+- a sample LDAP server with pre-populated accounts to match the NFS test server
 
 The broker and driver allow you to provision existing NFS volumes and bind those volumes to your applications for shared file access.
 
