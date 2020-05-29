@@ -2,13 +2,13 @@
 
 <% if p("nfsv3driver.disable") %>
 <% else %>
-set -e
+set -eo pipefail
 
 install_if_missing ()
 {
     echo "Installing $1"
 
-    set +e
+    set +eo pipefail
     dpkg -s $1 2>&1
     dpkg_installed=$(echo $?)
     if [ "$dpkg_installed" != "0" ]; then
@@ -18,24 +18,24 @@ install_if_missing ()
           if [ $? -ne 0 ] ; then
             sleep 3
           else
-           set -e
+           set -eo pipefail
            return 0
           fi
         done
-        set -e
+        set -eo pipefail
         lsof -n
         exit 1
     else
         echo "Skipping $1"
     fi
-    set -e
+    set -eo pipefail
 }
 
 install_or_upgrade ()
 {
     echo "Upgrading $1"
 
-    set +e
+    set +eo pipefail
 
     for x in `seq 1 100` :
     do
@@ -43,21 +43,21 @@ install_or_upgrade ()
       if [ $? -ne 0 ] ; then
         sleep 3
       else
-       set -e
+       set -eo pipefail
        return 0
       fi
     done
-    set -e
+    set -eo pipefail
     lsof -n
     exit 1
-    set -e
+    set -eo pipefail
 }
 
 configure_if_present ()
 {
     echo "Configuring $1"
 
-    set +e
+    set +eo pipefail
     dpkg -s $1 2>&1
     dpkg_installed=$(echo $?)
     if [ "$dpkg_installed" == "0" ]; then
@@ -67,17 +67,17 @@ configure_if_present ()
           if [ $? -ne 0 ] ; then
             sleep 3
           else
-           set -e
+           set -eo pipefail
            return 0
           fi
         done
-        set -e
+        set -eo pipefail
         lsof -n
         exit 1
     else
         echo "Skipping $1"
     fi
-    set -e
+    set -eo pipefail
 }
 
 
@@ -90,27 +90,35 @@ function copy_client_certs_to_spec_dir() {
   cp -p /var/vcap/jobs/nfsv3driver/config/certs/client.key ${cert_dir}
 }
 
-codename=$(lsb_release -c | grep xenial | awk '{print $2}')
-if [ "$codename" == "xenial" ]; then
-    echo "Installing NFS packages"
-    (
-    flock -x 200
-    install_if_missing keyutils /var/vcap/packages/nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb
-    install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
-    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/libnfsidmap2_0.25-5_amd64.deb
-    install_or_upgrade libkrb5support0 /var/vcap/packages/nfs-debs/libkrb5support0_1.15.1-2_amd64.deb
-    install_or_upgrade libk5crypto3 /var/vcap/packages/nfs-debs/libk5crypto3_1.15.1-2_amd64.deb
-    install_or_upgrade libkrb5-3 /var/vcap/packages/nfs-debs/libkrb5-3_1.15.1-2_amd64.deb
-    configure_if_present libkrb5-3
-    install_or_upgrade libgssapi-krb5-2 /var/vcap/packages/nfs-debs/libgssapi-krb5-2_1.15.1-2_amd64.deb
-    install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb
-    install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.6_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb
-    ) 200>/var/vcap/data/dpkg.lock
-fi
+function prepend_rfc3339_datetime() {
+  perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
+}
 
-echo "Copying client certs to data directory..."
-copy_client_certs_to_spec_dir
+function main() {
+  codename=$(lsb_release -c | grep xenial | awk '{print $2}')
+  if [ "$codename" == "xenial" ]; then
+      echo "Installing NFS packages"
+      (
+      flock -x 200
+      install_if_missing keyutils /var/vcap/packages/nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb
+      install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
+      install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/libnfsidmap2_0.25-5_amd64.deb
+      install_or_upgrade libkrb5support0 /var/vcap/packages/nfs-debs/libkrb5support0_1.15.1-2_amd64.deb
+      install_or_upgrade libk5crypto3 /var/vcap/packages/nfs-debs/libk5crypto3_1.15.1-2_amd64.deb
+      install_or_upgrade libkrb5-3 /var/vcap/packages/nfs-debs/libkrb5-3_1.15.1-2_amd64.deb
+      configure_if_present libkrb5-3
+      install_or_upgrade libgssapi-krb5-2 /var/vcap/packages/nfs-debs/libgssapi-krb5-2_1.15.1-2_amd64.deb
+      install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb
+      install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.6_amd64.deb
+      install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb
+      ) 200>/var/vcap/data/dpkg.lock
+  fi
 
-exit 0
+  echo "Copying client certs to data directory..."
+  copy_client_certs_to_spec_dir
+
+  exit 0
+}
+
+main | prepend_rfc3339_datetime
 <% end %>

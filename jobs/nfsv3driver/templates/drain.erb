@@ -12,8 +12,12 @@ mkdir -p $LOG_DIR
 
 exec 3>&1
 
-exec 1>> $LOGFILE
-exec 2>> $LOGFILE
+function prepend_rfc3339_datetime() {
+  perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
+}
+
+exec 1> prepend_rfc3339_datetime >> $LOGFILE
+exec 2> prepend_rfc3339_datetime >> $LOGFILE
 
 evacuate() {
   curl --fail --max-time 600 http://$ADDRESS/evacuate >/dev/null 2>&1
