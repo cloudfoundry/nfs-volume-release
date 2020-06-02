@@ -8,14 +8,10 @@ PIDFILE=$RUN_DIR/nfsv3driver.pid
 SCRIPT=$(basename $0)
 mkdir -p /var/vcap/sys/log/monit
 
-function prepend_rfc3339_datetime() {
-  perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
-}
+exec 1>> /var/vcap/sys/log/monit/$SCRIPT.log
+exec 2>> /var/vcap/sys/log/monit/$SCRIPT.err.log
 
-exec 1> prepend_rfc3339_datetime >> /var/vcap/sys/log/monit/${SCRIPT}.log
-exec 2> prepend_rfc3339_datetime >> /var/vcap/sys/log/monit/${SCRIPT}.err.log
-
-echo "------------ `basename $0` $* at `date` --------------" | tee /dev/stderr
+echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ `basename $0` $* --------------" | tee /dev/stderr
 
 case $1 in
 
