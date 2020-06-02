@@ -12,12 +12,7 @@ mkdir -p $LOG_DIR
 
 exec 3>&1
 
-function prepend_rfc3339_datetime() {
-  perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
-}
-
-exec 1> prepend_rfc3339_datetime >> $LOGFILE
-exec 2> prepend_rfc3339_datetime >> $LOGFILE
+exec &> >(while read line; do echo "[$(date +%Y-%m-%dT%H:%M:%S.%NZ)] $line" >> ${LOGFILE}; done;)
 
 evacuate() {
   curl --fail --max-time 600 http://$ADDRESS/evacuate >/dev/null 2>&1
@@ -30,7 +25,7 @@ heartbeat() {
 wait_for_apps_to_be_evacuated() {
     for i in {1..90}; do
         if pgrep -x "rep" > /dev/null; then
-            echo "$(date): waiting for rep..."
+            echo "waiting for rep..."
             sleep 10
         else
             break
@@ -46,9 +41,9 @@ output_for_bosh() {
   exit_code=$?
 
   if [ $exit_code -eq 0 ]; then
-    echo "$(date): nfsv3driver exited"
+    echo "nfsv3driver exited"
   else
-    echo "$(date): evacuation failed"
+    echo "evacuation failed"
   fi
 
   #See https://www.pivotaltracker.com/story/show/165747144/comments/202416034
@@ -58,20 +53,20 @@ output_for_bosh() {
 trap output_for_bosh EXIT
 
 if [ ! -f $PIDFILE ]; then
-  echo "$(date): PIDFILE does not exist"
+  echo "PIDFILE does not exist"
   exit 0
 fi
 
 pid=$(cat $PIDFILE)
 
 if [ ! -e /proc/$pid ]; then
-  echo "$(date): nfsv3driver process not running"
+  echo "nfsv3driver process not running"
   exit 0
 fi
 
 wait_for_apps_to_be_evacuated
 
-echo "$(date): rep is done..evacuating nfsv3driver"
+echo "rep is done..evacuating nfsv3driver"
 
 set +e
 evacuate
@@ -81,7 +76,7 @@ set -e
 if [ $evacuate_exit_code -eq 0 ]; then
   for i in {1..60}; do
     if heartbeat; then
-      echo "$(date): waiting"
+      echo "waiting"
       sleep 5
     else
       break
@@ -91,7 +86,7 @@ if [ $evacuate_exit_code -eq 0 ]; then
   kill -9 $pid || true
   rm -rf $PIDFILE || true
 elif [ $evacuate_exit_code -eq 28 ]; then
-   echo "$(date): Drain timed out"
+   echo "Drain timed out"
    kill -9 $pid || true
    rm -rf $PIDFILE || true
 else
