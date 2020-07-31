@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
+export PATH="/var/vcap/packages/cf-cli-7-linux/bin:$PATH"
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
@@ -31,7 +32,6 @@ ERROR_EXIT_CODE=<%= p('nfsbrokerpush.error_on_misconfiguration') ? 1 : 0 %>
 DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
-  cf logout
   mkdir -p $CF_HOME
   cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
   <% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
@@ -48,7 +48,11 @@ function authenticate_and_target() {
 function create_credhub_security_group() {
   cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
-  cf bind-security-group credhub_open $ORG $SPACE
+  if [[ -d "/var/vcap/packages/cf-cli-7-linux" ]]; then
+    cf bind-security-group credhub_open $ORG --space $SPACE
+  else
+    cf bind-security-group credhub_open $ORG $SPACE
+  fi
 }
 
 function create_manifest() {
