@@ -69,7 +69,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 
 		It("should upgrade the nfs-common package to the version specified in the pre-install script", func() {
-			expectDpkgInstalled("nfs-common", "1:1.2.8-9ubuntu12.2")
+			expectDpkgInstalled("nfs-common", "1:1.2.8-9ubuntu12.3")
 
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "sudo /var/vcap/jobs/nfsv3driver/bin/pre-start")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
