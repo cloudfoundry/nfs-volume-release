@@ -52,8 +52,8 @@ describe 'nfsv3driver job' do
         it 'sets the allowedOptions flag correctly' do
           tpl_output = template.render(manifest_properties, consumes: mapfs_link)
 
-          expect(tpl_output).to include("export LDAP_SVC_USER=\"service-user\"")
-          expect(tpl_output).to include("export LDAP_SVC_PASS=\"service-password\"")
+          expect(tpl_output).to include("export LDAP_SVC_USER='service-user'")
+          expect(tpl_output).to include("export LDAP_SVC_PASS='service-password'")
           expect(tpl_output).to include("export LDAP_HOST=\"some-host\"")
           expect(tpl_output).to include("export LDAP_PORT=\"1234\"")
           expect(tpl_output).to include("export LDAP_PROTO=\"udp\"")
@@ -62,6 +62,28 @@ describe 'nfsv3driver job' do
         end
       end
 
+      context 'when ldap properties contain bash special characters' do
+        let(:manifest_properties) do
+          {
+            "nfsv3driver" => {
+              "ldap_svc_user" => "Patrick O'Malley",
+              "ldap_svc_password" => "!que&pasa!${xxx}$?",
+              "ldap_host" => "some-host",
+              "ldap_port" => 1234,
+              "ldap_proto" => "udp",
+              "ldap_user_fqdn" => "cn=Users,dc=corp,dc=test,dc=com",
+              "ldap_ca_cert" => "some-ca-cert",
+            }
+          }
+        end
+
+        it 'escapes the properties correctly' do
+          tpl_output = template.render(manifest_properties, consumes: mapfs_link)
+
+          expect(tpl_output).to include("export LDAP_SVC_USER='Patrick O'\"'\"'Malley'")
+          expect(tpl_output).to include("export LDAP_SVC_PASS='!que&pasa!${xxx}$?'")
+        end
+      end
     context 'when configured with ldap with a null ca cert' do
       let(:manifest_properties) do
         {
