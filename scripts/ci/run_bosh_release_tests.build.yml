@@ -5,7 +5,7 @@ image_resource:
   type: docker-image
   source:
     privileged: true
-    repository: harbor-repo.vmware.com/dockerhub-proxy-cache/bosh/main-bosh-docker
+    repository: bosh/main-bosh-docker
     tag: latest
 
 inputs:
