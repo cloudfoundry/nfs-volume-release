@@ -3,7 +3,7 @@ RUN git clone --recurse-submodules https://github.com/cloudfoundry/nfs-volume-re
 RUN cd nfs-volume-release && bosh create-release --tarball /tmp/release.tgz
 RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1.13-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
 
-FROM apnar/nfs-ganesha
+FROM apnar/nfs-ganesha@sha256:e06f4f94e41ee7f490ce5f82fb39f44b09e75900b4444828ee71a9d59b5321e0
 
 RUN DEBIAN_FRONTEND=noninteractive \
      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FE869A9 \
@@ -30,6 +30,3 @@ RUN go get github.com/onsi/ginkgo/ginkgo
 
 RUN sed -i 's/VFS/MEM/' /start.sh
 RUN sed -i 's#^EXPORT#NFSV4 \{ Graceless = true; \}\nEXPORT#' /start.sh
-RUN mkdir -p /var/run/dbus
-RUN touch /var/run/dbus/system_bus_socket
-RUN touch /var/run/dbus/pid
