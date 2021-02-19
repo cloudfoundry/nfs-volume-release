@@ -30,3 +30,6 @@ RUN go get github.com/onsi/ginkgo/ginkgo
 
 RUN sed -i 's/VFS/MEM/' /start.sh
 RUN sed -i 's#^EXPORT#NFSV4 \{ Graceless = true; \}\nEXPORT#' /start.sh
+RUN mkdir -p /var/run/dbus
+RUN touch /var/run/dbus/system_bus_socket
+RUN touch /var/run/dbus/pid
