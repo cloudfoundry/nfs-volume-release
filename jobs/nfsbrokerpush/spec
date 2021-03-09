@@ -78,8 +78,10 @@ properties:
     default: 3306
   nfsbrokerpush.db.username:
     description: '[DEPRECATED] database username'
+    default: ""
   nfsbrokerpush.db.password:
     description: '[DEPRECATED] database password'
+    default: ""
   nfsbrokerpush.db.name:
     description: '[DEPRECATED] database name'
   nfsbrokerpush.db.ca_cert:

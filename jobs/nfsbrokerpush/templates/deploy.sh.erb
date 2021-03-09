@@ -119,6 +119,13 @@ function migrate_data_to_credhub() {
       raise 'missing database host property or link'
     end
   %>
+
+  # don't run migration if there are no user credentials--external db deployments
+  # upgrading from 2.9 or 2.10 will not have nfs SQL databases
+  if [ -z "<%= p('nfsbrokerpush.db.username') %>" ]; then
+    return
+  fi
+
   /var/vcap/packages/migrate_mysql_to_credhub/bin/migrate_mysql_to_credhub \
     --dbDriver="<%= p('nfsbrokerpush.db.driver') %>" \
     --dbHostname="<%= database_host %>" \
