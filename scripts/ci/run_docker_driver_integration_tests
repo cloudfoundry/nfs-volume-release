@@ -2,6 +2,9 @@
 
 set -x -e
 
+# unmount the /run mount provided by containerd
+umount /run || true
+
 /start.sh &
 
 function kill_ganesha {
