@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-COMMAND_TO_RUN='"go get github.com/onsi/ginkgo/ginkgo && ginkgo -nodes 1 -v ."'
+COMMAND_TO_RUN='bash -c "go get github.com/onsi/ginkgo/ginkgo && ginkgo -nodes 1 -v ."'
 if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
@@ -29,6 +29,7 @@ run \
 --env BOSH_CLIENT_SECRET=${BOSH_CLIENT_SECRET} \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
+--env GOPATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 --env GO111MODULE=off \
 cfpersi/bosh-release-tests \
