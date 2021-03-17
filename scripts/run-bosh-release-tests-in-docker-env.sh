@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-COMMAND_TO_RUN='bash -c "go get github.com/onsi/ginkgo/ginkgo && ginkgo -nodes 1 -v ."'
+COMMAND_TO_RUN="go get github.com/onsi/ginkgo/ginkgo && ginkgo -nodes 1 -v ."
 if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
@@ -33,4 +33,4 @@ run \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 --env GO111MODULE=off \
 cfpersi/bosh-release-tests \
-$COMMAND_TO_RUN
+bash -c "$COMMAND_TO_RUN"
