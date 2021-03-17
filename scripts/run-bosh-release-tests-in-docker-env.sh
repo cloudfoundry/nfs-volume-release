@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-COMMAND_TO_RUN='ginkgo -nodes 1 -v .'
+COMMAND_TO_RUN='"go get github.com/onsi/ginkgo/ginkgo && ginkgo -nodes 1 -v ."'
 if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
