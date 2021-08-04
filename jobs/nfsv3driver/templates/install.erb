@@ -105,12 +105,10 @@ function main() {
       install_if_missing keyutils /var/vcap/packages/nfs-debs/keyutils_1.5.9-9.2ubuntu2_amd64.deb
       install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
       install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/libnfsidmap2_0.25-5.1_amd64.deb
-      install_or_upgrade libkrb5support0 /var/vcap/packages/nfs-debs/libkrb5support0_1.16-2ubuntu0.2_amd64.deb
-      install_or_upgrade libk5crypto3 /var/vcap/packages/nfs-debs/libk5crypto3_1.16-2ubuntu0.2_amd64.deb
-      install_or_upgrade libkrb5-3 /var/vcap/packages/nfs-debs/libkrb5-3_1.16-2ubuntu0.2_amd64.deb
+      configure_if_present libk5crypto3
       configure_if_present libkrb5-3
-      install_or_upgrade libgssapi-krb5-2 /var/vcap/packages/nfs-debs/libgssapi-krb5-2_1.16-2ubuntu0.2_amd64.deb
-      install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/libtirpc1_0.2.5-1.2ubuntu0.1_amd64.deb
+      configure_if_present libgssapi-krb5-2
+      configure_if_present libtirpc1
       install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/rpcbind_0.2.3-0.6ubuntu0.18.04.4_amd64.deb
       install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/nfs-common_1.3.4-2.1ubuntu5.3_amd64.deb
       ) 200>/var/vcap/data/dpkg.lock

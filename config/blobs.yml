@@ -16,30 +16,18 @@ nfs-debs/libgssapi-krb5-2_1.15.1-2_amd64.deb:
   size: 120298
   object_id: 00800a67-3797-4f5a-6cf5-e2f8a4290d85
   sha: sha256:07affb4998cbd57d9d125349213cde5a191a5bb466f9085333c87d2a6b252648
-nfs-debs/libgssapi-krb5-2_1.16-2ubuntu0.2_amd64.deb:
-  size: 122004
-  sha: sha256:dbb4d6508d81ac50b9f3fbac9f1d0d00c9ad15d22bce104ebf934813d780012b
 nfs-debs/libk5crypto3_1.15.1-2_amd64.deb:
   size: 84942
   object_id: 461520bc-8f33-4c19-7f13-fffa143614cb
   sha: sha256:f52e197b56ddfa20159a9f4967b87dc29a1987ea4a48acd159512761c4ae51e4
-nfs-debs/libk5crypto3_1.16-2ubuntu0.2_amd64.deb:
-  size: 85472
-  sha: sha256:d3cf88802e2a182ccd2214c454adda9fd895d35d73c9cda2c7ce53e5356c1927
 nfs-debs/libkrb5-3_1.15.1-2_amd64.deb:
   size: 276254
   object_id: e8d2e2aa-647a-45fd-53f1-b8d1199718b3
   sha: sha256:6613a940c56a785724e330645fd9ac9bf493b849cbb63c541b7a6ce1b426a99d
-nfs-debs/libkrb5-3_1.16-2ubuntu0.2_amd64.deb:
-  size: 278652
-  sha: sha256:43344f93c620dbaa9d3941cbad6900492273c609a728739dc68d816ca23a5df0
 nfs-debs/libkrb5support0_1.15.1-2_amd64.deb:
   size: 32158
   object_id: 721c58f2-7b41-4736-40f0-9fc36ea629c6
   sha: sha256:da7fd6c191485c6c64b484368a77f3cbbe2d0729f858045ea4182df09f77ba3a
-nfs-debs/libkrb5support0_1.16-2ubuntu0.2_amd64.deb:
-  size: 30824
-  sha: sha256:f09c0d595dc9124716bfdb250329335e18efb8840982dd1191d49c6f214f7dbf
 nfs-debs/libnfsidmap2_0.25-5.1_amd64.deb:
   size: 27180
   sha: sha256:ae6eaf479efa010b313b4e0cf18812e3ca6eb50b6392b7b52e854d6acafe866b
@@ -51,9 +39,6 @@ nfs-debs/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb:
   size: 80634
   object_id: 671095cf-0251-4aab-63a8-ee86f9ec150d
   sha: sha256:2176796081db99169c578dbfc1d958e2170047be7bff9722350204953623be44
-nfs-debs/libtirpc1_0.2.5-1.2ubuntu0.1_amd64.deb:
-  size: 75708
-  sha: sha256:6e0e12526d37f786f7afec3e16a1b5687d97774fdc9596bc8f42291214df2a5d
 nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb:
   size: 205360
   object_id: 79011511-3a38-4446-4521-c05ff6ecfc63
