@@ -2,6 +2,7 @@ FROM relintdockerhubpushbot/cf-deployment-concourse-tasks as golang_version
 RUN git clone --recurse-submodules https://github.com/cloudfoundry/nfs-volume-release
 RUN cd nfs-volume-release && bosh create-release --tarball /tmp/release.tgz
 RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1.13-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
+RUN ginkgo_version=$(cd nfs-volume-release/src/bosh_release/ && go list -f "{{.Version}}" -m github.com/onsi/ginkgo > /tmp/ginkgo_version)
 
 FROM apnar/nfs-ganesha@sha256:e06f4f94e41ee7f490ce5f82fb39f44b09e75900b4444828ee71a9d59b5321e0
 
@@ -16,6 +17,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update && apt-get install -y fuse git gcc wget
 
 COPY --from=golang_version /tmp/golang_version /tmp/golang_version
+COPY --from=golang_version /tmp/ginkgo_version /tmp/ginkgo_version
 RUN wget https://dl.google.com/go/$(cat /tmp/golang_version).linux-amd64.tar.gz
 RUN tar -xvf $(cat /tmp/golang_version).linux-amd64.tar.gz
 RUN mv go /usr/local
@@ -25,7 +27,8 @@ ENV GOPATH /go
 ENV GOROOT=/usr/local/go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-RUN go get github.com/onsi/ginkgo/ginkgo
+ENV GO111MODULE=on
+RUN go get github.com/onsi/ginkgo/ginkgo@$(cat /tmp/ginkgo_version)
 
 
 RUN sed -i 's/VFS/MEM/' /start.sh
