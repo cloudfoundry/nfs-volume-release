@@ -17,7 +17,11 @@ SOURCE="localhost:/"
 export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
-go get -u github.com/onsi/ginkgo/ginkgo
+
+if ! ginkgo version &> /dev/null
+then
+  go get -u github.com/onsi/ginkgo/ginkgo
+fi
 
 pushd mapfs-release
   export PATH=$PWD/bin:$PATH
