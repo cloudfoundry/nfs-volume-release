@@ -11,6 +11,9 @@ export PATH=$GOROOT/bin:$PATH
 export GOPATH=$PWD
 export PATH=$PWD/bin:$PATH
 
-go get -u github.com/onsi/ginkgo/ginkgo
+if ! ginkgo version &> /dev/null
+then
+  go get -u github.com/onsi/ginkgo/ginkgo
+fi
 
 ./scripts/run-driver-unit-tests -race
