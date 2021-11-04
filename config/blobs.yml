@@ -9,9 +9,15 @@ nfs-debs/keyutils_1.5.9-8ubuntu1_amd64.deb:
 nfs-debs/keyutils_1.5.9-9.2ubuntu2_amd64.deb:
   size: 47896
   sha: sha256:223a7160b6e2680d2b1f43abb067e0ccc08906bb2c5448ad4b3065f38309bbb5
+nfs-debs/keyutils_1.6-6ubuntu1_amd64.deb:
+  size: 44960
+  sha: sha256:ae5fd32e1ee1ff359b187e6b410c6ec6eac2c967bc24bd68bc07c7700b874ccc
 nfs-debs/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb:
   size: 133328
   sha: sha256:76bc94b3bb4356673c61dd2a4a7b06f40de21dab051aa4b31282aa9d7798b383
+nfs-debs/libevent-2.1-7_2.1.11-stable-1_amd64.deb:
+  size: 138008
+  sha: sha256:4494b16a4732e6d9989d440bcedac846cee66bc11cc55c1f622b0abb7d6c449f
 nfs-debs/libgssapi-krb5-2_1.15.1-2_amd64.deb:
   size: 120298
   object_id: 00800a67-3797-4f5a-6cf5-e2f8a4290d85
@@ -31,6 +37,9 @@ nfs-debs/libkrb5support0_1.15.1-2_amd64.deb:
 nfs-debs/libnfsidmap2_0.25-5.1_amd64.deb:
   size: 27180
   sha: sha256:ae6eaf479efa010b313b4e0cf18812e3ca6eb50b6392b7b52e854d6acafe866b
+nfs-debs/libnfsidmap2_0.25-5.1ubuntu1_amd64.deb:
+  size: 27852
+  sha: sha256:5ffcd9d6cc05b5e2f6e952a02e9308bf9c9aa35a11a4f683d474c27f44d7276e
 nfs-debs/libnfsidmap2_0.25-5_amd64.deb:
   size: 32182
   object_id: d666fb5d-2e46-4bb1-6dba-b2e6368c6048
@@ -46,6 +55,9 @@ nfs-debs/nfs-common_1.3.4-2.1ubuntu4_amd64.deb:
 nfs-debs/nfs-common_1.3.4-2.1ubuntu5.3_amd64.deb:
   size: 205520
   sha: sha256:ecf4d9601d210d86d423457dd18a7d3af406ed34a273fb22ade431764fc66d67
+nfs-debs/nfs-common_1.3.4-2.5ubuntu3.3_amd64.deb:
+  size: 204084
+  sha: sha256:aa77347fd0ba3b4845de717bc80db0240a2bc7b98082a7100118b122653c2b93
 nfs-debs/rpcbind_0.2.3-0.6_amd64.deb:
   size: 45966
   object_id: 34ce9d16-81b5-4f83-6e52-14259e667a38
@@ -53,6 +65,9 @@ nfs-debs/rpcbind_0.2.3-0.6_amd64.deb:
 nfs-debs/rpcbind_0.2.3-0.6ubuntu0.18.04.4_amd64.deb:
   size: 42124
   sha: sha256:ad1e5849523af0dba54a1f7e7f54d11f1a7a0131ce5de858a5ff37e61c27b35d
+nfs-debs/rpcbind_1.2.5-8_amd64.deb:
+  size: 42836
+  sha: sha256:f67c7baa1b76ba3ad682c00899ec71c73bdeb3c2dd2bf73251f971f51673beab
 openldap/openldap-2.4.44.tgz:
   size: 5658830
   object_id: daea5917-02c3-4fe5-4626-a8805979788d
