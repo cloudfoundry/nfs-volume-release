@@ -4,3 +4,27 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
+####################################
+# Settings for branch v2.3 used in:
+# https://github.com/cloudfoundry/persi-ci/blob/3ed769b9b522d4fcbe0dc9bf6dcf7168f0b21b40/sync-pipelines.sh#L64
+####################################
+  - package-ecosystem: "bundler"
+    target-branch: "v2.3"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+####################################
+# Settings for branch v5.0 used in:
+# https://github.com/cloudfoundry/persi-ci/blob/3ed769b9b522d4fcbe0dc9bf6dcf7168f0b21b40/sync-pipelines.sh#L56
+####################################
+  - package-ecosystem: "bundler"
+    target-branch: "v5.0"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+# Do we want to autoupdate submodules in /src ?
+# Do we want to autoupdate go-modules in /src ?
+# Do we want to autoupdate /dockerfiles ?
