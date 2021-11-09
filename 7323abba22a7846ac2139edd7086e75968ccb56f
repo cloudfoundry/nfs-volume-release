@@ -1,0 +1,7 @@
+{
+  "pr": "79",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/bundler/v2.3/rspec-3.10.0",
+  "branch_tip": "7323abba22a7846ac2139edd7086e75968ccb56f"
+}
