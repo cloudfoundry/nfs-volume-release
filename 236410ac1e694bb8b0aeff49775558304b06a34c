@@ -1,0 +1,7 @@
+{
+  "pr": "76",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v5.0",
+  "head_branch": "dependabot/bundler/v5.0/bosh-template-2.2.1",
+  "branch_tip": "236410ac1e694bb8b0aeff49775558304b06a34c"
+}
