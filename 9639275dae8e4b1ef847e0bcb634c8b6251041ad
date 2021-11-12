@@ -1,0 +1,7 @@
+{
+  "pr": "87",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "master",
+  "head_branch": "dependabot/submodules/src/code.cloudfoundry.org/nfsv3driver-3235d88",
+  "branch_tip": "9639275dae8e4b1ef847e0bcb634c8b6251041ad"
+}
