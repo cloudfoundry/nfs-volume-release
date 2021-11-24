@@ -29,7 +29,7 @@ run \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env GOPATH=/nfs-volume-release \
---env MAPFS_RELEASE_PATH=/nfs-volume-release/src/githum.com/cloudfoundry/mapfs-release \
+--env MAPFS_RELEASE_PATH=/nfs-volume-release/src/github.com/cloudfoundry/mapfs-release \
 --env GO111MODULE=off \
 cfpersi/bosh-release-tests \
 bash -c "$COMMAND_TO_RUN"
