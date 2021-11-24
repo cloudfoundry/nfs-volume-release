@@ -15,7 +15,7 @@ export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
 
-pushd mapfs-release
+pushd nfs-volume-release/src/github.com/cloudfoundry/mapfs-release
   export PATH=$PWD/bin:$PATH
 
   mkdir -p /var/vcap/packages/mapfs/bin/
