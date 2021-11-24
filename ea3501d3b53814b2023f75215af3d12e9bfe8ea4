@@ -1,0 +1,7 @@
+{
+  "pr": "91",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "v2.3-mapfs-submodule",
+  "branch_tip": "ea3501d3b53814b2023f75215af3d12e9bfe8ea4"
+}
