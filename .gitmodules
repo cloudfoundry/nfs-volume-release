@@ -118,3 +118,6 @@
 [submodule "src/github.com/google/gofuzz"]
 	path = src/github.com/google/gofuzz
 	url = https://github.com/google/gofuzz
+[submodule "src/github.com/cloudfoundry/mapfs-release"]
+	path = src/github.com/cloudfoundry/mapfs-release
+	url = https://github.com/cloudfoundry/mapfs-release

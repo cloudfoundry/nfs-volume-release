@@ -19,7 +19,7 @@ docker \
 run \
 --network=director_network \
 -v $PWD/nfs-volume-release/:/nfs-volume-release \
--v $PWD/mapfs-release:/mapfs-release \
+-v $PWD/nfs-volume-release/src/github.com/cloudfoundry/mapfs-release:/mapfs-release \
 -v /tmp:/tmp \
 -w /nfs-volume-release/src/bosh_release \
 -t \
