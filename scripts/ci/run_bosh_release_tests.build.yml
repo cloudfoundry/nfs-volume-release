@@ -11,7 +11,6 @@ image_resource:
 inputs:
   - name: nfs-volume-release-concourse-tasks
   - name: nfs-volume-release
-  - name: mapfs-release
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_bosh_release_tests
