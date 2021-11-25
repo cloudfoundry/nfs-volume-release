@@ -1,0 +1,7 @@
+{
+  "pr": "95",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v5.0",
+  "head_branch": "dependabot/submodules/v5.0/src/code.cloudfoundry.org/migrate_mysql_to_credhub-df03ea2",
+  "branch_tip": "54c7a56092168b55f0ea93d23a4fea5065c3750c"
+}
