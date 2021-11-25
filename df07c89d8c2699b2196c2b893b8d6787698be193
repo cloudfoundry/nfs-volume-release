@@ -1,0 +1,7 @@
+{
+  "pr": "94",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/code.cloudfoundry.org/credhub-cli-9cc390e",
+  "branch_tip": "df07c89d8c2699b2196c2b893b8d6787698be193"
+}
