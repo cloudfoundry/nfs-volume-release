@@ -23,7 +23,7 @@ then
   go get -u github.com/onsi/ginkgo/ginkgo
 fi
 
-pushd mapfs-release
+pushd nfs-volume-release/src/github.com/cloudfoundry/mapfs-release
   export PATH=$PWD/bin:$PATH
 
   mkdir -p /var/vcap/packages/mapfs/bin/
