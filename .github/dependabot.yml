@@ -18,6 +18,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  - package-ecosystem: "gitsubmodule"
+    target-branch: "v2.3"
+    directory: "/"
+    schedule:
+      interval: "daily"
 
 ####################################
 # Settings for branch v5.0 used in:
@@ -28,7 +33,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-
-# Do we want to autoupdate submodules in /src ?
-# Do we want to autoupdate go-modules in /src ?
-# Do we want to autoupdate /dockerfiles ?
+  - package-ecosystem: "gitsubmodule"
+    target-branch: "v5.0"
+    directory: "/"
+    schedule:
+      interval: "daily"      
