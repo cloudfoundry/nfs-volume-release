@@ -1,0 +1,7 @@
+{
+  "pr": "98",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/github.com/tedsuo/ifrit-9a97d06",
+  "branch_tip": "0d8126ac9c9efee349e99d8c200e9e7c1fa5e3fd"
+}
