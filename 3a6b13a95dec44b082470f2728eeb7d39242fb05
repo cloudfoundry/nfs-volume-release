@@ -1,0 +1,7 @@
+{
+  "pr": "97",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/code.cloudfoundry.org/dockerdriver-1b34132",
+  "branch_tip": "3a6b13a95dec44b082470f2728eeb7d39242fb05"
+}
