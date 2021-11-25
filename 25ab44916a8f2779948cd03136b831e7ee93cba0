@@ -1,0 +1,7 @@
+{
+  "pr": "99",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/code.cloudfoundry.org/lager-2c3a201",
+  "branch_tip": "25ab44916a8f2779948cd03136b831e7ee93cba0"
+}
