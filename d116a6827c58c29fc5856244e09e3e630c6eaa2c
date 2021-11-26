@@ -1,0 +1,7 @@
+{
+  "pr": "100",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/gopkg.in/DATA-DOG/go-sqlmock.v1-5b901db",
+  "branch_tip": "d116a6827c58c29fc5856244e09e3e630c6eaa2c"
+}
