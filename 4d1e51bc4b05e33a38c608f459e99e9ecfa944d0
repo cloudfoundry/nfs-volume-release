@@ -1,0 +1,7 @@
+{
+  "pr": "101",
+  "repository": "cloudfoundry/nfs-volume-release",
+  "base_branch": "v2.3",
+  "head_branch": "dependabot/submodules/v2.3/src/code.cloudfoundry.org/service-broker-store-35ad5d6",
+  "branch_tip": "4d1e51bc4b05e33a38c608f459e99e9ecfa944d0"
+}
