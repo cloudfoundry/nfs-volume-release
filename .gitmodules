@@ -1,11 +1,11 @@
 [submodule "src/code.cloudfoundry.org/nfsv3driver"]
 	path = src/code.cloudfoundry.org/nfsv3driver
 	url = https://github.com/cloudfoundry/nfsv3driver
-	branch = master
+	branch = v5.0
 [submodule "src/code.cloudfoundry.org/nfsbroker"]
 	path = src/code.cloudfoundry.org/nfsbroker
 	url = https://github.com/cloudfoundry/nfsbroker
-	branch = master
+	branch = v5.0
 [submodule "src/code.cloudfoundry.org/migrate_mysql_to_credhub"]
 	path = src/code.cloudfoundry.org/migrate_mysql_to_credhub
 	url = https://github.com/cloudfoundry/migrate_mysql_to_credhub
