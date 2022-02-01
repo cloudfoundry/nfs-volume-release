@@ -2,4 +2,4 @@
 
 set -e
 
-cp -a ${BOSH_COMPILE_TARGET}/nfs-debs/*.deb ${BOSH_INSTALL_TARGET}/
+cp -ra ${BOSH_COMPILE_TARGET}/nfs-debs/* ${BOSH_INSTALL_TARGET}/
