@@ -2,6 +2,7 @@
 
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
 export PATH="/var/vcap/packages/cf-cli-7-linux/bin:$PATH"
+export PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
@@ -48,10 +49,10 @@ function authenticate_and_target() {
 function create_credhub_security_group() {
   cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
-  if [[ -d "/var/vcap/packages/cf-cli-7-linux" ]]; then
-    cf bind-security-group credhub_open $ORG --space $SPACE
-  else
+  if [[ -d "/var/vcap/packages/cf-cli-6-linux" ]]; then
     cf bind-security-group credhub_open $ORG $SPACE
+  else
+    cf bind-security-group credhub_open $ORG --space $SPACE
   fi
 }
 
