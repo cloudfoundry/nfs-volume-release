@@ -27,11 +27,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-  - package-ecosystem: "gomod"
-    target-branch: "v2.3"
-    directory: "/src/bosh_release/"
-    schedule:
-      interval: "daily"
 
 ####################################
 # Settings for branch v5.0 used in:
