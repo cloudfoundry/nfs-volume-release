@@ -8,6 +8,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  - package-ecosystem: "gomod"
+    directory: "/src/bosh_release/"
+    schedule:
+      interval: "daily"
 
 ####################################
 # Settings for branch v2.3 used in:
@@ -21,6 +25,11 @@ updates:
   - package-ecosystem: "gitsubmodule"
     target-branch: "v2.3"
     directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gomod"
+    target-branch: "v2.3"
+    directory: "/src/bosh_release/"
     schedule:
       interval: "daily"
 
@@ -38,3 +47,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"      
+  - package-ecosystem: "gomod"
+    target-branch: "v5.0"
+    directory: "/src/bosh_release/"
+    schedule:
+      interval: "daily"
