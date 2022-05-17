@@ -14,21 +14,6 @@ updates:
       interval: "daily"
 
 ####################################
-# Settings for branch v2.3 used in:
-# https://github.com/cloudfoundry/persi-ci/blob/3ed769b9b522d4fcbe0dc9bf6dcf7168f0b21b40/sync-pipelines.sh#L64
-####################################
-  - package-ecosystem: "bundler"
-    target-branch: "v2.3"
-    directory: "/"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "gitsubmodule"
-    target-branch: "v2.3"
-    directory: "/"
-    schedule:
-      interval: "daily"
-
-####################################
 # Settings for branch v5.0 used in:
 # https://github.com/cloudfoundry/persi-ci/blob/3ed769b9b522d4fcbe0dc9bf6dcf7168f0b21b40/sync-pipelines.sh#L56
 ####################################
