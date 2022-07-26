@@ -5,6 +5,9 @@ if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
 
+update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
 export DOCKER_STORAGE_OPTIONS='--storage-opt dm.basesize=100G'
 . start-bosh
 
