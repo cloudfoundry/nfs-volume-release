@@ -82,7 +82,7 @@ nfs-debs/xenial/rpcbind_0.2.3-0.6_amd64.deb:
   size: 45966
   object_id: 34ce9d16-81b5-4f83-6e52-14259e667a38
   sha: sha256:2338a1e969779c54d40ca9d53deb928afc721524e511dac38be76f1a61540f81
-openldap/openldap-2.5.13.tgz:
-  size: 6454072
-  object_id: cf550594-55b9-4b41-677e-d1cd74baadb7
-  sha: sha256:ee3c430c4ef7b87c57b622108c7339376d6c27fbbf2767770be3de1df63d008c
+openldap/openldap-2.6.3.tgz:
+  size: 6474169
+  object_id: 54ace5ea-fc25-4e58-521a-bcda18784753
+  sha: sha256:d2a2a1d71df3d77396b1c16ad7502e674df446e06072b0e5a4e941c3d06c0d46

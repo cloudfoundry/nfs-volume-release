@@ -10,8 +10,8 @@ export HOME=/var/vcap
 export BDB_PATH=/var/vcap/packages/berkeleydb
 
 cd $BOSH_COMPILE_TARGET
-tar -xzvf openldap/openldap-2.5.13.tgz
-cd openldap-2.5.13
+tar -xzvf openldap/openldap-2.6.3.tgz
+cd openldap-2.6.3
 
 export CPPFLAGS="-I ${BDB_PATH}/include"
 export LD_LIBRARY_PATH="${BDB_PATH}/lib"

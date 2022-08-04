@@ -1,0 +1,5 @@
+---
+name: openldap-2.6.3
+dependencies: [berkeleydb]
+files:
+- openldap/openldap-2.6.3.tgz
