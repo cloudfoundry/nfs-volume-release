@@ -9,7 +9,7 @@ source /var/vcap/jobs/nfstestldapserver/helpers/ctl_setup.sh 'nfstestldapserver'
 export PORT=${PORT:-5000}
 export LANG=en_US.UTF-8
 
-export OPENLDAP=/var/vcap/packages/openldap-2.5.13
+export OPENLDAP=/var/vcap/packages/openldap-2.6.3
 export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:$PATH
 
 case $1 in
