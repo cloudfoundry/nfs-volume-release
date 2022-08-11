@@ -49,7 +49,7 @@ function authenticate_and_target() {
 function create_credhub_security_group() {
   cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
-  if [[ -d "/var/vcap/packages/cf-cli-6-linux" ]]; then
+  if LANG=en cf version | grep "cf version 6"; then
     cf bind-security-group credhub_open $ORG $SPACE
   else
     cf bind-security-group credhub_open $ORG --space $SPACE
