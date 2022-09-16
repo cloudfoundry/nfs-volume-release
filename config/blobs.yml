@@ -30,10 +30,6 @@ nfs-debs/jammy/libevent-2.1-7_2.1.12-stable-1build3_amd64.deb:
   size: 148238
   object_id: 2dea972e-5825-485d-5287-67d20fe2d7cb
   sha: sha256:e13aac87e4143293cf1d3cb82a2458fbeacc234d0db0667fd5567bdcd6da15fe
-nfs-debs/jammy/libnfsidmap2_0.25-6build1_amd64.deb:
-  size: 27896
-  object_id: 941ca15d-7c40-4533-67a2-a23af0978300
-  sha: sha256:a6d3c6b8db27c51d9aabcba372c626726648c6b60d7b94aa962a4465ec23ae5a
 nfs-debs/jammy/nfs-common_1.3.4-6ubuntu1_amd64.deb:
   size: 219244
   object_id: f767427a-61b5-4686-5352-d8c91acceba3
