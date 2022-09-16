@@ -108,7 +108,7 @@ function main() {
     configure_if_present libgssapi-krb5-2
     configure_if_present libtirpc1
     install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/$codename/rpcbind_1.2.6-2build1_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-6ubuntu1_amd64.deb
+    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_2.6.1-1ubuntu1_amd64.deb
     ) 200>/var/vcap/data/dpkg.lock
   ;;
   "bionic")
