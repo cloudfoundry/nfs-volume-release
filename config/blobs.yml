@@ -26,10 +26,6 @@ nfs-debs/jammy/keyutils_1.6.1-2ubuntu3_amd64.deb:
   size: 50410
   object_id: 6a525e94-1a19-4da7-5b9c-8f90509b6681
   sha: sha256:39da334791f57894fa13f680470e048383074b6c02aeb58e206033c5a3d0e925
-nfs-debs/jammy/libevent-2.1-7_2.1.12-stable-1build3_amd64.deb:
-  size: 148238
-  object_id: 2dea972e-5825-485d-5287-67d20fe2d7cb
-  sha: sha256:e13aac87e4143293cf1d3cb82a2458fbeacc234d0db0667fd5567bdcd6da15fe
 nfs-debs/jammy/libevent-core-2.1-7_2.1.12-stable-1build3_amd64.deb:
   size: 93926
   object_id: 527fcc8c-dce7-45fd-5b05-f10809895b7b
