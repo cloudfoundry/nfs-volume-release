@@ -90,6 +90,13 @@ function copy_client_certs_to_spec_dir() {
   cp -p /var/vcap/jobs/nfsv3driver/config/certs/client.key ${cert_dir}
 }
 
+function ensure_nfs_udp_is_enabled() {
+cat >> /etc/nfs.conf.d/local.conf <<EOL
+[nfsd]
+udp=y
+EOL
+}
+
 function prepend_rfc3339_datetime() {
   perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
 }
@@ -146,6 +153,10 @@ function main() {
 
   echo "Copying client certs to data directory..."
   copy_client_certs_to_spec_dir
+
+  echo "Ensuring nfsd has udp enabled by default..."
+  # https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+bug/1973101
+  ensure_nfs_udp_is_enabled
 
   exit 0
 }
