@@ -91,6 +91,7 @@ function copy_client_certs_to_spec_dir() {
 }
 
 function ensure_nfs_udp_is_enabled() {
+mkdir -p /etc/nfs.conf.d/
 cat >> /etc/nfs.conf.d/local.conf <<EOL
 [nfsd]
 udp=y
