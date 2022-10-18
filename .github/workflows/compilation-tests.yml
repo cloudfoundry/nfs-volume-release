@@ -1,0 +1,22 @@
+on:
+   pull_request:
+     branches:
+       - main
+
+ jobs:
+   compile-release:
+     name: Compile Release
+     runs-on: ubuntu-latest
+     strategy:
+       matrix:
+         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
+
+     steps:
+       - uses: actions/checkout@v3
+         with:
+           path: repo
+       - name: Run Dockerize Release
+         run: |
+              STEMCELL_NAME="${{ matrix.stemcell-name }}" \
+              docker-compose -f repo/docker-compose.yml run dockerize-release
+
