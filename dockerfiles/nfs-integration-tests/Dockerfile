@@ -1,7 +1,7 @@
 FROM relintdockerhubpushbot/cf-deployment-concourse-tasks as golang_version
 RUN git clone --recurse-submodules https://github.com/cloudfoundry/nfs-volume-release
 RUN cd nfs-volume-release && bosh create-release --tarball /tmp/release.tgz
-RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1.13-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
+RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
 
 FROM apnar/nfs-ganesha
 
