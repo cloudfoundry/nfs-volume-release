@@ -1,7 +1,7 @@
 ---
 name: nfstestldapserver
 packages:
-- openldap-2.6.3
+- openldap-.13
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger

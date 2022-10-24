@@ -1,0 +1,5 @@
+---
+name: openldap-.13
+dependencies: [berkeleydb]
+files:
+- openldap/openldap-.13.tgz
