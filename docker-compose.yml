@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+  dockerize-release:
+    image: dockerize-release
+    build:
+      context: .
+      dockerfile: .github/dockerfiles/dockerize-release/Dockerfile
+      args:
+      - STEMCELL_NAME=${STEMCELL_NAME}
