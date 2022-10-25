@@ -59,7 +59,7 @@ nfs-debs                              \
 nfsbroker                             \
 nfsv3driver                           \
 berkeleydb                            \
-openldap-2.6.3"
+openldap-2.5.13"
 
 WORKDIR /release/packages
 RUN bash -c 'for pkg in ${PACKAGES}; do                   \
