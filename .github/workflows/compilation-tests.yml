@@ -4,6 +4,10 @@ on:
       - master
       - v5.0
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   compile-release:
     name: Compile Release
@@ -11,7 +15,7 @@ jobs:
     strategy:
       matrix:
         base-branch: 
-        - ${{ github.ref }}
+        - ${{ github.base_ref }}
         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
         exclude:
         # Support for Xenial Stemcell is available in branch v5.0
