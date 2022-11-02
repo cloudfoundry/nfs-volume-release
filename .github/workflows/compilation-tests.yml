@@ -12,10 +12,10 @@ jobs:
       matrix:
         base-branch: [ ${{ github.ref }} ]
         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
-      exclude:
-      # Support for Xenial Stemcell is available in branch v5.0
-      - base-branch: refs/heads/master
-        stemcell-name: ubuntu-xenial
+        exclude:
+        # Support for Xenial Stemcell is available in branch v5.0
+        - base-branch: refs/heads/master
+          stemcell-name: ubuntu-xenial
 
     steps:
       - uses: actions/checkout@v3
