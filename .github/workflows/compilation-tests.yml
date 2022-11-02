@@ -19,7 +19,7 @@ jobs:
         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
         exclude:
         # Support for Xenial Stemcell is available in branch v5.0
-        - base-branch: refs/heads/master
+        - base-branch: master
           stemcell-name: ubuntu-xenial
 
     steps:
