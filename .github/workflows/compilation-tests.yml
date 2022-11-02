@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        base-branch: [ ${{ github.ref }} ]
+        base-branch: 
+        - ${{ github.ref }}
         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
         exclude:
         # Support for Xenial Stemcell is available in branch v5.0
