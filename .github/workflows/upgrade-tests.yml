@@ -8,11 +8,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-upgrade
+  test-upgrade:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Test upgrade from 7.1.6
-        run: |
-             STEMCELL_NAME="ubuntu-jammy" make test-upgrade
+        run: STEMCELL_NAME="ubuntu-jammy" make test-upgrade
 
