@@ -4,3 +4,6 @@ release-test:
 
 unit-test:
 	bundle exec rspec spec
+
+test-upgrade:
+	docker-compose run test-upgrade

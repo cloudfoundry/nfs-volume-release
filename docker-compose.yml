@@ -8,3 +8,11 @@ services:
       dockerfile: .github/dockerfiles/dockerize-release/Dockerfile
       args:
       - STEMCELL_NAME=${STEMCELL_NAME}
+
+  test-upgrade:
+    privileged: true
+    build:
+      context: .
+      dockerfile: .github/dockerfiles/test-upgrade/Dockerfile
+      args:
+      - STEMCELL_NAME=${STEMCELL_NAME}
