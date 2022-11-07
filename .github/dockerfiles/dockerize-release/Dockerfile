@@ -59,6 +59,7 @@ nfs-debs                              \
 nfsbroker                             \
 nfsv3driver                           \
 berkeleydb                            \
+openldap-2.4.44                       \
 openldap-2.5.13"
 
 WORKDIR /release/packages
