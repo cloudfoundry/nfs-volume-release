@@ -2,7 +2,6 @@ on:
   pull_request:
     branches:
       - master
-      - v5.0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,13 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        base-branch: 
-        - ${{ github.base_ref }}
         stemcell-name: [ubuntu-bionic, ubuntu-jammy, ubuntu-xenial]
-        exclude:
-        # Support for Xenial Stemcell is available in branch v5.0
-        - base-branch: master
-          stemcell-name: ubuntu-xenial
 
     steps:
       - uses: actions/checkout@v3
