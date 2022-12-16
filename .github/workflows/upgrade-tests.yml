@@ -1,0 +1,17 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test upgrade from 7.1.6
+        run: STEMCELL_NAME="ubuntu-jammy" make test-upgrade
+
