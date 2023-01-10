@@ -6,6 +6,6 @@ mkdir ../src && cp -a * ../src/ && mv ../src ./src
 mkdir $BOSH_INSTALL_TARGET/bin
 export GO111MODULE=on
 
-pushd src/code.cloudfoundry.org/nfsbroker
+pushd src/nfsbroker
     go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsbroker *.go
 popd

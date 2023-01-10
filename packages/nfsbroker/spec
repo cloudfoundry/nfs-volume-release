@@ -5,5 +5,5 @@ dependencies:
 - golang-1-linux
 
 files:
-  - code.cloudfoundry.org/nfsbroker/**
-  - code.cloudfoundry.org/nfsbroker/vendor/**
+- nfsbroker/**
+- nfsbroker/vendor/**
