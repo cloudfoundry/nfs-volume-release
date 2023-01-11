@@ -6,6 +6,6 @@ mkdir ../src && cp -a * ../src/ && mv ../src ./src
 mkdir $BOSH_INSTALL_TARGET/bin
 export GO111MODULE=on
 
-pushd src/code.cloudfoundry.org/nfsv3driver
+pushd src/nfsv3driver
     go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsv3driver cmd/nfsv3driver/*.go
 popd
