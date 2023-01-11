@@ -5,5 +5,5 @@ dependencies:
 - golang-1-linux
 
 files:
-  - code.cloudfoundry.org/nfsv3driver/**
-  - code.cloudfoundry.org/nfsv3driver/vendor/**
+- nfsv3driver/**
+- nfsv3driver/vendor/**
