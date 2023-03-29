@@ -31,11 +31,12 @@
     raise 'missing credhub uaa properties'
   end
 %>
+export UAA_CLIENT_SECRET="<%= uaa_client_secret %>"
+export UAA_CLIENT_ID="<%= uaa_client_id %>"
+
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --servicesConfig="./services.json" \
               --credhubURL="<%= credhub_url %>" \
-              --uaaClientID="<%= uaa_client_id %>" \
-              --uaaClientSecret="<%= uaa_client_secret %>" \
               --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
               --timeFormat="<%= p("nfsbrokerpush.log_time_format") %>" \
