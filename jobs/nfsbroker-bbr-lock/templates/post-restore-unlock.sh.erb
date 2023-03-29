@@ -21,9 +21,21 @@ function cf_auth_and_target() {
 
 	set +x
     <% link('nfsbrokerpush').if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
-        cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+        # On 2023-03-27 we discovered that new stemcells were using OS audit tools to
+        # log every command run on a VM. This was causing CF authentication commands
+        # of the form `cf auth --client-credentials USERNAME PASSWORD` to be logged
+        # in plaintext to syslog.
+        #
+        # Internal shell commands like setting variables are not logged by OS audit
+        # tools, so we changed our auth from passing a password as an argument to
+        # passing a password as an environment variable
+        export CF_USERNAME="<%= client_id %>"
+        export CF_PASSWORD="<%= client_secret %>"
+        cf auth --client-credentials
     <% end.else do %>
-        cf auth "<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_user') %>" "<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_password') %>"
+        export CF_USERNAME="<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_user') %>"
+        export CF_PASSWORD="<%= link('nfsbrokerpush').p('nfsbrokerpush.cf.admin_password') %>"
+        cf auth
     <% end %>
 	set -x
 	echo -e  "********************\n"
