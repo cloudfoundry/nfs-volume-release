@@ -4,8 +4,7 @@ source /var/vcap/packages/golang-1-linux/bosh/compile.env
 
 mkdir ../src && cp -a * ../src/ && mv ../src ./src
 mkdir $BOSH_INSTALL_TARGET/bin
-export GO111MODULE=on
 
 pushd src/nfsbroker
-    go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsbroker *.go
+    CGO_ENABLED=0 go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsbroker *.go
 popd
