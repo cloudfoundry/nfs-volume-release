@@ -22,13 +22,19 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "v5"
   - package-ecosystem: "gitsubmodule"
     target-branch: "v5.0"
     directory: "/"
     schedule:
       interval: "daily"      
+    labels:
+      - "v5"
   - package-ecosystem: "gomod"
     target-branch: "v5.0"
     directory: "/src/bosh_release/"
     schedule:
       interval: "daily"
+    labels:
+      - "v5"
