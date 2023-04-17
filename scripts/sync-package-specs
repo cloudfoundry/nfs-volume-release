@@ -40,7 +40,6 @@ function sync_package() {
 
 sync_package nfsv3driver              -app code.cloudfoundry.org/nfsv3driver/cmd/nfsv3driver
 sync_package nfsbroker                -app code.cloudfoundry.org/nfsbroker
-sync_package migrate_mysql_to_credhub -app code.cloudfoundry.org/migrate_mysql_to_credhub
 
 wait
 
