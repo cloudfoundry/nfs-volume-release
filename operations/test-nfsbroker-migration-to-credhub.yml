@@ -122,45 +122,6 @@
     - name: cf-cli-6-linux
       release: cf-cli
 - type: replace
-  path: /instance_groups/-
-  value:
-    name: migrate-mysql-to-credhub-test-migration
-    networks:
-    - name: default
-    stemcell: default
-    vm_type: minimal
-    azs: [z1]
-    lifecycle: errand
-    instances: 1
-    jobs:
-    - name: migrate_mysql_to_credhub
-      release: nfs-volume
-      properties:
-        app_name: nfs-broker-migration-test
-        domain: ((system_domain))
-        cf:
-          admin_password: ((cf_admin_password))
-          admin_user: admin
-        organization: system
-        space: nfs-broker-space
-        skip_cert_verify: true
-        db:
-          driver: mysql
-          name: nfs-broker-migration-test
-          password: ((nfs-broker-migration-test-database-password))
-          port: 3306
-          username: nfs-broker-migration-test
-        credhub:
-          url: https://credhub.service.cf.internal:8844
-          uaa_client_id: nfs-broker-migration-test-credhub-client
-          uaa_client_secret: ((nfs-broker-migration-test-credhub-uaa-client-secret))
-          ca_cert: |
-            ((credhub_ca.certificate))
-          uaa_ca_cert: |
-            ((uaa_ca.certificate))
-    - name: cf-cli-6-linux
-      release: cf-cli
-- type: replace
   path: /variables/-
   value:
     name: nfs-broker-migration-test-password
