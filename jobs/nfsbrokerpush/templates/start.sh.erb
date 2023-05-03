@@ -5,8 +5,6 @@
   end
 
   credhub_url = ''
-  uaa_client_id = ''
-  uaa_client_secret = ''
 
   if link('credhub').instances.length > 0
     credhub_url = link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s
@@ -16,26 +14,19 @@
     end
   end
 
-  if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |client_id, client_secret|
-    uaa_client_id = client_id
-    uaa_client_secret = client_secret
-  end
-
   allowed_options = 'source,uid,gid,auto_cache,readonly,version,mount,cache'
 
   if p('nfsbrokerpush.ldap_enabled')
     allowed_options = 'source,auto_cache,username,password,readonly,version,mount,cache'
   end
   
-  if credhub_url == '' || uaa_client_id == '' || uaa_client_secret == ''
-    raise 'missing credhub uaa properties'
+  if credhub_url == ''
+    raise 'missing credhub URL'
   end
 %>
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --servicesConfig="./services.json" \
               --credhubURL="<%= credhub_url %>" \
-              --uaaClientID="<%= uaa_client_id %>" \
-              --uaaClientSecret="<%= uaa_client_secret %>" \
               --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
               --timeFormat="<%= p("nfsbrokerpush.log_time_format") %>" \
