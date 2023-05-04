@@ -113,16 +113,9 @@ function push_app() {
   mkdir -p /var/vcap/data/tmp
   export TMPDIR=/var/vcap/data/tmp
 
-  local app_stack
-  app_stack="cflinuxfs2"
-
-  if [[ -n "`cf stacks | grep cflinuxfs3`" ]]; then
-    app_stack="cflinuxfs3"
-  fi
-
   pushd /var/vcap/packages/nfsbroker > /dev/null
     set +e
-      cf push "${APP_NAME}" -i 1 -s ${app_stack}
+      cf push "${APP_NAME}" -i 1
       exit_code=$?
     set -e
 
