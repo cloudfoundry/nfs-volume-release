@@ -47,8 +47,6 @@ describe 'nfsbrokerpush job' do
 
         expect(tpl_output).to include("bin/nfsbroker --listenAddr=\"0.0.0.0:$PORT\"")
         expect(tpl_output).to include("--credhubURL=\"https://some-credhub-url:4321\"")
-        expect(tpl_output).to include("--uaaClientID=\"client-id\"")
-        expect(tpl_output).to include("--uaaClientSecret=\"client-secret\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
@@ -72,8 +70,6 @@ describe 'nfsbrokerpush job' do
         tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--credhubURL=\"https://some-credhub-url:4321\"")
-        expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
-        expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
         expect(tpl_output).to include("--storeID=\"nfsbroker\"")
       end
 
@@ -103,16 +99,6 @@ describe 'nfsbrokerpush job' do
         it 'a meaningful error message is returned' do
           expect{template.render(manifest_properties)}.to raise_error("Can't find link 'credhub'")
         end
-      end
-    end
-
-    context 'when configured with no credhub properties' do
-      let(:manifest_properties) do
-        {}
-      end
-
-      it 'fails with a meaningful error message' do
-        expect { template.render(manifest_properties, consumes: credhub_link) }.to raise_error('missing credhub uaa properties')
       end
     end
 
