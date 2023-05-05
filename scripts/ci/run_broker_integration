@@ -5,6 +5,8 @@ set -e -x
 
 {
     cd credhub
+    # need to patch the script from credhub repo to use the -legacy flag to export the keytool certs, else newer java versions will fail
+    sed -i  's#pass:changeit#pass:changeit -legacy#g' scripts/setup_dev_mtls.sh
     ./scripts/start_server.sh -Dspring.profiles.active=dev,dev-h2 > /tmp/start_credhub.log 2>&1
     kill -9 "$(ps --pid $$ -oppid=)"; exit
 }&
