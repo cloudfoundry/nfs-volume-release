@@ -1,3 +1,16 @@
+<%
+  uaa_client_id = ''
+  uaa_client_secret = ''
+
+  if_p('nfsbrokerpush.credhub.uaa_client_id', 'nfsbrokerpush.credhub.uaa_client_secret') do |client_id, client_secret|
+    uaa_client_id = client_id
+    uaa_client_secret = client_secret
+  end
+
+  if uaa_client_id == '' || uaa_client_secret == ''
+    raise 'missing credhub UAA credentials'
+  end
+-%>
 ---
 applications:
 - name: "<%= p('nfsbrokerpush.app_name') %>"
@@ -9,3 +22,5 @@ applications:
   env:
     USERNAME: "<%= p('nfsbrokerpush.username') %>"
     PASSWORD: "<%= p('nfsbrokerpush.password') %>"
+    UAA_CLIENT_ID: "<%= uaa_client_id %>"
+    UAA_CLIENT_SECRET: "<%= uaa_client_secret %>"
