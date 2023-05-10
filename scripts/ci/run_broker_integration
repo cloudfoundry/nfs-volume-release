@@ -23,5 +23,5 @@ pushd nfs-volume-release
     export GO111MODULE=on
     cd src/code.cloudfoundry.org/nfsbroker
 
-    ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress . "$@"
+    go run github.com/onsi/ginkgo/v2/ginkgo -r -p -trace -race -keep-going -randomize-all -progress . "$@"
 popd
