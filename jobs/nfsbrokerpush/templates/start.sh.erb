@@ -24,6 +24,9 @@
     raise 'missing credhub URL'
   end
 %>
+export UAA_CLIENT_SECRET="<%= uaa_client_secret %>"
+export UAA_CLIENT_ID="<%= uaa_client_id %>"
+
 bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --servicesConfig="./services.json" \
               --credhubURL="<%= credhub_url %>" \

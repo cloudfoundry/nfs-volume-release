@@ -125,9 +125,23 @@ function push_app() {
     fi
   popd > /dev/null
 }
-
 function register_service() {
-  cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  # We want to avoid providing creds as commandline params to binaries to avoid leaking creds via autitd logs. The below `cf curl` replaces the (create|update)-service-broker commands.
+  # cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  if ! cf curl "/v2/service_brokers?q=name:$SERVICE_BROKER_NAME" | grep $SERVICE_BROKER_NAME; then
+    echo "Creating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
+    echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\", \"name\": \"${SERVICE_BROKER_NAME}\"}" > ./data
+    cf curl --fail \
+      -X POST "/v2/service_brokers" \
+      -d @./data
+    rm data
+  else
+    echo "Updating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
+    broker_guid="$(cf curl /v2/service_brokers?q=name:$SERVICE_BROKER_NAME | grep \"guid\" | cut -f4 -d\")"
+    cf curl --fail \
+      -X PUT "/v2/service_brokers/${broker_guid}" \
+      -d @<(echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\"}") > /dev/null
+  fi
 }
 
 function clean_up() {
