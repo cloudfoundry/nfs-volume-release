@@ -36,9 +36,21 @@ function authenticate_and_target() {
   mkdir -p $CF_HOME
   cf api $API_ENDPOINT <% if p('nfsbrokerpush.skip_cert_verify') %>--skip-ssl-validation<% end %>
   <% if_p('nfsbrokerpush.cf.client_id', 'nfsbrokerpush.cf.client_secret') do |client_id, client_secret| %>
-    cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+    # On 2023-03-27 we discovered that new stemcells were using OS audit tools to
+    # log every command run on a VM. This was causing CF authentication commands
+    # of the form `cf auth --client-credentials USERNAME PASSWORD` to be logged
+    # in plaintext to syslog.
+    #
+    # Internal shell commands like setting variables are not logged by OS audit
+    # tools, so we changed our auth from passing a password as an argument to
+    # passing a password as an environment variable
+    export CF_USERNAME="<%= client_id %>"
+    export CF_PASSWORD="<%= client_secret %>"
+    cf auth --client-credentials
   <% end.else do %>
-    cf auth "<%= p('nfsbrokerpush.cf.admin_user') %>" "<%= p('nfsbrokerpush.cf.admin_password') %>"
+    export CF_USERNAME="<%= p('nfsbrokerpush.cf.admin_user') %>"
+    export CF_PASSWORD="<%= p('nfsbrokerpush.cf.admin_password') %>"
+    cf auth
   <% end %>
   cf create-org $ORG
   cf target -o $ORG
@@ -171,9 +183,23 @@ function push_app() {
     fi
   popd > /dev/null
 }
-
 function register_service() {
-  cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  # We want to avoid providing creds as commandline params to binaries to avoid leaking creds via autitd logs. The below `cf curl` replaces the (create|update)-service-broker commands.
+  # cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
+  if ! cf curl "/v2/service_brokers?q=name:$SERVICE_BROKER_NAME" | grep $SERVICE_BROKER_NAME; then
+    echo "Creating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
+    echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\", \"name\": \"${SERVICE_BROKER_NAME}\"}" > ./data
+    cf curl --fail \
+      -X POST "/v2/service_brokers" \
+      -d @./data
+    rm data
+  else
+    echo "Updating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
+    broker_guid="$(cf curl /v2/service_brokers?q=name:$SERVICE_BROKER_NAME | grep \"guid\" | cut -f4 -d\")"
+    cf curl --fail \
+      -X PUT "/v2/service_brokers/${broker_guid}" \
+      -d @<(echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\"}") > /dev/null
+  fi
 }
 
 function clean_up() {

@@ -47,12 +47,14 @@ describe 'nfsbrokerpush job' do
 
         expect(tpl_output).to include("bin/nfsbroker --listenAddr=\"0.0.0.0:$PORT\"")
         expect(tpl_output).to include("--credhubURL=\"https://some-credhub-url:4321\"")
-        expect(tpl_output).to include("--uaaClientID=\"client-id\"")
-        expect(tpl_output).to include("--uaaClientSecret=\"client-secret\"")
+        expect(tpl_output).not_to include("--uaaClientID=\"client-id\"")
+        expect(tpl_output).not_to include("--uaaClientSecret=\"client-secret\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
         expect(tpl_output).to include("--allowedOptions=\"source,uid,gid,auto_cache,readonly,version,mount,cache\"")
+        expect(tpl_output).to include("export UAA_CLIENT_SECRET=\"client-secret\"")
+        expect(tpl_output).to include("export UAA_CLIENT_ID=\"client-id\"")
       end
     end
 
@@ -68,12 +70,12 @@ describe 'nfsbrokerpush job' do
         }
       end
 
-      it 'includes the credhub flags in the script' do
+      it 'includes the unsensitive credhub flags in the script' do
         tpl_output = template.render(manifest_properties, consumes: credhub_link)
 
         expect(tpl_output).to include("--credhubURL=\"https://some-credhub-url:4321\"")
-        expect(tpl_output).to include("--uaaClientID=\"some-uaa-client-id\"")
-        expect(tpl_output).to include("--uaaClientSecret=\"some-uaa-client-secret\"")
+        expect(tpl_output).not_to include("--uaaClientID=\"some-uaa-client-id\"")
+        expect(tpl_output).not_to include("--uaaClientSecret=\"some-uaa-client-secret\"")
         expect(tpl_output).to include("--storeID=\"nfsbroker\"")
       end
 
