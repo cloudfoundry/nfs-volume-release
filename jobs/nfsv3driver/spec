@@ -7,8 +7,8 @@ templates:
   client.key.erb: config/certs/client.key
   server.crt.erb: config/certs/server.crt
   server.key.erb: config/certs/server.key
-  install.erb: bin/pre-start
-  ctl.erb: bin/nfsv3driver_ctl
+  pre-start.erb: bin/pre-start
+  nfsv3driver_ctl.erb: bin/nfsv3driver_ctl
   start.sh.erb: bin/start.sh
   drain.erb: bin/drain
 
