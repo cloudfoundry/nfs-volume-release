@@ -82,7 +82,7 @@ COPY --from=uncompressed-release /release-new /release-new
 WORKDIR /release-new/jobs
 RUN mkdir -p /var/vcap/jobs/nfsv3driver-new/bin \
  && gem install bosh-template \
- && bosh-template nfsv3driver/templates/install.erb --context '{"properties":{"nfsv3driver":{"disable":false, "driver_path":"/var/vcap/data/voldrivers"}}}' > /var/vcap/jobs/nfsv3driver-new/bin/pre-start \
+ && bosh-template nfsv3driver/templates/pre-start.erb --context '{"properties":{"nfsv3driver":{"disable":false, "driver_path":"/var/vcap/data/voldrivers"}}}' > /var/vcap/jobs/nfsv3driver-new/bin/pre-start \
  && chmod +x /var/vcap/jobs/nfsv3driver-new/bin/pre-start \
  && mkdir -p /var/vcap/jobs/nfsv3driver/config/certs \
  && touch /var/vcap/jobs/nfsv3driver/config/certs/ca.crt \
