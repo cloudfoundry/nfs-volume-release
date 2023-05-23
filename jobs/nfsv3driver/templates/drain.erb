@@ -67,6 +67,7 @@ fi
 wait_for_apps_to_be_evacuated
 
 echo "rep is done..evacuating nfsv3driver"
+rm -f "<%= p('nfsv3driver.driver_path') %>/nfsv3driver.json"
 
 set +e
 evacuate
