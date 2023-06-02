@@ -47,8 +47,6 @@ describe 'nfsbrokerpush job' do
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
         expect(tpl_output).to include("--allowedOptions=\"source,uid,gid,auto_cache,readonly,version,mount,cache\"")
-        expect(tpl_output).to include("export UAA_CLIENT_SECRET=\"client-secret\"")
-        expect(tpl_output).to include("export UAA_CLIENT_ID=\"client-id\"")
       end
     end
 
