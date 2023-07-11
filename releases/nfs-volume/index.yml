@@ -15,6 +15,8 @@ builds:
     version: 5.0.30
   0df07040-93bf-4f85-575f-062e6311a891:
     version: 5.0.27
+  148bb380-9fad-45c6-7486-b9551294e195:
+    version: 5.0.35
   14c287af-6c91-4118-9d46-0cacde46d8ea:
     version: 0.1.5
   184c8262-206c-45d7-715b-735a3d19f0cb:
