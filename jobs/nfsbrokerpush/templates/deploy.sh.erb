@@ -113,7 +113,7 @@ function push_app() {
   mkdir -p /var/vcap/data/tmp
   export TMPDIR=/var/vcap/data/tmp
 
-  # Find the latest available cflinux stack to ensure that the broker runs with the latest available stack. We could do a more complicated implementation that tries to lookup the default stack and use that, but as of 24-07-2023 I haven't seen a good reason to do so. This way, we will just always use the latest available stack to push the app and not rely on more complicated lookups via cf curl.
+  # Find the latest available cflinux stack to ensure that the broker runs with the latest available stack. We could do a more complicated implementation that tries to lookup the default stack and use that, but as of 24-07-2023 I haven't seen a good reason to do so. This way, we will just always use the latest available stack to push the app and not rely on more complicated lookups via cf curl. Previously this would rely on using the default stack but that only works for new apps. If an app was already pushed with cflinuxfs3 it wouldn't pick up cflinuxfs4 even if that is the default stack. The buildpack (and assigned stack) ordering does NOT affect that either, the stack will be sticky..
   LATEST_STACK = $( cf stacks | grep linux | cut -f1 -d' ' | sort -u | tail -1 )
   pushd /var/vcap/packages/nfsbroker > /dev/null
     set +e
