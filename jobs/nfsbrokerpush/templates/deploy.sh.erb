@@ -113,9 +113,11 @@ function push_app() {
   mkdir -p /var/vcap/data/tmp
   export TMPDIR=/var/vcap/data/tmp
 
+  # Find the latest available cflinux stack to ensure that the broker runs with the latest available stack. We could do a more complicated implementation that tries to lookup the default stack and use that, but as of 24-07-2023 I haven't seen a good reason to do so. This way, we will just always use the latest available stack to push the app and not rely on more complicated lookups via cf curl.
+  LATEST_STACK = $( cf stacks | grep linux | cut -f1 -d' ' | sort -u | tail -1 )
   pushd /var/vcap/packages/nfsbroker > /dev/null
     set +e
-      cf push "${APP_NAME}" -i 1
+      cf push "${APP_NAME}" -i 1 -s ${LATEST_STACK}
       exit_code=$?
     set -e
 
