@@ -153,6 +153,8 @@ builds:
     version: 7.1.23
   d324aa28-4958-41e2-7223-bb90eedb512e:
     version: 7.1.20
+  d36a88f0-7a32-446f-560e-7b0fa89e9661:
+    version: 7.1.26
   d451b8ed-4792-4292-b323-21e03671f556:
     version: 1.0.5
   d4f1eac7-2d65-4e26-5da5-0db8a67afa3d:
