@@ -19,6 +19,8 @@ builds:
     version: 7.1.25
   217d2445-6b3a-408c-708e-e4221af3d028:
     version: 7.1.6
+  22a47415-2ec8-444f-5e26-f9d89e0fc676:
+    version: 7.1.32
   23d10898-c13f-433d-59fb-3de2fcbc21a2:
     version: 6.0.0
   271f8d98-71e6-4c54-5746-fee16403321c:
