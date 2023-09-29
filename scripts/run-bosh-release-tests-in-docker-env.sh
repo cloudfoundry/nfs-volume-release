@@ -33,5 +33,5 @@ run \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
-harbor-repo.vmware.com/cryogenics/essentials \
+"${DOCKER_IMAGE:-harbor-repo.vmware.com/cryogenics/essentials}" \
     bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
