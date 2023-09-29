@@ -15,6 +15,7 @@ source /tmp/local-bosh/director/env
 export DOCKER_TMP_DIR=$(find /tmp/ -name "tmp.*")
 
 docker \
+--registry-mirror=https://harbor-repo.vmware.com/dockerhub-proxy-cache \
 --tls \
 --tlscacert=${DOCKER_TMP_DIR}/ca.pem \
 --tlscert=${DOCKER_TMP_DIR}/cert.pem \
