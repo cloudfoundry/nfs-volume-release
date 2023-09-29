@@ -6,7 +6,6 @@ image_resource:
   source:
     registry_mirror:
       host: harbor-repo.vmware.com
-    privileged: true
     repository: dockerhub-proxy-cache/bosh/main-bosh-docker
     tag: latest
 
