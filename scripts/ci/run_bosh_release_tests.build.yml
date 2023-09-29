@@ -15,3 +15,6 @@ inputs:
 
 run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_bosh_release_tests
+
+params:
+  DOCKER_IMAGE: cfpersi/bosh-release-tests

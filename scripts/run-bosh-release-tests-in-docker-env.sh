@@ -33,5 +33,5 @@ run \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
-cfpersi/bosh-release-tests \
+"${DOCKER_IMAGE:-cfpersi/bosh-release-tests}" \
     bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
