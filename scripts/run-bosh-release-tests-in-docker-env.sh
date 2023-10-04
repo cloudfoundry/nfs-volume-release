@@ -9,12 +9,13 @@ update-alternatives --set iptables /usr/sbin/iptables-legacy
 update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 export DOCKER_STORAGE_OPTIONS='--storage-opt dm.basesize=100G'
-. start-bosh "$PWD" 'https://harbor-repo.vmware.com/dockerhub-proxy-cache' 
+. start-bosh
 
 source /tmp/local-bosh/director/env
 export DOCKER_TMP_DIR=$(find /tmp/ -name "tmp.*")
 
 docker \
+--registry-mirror=https://harbor-repo.vmware.com/dockerhub-proxy-cache \
 --tls \
 --tlscacert=${DOCKER_TMP_DIR}/ca.pem \
 --tlscert=${DOCKER_TMP_DIR}/cert.pem \
