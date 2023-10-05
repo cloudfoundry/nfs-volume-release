@@ -2,10 +2,11 @@
 platform: linux
 
 image_resource:
-  type: docker-image
+  type: registry-image
   source:
-    privileged: true
-    repository: bosh/main-bosh-docker
+    registry_mirror:
+      host: harbor-repo.vmware.com
+    repository: dockerhub-proxy-cache/bosh/main-bosh-docker
     tag: latest
 
 inputs:
