@@ -34,4 +34,4 @@ run \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/mapfs-release \
 "${DOCKER_IMAGE:-harbor-repo.vmware.com/cryogenics/essentials}" \
-    bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
+    bash -c "echo '**** from the bash shell, run go run github.com/onsi/ginkgo/v2/ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
