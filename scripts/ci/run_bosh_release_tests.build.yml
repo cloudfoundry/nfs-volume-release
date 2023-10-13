@@ -18,5 +18,4 @@ run:
   path: nfs-volume-release-concourse-tasks/scripts/ci/run_bosh_release_tests
 
 params:
-  BOSH_LOG_LEVEL: debug # More options available here: https://bosh.io/docs/cli-global-flags/#logging
-
+  BOSH_LOG_LEVEL: none # More options available here: https://bosh.io/docs/cli-global-flags/#logging
