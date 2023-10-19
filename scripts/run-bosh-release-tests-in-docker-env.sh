@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-COMMAND_TO_RUN='ginkgo -nodes 1 -v .'
+COMMAND_TO_RUN='go run github.com/onsi/ginkgo/ginkgo -nodes 1 -v .'
 if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
@@ -32,5 +32,5 @@ run \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env NFS_VOLUME_RELEASE_PATH=/nfs-volume-release \
 --env MAPFS_RELEASE_PATH=/nfs-volume-release/src/github.com/cloudfoundry/mapfs-release \
-cfpersi/bosh-release-tests \
+"${DOCKER_IMAGE:-cfpersi/bosh-release-tests}" \
 $COMMAND_TO_RUN
