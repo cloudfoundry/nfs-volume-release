@@ -8,13 +8,8 @@ source /var/vcap/jobs/nfstestldapserver/helpers/ctl_setup.sh 'nfstestldapserver'
 
 export PORT=${PORT:-5000}
 export LANG=en_US.UTF-8
-codename=$(lsb_release -c | cut -f 2 )
-if [[ "${codename}" == "xenial" ]];
-then
-  export OPENLDAP=/var/vcap/packages/openldap-2.4.44
-else
-  export OPENLDAP=/var/vcap/packages/openldap-2.5.13
-fi
+export OPENLDAP=/var/vcap/packages/openldap-2.5.13
+export LD_LIBRARY_PATH="${OPENLDAP}/openssl3/lib64:${LD_LIBRARY_PATH}"
 export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:$PATH
 
 case $1 in
