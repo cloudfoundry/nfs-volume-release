@@ -1,26 +1,41 @@
+#!/usr/bin/env bash 
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
-codename=$(lsb_release -c | cut -f 2 )
-if [[ "${codename}" == "xenial" ]];
-then
-  exit 0
-fi
-
 # Detect # of CPUs so make jobs can be parallelized
 CPUS=$(grep -c ^processor /proc/cpuinfo)
- # Available variables
+
+# Available variables
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
-export HOME=/var/vcap
-export BDB_PATH=/var/vcap/packages/berkeleydb
+
+# Both the below compilation items are test dependencies. The reason you see openssl3
+# in here is that the openssl version shipped with xenial stemcells was too old to
+# to compile > openldap-2.4.44 on 2023/11/01. Instead of adding logic to handle xenial vs.
+# newer stemcell versions we opted to exchange the openssl it is compiled against to avoid
+# complexity. We judged it safe since these test dependencies should not be able to
+# interfere with production deployments.
+
+tar xvf test-dependencies/openssl3.tar.gz
+pushd openssl-3*
+  ./Configure \
+    --prefix=${BOSH_INSTALL_TARGET}/openssl3 \
+    --openssldir=${BOSH_INSTALL_TARGET}/openssl3 \
+    enable-fips \
+
+  make
+  make install
+popd
 
 cd $BOSH_COMPILE_TARGET
 tar -xzvf openldap/openldap-2.5.13.tgz
-cd openldap-2.5.13
+pushd openldap-2.5.13
+  export HOME=/var/vcap
+  export BDB_PATH=/var/vcap/packages/berkeleydb
+  export CPPFLAGS="-I ${BDB_PATH}/include -I ${BOSH_INSTALL_TARGET}/openssl3/include"
+  export LDFLAGS=-L${BOSH_INSTALL_TARGET}/openssl3/lib64
+  export LD_LIBRARY_PATH="${BDB_PATH}/lib"
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
 
-export CPPFLAGS="-I ${BDB_PATH}/include"
-export LD_LIBRARY_PATH="${BDB_PATH}/lib"
-./configure --prefix=${BOSH_INSTALL_TARGET}
-
-make depend && make && make install
+  make depend && make && make install
+popd
