@@ -92,5 +92,5 @@ openldap/openldap-2.5.13.tgz:
   sha: sha256:ee3c430c4ef7b87c57b622108c7339376d6c27fbbf2767770be3de1df63d008c
 openldap/openldap-2.6.6.tgz:
   size: 6475109
-  object_id: e10d3419-4a80-44d4-52b1-c8c10ae2c118
+  object_id: 92f0ab47-9268-4630-5885-c3d085b3a138
   sha: sha256:082e998cf542984d43634442dbe11da860759e510907152ea579bdc42fe39ea0
