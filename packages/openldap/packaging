@@ -28,13 +28,14 @@ pushd openssl-3*
 popd
 
 cd $BOSH_COMPILE_TARGET
-tar -xzvf openldap/openldap-2.5.13.tgz
-pushd openldap-2.5.13
+tar -xzvf openldap/openldap*.tgz
+pushd openldap-*
   export HOME=/var/vcap
   export BDB_PATH=/var/vcap/packages/berkeleydb
   export CPPFLAGS="-I ${BDB_PATH}/include -I ${BOSH_INSTALL_TARGET}/openssl3/include"
   export LDFLAGS=-L${BOSH_INSTALL_TARGET}/openssl3/lib64
   export LD_LIBRARY_PATH="${BDB_PATH}/lib"
+
   ./configure --prefix=${BOSH_INSTALL_TARGET}
 
   make depend && make && make install
