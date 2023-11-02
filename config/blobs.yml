@@ -86,3 +86,7 @@ openldap/openldap-2.4.44.tgz:
   size: 5658830
   object_id: daea5917-02c3-4fe5-4626-a8805979788d
   sha: 016a738d050a68d388602a74b5e991035cdba149
+test-dependencies/openssl-3.1.4.tar.gz:
+  size: 15569450
+  object_id: 6a391d0f-2ad0-4c23-7597-5747d153db71
+  sha: sha256:840af5366ab9b522bde525826be3ef0fb0af81c6a9ebd84caa600fea1731eee3
