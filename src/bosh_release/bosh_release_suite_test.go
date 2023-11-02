@@ -47,7 +47,7 @@ func ensureDeploy(opsfiles ...string) {
 }
 
 func deploy(opsfiles ...string) (*gexec.Session, error) {
-	deployCmd := []string {"deploy",
+	deployCmd := []string{"deploy",
 		"-n",
 		"-d",
 		"bosh_release_test",
@@ -80,12 +80,11 @@ func hasStemcell() bool {
 }
 
 func uploadStemcell() {
-	boshUsCmd := exec.Command("bosh", "upload-stemcell", "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent")
+	boshUsCmd := exec.Command("bosh", "upload-stemcell", "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-jammy-go_agent")
 	session, err := gexec.Start(boshUsCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 20*time.Minute).Should(gexec.Exit(0))
 }
-
 
 func findProcessState(processName string) string {
 
@@ -127,7 +126,6 @@ type BoshInstancesOutput struct {
 	Blocks interface{} `json:"Blocks"`
 	Lines  []string    `json:"Lines"`
 }
-
 
 type BoshStemcellsOutput struct {
 	Tables []struct {
