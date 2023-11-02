@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export OPENLDAP=/var/vcap/packages/openldap-2.5.13
+export OPENLDAP=/var/vcap/packages/openldap
 export LD_LIBRARY_PATH="${OPENLDAP}/openssl3/lib64:${LD_LIBRARY_PATH}"
 export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
 
