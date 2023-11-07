@@ -30,12 +30,11 @@ export DOCKER_STORAGE_OPTIONS='--storage-opt dm.basesize=100G'
 . start-bosh
 
 source /tmp/local-bosh/director/env
-export DOCKER_TMP_DIR=$(find /tmp/ -name "tmp.*")
 
-export NFS_VOLUME_RELEASE_PATH=$PWD/nfs-volume-release
-export MAPFS_RELEASE_PATH=$PWD/mapfs-release
+export NFS_VOLUME_RELEASE_PATH="${PWD}/nfs-volume-release"
+export MAPFS_RELEASE_PATH="${PWD}/mapfs-release"
 
-pushd $PWD/nfs-volume-release/src/bosh_release
+pushd "${PWD}/nfs-volume-release/src/bosh_release"
   echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .'
   $COMMAND_TO_RUN
 popd
