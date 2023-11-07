@@ -34,7 +34,7 @@ source /tmp/local-bosh/director/env
 export NFS_VOLUME_RELEASE_PATH="${PWD}/nfs-volume-release"
 export MAPFS_RELEASE_PATH="${PWD}/mapfs-release"
 
-pushd "${PWD}/nfs-volume-release"
+pushd "${PWD}/nfs-volume-release/src/bosh_release"
   echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .'
   $COMMAND_TO_RUN
 popd
