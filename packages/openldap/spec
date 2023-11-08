@@ -1,0 +1,6 @@
+---
+name: openldap
+dependencies: [berkeleydb]
+files:
+- openldap/openldap-*.tgz
+- test-dependencies/openssl-3*.tar.gz
