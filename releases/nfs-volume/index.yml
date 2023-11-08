@@ -227,6 +227,8 @@ builds:
     version: 7.1.22
   fab6cd55-2c34-43a7-92f3-0d43f6795771:
     version: 0.0.5
+  fae42af2-eb08-4581-61e2-75b24e594a5c:
+    version: 7.1.42
   feed4394-af36-4db1-8194-22c6010f7018:
     version: 0.0.1
 format-version: "2"

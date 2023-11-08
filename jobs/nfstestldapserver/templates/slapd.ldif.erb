@@ -34,11 +34,7 @@ olcPidFile: /var/vcap/sys/run/nfstestldapserver/nfstestldapserver.pid
 #dn: cn=module,cn=config
 #objectClass: olcModuleList
 #cn: module
-#<% if system("bash -c 'lsb_release -c | cut -f 2'") == "xenial" %>
-#olcModulepath:	/var/vcap/packages/openldap-2-4-44/libexec/openldap
-#<% else %>
-#olcModulepath:	/var/vcap/packages/openldap-2.5.13/libexec/openldap
-#<% end %>
+#olcModulepath:	/var/vcap/packages/openldap/libexec/openldap
 #olcModuleload:	back_bdb.la
 #olcModuleload:	back_hdb.la
 #olcModuleload:	back_ldap.la
@@ -51,15 +47,9 @@ objectClass: olcSchemaConfig
 cn: schema
 
 include: file:///var/vcap/jobs/nfstestldapserver/config/core.ldif
-#<% if system("bash -c 'lsb_release -c | cut -f 2'") == "xenial" %>
-include: file:///var/vcap/packages/openldap-2.4.44/etc/openldap/schema/cosine.ldif
-include: file:///var/vcap/packages/openldap-2.4.44/etc/openldap/schema/nis.ldif
-include: file:///var/vcap/packages/openldap-2.4.44/etc/openldap/schema/inetorgperson.ldif
-#<% else %>
-include: file:///var/vcap/packages/openldap-2.5.13/etc/openldap/schema/cosine.ldif
-include: file:///var/vcap/packages/openldap-2.5.13/etc/openldap/schema/nis.ldif
-include: file:///var/vcap/packages/openldap-2.5.13/etc/openldap/schema/inetorgperson.ldif
-#<% end %>
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/cosine.ldif
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/nis.ldif
+include: file:///var/vcap/packages/openldap/etc/openldap/schema/inetorgperson.ldif
 
 # Frontend settings
 #
