@@ -8,13 +8,8 @@ source /var/vcap/jobs/nfstestldapserver/helpers/ctl_setup.sh 'nfstestldapserver'
 
 export PORT=${PORT:-5000}
 export LANG=en_US.UTF-8
-codename=$(lsb_release -c | cut -f 2 )
-if [[ "${codename}" == "xenial" ]];
-then
-  export OPENLDAP=/var/vcap/packages/openldap-2.4.44
-else
-  export OPENLDAP=/var/vcap/packages/openldap-2.5.13
-fi
+export OPENLDAP=/var/vcap/packages/openldap
+export LD_LIBRARY_PATH="${OPENLDAP}/openssl3/lib64:${LD_LIBRARY_PATH}"
 export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:$PATH
 
 case $1 in
@@ -44,7 +39,7 @@ case $1 in
       mkdir -p $conf_db
       chown vcap:vcap $conf_db
       echo "Creating config database from $conf_file"
-      sudo slapadd -F $conf_db -n 0 -l $conf_file
+      sudo LD_LIBRARY_PATH=${LD_LIBRARY_PATH} slapadd -F $conf_db -n 0 -l $conf_file
     fi
 
     if [ -n "$SSL_ACTIVE" ]
@@ -54,7 +49,7 @@ case $1 in
       protocols="ldap:///"
     fi
 
-    sudo slapd -h "$protocols" -d stats,acl -F $conf_db >>$LOG_DIR/$JOB_NAME.log 2>&1
+    sudo LD_LIBRARY_PATH=${LD_LIBRARY_PATH} slapd -h "$protocols" -d stats,acl -F $conf_db >>$LOG_DIR/$JOB_NAME.log 2>&1
 
     ;;
 
