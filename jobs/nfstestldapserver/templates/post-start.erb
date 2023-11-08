@@ -1,21 +1,10 @@
 #!/bin/bash
 
-codename=$(lsb_release -c | cut -f 2 )
-if [[ "${codename}" == "xenial" ]];
-then
-  export OPENLDAP=/var/vcap/packages/openldap-2.4.44
-  export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
+export OPENLDAP=/var/vcap/packages/openldap
+export LD_LIBRARY_PATH="${OPENLDAP}/openssl3/lib64:${LD_LIBRARY_PATH}"
+export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
 
-  pushd /var/vcap/jobs/nfstestldapserver/config/
-  ldapadd -x -w secret -h 127.0.0.1 -p 389 -D "cn=admin,dc=domain,dc=com" -f addou.ldif
-  ldapadd -x -w secret -h 127.0.0.1 -p 389 -D "cn=admin,dc=domain,dc=com" -f adduser.ldif
-else
-  export OPENLDAP=/var/vcap/packages/openldap-2.5.13
-  export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
-
-  pushd /var/vcap/jobs/nfstestldapserver/config/
-  ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f addou.ldif
-  ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f adduser.ldif
-fi
-
+pushd /var/vcap/jobs/nfstestldapserver/config/
+ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f addou.ldif
+ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f adduser.ldif
 exit 0
