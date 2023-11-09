@@ -42,6 +42,21 @@ nfs-debs/jammy/rpcbind_1.2.6-2build1_amd64.deb:
   size: 46608
   object_id: 6b175861-ab18-4247-6e08-7c69c25f0efe
   sha: sha256:40f5113c7d8711c2ac8ad50ffee7fa0890731e22da0a99bee3fbc6cdd1f451ac
+nfs-debs/libevent-2.1.12-stable.tar.gz:
+  size: 1100847
+  sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
+nfs-debs/libtirpc-1.3.4.tar.bz2:
+  size: 563292
+  sha: sha256:1e0b0c7231c5fa122e06c0609a76723664d068b0dba3b8219b63e6340b347860
+nfs-debs/nfs-utils-2.6.3.tar.xz:
+  size: 726284
+  sha: sha256:38d89e853a71d3c560ff026af3d969d75e24f782ff68324e76261fe0344459e1
+nfs-debs/rpcsvc-proto-v1.4.4.tar.gz:
+  size: 62742
+  sha: sha256:7988641deae8463303b6273d7af98ece09111c385d4c9134a142a5fad3cdfef8
+nfs-debs/sqlite-3.44.0.tar.gz:
+  size: 12706126
+  sha: sha256:a63190f3abc48189f3d7f544d7c18b73e042d4ddc520ebb57071e48417c5607c
 nfs-debs/xenial/keyutils_1.5.9-8ubuntu1_amd64.deb:
   size: 47054
   object_id: 79ec8102-01f0-4e62-7d5a-cac385c29c03

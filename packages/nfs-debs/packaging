@@ -1,5 +1,44 @@
 #!/bin/bash
 
 set -e
+sleep 36000
 
-cp -ra ${BOSH_COMPILE_TARGET}/nfs-debs/* ${BOSH_INSTALL_TARGET}/
+mkdir ${BOSH_INSTALL_TARGET}/nfs-debs
+cp -ra ${BOSH_COMPILE_TARGET}/nfs-debs/*.tar.gz ${BOSH_INSTALL_TARGET}/nfs-debs
+
+#sqlite compile example
+./configure \
+  --prefix=/usr     \
+  --disable-static  \
+  --enable-fts{4,5} \
+  CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+    -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+    -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+    -DSQLITE_SECURE_DELETE=1          \
+    -DSQLITE_ENABLE_FTS3_TOKENIZER=1" &&
+  make
+  #?make install
+
+# libevent
+
+# From https://www.linuxfromscratch.org/blfs/view/svn/basicnet/libevent.html 
+# First, fix an issue that prevents event_rpcgen.py from working:
+
+sed -i 's/python/&3/' event_rpcgen.py
+./configure --prefix=/usr --disable-static &&
+make
+#? make install
+
+
+# rpcsvc-proto
+./configure --prefix=/usr --sysconfdir=/etc &&
+make
+
+#libtirpc
+./configure --prefix=/usr                                   \
+            --sysconfdir=/etc                               \
+            --disable-static                                \
+            --disable-gssapi                                &&
+make
+
+
