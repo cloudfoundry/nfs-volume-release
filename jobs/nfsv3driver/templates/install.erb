@@ -126,16 +126,6 @@ function main() {
     install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-2.1ubuntu5.5_amd64.deb
     ) 200>/var/vcap/data/dpkg.lock
   ;;
-  "xenial")
-    (
-    flock -x 200
-    install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/$codename/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
-    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/$codename/libnfsidmap2_0.25-5_amd64.deb
-   #install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/$codename/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb
-   #install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/$codename/rpcbind_0.2.3-0.6_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-2.1ubuntu4_amd64.deb
-    ) 200>/var/vcap/data/dpkg.lock
-  ;;
   esac
 
   echo "Copying client certs to data directory..."
