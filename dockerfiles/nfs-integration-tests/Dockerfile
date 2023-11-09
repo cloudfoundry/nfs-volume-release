@@ -4,7 +4,7 @@ RUN cd nfs-volume-release && bosh create-release --tarball /tmp/release.tgz
 RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
 RUN ginkgo_version=$(cd nfs-volume-release/src/bosh_release/ && go list -f "{{.Version}}" -m github.com/onsi/ginkgo > /tmp/ginkgo_version)
 
-FROM apnar/nfs-ganesha@sha256:e06f4f94e41ee7f490ce5f82fb39f44b09e75900b4444828ee71a9d59b5321e0
+FROM harbor-repo.vmware.com/dockerhub-proxy-cache/apnar/nfs-ganesha@sha256:e06f4f94e41ee7f490ce5f82fb39f44b09e75900b4444828ee71a9d59b5321e0
 
 RUN DEBIAN_FRONTEND=noninteractive \
      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FE869A9 \
