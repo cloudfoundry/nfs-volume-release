@@ -1,0 +1,79 @@
+name: nfs-volume
+version: 5.0.51
+commit_hash: 2f77627
+uncommitted_changes: false
+jobs:
+- name: nfsbroker-bbr-lock
+  version: 7aa345934fee7768d67b1d5bc5d14146ee6588c2a9b9bfe8bf886be60c4dae3f
+  fingerprint: 7aa345934fee7768d67b1d5bc5d14146ee6588c2a9b9bfe8bf886be60c4dae3f
+  sha1: sha256:2ec007a4fe24177f27e64e5449568e6e1b62d3628123cb6aac88ef192cfd12c6
+  packages: []
+- name: nfsbrokerpush
+  version: 8d66c2334f1b2ffc12422c8a946541656bb16084045241dd50ccdf6d7718e588
+  fingerprint: 8d66c2334f1b2ffc12422c8a946541656bb16084045241dd50ccdf6d7718e588
+  sha1: sha256:9660ac4a641c2ba48d3b66b360b3356138ce13132702417d700816d14e6f1de8
+  packages:
+  - nfsbroker
+  - migrate_mysql_to_credhub
+- name: nfstestldapserver
+  version: 29a5750375bdd25fb3f2c32e1a68edd90cc5a145418d1907ca3021619ec14850
+  fingerprint: 29a5750375bdd25fb3f2c32e1a68edd90cc5a145418d1907ca3021619ec14850
+  sha1: sha256:560645dc0295fa78c7f4f1060eff29758d8723575e126d808347884c5e9133c0
+  packages:
+  - openldap
+- name: nfstestserver
+  version: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  fingerprint: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  sha1: sha256:360ce74f8fc1bd32be398c99174ca73b5fe88a51c350357633c57ee7798b8a73
+  packages: []
+- name: nfsv3driver
+  version: 3cd5fb2fd2381384e085231c682b953367bcddb6e42c4bc23f2bc5ea242ac2e7
+  fingerprint: 3cd5fb2fd2381384e085231c682b953367bcddb6e42c4bc23f2bc5ea242ac2e7
+  sha1: sha256:3c7433ccfcec3ce5c88590fe09bc275164d462ab490dce1e838d16fcfa2da533
+  packages:
+  - nfs-debs
+  - nfsv3driver
+packages:
+- name: berkeleydb
+  version: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  fingerprint: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  sha1: sha256:1e94bc772d8923cb05bfd0b28927b46f19b2e94de15833e601e330e5141745c4
+  dependencies: []
+- name: golang-1-linux
+  version: 2bba3dc3872d3475f3aa9476963ed92dae8471d15419714082e19d2b34a0e01e
+  fingerprint: 2bba3dc3872d3475f3aa9476963ed92dae8471d15419714082e19d2b34a0e01e
+  sha1: sha256:53f80714c8acd709ad39e7619f89af7766854a8d81be21d698aeaf5fd5d6e090
+  dependencies: []
+- name: migrate_mysql_to_credhub
+  version: e6178f5a31c10f161b7853fc568bde39403f63bca159b03c1d5025246796d3ad
+  fingerprint: e6178f5a31c10f161b7853fc568bde39403f63bca159b03c1d5025246796d3ad
+  sha1: sha256:d5c6ef4b19e8787b6b71f4ca64743f985c23e83f9743e9f6a48a6cf9d94aaecf
+  dependencies:
+  - golang-1-linux
+- name: nfs-debs
+  version: 01c0d2f3eb92d67d0ed4adeec2749cf2236ac8a991cb205e12614e974b305f98
+  fingerprint: 01c0d2f3eb92d67d0ed4adeec2749cf2236ac8a991cb205e12614e974b305f98
+  sha1: sha256:fc4d8a80c4baffb8cab5082f52627fb8de19388b35e27d5fa8f236705848ce24
+  dependencies: []
+- name: nfsbroker
+  version: dca22bd2e436637576cfe8240b8cb6d96ae210d7842f54580dc37292ff13f449
+  fingerprint: dca22bd2e436637576cfe8240b8cb6d96ae210d7842f54580dc37292ff13f449
+  sha1: sha256:8f53e48c9cc8e1c0f6734db3fd45e246000d909066574d8b0b85051b6314ed8d
+  dependencies:
+  - golang-1-linux
+- name: nfsv3driver
+  version: 5fd4f08fe789e556cbddef01ae206b8071fbc319bea761cd3db58d15585bf99d
+  fingerprint: 5fd4f08fe789e556cbddef01ae206b8071fbc319bea761cd3db58d15585bf99d
+  sha1: sha256:cd328d31d356ea51cc616b168a440530cf8dcc36fed5ad199d27027ce717d3fc
+  dependencies:
+  - golang-1-linux
+- name: openldap
+  version: f103aa0e4b1f821d504d0f460745389171dc0d60a4e9de45ec98d8e9fa404c38
+  fingerprint: f103aa0e4b1f821d504d0f460745389171dc0d60a4e9de45ec98d8e9fa404c38
+  sha1: sha256:aa1cf305b98e9bb31744dd59e2437616ea94fea17df68103f189721578e4b816
+  dependencies:
+  - berkeleydb
+license:
+  version: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  fingerprint: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  sha1: sha256:426570cc065ba3857a8964ffb0e29d11c54109ab3ff7704a1a3236f8736cd6de
