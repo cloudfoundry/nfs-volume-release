@@ -1,44 +1,133 @@
 #!/bin/bash
 
 set -e
-sleep 36000
 
-mkdir ${BOSH_INSTALL_TARGET}/nfs-debs
-cp -ra ${BOSH_COMPILE_TARGET}/nfs-debs/*.tar.gz ${BOSH_INSTALL_TARGET}/nfs-debs
 
-#sqlite compile example
-./configure \
-  --prefix=/usr     \
-  --disable-static  \
-  --enable-fts{4,5} \
-  CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
-    -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
-    -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
-    -DSQLITE_SECURE_DELETE=1          \
-    -DSQLITE_ENABLE_FTS3_TOKENIZER=1" &&
+#extract all the things
+
+pushd ${BOSH_COMPILE_TARGET}
+  ls nfs-debs/*.tar.gz | xargs -n1 tar -xzf
+  ls nfs-debs/*.tar.bz2 | xargs -n1 tar -xjf
+  ls nfs-debs/*.tar.xz | xargs -n1 tar -xf
+popd
+
+#required to compile sqlite on xenial, configure fails without
+pushd ${BOSH_COMPILE_TARGET}/tcl*/unix
+  ./configure   --prefix=${BOSH_INSTALL_TARGET}
   make
-  #?make install
-
+  make install
+  export PATH=$BOSH_INSTALL_TARGET/bin:$PATH
+popd
+echo "TCL done"
+pushd ${BOSH_COMPILE_TARGET}/sqlite-*/
+  ./configure \
+    --prefix=${BOSH_INSTALL_TARGET}     \
+    --disable-static  \
+    --enable-fts{4,5} \
+    CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+      -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+      -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+      -DSQLITE_SECURE_DELETE=1          \
+      -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
+  make
+  make install
+popd
+echo "SQLITE done"
 # libevent
-
-# From https://www.linuxfromscratch.org/blfs/view/svn/basicnet/libevent.html 
-# First, fix an issue that prevents event_rpcgen.py from working:
-
-sed -i 's/python/&3/' event_rpcgen.py
-./configure --prefix=/usr --disable-static &&
-make
-#? make install
-
-
+pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
+  # no binary 'python' on $PATH, but python3 is available
+  sed -i 's/python/&3/' event_rpcgen.py
+  ./configure --prefix=${BOSH_INSTALL_TARGET} --disable-static
+  make
+  make install
+popd
+echo "LIBEVENT done"
 # rpcsvc-proto
-./configure --prefix=/usr --sysconfdir=/etc &&
-make
+pushd ${BOSH_COMPILE_TARGET}/rpcsvc-proto-*/
+  ./configure --prefix=${BOSH_INSTALL_TARGET} --sysconfdir=${BOSH_INSTALL_TARGET}/etc
+  make
+  make install
+popd
+echo "RPCSVC done"
 
 #libtirpc
-./configure --prefix=/usr                                   \
-            --sysconfdir=/etc                               \
-            --disable-static                                \
-            --disable-gssapi                                &&
+pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
+  ./configure --prefix=${BOSH_INSTALL_TARGET} \
+              --sysconfdir=${BOSH_INSTALL_TARGET}/etc \
+              --disable-static \
+              --disable-gssapi 
+  make
+  make install
+popd 
+echo "LIBTIRPC done"
+
+#nfs-utils
+
+
+pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
+
+  ./configure   \
+    --prefix=${BOSH_INSTALL_TARGET}   \
+    --libdir=${BOSH_INSTALL_TARGET}/lib   \
+    --sysconfdir=${BOSH_INSTALL_TARGET}/etc   \
+    --localstatedir=${BOSH_INSTALL_TARGET}/var   \
+    --mandir=${BOSH_INSTALL_TARGET}/man   \
+    --infodir=${BOSH_INSTALL_TARGET}/info   \
+    --docdir=${BOSH_INSTALL_TARGET}/doc/util-linux   \
+    --enable-libblkid   \
+    --enable-libmount   \
+    --enable-libuuid   \
+    --enable-blkid   \
+    --enable-mount   \
+    --enable-uuid \
+    --enable-shared   \
+    --disable-all-programs   \
+    --without-python
+    make
+    make install
+popd
+
+LINKER_AND_C_FLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+export CPATH="${BOSH_INSTALL_TARGET}include:${BOSH_INSTALL_TARGET}include/tirpc"
+#export C_INCLUDE_PATH="${BOSH_INSTALL_TARGET}include:${BOSH_INSTALL_TARGET}include/tirpc"
+#export CPLUS_INCLUDE_PATH="${BOSH_INSTALL_TARGET}include:${BOSH_INSTALL_TARGET}include/tirpc"
+
+pushd  ${BOSH_COMPILE_TARGET}/nfs-utils*/
+export CFLAGS=-L${BOSH_INSTALL_TARGET}/lib
+./configure --prefix=${BOSH_INSTALL_TARGET}          \
+          --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
+          --disable-sbin-override  \
+          --bindir=${BOSH_INSTALL_TARGET}/bin \
+          --sbindir=${BOSH_INSTALL_TARGET}/sbin    \
+          --disable-nfsv4        \
+          --disable-gss          \
+          LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -lmount -levent_core  -lsqlite3 -ltirpc"
 make
+popd
+# sleep 36000
+# #--disable-nfsv4 should be fine because it should refer to the server side of these utils. We do not want to support deploying nfs-servers. we want to support nfs clients.
+# # export LIBRARY_PATH=$BOSH_INSTALL_TARGET/lib
+# # export LIBMOUNT_LIBS=/lib/x86_64-linux-gnu
+# # export LIBMOUNT_CFLAGS=-l/lib/x86_64-linux-gnu
 
 
+# pushd  ${BOSH_COMPILE_TARGET}/nfs-utils*/
+#   LINKER_AND_C_FLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+#   export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+#   export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+#   export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+#   export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}include"
+#   export CPATH=${BOSH_INSTALL_TARGET}include:${BOSH_INSTALL_TARGET}include/tirpc
+#   #ln -s /usr/include/linux/random.h $BOSH_INSTALL_TARGET/include/sys/random.h
+#    ./configure --prefix=${BOSH_COMPILE_TARGET}          \
+#             --sysconfdir=/etc      \
+#             --sbindir=/usr/sbin    \
+#             --disable-nfsv4        \
+#             --disable-gss          \
+#             LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -levent_core  -lsqlite3"
+# make
+# popd
