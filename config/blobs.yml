@@ -4,24 +4,30 @@ berkeleydb/db-5.3.28.tar.gz:
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
 nfs-debs/libevent-2.1.12-stable.tar.gz:
   size: 1100847
+  object_id: de54df99-f627-4e40-68b6-eb3addfa785a
   sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
 nfs-debs/libtirpc-1.3.4.tar.bz2:
   size: 563292
+  object_id: 2994e47f-f2f3-4756-5fee-40626caf879c
   sha: sha256:1e0b0c7231c5fa122e06c0609a76723664d068b0dba3b8219b63e6340b347860
 nfs-debs/nfs-utils-2.6.3.tar.xz:
   size: 726284
+  object_id: 650e255f-2eaa-447c-55f1-83f72f8b32f8
   sha: sha256:38d89e853a71d3c560ff026af3d969d75e24f782ff68324e76261fe0344459e1
 nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
   size: 168648
+  object_id: 0031d8cb-2639-4b77-64f9-0e821bee9808
   sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
 nfs-debs/sqlite-3.44.0.tar.gz:
   size: 12706126
+  object_id: b84f66d4-b415-483c-6096-076e09b1a9d0
   sha: sha256:a63190f3abc48189f3d7f544d7c18b73e042d4ddc520ebb57071e48417c5607c
 nfs-debs/tcl8.6.13-src.tar.gz:
   size: 10834396
   sha: sha256:43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066
 nfs-debs/util-linux-2.39.tar.gz:
   size: 17422555
+  object_id: 68a5e840-33e3-4a3e-4394-a29faff88e1e
   sha: sha256:b1f597ad172a2ee17b0a7ae4be7ab7e1b1a6f9394ddbd3d8ec90ae4ed7333579
 openldap/openldap-2.6.6.tgz:
   size: 6475109
