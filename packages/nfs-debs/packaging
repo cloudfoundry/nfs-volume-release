@@ -61,8 +61,7 @@ pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
 popd 
 echo "LIBTIRPC done"
 
-#nfs-utils
-
+#linux-utils
 
 pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
 
@@ -87,15 +86,16 @@ pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
     make install
 popd
 
+# nfs-utils
 export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export C_INCLUDE_PATH="${BOSH_INSTALL_TARGET}/include:${BOSH_INSTALL_TARGET}/include/tirpc"
 export CPLUS_INCLUDE_PATH="${BOSH_INSTALL_TARGET}/include:${BOSH_INSTALL_TARGET}/include/tirpc"
-
-pushd  ${BOSH_COMPILE_TARGET}/nfs-utils*/
 export CFLAGS=-L${BOSH_INSTALL_TARGET}/lib
+
+pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
 ./configure --prefix=${BOSH_INSTALL_TARGET}          \
           --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
           --disable-sbin-override  \
@@ -106,27 +106,5 @@ export CFLAGS=-L${BOSH_INSTALL_TARGET}/lib
           LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -lmount -levent_core  -lsqlite3 -ltirpc"
 make
 make install
+
 popd
-# sleep 36000
-# #--disable-nfsv4 should be fine because it should refer to the server side of these utils. We do not want to support deploying nfs-servers. we want to support nfs clients.
-# # export LIBRARY_PATH=$BOSH_INSTALL_TARGET/lib
-# # export LIBMOUNT_LIBS=/lib/x86_64-linux-gnu
-# # export LIBMOUNT_CFLAGS=-l/lib/x86_64-linux-gnu
-
-
-# pushd  ${BOSH_COMPILE_TARGET}/nfs-utils*/
-#   LINKER_AND_C_FLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-#   export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-#   export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-#   export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-#   export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-#   export CPATH=${BOSH_INSTALL_TARGET}/include:${BOSH_INSTALL_TARGET}/include/tirpc
-#   #ln -s /usr/include/linux/random.h $BOSH_INSTALL_TARGET/include/sys/random.h
-#    ./configure --prefix=${BOSH_COMPILE_TARGET}          \
-#             --sysconfdir=/etc      \
-#             --sbindir=/usr/sbin    \
-#             --disable-nfsv4        \
-#             --disable-gss          \
-#             LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -levent_core  -lsqlite3"
-# make
-# popd
