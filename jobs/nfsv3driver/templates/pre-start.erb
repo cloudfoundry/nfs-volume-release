@@ -19,8 +19,10 @@ function prepend_rfc3339_datetime() {
 
 function main() {
   if [[ ! -f /sbin/mount.nfs ]]; then
-    echo "Creating symlink to mount.nfs from package dir"
+    echo "Creating symlinks to nfs-utils sbins from package dir"
     ln -s /var/vcap/packages/nfs-debs/sbin/mount.nfs /sbin/mount.nfs
+    ln -s /var/vcap/packages/nfs-debs/sbin/sm-notify /sbin/sm-notify
+    ln -s /var/vcap/packages/nfs-debs/sbin/rpc.statd /sbin/rpc.statd
   fi
   echo "Copying client certs to data directory..."
   copy_client_certs_to_spec_dir

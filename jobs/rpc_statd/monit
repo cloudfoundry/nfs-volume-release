@@ -1,0 +1,5 @@
+check process statd matching rpc.statd
+  start program "/sbin/rpc.statd -p 60000"
+  stop program "/bin/sh -c 'echo true'"
+  if failed port 60000 then restart
+  group vcap
