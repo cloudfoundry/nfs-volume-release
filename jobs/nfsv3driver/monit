@@ -5,4 +5,10 @@ check process nfsv3driver
   start program "/var/vcap/jobs/nfsv3driver/bin/nfsv3driver_ctl start"
   stop program "/var/vcap/jobs/nfsv3driver/bin/nfsv3driver_ctl stop"
   group vcap
+check process statd matching rpc.statd
+  start program "/var/vcap/jobs/nfsv3driver/bin/statd_ctl start"
+  stop program "/var/vcap/jobs/nfsv3driver/bin/statd_ctl stop"
+  if failed port p("nfsv3driver.statd_port") then restart
+  group vcap
 <% end %>
+

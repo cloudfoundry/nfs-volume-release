@@ -16,9 +16,11 @@ nfs-debs/nfs-utils-2.6.2.tar.xz:
   sha: sha256:45ad39b54b60aa9c71d1447c1321b9d799369a018990b3641bfeefbcc0b096a7
 nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch:
   size: 938
+  object_id: e903bdf9-3746-42cc-7799-a8fc18ce7899
   sha: sha256:17a15acdabcf2bfc648af9197bbae8d1bcc1e22215b3d5cf9ff60533bf6522e4
 nfs-debs/rpcbind-1.2.6.tar.bz2:
   size: 124590
+  object_id: 21cf96a5-d367-4204-4bbf-188d1167e643
   sha: sha256:5613746489cae5ae23a443bb85c05a11741a5f12c8f55d2bb5e83b9defeee8de
 nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
   size: 168648

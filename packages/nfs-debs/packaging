@@ -85,7 +85,6 @@ pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
     make
     make install
 popd
-i
 # rpc-bind ( required for some nfsv3 mounts to work
 
 #These flags are required for rpcbind and nfs-utils
@@ -102,11 +101,13 @@ pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
 
   ./configure \
             --prefix=${BOSH_INSTALL_TARGET}/                                \
-            --bindir=${BOSH_INSTALL_TARGET}//sbin                             \
+            --bindir=${BOSH_INSTALL_TARGET}/sbin                             \
             --with-rpcuser=root                            \
             --enable-warmstarts                            \
             --without-systemdsystemunitdir \
-            LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"     
+            LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"
+  make
+  make install
 popd
 
 # nfs-utils
