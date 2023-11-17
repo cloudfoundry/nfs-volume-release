@@ -85,15 +85,33 @@ pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
     make
     make install
 popd
+i
+# rpc-bind ( required for some nfsv3 mounts to work
 
-# nfs-utils
-export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
-export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
+#These flags are required for rpcbind and nfs-utils
+
 export C_INCLUDE_PATH="${BOSH_INSTALL_TARGET}/include:${BOSH_INSTALL_TARGET}/include/tirpc"
 export CPLUS_INCLUDE_PATH="${BOSH_INSTALL_TARGET}/include:${BOSH_INSTALL_TARGET}/include/tirpc"
 export CFLAGS=-L${BOSH_INSTALL_TARGET}/lib
+export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
+export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
+
+pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
+  sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
+  patch -Np1 -i ${BOSH_COMPILE_TARGET}/nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch 
+
+  ./configure \
+            --prefix=${BOSH_INSTALL_TARGET}/                                \
+            --bindir=${BOSH_INSTALL_TARGET}//sbin                             \
+            --with-rpcuser=root                            \
+            --enable-warmstarts                            \
+            --without-systemdsystemunitdir \
+            LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"     
+popd
+
+# nfs-utils
+export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
+export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 
 pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
 ./configure --prefix=${BOSH_INSTALL_TARGET}          \
