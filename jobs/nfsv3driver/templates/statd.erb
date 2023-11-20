@@ -16,11 +16,17 @@ case $1 in
       ln -s /var/vcap/packages/nfs-debs/sbin/sm-notify /sbin/sm-notify
     fi
 
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ starting rpcbind  --------------" | tee /dev/stdout
+    /var/vcap/packages/nfs-debs/sbin/rpcbind 
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ starting statd  --------------" | tee /dev/stdout
     /var/vcap/packages/nfs-debs/sbin/rpc.statd -p <%= p("nfsv3driver.statd_port") %> -P /var/vcap/data/rpc_statd
     ;;
 
   stop)
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ stopping rpcbind  --------------" | tee /dev/stdout
     pkill rpc.statd
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ stopping rpcbind  --------------" | tee /dev/stdout
+    pkill rpcbind
     ;;
 
   *)
