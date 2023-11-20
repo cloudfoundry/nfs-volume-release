@@ -16,7 +16,7 @@ case $1 in
       ln -s /var/vcap/packages/nfs-debs/sbin/sm-notify /sbin/sm-notify
     fi
 
-    /var/vcap/packages/nfs-debs/sbin/rpc.statd -p <% p("nfsv3driver.statd_port") %> -P /var/vcap/data/rpc_statd
+    /var/vcap/packages/nfs-debs/sbin/rpc.statd -p <%= p("nfsv3driver.statd_port") %> -P /var/vcap/data/rpc_statd
     ;;
 
   stop)
