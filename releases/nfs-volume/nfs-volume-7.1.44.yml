@@ -1,0 +1,72 @@
+name: nfs-volume
+version: 7.1.44
+commit_hash: 432c802
+uncommitted_changes: false
+jobs:
+- name: nfsbroker-bbr-lock
+  version: d9e1056bd741e723b2a4e53e00baf21380e74b6a5890bb92fce82f82860420c4
+  fingerprint: d9e1056bd741e723b2a4e53e00baf21380e74b6a5890bb92fce82f82860420c4
+  sha1: sha256:4a5ed6b759675688b29dfc35aa72b2dba3d11671622452584471b7a5a945ea25
+  packages: []
+- name: nfsbrokerpush
+  version: 44bf3d9b5a368da8d66f48c117744fc025b30cbd2a70860ffa6b1004b91b0049
+  fingerprint: 44bf3d9b5a368da8d66f48c117744fc025b30cbd2a70860ffa6b1004b91b0049
+  sha1: sha256:c742d838e6a0ce1d1b63bdbc8d533ccb0d8d63d8719fa4ad387ae2d99967ad8d
+  packages:
+  - nfsbroker
+- name: nfstestldapserver
+  version: a0aea88dc82f5594d92fdc8e8d96da15cd526f4f15603e58aab9665bea195f40
+  fingerprint: a0aea88dc82f5594d92fdc8e8d96da15cd526f4f15603e58aab9665bea195f40
+  sha1: sha256:c666bf61ffbd9ccb4f06051d35e1071cc22f8a073b61c6d3aef6c11a8ec4f904
+  packages:
+  - openldap
+- name: nfstestserver
+  version: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  fingerprint: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  sha1: sha256:360ce74f8fc1bd32be398c99174ca73b5fe88a51c350357633c57ee7798b8a73
+  packages: []
+- name: nfsv3driver
+  version: 91248a74a6fd2b43cdb5f564e6d715f1b1fdf7ad53525947c88d5be2475fd81e
+  fingerprint: 91248a74a6fd2b43cdb5f564e6d715f1b1fdf7ad53525947c88d5be2475fd81e
+  sha1: sha256:366bcbb5ae2e51a5398decf6636119707dffb92dd4ccbd4b2f3216e8e4349d28
+  packages:
+  - nfs-debs
+  - nfsv3driver
+packages:
+- name: berkeleydb
+  version: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  fingerprint: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  sha1: sha256:1e94bc772d8923cb05bfd0b28927b46f19b2e94de15833e601e330e5141745c4
+  dependencies: []
+- name: golang-1-linux
+  version: 48a59edbcdab872874d3b1851402c38b62fbf4a70ebfbd055a9d63865f021a69
+  fingerprint: 48a59edbcdab872874d3b1851402c38b62fbf4a70ebfbd055a9d63865f021a69
+  sha1: sha256:74d221407b944acb8eca4210fe808b0515f7a7b7a7919d51f65630bfffd22046
+  dependencies: []
+- name: nfs-debs
+  version: f9ffefe5ad40b13b9b60c46ba5bc16d1eddf701a5bbc40c313aa84719731ace0
+  fingerprint: f9ffefe5ad40b13b9b60c46ba5bc16d1eddf701a5bbc40c313aa84719731ace0
+  sha1: sha256:c2aa4604bde4b7698dac2b390762f1813a566bc816a1c124799546c46737b9ca
+  dependencies: []
+- name: nfsbroker
+  version: 8c1ec88ed5b02b32c93dc48efcfce220248e90e663bc728ec1dca66f6b051259
+  fingerprint: 8c1ec88ed5b02b32c93dc48efcfce220248e90e663bc728ec1dca66f6b051259
+  sha1: sha256:547e2cceaf581749da9bd3442f358b54892602749bf5425d1159c1c97c0dc243
+  dependencies:
+  - golang-1-linux
+- name: nfsv3driver
+  version: 58a86476eaf705c413c53308df8740ae88dcd4468fa9f25b6da5cfd1896e3607
+  fingerprint: 58a86476eaf705c413c53308df8740ae88dcd4468fa9f25b6da5cfd1896e3607
+  sha1: sha256:287ba12ccfe457b21c20327baf756e971d35b25931feb06a9096d7d51cf65720
+  dependencies:
+  - golang-1-linux
+- name: openldap
+  version: f103aa0e4b1f821d504d0f460745389171dc0d60a4e9de45ec98d8e9fa404c38
+  fingerprint: f103aa0e4b1f821d504d0f460745389171dc0d60a4e9de45ec98d8e9fa404c38
+  sha1: sha256:4d00e55a9ccfb1ad2b16664ae8be871a4efa28dc064d3ccf9085e419876093dc
+  dependencies:
+  - berkeleydb
+license:
+  version: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  fingerprint: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  sha1: sha256:426570cc065ba3857a8964ffb0e29d11c54109ab3ff7704a1a3236f8736cd6de
