@@ -5,7 +5,7 @@ set -e
 mkdir -p /var/vcap/sys/log/statd
 exec 1>> /var/vcap/sys/log/statd/statd.log
 exec 2>> /var/vcap/sys/log/statd/statd.err.log
-
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/var/vcap/packages/nfs-debs/lib
 echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ `basename $0` $* --------------" | tee /dev/stderr
 
 case $1 in
