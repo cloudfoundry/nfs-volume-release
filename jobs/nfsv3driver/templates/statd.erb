@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+mkdir -p /var/vcap/sys/log/statd
+exec 1>> /var/vcap/sys/log/statd/statd.log
+exec 2>> /var/vcap/sys/log/statd/statd.err.log
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/var/vcap/packages/nfs-debs/lib
+echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ `basename $0` $* --------------" | tee /dev/stderr
+
+case $1 in
+  start)
+    mkdir -p /var/vcap/data/rpc_statd/sm
+
+    if [[ ! -f /sbin/sm-notify ]]; then
+      ln -s /var/vcap/packages/nfs-debs/sbin/sm-notify /sbin/sm-notify
+    fi
+
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ starting rpcbind  --------------" | tee /dev/stdout
+    /var/vcap/packages/nfs-debs/sbin/rpcbind 
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ starting statd  --------------" | tee /dev/stdout
+    /var/vcap/packages/nfs-debs/sbin/rpc.statd -p <%= p("nfsv3driver.statd_port") %> -P /var/vcap/data/rpc_statd
+    ;;
+
+  stop)
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ stopping rpcbind  --------------" | tee /dev/stdout
+    pkill rpc.statd
+    echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ stopping rpcbind  --------------" | tee /dev/stdout
+    pkill rpcbind
+    ;;
+
+  *)
+    echo "Usage: statd_ctl {start|stop}"
+    ;;
+esac

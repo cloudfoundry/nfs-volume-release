@@ -11,6 +11,7 @@ templates:
   nfsv3driver_ctl.erb: bin/nfsv3driver_ctl
   start.sh.erb: bin/start.sh
   drain.erb: bin/drain
+  statd.erb: bin/statd_ctl
 
 packages:
 - nfs-debs
@@ -21,6 +22,9 @@ consumes:
   type: mapfs
 
 properties:
+  nfsv3driver.statd_port:
+    description: "port rpc-statd listens on"
+    default: 60000
   nfsv3driver.listen_addr:
     description: "address nfsv3driver listens on"
     default: "127.0.0.1:7589"
