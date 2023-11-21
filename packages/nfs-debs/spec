@@ -2,4 +2,4 @@
 name: nfs-debs
 
 files:
-- nfs-debs/**/*
+- nfs-debs/**
