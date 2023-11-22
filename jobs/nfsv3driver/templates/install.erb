@@ -4,83 +4,6 @@
 <% else %>
 set -eo pipefail
 
-install_if_missing ()
-{
-    echo "Installing $1"
-
-    set +eo pipefail
-    dpkg -s $1 2>&1
-    dpkg_installed=$(echo $?)
-    if [ "$dpkg_installed" != "0" ]; then
-        for x in `seq 1 100` :
-        do
-          dpkg --force-confdef -i $2 2>&1
-          if [ $? -ne 0 ] ; then
-            sleep 3
-          else
-           set -eo pipefail
-           return 0
-          fi
-        done
-        set -eo pipefail
-        lsof -n
-        exit 1
-    else
-        echo "Skipping $1"
-    fi
-    set -eo pipefail
-}
-
-install_or_upgrade ()
-{
-    echo "Upgrading $1"
-
-    set +eo pipefail
-
-    for x in `seq 1 100` :
-    do
-      dpkg --force-confdef -i $2 2>&1
-      if [ $? -ne 0 ] ; then
-        sleep 3
-      else
-       set -eo pipefail
-       return 0
-      fi
-    done
-    set -eo pipefail
-    lsof -n
-    exit 1
-    set -eo pipefail
-}
-
-configure_if_present ()
-{
-    echo "Configuring $1"
-
-    set +eo pipefail
-    dpkg -s $1 2>&1
-    dpkg_installed=$(echo $?)
-    if [ "$dpkg_installed" == "0" ]; then
-        for x in `seq 1 100` :
-        do
-          dpkg --configure $1 2>&1 | grep 'is already installed and configured'
-          if [ $? -ne 0 ] ; then
-            sleep 3
-          else
-           set -eo pipefail
-           return 0
-          fi
-        done
-        set -eo pipefail
-        lsof -n
-        exit 1
-    else
-        echo "Skipping $1"
-    fi
-    set -eo pipefail
-}
-
-
 function copy_client_certs_to_spec_dir() {
   local cert_dir="<%= p('nfsv3driver.driver_path') %>/certs/nfsv3driver"
 
@@ -95,57 +18,12 @@ function prepend_rfc3339_datetime() {
 }
 
 function main() {
-  codename=$(lsb_release -c | cut -f 2 )
-  echo "Installing NFS packages ${codename}"
-  case ${codename} in
-  "jammy")
-    (
-    flock -x 200
-    install_if_missing keyutils /var/vcap/packages/nfs-debs/$codename/keyutils_1.6.1-2ubuntu3_amd64.deb
-    install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/$codename/libevent-2.1-7_2.1.12-stable-1build3_amd64.deb
-    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/$codename/libnfsidmap2_0.25-6build1_amd64.deb
-    configure_if_present libk5crypto3
-    configure_if_present libkrb5-3
-    configure_if_present libgssapi-krb5-2
-    configure_if_present libtirpc1
-    install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/$codename/rpcbind_1.2.6-2build1_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-6ubuntu1_amd64.deb
-    ) 200>/var/vcap/data/dpkg.lock
-  ;;
-  "bionic")
-    (
-    flock -x 200
-    install_if_missing keyutils /var/vcap/packages/nfs-debs/$codename/keyutils_1.5.9-9.2ubuntu2_amd64.deb
-    install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/$codename/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
-    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/$codename/libnfsidmap2_0.25-5.1_amd64.deb
-    configure_if_present libk5crypto3
-    configure_if_present libkrb5-3
-    configure_if_present libgssapi-krb5-2
-    configure_if_present libtirpc1
-    install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/$codename/rpcbind_0.2.3-0.6ubuntu0.18.04.4_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-2.1ubuntu5.5_amd64.deb
-    ) 200>/var/vcap/data/dpkg.lock
-  ;;
-  "xenial")
-    (
-    flock -x 200
-    install_if_missing keyutils /var/vcap/packages/nfs-debs/$codename/keyutils_1.5.9-8ubuntu1_amd64.deb
-    install_if_missing libevent-2.1-6 /var/vcap/packages/nfs-debs/$codename/libevent-2.1-6_2.1.8-stable-4build1_amd64.deb
-    install_if_missing libnfsidmap2 /var/vcap/packages/nfs-debs/$codename/libnfsidmap2_0.25-5_amd64.deb
-    install_or_upgrade libkrb5support0 /var/vcap/packages/nfs-debs/$codename/libkrb5support0_1.15.1-2_amd64.deb
-    install_or_upgrade libk5crypto3 /var/vcap/packages/nfs-debs/$codename/libk5crypto3_1.15.1-2_amd64.deb
-    install_or_upgrade libkrb5-3 /var/vcap/packages/nfs-debs/$codename/libkrb5-3_1.15.1-2_amd64.deb
-    configure_if_present libkrb5-3
-    install_or_upgrade libgssapi-krb5-2 /var/vcap/packages/nfs-debs/$codename/libgssapi-krb5-2_1.15.1-2_amd64.deb
-    install_or_upgrade libtirpc1 /var/vcap/packages/nfs-debs/$codename/libtirpc1_0.2.5-1.2+deb9u1_amd64.deb
-    install_or_upgrade rpcbind /var/vcap/packages/nfs-debs/$codename/rpcbind_0.2.3-0.6_amd64.deb
-    install_or_upgrade nfs-common /var/vcap/packages/nfs-debs/$codename/nfs-common_1.3.4-2.1ubuntu4_amd64.deb
-    ) 200>/var/vcap/data/dpkg.lock
-  ;;
-  esac
-
   echo "Copying client certs to data directory..."
   copy_client_certs_to_spec_dir
+  if [[ ! -f /sbin/mount.nfs ]]; then
+  echo "Creating symlinks to nfs-utils sbins from package dir"
+    ln -s /var/vcap/packages/nfs-debs/sbin/mount.nfs /sbin/mount.nfs
+  fi
 
   exit 0
 }
