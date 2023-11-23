@@ -8,9 +8,7 @@ releases:
     url: ((path_to_mapfs_release))
     version: create
   - name: "credhub"
-    version: "2.5.6"
-    url: "https://bosh.io/d/github.com/pivotal-cf/credhub-release?v=2.5.6"
-    sha1: "788c7da077480fc76a49a69095debbd887c9250e"
+    version: latest
 
 variables:
   - name: credhub-ca
