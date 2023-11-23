@@ -12,6 +12,7 @@ templates:
   start.sh.erb: bin/start.sh
   drain.erb: bin/drain
   statd.erb: bin/statd_ctl
+  rpcbind.erb: bin/rpcbind_ctl
 
 packages:
 - nfs-debs
