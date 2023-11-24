@@ -2,12 +2,13 @@ package bosh_release_test
 
 import (
 	"fmt"
+	"os/exec"
+	"time"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
-	"os/exec"
-	"time"
 )
 
 var _ = Describe("BoshReleaseTest", func() {
@@ -101,6 +102,10 @@ var _ = Describe("BoshReleaseTest", func() {
 					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "rep")
 					_, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 					Expect(err).NotTo(HaveOccurred())
+					cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", "until pgrep rep; do echo 'not running'; done; echo 'rep is running'")
+					session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+					Expect(err).NotTo(HaveOccurred())
+					Eventually(session.Out, 2*time.Minute).Should(gbytes.Say("rep is running"))
 				})
 			})
 
@@ -147,7 +152,7 @@ func releaseDpkgLock() {
 }
 
 func expectDpkgNotInstalled(dpkgName string) {
-	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", fmt.Sprintf( "dpkg -l | grep ' %s '", dpkgName))
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", fmt.Sprintf("dpkg -l | grep ' %s '", dpkgName))
 	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session).Should(gexec.Exit(1), string(session.Out.Contents()))
@@ -157,8 +162,8 @@ func expectDpkgInstalled(dpkgName string, version string) {
 	packageDebugMessage := fmt.Sprintf("Expecting dpkg %s %s to be installed", dpkgName, version)
 	By(packageDebugMessage)
 
-  cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", fmt.Sprintf("dpkg -s %s | grep Version | grep -o '[0-9].*' | grep -E '^%s$'", dpkgName, version))
-  session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
-  Expect(err).NotTo(HaveOccurred(), packageDebugMessage)
-  Eventually(session).Should(gexec.Exit(0), packageDebugMessage + string(session.Out.Contents()))
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "nfsv3driver", "-c", fmt.Sprintf("dpkg -s %s | grep Version | grep -o '[0-9].*' | grep -E '^%s$'", dpkgName, version))
+	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred(), packageDebugMessage)
+	Eventually(session).Should(gexec.Exit(0), packageDebugMessage+string(session.Out.Contents()))
 }
