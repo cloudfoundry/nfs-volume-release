@@ -3,13 +3,14 @@ package bosh_release_test
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"os/exec"
+	"time"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
-	"os"
-	"os/exec"
-	"time"
 
 	"testing"
 )
@@ -47,13 +48,19 @@ func ensureDeploy(opsfiles ...string) {
 }
 
 func deploy(opsfiles ...string) (*gexec.Session, error) {
-	deployCmd := []string {"deploy",
+	stemcell_line := os.Getenv("STEMCELL_LINE")
+	if stemcell_line == "" {
+		stemcell_line = "jammy"
+	}
+
+	deployCmd := []string{"deploy",
 		"-n",
 		"-d",
 		"bosh_release_test",
 		"--vars-store",
 		"/tmp/store",
 		"./nfsv3driver-manifest.yml",
+		"-v", fmt.Sprintf("stemcell_line=%s", stemcell_line),
 		"-v", fmt.Sprintf("path_to_nfs_volume_release=%s", os.Getenv("NFS_VOLUME_RELEASE_PATH")),
 		"-v", fmt.Sprintf("path_to_mapfs_release=%s", os.Getenv("MAPFS_RELEASE_PATH")),
 	}
@@ -85,7 +92,6 @@ func uploadStemcell() {
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 20*time.Minute).Should(gexec.Exit(0))
 }
-
 
 func findProcessState(processName string) string {
 
@@ -128,7 +134,6 @@ type BoshInstancesOutput struct {
 	Lines  []string    `json:"Lines"`
 }
 
-
 type BoshStemcellsOutput struct {
 	Tables []struct {
 		Content string `json:"Content"`
@@ -151,3 +156,4 @@ type BoshStemcellsOutput struct {
 	Blocks interface{} `json:"Blocks"`
 	Lines  []string    `json:"Lines"`
 }
+

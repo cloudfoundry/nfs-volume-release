@@ -122,7 +122,7 @@ instance_groups:
 
 stemcells:
   - alias: default
-    os: ubuntu-jammy
+    os: ubuntu-((stemcell_line))
     version: latest
 
 update:
