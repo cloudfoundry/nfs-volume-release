@@ -10,10 +10,10 @@ nfs-debs/libtirpc-1.3.4.tar.bz2:
   size: 563292
   object_id: 2994e47f-f2f3-4756-5fee-40626caf879c
   sha: sha256:1e0b0c7231c5fa122e06c0609a76723664d068b0dba3b8219b63e6340b347860
-nfs-debs/nfs-utils-2.6.2.tar.xz:
-  size: 1370282
-  object_id: d85f1bcc-9f7a-40fd-560d-62561c494c99
-  sha: sha256:45ad39b54b60aa9c71d1447c1321b9d799369a018990b3641bfeefbcc0b096a7
+nfs-debs/nfs-utils-2.6.4.tar.xz:
+  size: 728280
+  object_id: b995275d-cde4-4b90-474f-b091257387a0
+  sha: sha256:01b3b0fb9c7d0bbabf5114c736542030748c788ec2fd9734744201e9b0a1119d
 nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch:
   size: 938
   object_id: e903bdf9-3746-42cc-7799-a8fc18ce7899
