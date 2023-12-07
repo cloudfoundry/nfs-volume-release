@@ -24,7 +24,7 @@ heartbeat() {
 
 wait_for_apps_to_be_evacuated() {
     for i in {1..90}; do
-        if pgrep -x "rep" > /dev/null; then
+        if [ $(( $(pgrep -cx "rep") )) -gt 0  ]; then
             echo "waiting for rep..."
             sleep 10
         else
