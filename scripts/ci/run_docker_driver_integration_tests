@@ -18,11 +18,6 @@ export SOURCE
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
 
-if ! ginkgo version &> /dev/null
-then
-  go get -u github.com/onsi/ginkgo/ginkgo
-fi
-
 pushd nfs-volume-release/src/github.com/cloudfoundry/mapfs-release
   export PATH=$PWD/bin:$PATH
 
@@ -65,7 +60,7 @@ pushd nfs-volume-release
 EOT
 
   pushd src/code.cloudfoundry.org/nfsv3driver
-    GO111MODULE=on go build -mod=vendor -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
+    go build -mod=vendor -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
 
     export PATH=$PATH:$PWD
     mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
@@ -85,7 +80,7 @@ EOT
 
   trap kill_ganesha EXIT
   pushd src/code.cloudfoundry.org/${TEST_PACKAGE}
-    GO111MODULE=on ginkgo -v -keepGoing . -race
+    go run github.com/onsi/ginkgo/v2/ginkgo -v --keep-going . -race
   popd
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
