@@ -80,7 +80,7 @@ EOT
 
   trap kill_ganesha EXIT
   pushd src/code.cloudfoundry.org/${TEST_PACKAGE}
-    go run github.com/onsi/ginkgo/v2/ginkgo -v -keepGoing . -race
+    go run github.com/onsi/ginkgo/v2/ginkgo -v --keep-going . -race
   popd
   rm -rf "${NFS_ACCEPTANCE_DIR}"
 popd
