@@ -34,10 +34,10 @@ nfs-debs/tcl8.6.13-src.tar.gz:
   size: 10834396
   object_id: d7bc625e-0a7c-4522-6626-c42c0eafc040
   sha: sha256:43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066
-nfs-debs/util-linux-2.39.3.tar.gz:
-  size: 18876273
-  object_id: 2decee4a-ef86-4633-4baf-528eedef43b8
-  sha: sha256:40ea07584d56c310455471afa92c119ec259776a561af7159cc802344c2c370d
+nfs-debs/util-linux-2.40-rc1.tar.gz:
+  size: 18802499
+  object_id: 511cd5f6-1e49-4bd6-7d90-ce6d6604f12d
+  sha: sha256:895603ae9ae366802e98fb5d81646d8aa3b4a5ecf037f7365a83813501a7cb15
 openldap/openldap-2.6.6.tgz:
   size: 6475109
   object_id: 60975226-87dd-4f55-52c4-6225e7307fa9
