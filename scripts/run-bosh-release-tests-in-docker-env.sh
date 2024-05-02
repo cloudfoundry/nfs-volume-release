@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 
-COMMAND_TO_RUN='go run github.com/onsi/ginkgo/ginkgo -r -nodes 1 -v .'
+COMMAND_TO_RUN='go run github.com/onsi/ginkgo/v2/ginkgo -r -nodes 1 -v .'
 if [[ -n "$DEV" ]]; then
     COMMAND_TO_RUN='bash'
 fi
