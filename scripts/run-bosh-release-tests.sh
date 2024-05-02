@@ -16,5 +16,5 @@ docker run \
 -v $HOME/workspace/nfs-volume-release/:/nfs-volume-release \
 -v $HOME/workspace/mapfs-release:/mapfs-release \
 --workdir=/ \
-bosh/main-bosh-docker \
+bosh/docker-cpi \
 /nfs-volume-release/scripts/run-bosh-release-tests-in-docker-env.sh
