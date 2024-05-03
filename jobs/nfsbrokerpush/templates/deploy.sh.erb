@@ -1,6 +1,8 @@
 #!/bin/bash -eu
 
-export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
+export PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
+export PATH="/var/vcap/packages/cf-cli-7-linux/bin:${PATH}"
+export PATH="/var/vcap/packages/cf-cli-6-linux/bin:${PATH}"
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
 
@@ -173,7 +175,11 @@ function push_app() {
 
   pushd /var/vcap/packages/nfsbroker > /dev/null
     set +e
-      cf push "${APP_NAME}" -i 1 -s ${app_stack}
+      REDACT_ENV=""
+      if cf push --help | grep -- '--redact-env'; then
+        REDACT_ENV="--redact-env"
+      fi
+      cf push "${APP_NAME}" -i 1 -s ${LATEST_STACK} ${REDACT_ENV}
       exit_code=$?
     set -e
 
