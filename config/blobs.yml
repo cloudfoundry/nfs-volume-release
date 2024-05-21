@@ -38,10 +38,10 @@ nfs-debs/util-linux-2.40.1.tar.gz:
   size: 19413328
   object_id: 4f154ba9-1f2e-4df1-72a8-08708da338af
   sha: sha256:8e396eececae2b3b68db232c33b8810faa7c31f6df19f98f512739293d5829b7
-openldap/openldap-2.6.7.tgz:
-  size: 6484944
-  object_id: f679c87e-63c7-4327-580b-1c3fb9f76eeb
-  sha: sha256:cd775f625c944ed78a3da18a03b03b08eea73c8aabc97b41bb336e9a10954930
+openldap/openldap-2.6.8.tgz:
+  size: 6512544
+  object_id: 831b157b-8af6-45af-64e4-ca61dcd68bfa
+  sha: sha256:48969323e94e3be3b03c6a132942dcba7ef8d545f2ad35401709019f696c3c4e
 test-dependencies/openssl-3.3.0.tar.gz:
   size: 18038030
   object_id: dbe427e3-ef85-420b-7943-c227850a484e
