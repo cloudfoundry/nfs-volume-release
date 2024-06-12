@@ -3,8 +3,12 @@
 export PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
 export PATH="/var/vcap/packages/cf-cli-7-linux/bin:${PATH}"
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:${PATH}"
+
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
+
+export CF_BROKER_USERNAME="<%= p('nfsbrokerpush.username') %>"
+export CF_BROKER_PASSWORD="<%= p('nfsbrokerpush.password') %>"
 
 API_ENDPOINT=https://api.<%= p('nfsbrokerpush.domain') %>
 APP_NAME=<%= p('nfsbrokerpush.app_name') %>
@@ -13,7 +17,6 @@ CREDHUB_CA_CERT="<%= link('credhub').p('credhub.ca_certificate') %>"
 CREDHUB_SERVER="<%= link('credhub').p('credhub.internal_url')+":"+link('credhub').p('credhub.port').to_s %>"
 MANIFEST=/var/vcap/jobs/nfsbrokerpush/manifest.yml
 ORG=<%= p('nfsbrokerpush.organization') %>
-PASSWORD="<%= p('nfsbrokerpush.password') %>"
 PROCFILE=/var/vcap/jobs/nfsbrokerpush/Procfile
 SERVICES_CONFIG=/var/vcap/jobs/nfsbrokerpush/config/services.json
 SERVICE_BROKER_NAME=<%= p('nfsbrokerpush.broker_name') %>
@@ -21,7 +24,6 @@ SPACE=<%= p('nfsbrokerpush.space') %>
 STARTUP_SCRIPT=/var/vcap/jobs/nfsbrokerpush/start.sh
 STORE_ID="<%= p('nfsbrokerpush.store_id') %>"
 SYSLOG_URL="<%= p('nfsbrokerpush.syslog_url') %>"
-USERNAME="<%= p('nfsbrokerpush.username') %>"
 
 if [[ -n "${CREDHUB_CA_CERT}" ]]; then
   if ! [[ "${CREDHUB_SERVER}" =~ ^https?:// ]]; then
@@ -131,23 +133,10 @@ function push_app() {
     fi
   popd > /dev/null
 }
+
 function register_service() {
-  # We want to avoid providing creds as commandline params to binaries to avoid leaking creds via autitd logs. The below `cf curl` replaces the (create|update)-service-broker commands.
-  # cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
-  if ! cf curl "/v2/service_brokers?q=name:$SERVICE_BROKER_NAME" | grep $SERVICE_BROKER_NAME; then
-    echo "Creating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
-    echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\", \"name\": \"${SERVICE_BROKER_NAME}\"}" > ./data
-    cf curl --fail \
-      -X POST "/v2/service_brokers" \
-      -d @./data
-    rm data
-  else
-    echo "Updating service broker - name:${SERVICE_BROKER_NAME} host:${APP_URL}"
-    broker_guid="$(cf curl /v2/service_brokers?q=name:$SERVICE_BROKER_NAME | grep \"guid\" | cut -f4 -d\")"
-    cf curl --fail \
-      -X PUT "/v2/service_brokers/${broker_guid}" \
-      -d @<(echo "{\"auth_username\":\"${USERNAME}\",\"auth_password\":\"${PASSWORD}\",\"broker_url\":\"${APP_URL}\"}") > /dev/null
-  fi
+  # We want to avoid providing creds as commandline params to binaries to avoid leaking creds via auditd logs. Set the CF_BROKER_PASSWORD instead.
+  cf create-service-broker $SERVICE_BROKER_NAME $CF_BROKER_USERNAME $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $CF_BROKER_USERNAME $APP_URL
 }
 
 function clean_up() {
