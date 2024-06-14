@@ -1,8 +1,6 @@
 #!/bin/bash -eu
 
 export PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
-export PATH="/var/vcap/packages/cf-cli-7-linux/bin:${PATH}"
-export PATH="/var/vcap/packages/cf-cli-6-linux/bin:${PATH}"
 
 export CF_HOME=/var/vcap/data/nfsbrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('nfsbrokerpush.cf.dial_timeout') %>
