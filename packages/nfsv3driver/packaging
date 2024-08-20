@@ -1,11 +1,12 @@
 set -e
 
-source /var/vcap/packages/golang-1.22-linux/bosh/compile.env
+mkdir -p ${BOSH_INSTALL_TARGET}/src
+mv * ${BOSH_INSTALL_TARGET}/src
+mv ${BOSH_INSTALL_TARGET}/src .
 
-mkdir ../src && cp -a * ../src/ && mv ../src ./src
-mkdir $BOSH_INSTALL_TARGET/bin
-export GO111MODULE=on
+source /var/vcap/packages/golang-*-linux/bosh/compile.env
+export GOBIN=${BOSH_INSTALL_TARGET}/bin
 
-pushd src/nfsv3driver
-    go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/nfsv3driver cmd/nfsv3driver/*.go
+pushd src/code.cloudfoundry.org/nfsv3driver
+go install ./cmd/nfsv3driver
 popd
