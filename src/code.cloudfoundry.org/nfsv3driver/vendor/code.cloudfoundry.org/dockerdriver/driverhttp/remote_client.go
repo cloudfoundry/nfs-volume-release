@@ -5,12 +5,10 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
-	"strings"
 
-	"code.cloudfoundry.org/cfhttp"
+	"code.cloudfoundry.org/cfhttp/v2"
 	"code.cloudfoundry.org/clock"
 	"code.cloudfoundry.org/dockerdriver"
 	"code.cloudfoundry.org/goshims/http_wrap"
@@ -49,28 +47,18 @@ func NewRemoteClient(url string, tls *dockerdriver.TLSConfig) (*remoteClient, er
 	client := cfhttp.NewClient()
 	input_url := url
 
-	if strings.Contains(url, ".sock") {
-		client = cfhttp.NewUnixClient(url)
-		url = fmt.Sprintf("unix://%s", url)
-	} else {
-		if tls != nil {
-			tlsConfig, err := tlsconfig.Build(
-				tlsconfig.WithInternalServiceDefaults(),
-				tlsconfig.WithIdentityFromFile(tls.CertFile, tls.KeyFile),
-			).Client(tlsconfig.WithAuthorityFromFile(tls.CAFile))
-			if err != nil {
-				return nil, err
-			}
-
-			tlsConfig.InsecureSkipVerify = tls.InsecureSkipVerify
-
-			if tr, ok := client.Transport.(*http.Transport); ok {
-				tr.TLSClientConfig = tlsConfig
-			} else {
-				return nil, errors.New("Invalid transport")
-			}
+	if tls != nil {
+		tlsConfig, err := tlsconfig.Build(
+			tlsconfig.WithInternalServiceDefaults(),
+			tlsconfig.WithIdentityFromFile(tls.CertFile, tls.KeyFile),
+		).Client(tlsconfig.WithAuthorityFromFile(tls.CAFile))
+		if err != nil {
+			return nil, err
 		}
 
+		tlsConfig.InsecureSkipVerify = tls.InsecureSkipVerify
+
+		client = cfhttp.NewClient(cfhttp.WithTLSConfig(tlsConfig))
 	}
 
 	driver := NewRemoteClientWithClient(url, tls, client, clock.NewClock())
@@ -266,7 +254,7 @@ func (r *remoteClient) Path(env dockerdriver.Env, pathRequest dockerdriver.PathR
 }
 
 func (r *remoteClient) Unmount(env dockerdriver.Env, unmountRequest dockerdriver.UnmountRequest) dockerdriver.ErrorResponse {
-	logger := env.Logger().Session("mount")
+	logger := env.Logger().Session("unmount")
 	logger.Info("start")
 	defer logger.Info("end")
 
