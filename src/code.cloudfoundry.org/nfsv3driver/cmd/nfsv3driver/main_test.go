@@ -5,6 +5,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"time"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -32,13 +33,15 @@ var _ = Describe("Main", func() {
 	JustBeforeEach(func() {
 		var err error
 		session, err = gexec.Start(command, GinkgoWriter, GinkgoWriter)
+		time.Sleep(time.Second)
 		Eventually(session.Out).Should(gbytes.Say(expectedStartOutput))
 		Eventually(session.Err).Should(gbytes.Say(expectedStartErrOutput))
 		Expect(err).ToNot(HaveOccurred())
 	})
 
 	AfterEach(func() {
-		session.Kill().Wait()
+		session.Kill()
+		Eventually(session.Exited).Should(BeClosed())
 	})
 
 	Context("with a driver path", func() {
