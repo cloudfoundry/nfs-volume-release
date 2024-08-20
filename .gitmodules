@@ -1,3 +1,4 @@
-[submodule "dockerdriver"]
+[submodule "src/code.cloudfoundry.org/dockerdriver"]
 	path = src/code.cloudfoundry.org/dockerdriver
 	url = https://github.com/cloudfoundry/dockerdriver
+	branch = main
