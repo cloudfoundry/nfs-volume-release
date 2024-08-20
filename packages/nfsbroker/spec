@@ -37,7 +37,6 @@ files:
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/hashicorp/go-version/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pborman/uuid/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/auth/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/domain/*.go # gosub
@@ -46,7 +45,6 @@ files:
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/internal/blog/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/middlewares/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/utils/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pkg/errors/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/grouper/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/http_server/*.go # gosub
