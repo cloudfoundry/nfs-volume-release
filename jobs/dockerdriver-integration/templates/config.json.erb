@@ -1,20 +1,17 @@
 <%=
   listen_port = 8589
+  listen_addr = "https://127.0.0.1:#{listen_port}"
 
   config = {
     "create_config": {
-      "Name": "smb-volume-name",
-      "Opts": {
-        "source": p("smb_remote_path"),
-        "username": link("smbtestserver").p("username"),
-        "password": link("smbtestserver").p("password"),
-      }
+      "Name": "nfs-volume-name",
+      "Opts": {"source": p("nfs_remote_path"),"uid":"2000","gid":"2000"}
     },
-    "driver": "/var/vcap/packages/smbdriver/bin/smbdriver",
-    "driver_name": "smbdriver",
-    "driver_address": "http://127.0.0.1:#{listen_port}",
+    "driver": "/var/vcap/packages/nfsv3driver/bin/nfsv3driver",
+    "driver_name": "nfsv3driver",
+    "driver_address": listen_addr,
     "driver_args": [
-      "--listenPort=#{listen_port}",
+      "--listenAddr=#{listen_addr}",
       "--transport=tcp",
       "--driversPath=/var/vcap/data/dockerdriver-integration/volman",
       "--mountDir=/var/vcap/data/dockerdriver-integration/mount",
