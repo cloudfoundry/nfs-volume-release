@@ -1,0 +1,8 @@
+#!/bin/bash
+# vim: set ft=sh
+
+set -e -x
+
+pushd nfsbroker
+    go run github.com/onsi/ginkgo/v2/ginkgo -mod vendor -r --keep-going -p --trace --randomize-all
+popd

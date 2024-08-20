@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -ex
+
+pushd $(dirname $0)/..
+  go run github.com/onsi/ginkgo/v2/ginkgo --keep-going -p --race --trace --randomize-all "$@"
+  pushd cmd/nfsv3driver
+    go run github.com/onsi/ginkgo/v2/ginkgo --keep-going --race --trace --randomize-all "$@"
+  popd
+popd

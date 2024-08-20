@@ -1,8 +1,3 @@
-[submodule "src/code.cloudfoundry.org/nfsv3driver"]
-	path = src/nfsv3driver
-	url = https://github.com/cloudfoundry/nfsv3driver
-	branch = master
-[submodule "src/code.cloudfoundry.org/nfsbroker"]
-	path = src/nfsbroker
-	url = https://github.com/cloudfoundry/nfsbroker
-	branch = master
+[submodule "dockerdriver"]
+	path = src/code.cloudfoundry.org/dockerdriver
+	url = https://github.com/cloudfoundry/dockerdriver

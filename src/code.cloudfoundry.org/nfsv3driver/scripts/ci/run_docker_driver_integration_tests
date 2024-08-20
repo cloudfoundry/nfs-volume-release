@@ -1,0 +1,72 @@
+#!/bin/bash
+
+set -x -e
+
+# something strange happens to our /var/run directory in the latest version of hush-house. Add a nasty hack to allow dbus to start up
+mkdir -p /var/run/dbus
+
+/start.sh &
+
+function kill_ganesha {
+    pkill -9 ganesha || true
+}
+
+trap kill_ganesha EXIT
+
+export SOURCE="localhost:/"
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+
+if ! ginkgo version &> /dev/null
+then
+  go get -u github.com/onsi/ginkgo/ginkgo
+fi
+
+pushd mapfs
+  mkdir -p /var/vcap/packages/mapfs/bin/
+  go build -mod=vendor -o "/var/vcap/packages/mapfs/bin/mapfs" *.go
+popd
+
+NFS_ACCEPTANCE_DIR="${PWD}/tmp"
+mkdir -p "${NFS_ACCEPTANCE_DIR}"
+
+pushd nfsv3driver
+  listen_address=0.0.0.0:7589
+
+  drivers_path="${NFS_ACCEPTANCE_DIR}/voldriver_plugins"
+  mkdir -p $drivers_path
+  chmod 777 $drivers_path
+
+  listen_address=0.0.0.0:7589
+  driver_address=http://$listen_address
+
+  export FIXTURE_FILENAME="${NFS_ACCEPTANCE_DIR}/fixture.json"
+  cat << EOT > "${FIXTURE_FILENAME}"
+{
+  "volman_driver_path": "${drivers_path}",
+  "driver_address": "${driver_address}",
+  "driver_name": "nfsv3driver",
+  "create_config": {
+    "Name": "nfs-volume-name",
+    "Opts": {"source":"${SOURCE}","uid":"2000","gid":"2000"}
+  }
+}
+EOT
+
+  go build -mod=vendor -o "${NFS_ACCEPTANCE_DIR}/nfsv3driver" "cmd/nfsv3driver/main.go"
+
+  export PATH=$PATH:$PWD
+  mkdir -p "${NFS_ACCEPTANCE_DIR}/mountdir"
+
+  export DRIVER_CMD="${NFS_ACCEPTANCE_DIR}/nfsv3driver"
+  export DRIVER_OPTS="-listenAddr="$listen_address",-transport="$TRANSPORT",-driversPath="$drivers_path""
+popd
+
+function kill_ganesha {
+  pkill -9 ganesha || true
+}
+
+trap kill_ganesha EXIT
+pushd ${TEST_PACKAGE}
+  ginkgo -v -keepGoing -race .
+popd

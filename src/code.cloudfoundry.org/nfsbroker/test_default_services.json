@@ -1,0 +1,42 @@
+[
+  {
+    "id": "nfsbroker",
+    "name": "nfs-legacy",
+    "description": "Existing NFSv3 volumes (see: https://code.cloudfoundry.org/nfs-volume-release/)",
+    "bindable": true,
+    "plan_updateable": false,
+    "tags": [
+       "nfs"
+    ],
+    "plans": [
+      {
+        "id": "Existing",
+        "name": "Existing",
+        "description": "A preexisting filesystem"
+      }
+    ],
+    "requires":[
+       "volume_mount"
+    ]
+  },
+  {
+    "id": "997f8f26-e10c-11e7-80c1-9a214cf093ae",
+    "name": "nfs",
+    "description": "Existing NFSv3 and v4 volumes",
+    "bindable": true,
+    "plan_updateable": false,
+    "tags": [
+       "nfs"
+    ],
+    "plans": [
+      {
+        "id": "09a09260-1df5-4445-9ed7-1ba56dadbbc8",
+        "name": "Existing",
+        "description": "A preexisting filesystem"
+      }
+    ],
+    "requires":[
+       "volume_mount"
+    ]
+  }
+]
