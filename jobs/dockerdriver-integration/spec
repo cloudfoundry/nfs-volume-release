@@ -1,0 +1,16 @@
+---
+name: dockerdriver-integration
+
+templates:
+  pre-start.erb: bin/pre-start
+  run.erb: bin/run
+  config.json.erb: config/config.json
+
+packages:
+- dockerdriver-integration
+- nfsv3driver
+
+properties:
+  nfs_remote_path:
+    description: Address for SMB Remote Path 
+    default: //meowtestserver.service.cf.internal/vol

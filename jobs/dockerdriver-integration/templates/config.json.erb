@@ -1,0 +1,27 @@
+<%=
+  listen_port = 8589
+
+  config = {
+    "create_config": {
+      "Name": "smb-volume-name",
+      "Opts": {
+        "source": p("smb_remote_path"),
+        "username": link("smbtestserver").p("username"),
+        "password": link("smbtestserver").p("password"),
+      }
+    },
+    "driver": "/var/vcap/packages/smbdriver/bin/smbdriver",
+    "driver_name": "smbdriver",
+    "driver_address": "http://127.0.0.1:#{listen_port}",
+    "driver_args": [
+      "--listenPort=#{listen_port}",
+      "--transport=tcp",
+      "--driversPath=/var/vcap/data/dockerdriver-integration/volman",
+      "--mountDir=/var/vcap/data/dockerdriver-integration/mount",
+      "--logLevel=debug",
+      "--timeFormat=rfc3339"
+    ]
+  }
+
+config.to_json
+%>

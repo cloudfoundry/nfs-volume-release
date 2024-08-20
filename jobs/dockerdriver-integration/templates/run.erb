@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -ex
+
+base=$PWD
+
+cd "$(dirname "$0")/.."
+
+export CONFIG="/var/vcap/jobs/dockerdriver-integration/config/config.json"
+cd packages/dockerdriver-integration/bin
+for file in $(find . -name "*.test"); do
+./ginkgo $file
+done
+
