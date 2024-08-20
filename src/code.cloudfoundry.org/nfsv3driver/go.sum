@@ -592,6 +592,8 @@ cloud.google.com/go/workflows v1.7.0/go.mod h1:JhSrZuVZWuiDfKEFxU0/F1PQjmpnpcoIS
 cloud.google.com/go/workflows v1.8.0/go.mod h1:ysGhmEajwZxGn1OhGOGKsTXc5PyxOc0vfKf5Af+to4M=
 cloud.google.com/go/workflows v1.9.0/go.mod h1:ZGkj1aFIOd9c8Gerkjjq7OW7I5+l6cSvT3ujaO/WwSA=
 cloud.google.com/go/workflows v1.10.0/go.mod h1:fZ8LmRmZQWacon9UCX1r/g/DfAXx5VcPALq2CxzdePw=
+code.cloudfoundry.org/cf-networking-helpers v0.2.0 h1:z7eUqmm/9nL1/0dKra+f/CoOqVtm495lVYEk4fHcTmw=
+code.cloudfoundry.org/cf-networking-helpers v0.2.0/go.mod h1:xFo+hTyZ512PwXqVZfhVS9ouhMVLWP+y9lp6SZ5W+xk=
 code.cloudfoundry.org/cfhttp/v2 v2.2.0 h1:fYck9yveEoCy5ClwlMgEPIGJLsgmRLvV/86NMIZSNA0=
 code.cloudfoundry.org/cfhttp/v2 v2.2.0/go.mod h1:tosS8e6iNujMmdzxsl+wZz1B8Z3GUoO7p9Gmrub1bbg=
 code.cloudfoundry.org/clock v1.3.0 h1:0P9zWwt9eSCHYTFWSCT7FkX21x/dEDHKTlSbvJG80RI=

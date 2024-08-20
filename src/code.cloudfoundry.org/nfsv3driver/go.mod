@@ -1,6 +1,7 @@
 module code.cloudfoundry.org/nfsv3driver
 
 require (
+	code.cloudfoundry.org/cf-networking-helpers v0.2.0
 	code.cloudfoundry.org/debugserver v0.2.0
 	code.cloudfoundry.org/dockerdriver v0.2.0
 	code.cloudfoundry.org/goshims v0.39.0

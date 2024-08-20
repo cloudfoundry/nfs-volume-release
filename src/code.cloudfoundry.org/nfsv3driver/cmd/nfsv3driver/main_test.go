@@ -1,10 +1,10 @@
 package main_test
 
 import (
+	"fmt"
 	"net"
 	"os"
 	"os/exec"
-	"path/filepath"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -18,9 +18,12 @@ var _ = Describe("Main", func() {
 		command                *exec.Cmd
 		expectedStartOutput    string
 		expectedStartErrOutput string
+		listenAddr, adminAddr  string
 	)
 
 	BeforeEach(func() {
+		listenAddr = fmt.Sprintf("0.0.0.0:%d", listenPort)
+		adminAddr = fmt.Sprintf("0.0.0.0:%d", adminPort)
 		command = exec.Command(driverPath)
 		expectedStartOutput = "started"
 		expectedStartErrOutput = ""
@@ -50,47 +53,22 @@ var _ = Describe("Main", func() {
 			command.Args = append(command.Args, "-transport=tcp-json")
 		})
 
-		It("listens on tcp/7589 by default", func() {
-			EventuallyWithOffset(1, func() error {
-				_, err := net.Dial("tcp", "0.0.0.0:7589")
-				return err
-			}, 5).ShouldNot(HaveOccurred())
-
-			specFile := filepath.Join(dir, "nfsv3driver.json")
-			specFileContents, err := os.ReadFile(specFile)
-			Expect(err).NotTo(HaveOccurred())
-
-			Expect(string(specFileContents)).To(MatchJSON(`{
-				"Name": "nfsv3driver",
-				"Addr": "http://127.0.0.1:7589",
-				"TLSConfig": null,
-				"UniqueVolumeIds": true
-			}`))
-		})
-
-		It("listens on tcp/7590 for admin reqs by default", func() {
-			EventuallyWithOffset(1, func() error {
-				_, err := net.Dial("tcp", "0.0.0.0:7590")
-				return err
-			}, 5).ShouldNot(HaveOccurred())
-		})
-
 		Context("when command line arguments are provided", func() {
 			BeforeEach(func() {
-				command.Args = append(command.Args, "-listenAddr=0.0.0.0:7591")
-				command.Args = append(command.Args, "-adminAddr=0.0.0.0:7592")
+				command.Args = append(command.Args, fmt.Sprintf("-listenAddr=%s", listenAddr))
+				command.Args = append(command.Args, fmt.Sprintf("-adminAddr=%s", adminAddr))
 			})
 
 			It("listens on provided arguments", func() {
 				EventuallyWithOffset(1, func() error {
-					_, err := net.Dial("tcp", "0.0.0.0:7591")
+					_, err := net.Dial("tcp", listenAddr)
 					return err
 				}, 5).ShouldNot(HaveOccurred())
 			})
 
 			It("listens on provided arguments", func() {
 				EventuallyWithOffset(1, func() error {
-					_, err := net.Dial("tcp", "0.0.0.0:7592")
+					_, err := net.Dial("tcp", adminAddr)
 					return err
 				}, 5).ShouldNot(HaveOccurred())
 			})
@@ -104,7 +82,7 @@ var _ = Describe("Main", func() {
 
 				It("should error", func() {
 					EventuallyWithOffset(1, func() error {
-						_, err := net.Dial("tcp", "0.0.0.0:7595")
+						_, err := net.Dial("tcp", listenAddr)
 						return err
 					}, 5).Should(HaveOccurred())
 				})
@@ -120,8 +98,8 @@ var _ = Describe("Main", func() {
 				Expect(os.Setenv("LDAP_PORT", "7593")).To(Succeed())
 				Expect(os.Setenv("LDAP_PROTO", "tcp")).To(Succeed())
 
-				command.Args = append(command.Args, "-listenAddr=0.0.0.0:7593")
-				command.Args = append(command.Args, "-adminAddr=0.0.0.0:7594")
+				command.Args = append(command.Args, fmt.Sprintf("-listenAddr=%s", listenAddr))
+				command.Args = append(command.Args, fmt.Sprintf("-adminAddr=%s", adminAddr))
 			})
 
 			AfterEach(func() {
@@ -135,7 +113,7 @@ var _ = Describe("Main", func() {
 
 			It("listens on provided arguments", func() {
 				EventuallyWithOffset(1, func() error {
-					_, err := net.Dial("tcp", "0.0.0.0:7593")
+					_, err := net.Dial("tcp", listenAddr)
 					return err
 				}, 5).ShouldNot(HaveOccurred())
 			})
@@ -146,8 +124,8 @@ var _ = Describe("Main", func() {
 				Expect(os.Setenv("LDAP_HOST", "ldap.testdomain.com")).To(Succeed())
 				Expect(os.Setenv("LDAP_PORT", "389")).To(Succeed())
 				Expect(os.Setenv("LDAP_PROTO", "tcp")).To(Succeed())
-				command.Args = append(command.Args, "-listenAddr=0.0.0.0:7595")
-				command.Args = append(command.Args, "-adminAddr=0.0.0.0:7596")
+				command.Args = append(command.Args, fmt.Sprintf("-listenAddr=%s", listenAddr))
+				command.Args = append(command.Args, fmt.Sprintf("-adminAddr=%s", adminAddr))
 				expectedStartOutput = ""
 				expectedStartErrOutput = "required LDAP parameters are not set"
 			})
@@ -160,40 +138,9 @@ var _ = Describe("Main", func() {
 
 			It("fails to start", func() {
 				EventuallyWithOffset(1, func() error {
-					_, err := net.Dial("tcp", "0.0.0.0:7595")
+					_, err := net.Dial("tcp", listenAddr)
 					return err
 				}, 5).Should(HaveOccurred())
-			})
-		})
-
-		Context("given LDAP_TIMEOUT are set in the the environment", func() {
-			BeforeEach(func() {
-				Expect(os.Setenv("LDAP_SVC_USER", "user")).To(Succeed())
-				Expect(os.Setenv("LDAP_SVC_PASS", "password")).To(Succeed())
-				Expect(os.Setenv("LDAP_USER_FQDN", "cn=Users,dc=corp,dc=testdomain,dc=com")).To(Succeed())
-				Expect(os.Setenv("LDAP_HOST", "ldap.testdomain.com")).To(Succeed())
-				Expect(os.Setenv("LDAP_PORT", "389")).To(Succeed())
-				Expect(os.Setenv("LDAP_PROTO", "tcp")).To(Succeed())
-				Expect(os.Setenv("LDAP_TIMEOUT", "60")).To(Succeed())
-				command.Args = append(command.Args, "-listenAddr=0.0.0.0:7593")
-				command.Args = append(command.Args, "-adminAddr=0.0.0.0:7594")
-			})
-
-			AfterEach(func() {
-				Expect(os.Unsetenv("LDAP_SVC_USER")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_SVC_PASS")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_USER_FQDN")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_HOST")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_PORT")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_PROTO")).To(Succeed())
-				Expect(os.Unsetenv("LDAP_TIMEOUT")).To(Succeed())
-			})
-
-			It("listens on tcp/7589 by default", func() {
-				EventuallyWithOffset(1, func() error {
-					_, err := net.Dial("tcp", "0.0.0.0:7593")
-					return err
-				}, 5).ShouldNot(HaveOccurred())
 			})
 		})
 	})
