@@ -5,9 +5,9 @@ dependencies:
 - golang-1.22-linux
 
 files:
-    - code.cloudfoundry.org/nfsv3driver/go.mod
-    - code.cloudfoundry.org/nfsv3driver/go.sum
-    - code.cloudfoundry.org/nfsv3driver/vendor/modules.txt
+  - code.cloudfoundry.org/nfsv3driver/go.mod
+  - code.cloudfoundry.org/nfsv3driver/go.sum
+  - code.cloudfoundry.org/nfsv3driver/vendor/modules.txt
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/cfhttp/v2/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/cfhttp/v2/handlers/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/clock/*.go # gosub
