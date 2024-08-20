@@ -76,8 +76,8 @@ type VolumeMount struct {
 }
 
 type SharedDevice struct {
-	VolumeId    string                 `json:"volume_id"`
-	MountConfig map[string]interface{} `json:"mount_config"`
+	VolumeId    string         `json:"volume_id"`
+	MountConfig map[string]any `json:"mount_config"`
 }
 
 type ProvisionDetails struct {
@@ -99,8 +99,8 @@ type ProvisionedServiceSpec struct {
 }
 
 type InstanceMetadata struct {
-	Labels     map[string]string `json:"labels,omitempty"`
-	Attributes map[string]string `json:"attributes,omitempty"`
+	Labels     map[string]any `json:"labels,omitempty"`
+	Attributes map[string]any `json:"attributes,omitempty"`
 }
 
 type DeprovisionDetails struct {
@@ -115,10 +115,10 @@ type DeprovisionServiceSpec struct {
 }
 
 type GetInstanceDetailsSpec struct {
-	ServiceID    string      `json:"service_id"`
-	PlanID       string      `json:"plan_id"`
-	DashboardURL string      `json:"dashboard_url"`
-	Parameters   interface{} `json:"parameters"`
+	ServiceID    string `json:"service_id"`
+	PlanID       string `json:"plan_id"`
+	DashboardURL string `json:"dashboard_url"`
+	Parameters   any    `json:"parameters"`
 	Metadata     InstanceMetadata
 }
 
@@ -193,19 +193,27 @@ type Binding struct {
 	IsAsync         bool          `json:"is_async"`
 	AlreadyExists   bool          `json:"already_exists"`
 	OperationData   string        `json:"operation_data"`
-	Credentials     interface{}   `json:"credentials"`
+	Credentials     any           `json:"credentials"`
 	SyslogDrainURL  string        `json:"syslog_drain_url"`
 	RouteServiceURL string        `json:"route_service_url"`
 	BackupAgentURL  string        `json:"backup_agent_url,omitempty"`
 	VolumeMounts    []VolumeMount `json:"volume_mounts"`
+	Endpoints       []Endpoint    `json:"endpoints,omitempty"`
 }
 
 type GetBindingSpec struct {
-	Credentials     interface{}
+	Credentials     any
 	SyslogDrainURL  string
 	RouteServiceURL string
 	VolumeMounts    []VolumeMount
-	Parameters      interface{}
+	Parameters      any
+	Endpoints       []Endpoint
+}
+
+type Endpoint struct {
+	Host     string   `json:"host"`
+	Ports    []string `json:"ports"`
+	Protocol string   `json:"protocol,omitempty"`
 }
 
 func (d ProvisionDetails) GetRawContext() json.RawMessage {

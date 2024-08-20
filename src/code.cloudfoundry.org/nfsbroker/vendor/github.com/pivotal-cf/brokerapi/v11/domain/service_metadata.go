@@ -2,9 +2,8 @@ package domain
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
-
-	"github.com/pkg/errors"
 )
 
 type ServiceMetadata struct {
@@ -15,7 +14,7 @@ type ServiceMetadata struct {
 	DocumentationUrl    string `json:"documentationUrl,omitempty"`
 	SupportUrl          string `json:"supportUrl,omitempty"`
 	Shareable           *bool  `json:"shareable,omitempty"`
-	AdditionalMetadata  map[string]interface{}
+	AdditionalMetadata  map[string]any
 }
 
 func (sm ServiceMetadata) MarshalJSON() ([]byte, error) {
@@ -23,11 +22,13 @@ func (sm ServiceMetadata) MarshalJSON() ([]byte, error) {
 
 	b, err := json.Marshal(Alias(sm))
 	if err != nil {
-		return []byte{}, errors.Wrap(err, "unmarshallable content in AdditionalMetadata")
+		return nil, fmt.Errorf("unmarshallable content in AdditionalMetadata: %w", err)
 	}
 
-	var m map[string]interface{}
-	json.Unmarshal(b, &m)
+	var m map[string]any
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
 	delete(m, additionalMetadataName)
 
 	for k, v := range sm.AdditionalMetadata {
@@ -43,7 +44,7 @@ func (sm *ServiceMetadata) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	additionalMetadata := map[string]interface{}{}
+	additionalMetadata := map[string]any{}
 	if err := json.Unmarshal(data, &additionalMetadata); err != nil {
 		return err
 	}

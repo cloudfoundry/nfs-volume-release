@@ -2,17 +2,16 @@ package domain
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strings"
-
-	"github.com/pkg/errors"
 )
 
 type ServicePlanMetadata struct {
 	DisplayName        string            `json:"displayName,omitempty"`
 	Bullets            []string          `json:"bullets,omitempty"`
 	Costs              []ServicePlanCost `json:"costs,omitempty"`
-	AdditionalMetadata map[string]interface{}
+	AdditionalMetadata map[string]any
 }
 
 type ServicePlanCost struct {
@@ -27,7 +26,7 @@ func (spm *ServicePlanMetadata) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	additionalMetadata := map[string]interface{}{}
+	additionalMetadata := map[string]any{}
 	if err := json.Unmarshal(data, &additionalMetadata); err != nil {
 		return err
 	}
@@ -51,11 +50,13 @@ func (spm ServicePlanMetadata) MarshalJSON() ([]byte, error) {
 
 	b, err := json.Marshal(Alias(spm))
 	if err != nil {
-		return []byte{}, errors.Wrap(err, "unmarshallable content in AdditionalMetadata")
+		return nil, fmt.Errorf("unmarshallable content in AdditionalMetadata: %w", err)
 	}
 
-	var m map[string]interface{}
-	json.Unmarshal(b, &m)
+	var m map[string]any
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
 	delete(m, additionalMetadataName)
 
 	for k, v := range spm.AdditionalMetadata {
