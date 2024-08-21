@@ -6,16 +6,4 @@ function prepend_rfc3339_datetime() {
   perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
 }
 
-function main() {
-
-    echo "Installing mount.cifs"
-    pushd /var/vcap/packages/cifs-utils/
-      cp mount.cifs /sbin/
-    popd
-
-    echo "Installed mount.cifs"
-
-    exit 0
-}
-
-main | prepend_rfc3339_datetime
+prepend_rfc3339_datetime

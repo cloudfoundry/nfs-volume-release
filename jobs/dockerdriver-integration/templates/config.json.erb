@@ -1,18 +1,23 @@
 <%=
-  listen_port = 8589
-  listen_addr = "https://127.0.0.1:#{listen_port}"
+  listen_port = 7000
+  listen_addr = "127.0.0.1:#{listen_port}"
 
   config = {
     "create_config": {
       "Name": "nfs-volume-name",
-      "Opts": {"source": p("nfs_remote_path"),"uid":"2000","gid":"2000"}
+      "Opts": {
+        "source": p("nfs_remote_path"),
+        "uid":"2000",
+        "gid":"2000"
+      }
     },
     "driver": "/var/vcap/packages/nfsv3driver/bin/nfsv3driver",
     "driver_name": "nfsv3driver",
-    "driver_address": listen_addr,
+    "driver_address": "http://#{listen_addr}",
     "driver_args": [
       "--listenAddr=#{listen_addr}",
       "--transport=tcp",
+      "--mapfsPath=" + link("mapfs").p("path"),
       "--driversPath=/var/vcap/data/dockerdriver-integration/volman",
       "--mountDir=/var/vcap/data/dockerdriver-integration/mount",
       "--logLevel=debug",

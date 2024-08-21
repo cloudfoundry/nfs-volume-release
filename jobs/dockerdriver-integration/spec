@@ -8,9 +8,14 @@ templates:
 
 packages:
 - dockerdriver-integration
+- nfs-debs
 - nfsv3driver
+
+consumes:
+- name: mapfs
+  type: mapfs
 
 properties:
   nfs_remote_path:
     description: Address for SMB Remote Path 
-    default: //meowtestserver.service.cf.internal/vol
+    default: //nfstestserver.service.cf.internal/export/users
