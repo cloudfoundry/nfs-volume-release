@@ -3,6 +3,9 @@ set -ex
 
 base=$PWD
 
+/var/vcap/jobs/dockerdriver-integration/bin/statd_ctl start
+/var/vcap/jobs/dockerdriver-integration/bin/rpcbind_ctl start
+
 cd "$(dirname "$0")/.."
 
 export CONFIG="/var/vcap/jobs/dockerdriver-integration/config/config.json"
@@ -10,4 +13,3 @@ cd packages/dockerdriver-integration/bin
 for file in $(find . -name "*.test"); do
 ./ginkgo $file
 done
-
