@@ -5,8 +5,6 @@ templates:
   pre-start.erb: bin/pre-start
   run.erb: bin/run
   config.json.erb: config/config.json
-  statd.erb: bin/statd_ctl
-  rpcbind.erb: bin/rpcbind_ctl
 
 packages:
 - dockerdriver-integration
@@ -20,4 +18,4 @@ consumes:
 properties:
   nfs_remote_path:
     description: Address for SMB Remote Path 
-    default: nfstestserver.service.cf.internal:/export/users2000
+    default: nfs://nfstestserver.service.cf.internal/export

@@ -3,11 +3,11 @@ set -ex
 
 base=$PWD
 
-/var/vcap/jobs/dockerdriver-integration/bin/statd_ctl start
-/var/vcap/jobs/dockerdriver-integration/bin/rpcbind_ctl start
-
 cd "$(dirname "$0")/.."
 
+if [[ ! -f /sbin/mount.nfs ]]; then
+  ln -s /var/vcap/packages/nfs-debs/sbin/mount.nfs /sbin/
+fi
 export CONFIG="/var/vcap/jobs/dockerdriver-integration/config/config.json"
 cd packages/dockerdriver-integration/bin
 for file in $(find . -name "*.test"); do
