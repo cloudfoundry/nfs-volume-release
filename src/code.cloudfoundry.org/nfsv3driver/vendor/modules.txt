@@ -11,7 +11,7 @@ code.cloudfoundry.org/clock
 # code.cloudfoundry.org/debugserver v0.3.0
 ## explicit; go 1.19
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.3.0
+# code.cloudfoundry.org/dockerdriver v0.4.0
 ## explicit; go 1.21
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -127,7 +127,7 @@ github.com/tedsuo/ifrit/sigmon
 # github.com/tedsuo/rata v1.0.0
 ## explicit
 github.com/tedsuo/rata
-# golang.org/x/exp v0.0.0-20240822175202-778ce7bba035
+# golang.org/x/exp v0.0.0-20240823005443-9b4947da3948
 ## explicit; go 1.20
 golang.org/x/exp/constraints
 golang.org/x/exp/slices

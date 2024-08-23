@@ -3,7 +3,7 @@ module code.cloudfoundry.org/nfsv3driver
 require (
 	code.cloudfoundry.org/cf-networking-helpers v0.3.0
 	code.cloudfoundry.org/debugserver v0.3.0
-	code.cloudfoundry.org/dockerdriver v0.3.0
+	code.cloudfoundry.org/dockerdriver v0.4.0
 	code.cloudfoundry.org/goshims v0.39.0
 	code.cloudfoundry.org/lager/v3 v3.2.0
 	code.cloudfoundry.org/tlsconfig v0.1.0
@@ -26,7 +26,7 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
-	golang.org/x/exp v0.0.0-20240822175202-778ce7bba035 // indirect
+	golang.org/x/exp v0.0.0-20240823005443-9b4947da3948 // indirect
 	golang.org/x/mod v0.20.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
