@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.4.0
+# code.cloudfoundry.org/cf-networking-helpers v0.5.0
 ## explicit; go 1.21
 code.cloudfoundry.org/cf-networking-helpers/portauthority
 # code.cloudfoundry.org/cfhttp/v2 v2.4.0
@@ -8,10 +8,10 @@ code.cloudfoundry.org/cfhttp/v2/handlers
 # code.cloudfoundry.org/clock v1.5.0
 ## explicit; go 1.20
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.4.0
+# code.cloudfoundry.org/debugserver v0.5.0
 ## explicit; go 1.19
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.5.0
+# code.cloudfoundry.org/dockerdriver v0.6.0
 ## explicit; go 1.21
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
