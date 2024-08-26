@@ -10,6 +10,10 @@ berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
+cifs-utils/cifs-utils-7.0.tar.bz2:
+  size: 418638
+  object_id: b914f6d1-16c1-4f11-715c-c19e0be582cd
+  sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
 nfs-debs/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: de54df99-f627-4e40-68b6-eb3addfa785a
