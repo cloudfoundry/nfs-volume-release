@@ -1,3 +1,7 @@
+autoconf/autoconf-2.72.tar.gz:
+  size: 2143794
+  object_id: 99b591de-5236-4844-7de7-d2e3df7ba6f0
+  sha: sha256:afb181a76e1ee72832f6581c0eddf8df032b83e2e0239ef79ebedc4467d92d6e
 berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
