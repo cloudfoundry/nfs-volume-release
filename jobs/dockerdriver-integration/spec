@@ -11,11 +11,12 @@ packages:
 - nfs-debs
 - nfsv3driver
 
-consumes:
-- name: mapfs
-  type: mapfs
 
 properties:
   nfs_remote_path:
     description: Address for SMB Remote Path 
     default: nfs://nfstestserver.service.cf.internal/export
+
+  mapfs_path:
+    description: "Path to mapfs binary"
+    default: /var/vcap/packages/mapfs/bin/mapfs

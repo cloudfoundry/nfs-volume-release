@@ -17,7 +17,7 @@
     "driver_args": [
       "--listenAddr=#{listen_addr}",
       "--transport=tcp",
-      "--mapfsPath=" + link("mapfs").p("path"),
+      "--mapfsPath=" + p("mapfs_path"),
       "--driversPath=/var/vcap/data/dockerdriver-integration/volman",
       "--logLevel=debug",
       "--timeFormat=rfc3339"
