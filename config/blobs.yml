@@ -66,6 +66,10 @@ pkg-config/pkg-config-0.29.2.tar.gz:
   size: 2016830
   object_id: 75460cad-2afa-41bd-4abc-4b318d0416a3
   sha: sha256:6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
+talloc/talloc-2.4.2.tar.gz:
+  size: 679750
+  object_id: e98dc997-8168-41a9-4c56-891550a54fdf
+  sha: sha256:85ecf9e465e20f98f9950a52e9a411e14320bc555fa257d87697b7e7a9b1d8a6
 test-dependencies/openssl-3.3.1.tar.gz:
   size: 18055752
   object_id: 6cf3f9dc-2964-4f4c-5110-cd851b536ed6
