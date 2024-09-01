@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.7.0
+# code.cloudfoundry.org/cf-networking-helpers v0.8.0
 ## explicit; go 1.22
 code.cloudfoundry.org/cf-networking-helpers/portauthority
 # code.cloudfoundry.org/cfhttp/v2 v2.7.0
@@ -36,8 +36,8 @@ code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerctx
 code.cloudfoundry.org/lager/v3/lagerflags
 code.cloudfoundry.org/lager/v3/lagertest
-# code.cloudfoundry.org/tlsconfig v0.1.0
-## explicit; go 1.21
+# code.cloudfoundry.org/tlsconfig v0.2.0
+## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
 # code.cloudfoundry.org/volume-mount-options v0.96.0
 ## explicit; go 1.22.6
