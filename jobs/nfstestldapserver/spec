@@ -9,7 +9,8 @@ templates:
   config/core.ldif: config/core.ldif
   config/core.schema: config/core.schema
   config/addou.ldif: config/addou.ldif
-  config/adduser.ldif: config/adduser.ldif
+  config/adduser1000.ldif: config/adduser1000.ldif
+  config/adduser2000.ldif: config/adduser2000.ldif
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   slapd.ldif.erb: config/slapd.ldif

@@ -6,5 +6,6 @@ export PATH=${OPENLDAP}/libexec:${OPENLDAP}/sbin:${OPENLDAP}/bin:$PATH
 
 pushd /var/vcap/jobs/nfstestldapserver/config/
 ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f addou.ldif
-ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f adduser.ldif
+ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f adduser1000.ldif
+ldapadd -x -w secret -H ldap://127.0.0.1:389 -D "cn=admin,dc=domain,dc=com" -f adduser2000.ldif
 exit 0
