@@ -79,8 +79,8 @@ function create_manifest() {
 function create_logging_service() {
   local LOGGER_NAME=$APP_NAME-logger
   set +e
-    cf service $LOGGER_NAME --guid
-    local exit_code=$?
+  cf service $LOGGER_NAME --guid 1&>/dev/null
+  local exit_code=$?
   set -e
 
   if [[ -z "$SYSLOG_URL" ]]; then
