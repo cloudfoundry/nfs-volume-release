@@ -592,12 +592,12 @@ cloud.google.com/go/workflows v1.7.0/go.mod h1:JhSrZuVZWuiDfKEFxU0/F1PQjmpnpcoIS
 cloud.google.com/go/workflows v1.8.0/go.mod h1:ysGhmEajwZxGn1OhGOGKsTXc5PyxOc0vfKf5Af+to4M=
 cloud.google.com/go/workflows v1.9.0/go.mod h1:ZGkj1aFIOd9c8Gerkjjq7OW7I5+l6cSvT3ujaO/WwSA=
 cloud.google.com/go/workflows v1.10.0/go.mod h1:fZ8LmRmZQWacon9UCX1r/g/DfAXx5VcPALq2CxzdePw=
-code.cloudfoundry.org/clock v1.9.0 h1:mRDUfrzr2EEmk9AZFYW2TZBuqBtxrumDcKbM8NbwIzw=
-code.cloudfoundry.org/clock v1.9.0/go.mod h1:th34W6NqH3fd5eIOWHLB4kfxcIGzGnf4uASsm6kWmCQ=
+code.cloudfoundry.org/clock v1.10.0 h1:0eGyCCSGXZucpvaRywsykkmqNdjppr4LZpck+7NpDn8=
+code.cloudfoundry.org/clock v1.10.0/go.mod h1:vUGMidO0W1wXd5p3frivTJeLKI5Q9BgZnxeMESiEX/c=
 code.cloudfoundry.org/credhub-cli v0.0.0-20240902130721-726266af5f6a h1:JhPRP9WMq2aaSD573uPpgWTERoPVHwIDUE3/tCJDsIY=
 code.cloudfoundry.org/credhub-cli v0.0.0-20240902130721-726266af5f6a/go.mod h1:zFetpGhBJoTRcHXrTxUCp7IKHKWXLZ2+YG43RYkyyXA=
-code.cloudfoundry.org/debugserver v0.9.0 h1:LMO86q398iCdGAxcRZlf7IJ2ZQVRO+78YftUrcoayTo=
-code.cloudfoundry.org/debugserver v0.9.0/go.mod h1:rw7TeQwzw2GhtmGV8i//5Jug45FEgShiqVMXa5+g1o8=
+code.cloudfoundry.org/debugserver v0.10.0 h1:RVeapjPQc2lgfu3IGq/MduP0i8RLSNVrHzFOO+Yx/vk=
+code.cloudfoundry.org/debugserver v0.10.0/go.mod h1:qCnPai9gjPntiTVWixRq6xV3I/sn2rJovZNE9uKlamk=
 code.cloudfoundry.org/existingvolumebroker v0.140.0 h1:wmDF1rnQAG/IMLqaZZ74fMFusKziXMRZOrsOpWmXYhs=
 code.cloudfoundry.org/existingvolumebroker v0.140.0/go.mod h1:b+9zqAOdZr6qjN9GhsTEEYKraoVEVQDBkVxy/KujLTU=
 code.cloudfoundry.org/goshims v0.39.0 h1:HdfcLqdRpTyYqqrm6tF0ouIWppK/JshPdb/nEUdfAf4=
