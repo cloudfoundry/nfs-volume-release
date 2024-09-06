@@ -7,6 +7,12 @@ shares and bind the shares to your applications for share file access.
 For information on getting started with Cloud Foundry look at the docs
 for [CF Deployment](https://github.com/cloudfoundry/cf-deployment).
 
+# Docs
+
+-   [Overview](./docs/01-overview.md)
+-   [Deploying to
+    CloudFoundry](./docs/02-deploying-nfs-volume-service.md)
+
 # Contributing
 
 See the [Contributing.md](./.github/CONTRIBUTING.md) for more
