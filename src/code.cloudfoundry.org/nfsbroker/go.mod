@@ -21,7 +21,7 @@ require (
 require (
 	code.cloudfoundry.org/credhub-cli v0.0.0-20240906130858-907ed5401334 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.122 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.123 // indirect
 	github.com/go-chi/chi/v5 v5.1.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
