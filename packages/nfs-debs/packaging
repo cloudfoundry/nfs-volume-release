@@ -7,7 +7,6 @@ set -e
 
 pushd ${BOSH_COMPILE_TARGET}
   ls nfs-debs/*.tar.gz | xargs -n1 tar -xzf
-  ls nfs-debs/*.tar.bz2 | xargs -n1 tar -xjf
   ls nfs-debs/*.tar.xz | xargs -n1 tar -xf
 popd
 
