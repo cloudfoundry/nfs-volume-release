@@ -14,6 +14,10 @@ nfs-debs/nfs-utils-2-7-1.tar.gz:
   size: 631448
   object_id: f91f9681-e679-4c13-4072-6ad6b3314558
   sha: sha256:9d8803291438d71b472ebdab73569dcd3ed8ba119eb4cc544f5c6c86a2c2a1f7
+nfs-debs/pkg-config-0.29.2.tar.gz:
+  size: 2016830
+  object_id: 3e261e21-ad2b-4328-4fc5-6a9f86f64aa1
+  sha: sha256:6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
 nfs-debs/rpcbind-1-2-7.tar.gz:
   size: 62438
   object_id: 37fe850b-85dc-41d4-5162-c94aade6e3ff
