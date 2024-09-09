@@ -28,7 +28,7 @@ pushd openssl-3*
 popd
 
 cd $BOSH_COMPILE_TARGET
-tar -xzvf openldap/openldap*.tgz
+tar -xzvf openldap/openldap*.tar.gz
 pushd openldap-*
   export HOME=/var/vcap
   export BDB_PATH=/var/vcap/packages/berkeleydb
