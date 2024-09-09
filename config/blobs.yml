@@ -1,55 +1,15 @@
-autoconf/autoconf-2.72.tar.gz:
-  size: 2143794
-  object_id: 99b591de-5236-4844-7de7-d2e3df7ba6f0
-  sha: sha256:afb181a76e1ee72832f6581c0eddf8df032b83e2e0239ef79ebedc4467d92d6e
-automake/automake-1.17.tar.gz:
-  size: 2451070
-  object_id: 73a342d9-f600-4712-7246-15040a690a44
-  sha: sha256:397767d4db3018dd4440825b60c64258b636eaf6bf99ac8b0897f06c89310acd
 berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
-cifs-utils/cifs-utils-7.0.tar.bz2:
-  size: 418638
-  object_id: b914f6d1-16c1-4f11-715c-c19e0be582cd
-  sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
-keyutils/keyutils-1.6.3.tar.gz:
-  size: 137022
-  object_id: e3239aa5-ab0d-4f23-57f7-444e33285b62
-  sha: sha256:a61d5706136ae4c05bd48f86186bcfdbd88dd8bd5107e3e195c924cfc1b39bb4
-libtool/libtool-2.4.7.tar.gz:
-  size: 1938886
-  object_id: 9b4bec4e-560c-4428-623e-c434f5d38cf2
-  sha: sha256:04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8
 nfs-debs/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: de54df99-f627-4e40-68b6-eb3addfa785a
   sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
-nfs-debs/libtirpc-1.3.4.tar.bz2:
-  size: 563292
-  object_id: 2994e47f-f2f3-4756-5fee-40626caf879c
-  sha: sha256:1e0b0c7231c5fa122e06c0609a76723664d068b0dba3b8219b63e6340b347860
-nfs-debs/nfs-utils-2.6.2.tar.xz:
-  size: 1370282
-  object_id: d85f1bcc-9f7a-40fd-560d-62561c494c99
-  sha: sha256:45ad39b54b60aa9c71d1447c1321b9d799369a018990b3641bfeefbcc0b096a7
-nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch:
-  size: 938
-  object_id: e903bdf9-3746-42cc-7799-a8fc18ce7899
-  sha: sha256:17a15acdabcf2bfc648af9197bbae8d1bcc1e22215b3d5cf9ff60533bf6522e4
-nfs-debs/rpcbind-1.2.6.tar.bz2:
-  size: 124590
-  object_id: 21cf96a5-d367-4204-4bbf-188d1167e643
-  sha: sha256:5613746489cae5ae23a443bb85c05a11741a5f12c8f55d2bb5e83b9defeee8de
-nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
-  size: 168648
-  object_id: 0031d8cb-2639-4b77-64f9-0e821bee9808
-  sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
-nfs-debs/sqlite-3.46.0.tar.gz:
-  size: 12892680
-  object_id: dcb22de6-6f2a-48f8-5039-5cd652348992
-  sha: sha256:ae85b5545f6171694f4d7f915e8e87a936fcb1a56409e5fb3da89d52e3c224cc
+nfs-debs/sqlite-3.45.3.tar.gz:
+  size: 12792945
+  object_id: 886ea413-a1be-44fe-56e3-39da13829fc3
+  sha: sha256:a9502b2794ccf24685e6c4964df08944eed7d76aa0715870b3b62709b13a3fcb
 nfs-debs/tcl8.6.14-src.tar.gz:
   size: 11627322
   object_id: cab5205b-9f36-4bb4-5f30-02104172f593
@@ -62,15 +22,7 @@ openldap/openldap-2.6.7.tgz:
   size: 6484944
   object_id: 4efe41aa-3f7b-47ee-6ae1-9f0d6490303e
   sha: sha256:cd775f625c944ed78a3da18a03b03b08eea73c8aabc97b41bb336e9a10954930
-pkg-config/pkg-config-0.29.2.tar.gz:
-  size: 2016830
-  object_id: 75460cad-2afa-41bd-4abc-4b318d0416a3
-  sha: sha256:6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
-talloc/talloc-2.4.2.tar.gz:
-  size: 679750
-  object_id: e98dc997-8168-41a9-4c56-891550a54fdf
-  sha: sha256:85ecf9e465e20f98f9950a52e9a411e14320bc555fa257d87697b7e7a9b1d8a6
-test-dependencies/openssl-3.3.1.tar.gz:
-  size: 18055752
-  object_id: 6cf3f9dc-2964-4f4c-5110-cd851b536ed6
-  sha: sha256:777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e
+test-dependencies/openssl-3.3.0.tar.gz:
+  size: 18038030
+  object_id: 88876407-189e-44eb-714b-bd6602844ae6
+  sha: sha256:53e66b043322a606abf0087e7699a0e033a37fa13feb9742df35c3a33b18fb02
