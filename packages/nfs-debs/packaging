@@ -2,15 +2,8 @@
 
 set -e
 
-
-#extract all the things
-
-pushd ${BOSH_COMPILE_TARGET}
-  ls nfs-debs/*.tar.gz | xargs -n1 tar -xzf
-  ls nfs-debs/*.tar.xz | xargs -n1 tar -xf
-popd
-
 #required to compile sqlite on xenial, configure fails without
+tar -xzf nfs-debs/tcl*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/tcl*/unix
   ./configure   --prefix=${BOSH_INSTALL_TARGET}
   make
@@ -18,6 +11,8 @@ pushd ${BOSH_COMPILE_TARGET}/tcl*/unix
   export PATH=$BOSH_INSTALL_TARGET/bin:$PATH
 popd
 echo "TCL done"
+
+tar --one-top-level -xzf nfs-debs/sqlite-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/sqlite-*/
   ./configure \
     --prefix=${BOSH_INSTALL_TARGET}     \
@@ -32,7 +27,10 @@ pushd ${BOSH_COMPILE_TARGET}/sqlite-*/
   make install
 popd
 echo "SQLITE done"
+
+
 # libevent
+tar -xzf nfs-debs/libevent-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
   # no binary 'python' on $PATH, but python3 is available
   sed -i 's/python/&3/' event_rpcgen.py
@@ -41,7 +39,9 @@ pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
   make install
 popd
 echo "LIBEVENT done"
+
 # rpcsvc-proto
+tar -xf nfs-debs/rpcsvc-proto-*.tar.xz
 pushd ${BOSH_COMPILE_TARGET}/rpcsvc-proto-*/
   ./configure --prefix=${BOSH_INSTALL_TARGET} --sysconfdir=${BOSH_INSTALL_TARGET}/etc
   make
@@ -50,6 +50,7 @@ popd
 echo "RPCSVC done"
 
 #libtirpc
+tar --one-top-level -xzf nfs-debs/libtirpc-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
   ./configure --prefix=${BOSH_INSTALL_TARGET} \
               --sysconfdir=${BOSH_INSTALL_TARGET}/etc \
@@ -61,7 +62,7 @@ popd
 echo "LIBTIRPC done"
 
 #linux-utils
-
+tar --one-top-level -xzf nfs-debs/util-linux-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
 
   ./configure   \
@@ -94,6 +95,7 @@ export CFLAGS=-L${BOSH_INSTALL_TARGET}/lib
 export TIRPC_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 
+tar --one-top-level -xzf nfs-debs/rpcbind-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
   sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
   patch -Np1 -i ${BOSH_COMPILE_TARGET}/nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch 
@@ -113,6 +115,7 @@ popd
 export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
 
+tar --one-top-level -xzf nfs-debs/nfs-utils-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
 ./configure --prefix=${BOSH_INSTALL_TARGET}          \
           --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
