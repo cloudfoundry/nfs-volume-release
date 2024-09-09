@@ -10,6 +10,10 @@ nfs-debs/libtirpc-.tar.gz:
   size: 258026
   object_id: ce91f5c7-f6b3-445f-7678-bd61984d5cbe
   sha: sha256:489ab8723e12dc51a17ac87f48d827beb508a98bbbd30e9a28130456e6eb9910
+nfs-debs/nfs-utils-2-7-1.tar.gz:
+  size: 631448
+  object_id: f91f9681-e679-4c13-4072-6ad6b3314558
+  sha: sha256:9d8803291438d71b472ebdab73569dcd3ed8ba119eb4cc544f5c6c86a2c2a1f7
 nfs-debs/sqlite-3.45.3.tar.gz:
   size: 12792945
   object_id: 886ea413-a1be-44fe-56e3-39da13829fc3
