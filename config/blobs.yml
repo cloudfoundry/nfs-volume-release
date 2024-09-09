@@ -18,6 +18,10 @@ nfs-debs/rpcbind-1-2-7.tar.gz:
   size: 62438
   object_id: 37fe850b-85dc-41d4-5162-c94aade6e3ff
   sha: sha256:715753b085737a73d2af0ffeffa41cbb570a1dcdb40335507b9a38a59b9c9b24
+nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
+  size: 168648
+  object_id: 4e8c8dcd-97a2-4855-5bb2-34df28452116
+  sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
 nfs-debs/sqlite-3.45.3.tar.gz:
   size: 12792945
   object_id: 886ea413-a1be-44fe-56e3-39da13829fc3
