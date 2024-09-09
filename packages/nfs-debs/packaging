@@ -5,87 +5,88 @@ set -e
 #required to compile sqlite on xenial, configure fails without
 tar -xzf nfs-debs/tcl*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/tcl*/unix
-  ./configure   --prefix=${BOSH_INSTALL_TARGET}
-  make
-  make install
-  export PATH=$BOSH_INSTALL_TARGET/bin:$PATH
+./configure   --prefix=${BOSH_INSTALL_TARGET}
+make
+make install
+export PATH=$BOSH_INSTALL_TARGET/bin:$PATH
 popd
 echo "TCL done"
 
 tar --one-top-level -xzf nfs-debs/sqlite-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/sqlite-*/
-  ./configure \
-    --prefix=${BOSH_INSTALL_TARGET}     \
-    --disable-static  \
-    --enable-fts{4,5} \
-    CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
-      -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
-      -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
-      -DSQLITE_SECURE_DELETE=1          \
-      -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
+./configure \
+  --prefix=${BOSH_INSTALL_TARGET}     \
+  --disable-static  \
+  --enable-fts{4,5} \
+  CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
+  -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+  -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+  -DSQLITE_SECURE_DELETE=1          \
+  -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
   make
   make install
-popd
-echo "SQLITE done"
+  popd
+  echo "SQLITE done"
 
 
 # libevent
 tar -xzf nfs-debs/libevent-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
-  # no binary 'python' on $PATH, but python3 is available
-  sed -i 's/python/&3/' event_rpcgen.py
-  ./configure --prefix=${BOSH_INSTALL_TARGET} --disable-static
-  make
-  make install
+# no binary 'python' on $PATH, but python3 is available
+sed -i 's/python/&3/' event_rpcgen.py
+./configure --prefix=${BOSH_INSTALL_TARGET} --disable-static
+make
+make install
 popd
 echo "LIBEVENT done"
 
 # rpcsvc-proto
 tar -xf nfs-debs/rpcsvc-proto-*.tar.xz
 pushd ${BOSH_COMPILE_TARGET}/rpcsvc-proto-*/
-  ./configure --prefix=${BOSH_INSTALL_TARGET} --sysconfdir=${BOSH_INSTALL_TARGET}/etc
-  make
-  make install
+./configure --prefix=${BOSH_INSTALL_TARGET} --sysconfdir=${BOSH_INSTALL_TARGET}/etc
+make
+make install
 popd
 echo "RPCSVC done"
 
 #libtirpc
 tar --one-top-level -xzf nfs-debs/libtirpc-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
-  ./configure --prefix=${BOSH_INSTALL_TARGET} \
-              --sysconfdir=${BOSH_INSTALL_TARGET}/etc \
-              --disable-static \
-              --disable-gssapi 
+./bootstrap
+./configure --prefix=${BOSH_INSTALL_TARGET} \
+  --sysconfdir=${BOSH_INSTALL_TARGET}/etc \
+  --disable-static \
+  --disable-gssapi 
   make
   make install
-popd 
-echo "LIBTIRPC done"
+  popd 
+  echo "LIBTIRPC done"
 
 #linux-utils
 tar --one-top-level -xzf nfs-debs/util-linux-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
 
-  ./configure   \
-    --prefix=${BOSH_INSTALL_TARGET}   \
-    --libdir=${BOSH_INSTALL_TARGET}/lib   \
-    --sysconfdir=${BOSH_INSTALL_TARGET}/etc   \
-    --localstatedir=${BOSH_INSTALL_TARGET}/var   \
-    --mandir=${BOSH_INSTALL_TARGET}/man   \
-    --infodir=${BOSH_INSTALL_TARGET}/info   \
-    --docdir=${BOSH_INSTALL_TARGET}/doc/util-linux   \
-    --enable-libblkid   \
-    --enable-libmount   \
-    --enable-libuuid   \
-    --enable-blkid   \
-    --enable-mount   \
-    --enable-uuid \
-    --enable-shared   \
-    --disable-all-programs   \
-    --without-python
-    make
-    make install
-popd
-# rpc-bind ( required for some nfsv3 mounts to work
+./configure   \
+  --prefix=${BOSH_INSTALL_TARGET}   \
+  --libdir=${BOSH_INSTALL_TARGET}/lib   \
+  --sysconfdir=${BOSH_INSTALL_TARGET}/etc   \
+  --localstatedir=${BOSH_INSTALL_TARGET}/var   \
+  --mandir=${BOSH_INSTALL_TARGET}/man   \
+  --infodir=${BOSH_INSTALL_TARGET}/info   \
+  --docdir=${BOSH_INSTALL_TARGET}/doc/util-linux   \
+  --enable-libblkid   \
+  --enable-libmount   \
+  --enable-libuuid   \
+  --enable-blkid   \
+  --enable-mount   \
+  --enable-uuid \
+  --enable-shared   \
+  --disable-all-programs   \
+  --without-python
+  make
+  make install
+  popd
+  # rpc-bind ( required for some nfsv3 mounts to work
 
 #These flags are required for rpcbind and nfs-utils
 
@@ -97,19 +98,19 @@ export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include
 
 tar --one-top-level -xzf nfs-debs/rpcbind-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
-  sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
-  patch -Np1 -i ${BOSH_COMPILE_TARGET}/nfs-debs/rpcbind-1.2.6-vulnerability_fixes-1.patch 
+#sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 
-  ./configure \
-            --prefix=${BOSH_INSTALL_TARGET}/                                \
-            --bindir=${BOSH_INSTALL_TARGET}/sbin                             \
-            --with-rpcuser=root                            \
-            --enable-warmstarts                            \
-            --without-systemdsystemunitdir \
-            LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"
+./autogen.sh
+./configure \
+  --prefix=${BOSH_INSTALL_TARGET}/                                \
+  --bindir=${BOSH_INSTALL_TARGET}/sbin                             \
+  --with-rpcuser=root                            \
+  --enable-warmstarts                            \
+  --without-systemdsystemunitdir \
+  LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"
   make
   make install
-popd
+  popd
 
 # nfs-utils
 export LIBMOUNT_CFLAGS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include"
@@ -117,15 +118,16 @@ export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/incl
 
 tar --one-top-level -xzf nfs-debs/nfs-utils-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
+./autogen.sh
 ./configure --prefix=${BOSH_INSTALL_TARGET}          \
-          --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
-          --disable-sbin-override  \
-          --bindir=${BOSH_INSTALL_TARGET}/bin \
-          --sbindir=${BOSH_INSTALL_TARGET}/sbin    \
-          --disable-nfsv4        \
-          --disable-gss          \
-          LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -lmount -levent_core  -lsqlite3 -ltirpc"
-make
-make install
+  --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
+  --disable-sbin-override  \
+  --bindir=${BOSH_INSTALL_TARGET}/bin \
+  --sbindir=${BOSH_INSTALL_TARGET}/sbin    \
+  --disable-nfsv4        \
+  --disable-gss          \
+  LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -lmount -levent_core  -lsqlite3 -ltirpc"
+  make
+  make install
 
-popd
+  popd
