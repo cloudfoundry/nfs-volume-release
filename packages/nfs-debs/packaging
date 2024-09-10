@@ -130,7 +130,6 @@ export LIBMOUNT_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/incl
 
 tar --one-top-level -xzf nfs-debs/nfs-utils-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
-./autogen.sh
 ./configure --prefix=${BOSH_INSTALL_TARGET}          \
   --sysconfdir=${BOSH_INSTALL_TARGET}/etc      \
   --disable-sbin-override  \
