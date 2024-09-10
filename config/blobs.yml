@@ -14,10 +14,6 @@ nfs-debs/nfs-utils-1%2.6.1-1ubuntu1-0-ge96e5559473df8852ef387761697aa40713d6ef7.
   size: 1420757
   object_id: c4b2df63-88bb-4fb5-64f4-ab0eb0a20d9f
   sha: sha256:781f6a7217e2aa6422aca8a6e94bcb74023c505ca0551efb66e99940b313f0ce
-nfs-debs/pkg-config-0.29.2.tar.gz:
-  size: 2016830
-  object_id: 3e261e21-ad2b-4328-4fc5-6a9f86f64aa1
-  sha: sha256:6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591
 nfs-debs/rpcbind-1.2.6-2build1-0-gd4047c3303d327fc59a869a7243132cb01aa0314.tar.gz:
   size: 163516
   object_id: 14a004b1-cfb6-4105-794f-5d448325582c
