@@ -46,7 +46,7 @@ tags: [nfs-volume-release]
 Foundry initially, with the addition of a `-o operations/enable-nfs-volume-service.yml` option.
 
 > [!NOTE]
-> If you'd like to run with ldap server, also include `-o operations/enable-nfs-ldap.yml` opsfile.
+> If you'd like to run with ldap server, also include `-o operations/test/enable-nfs-test-ldapserver.yml` opsfile.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount or create NFS volumes.  
 Unless you have explicitly defined a variable for your broker password, BOSH will generate one for you.

@@ -90,14 +90,15 @@ pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
 
 #pkg-config
 tar xzf nfs-debs/pkg-config-*.tar.gz
-cd pkg-config-*
-./configure "--prefix=${BOSH_INSTALL_TARGET}" --with-internal-glib
+pushd pkg-config-*
+./configure "--prefix=${BOSH_INSTALL_TARGET}/pkg-config" --with-internal-glib
 
 make
-make install "prefix=${BOSH_INSTALL_TARGET}"
+make install "prefix=${BOSH_INSTALL_TARGET}/pkg-config"
+popd
 
-export PATH=${BOSH_INSTALL_TARGET}/bin:$PATH
-export AL_OPTS="${AL_OPTS} -I${BOSH_INSTALL_TARGET}/share/aclocal"
+export PATH=${BOSH_INSTALL_TARGET}/pkg-config/bin:$PATH
+export AL_OPTS="${AL_OPTS} -I${BOSH_INSTALL_TARGET}/pkg-config/share/aclocal"
 # rpc-bind ( required for some nfsv3 mounts to work
 
 #These flags are required for rpcbind and nfs-utils
