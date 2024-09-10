@@ -113,7 +113,6 @@ tar --one-top-level -xzf nfs-debs/rpcbind-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
 sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 
-./autogen.sh
 ./configure \
   --prefix=${BOSH_INSTALL_TARGET}/                                \
   --bindir=${BOSH_INSTALL_TARGET}/sbin                             \
