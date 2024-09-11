@@ -2,33 +2,6 @@
 
 set -e
 
-#required to compile sqlite on xenial, configure fails without
-tar -xzf nfs-debs/tcl*.tar.gz
-pushd ${BOSH_COMPILE_TARGET}/tcl*/unix
-./configure   --prefix=${BOSH_INSTALL_TARGET}
-make
-make install
-export PATH=$BOSH_INSTALL_TARGET/bin:$PATH
-popd
-echo "TCL done"
-
-tar --one-top-level -xzf nfs-debs/sqlite-*.tar.gz
-pushd ${BOSH_COMPILE_TARGET}/sqlite-*/
-./configure \
-  --prefix=${BOSH_INSTALL_TARGET}     \
-  --disable-static  \
-  --enable-fts{4,5} \
-  CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 \
-  -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
-  -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
-  -DSQLITE_SECURE_DELETE=1          \
-  -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
-  make
-  make install
-  popd
-  echo "SQLITE done"
-
-
 # libevent
 tar -xzf nfs-debs/libevent-*.tar.gz
 pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
@@ -126,7 +99,7 @@ pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
   --sbindir=${BOSH_INSTALL_TARGET}/sbin    \
   --disable-nfsv4        \
   --disable-gss          \
-  LIBS="-L${BOSH_INSTALL_TARGET}/lib -L${BOSH_INSTALL_TARGET}/lib/sqlite3.40.0 -lmount -levent_core  -lsqlite3 -ltirpc"
+  LIBS="-L${BOSH_INSTALL_TARGET}/lib -lmount -levent_core -ltirpc"
   make
   make install
 
