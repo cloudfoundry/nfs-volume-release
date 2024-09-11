@@ -2,26 +2,6 @@
 
 set -e
 
-# libevent
-tar -xzf nfs-debs/libevent-*.tar.gz
-pushd ${BOSH_COMPILE_TARGET}/libevent-*-stable/
-# no binary 'python' on $PATH, but python3 is available
-sed -i 's/python/&3/' event_rpcgen.py
-./configure --prefix=${BOSH_INSTALL_TARGET} --disable-static
-make
-make install
-popd
-echo "LIBEVENT done"
-
-# rpcsvc-proto
-tar -xf nfs-debs/rpcsvc-proto-*.tar.xz
-pushd ${BOSH_COMPILE_TARGET}/rpcsvc-proto-*/
-./configure --prefix=${BOSH_INSTALL_TARGET} --sysconfdir=${BOSH_INSTALL_TARGET}/etc
-make
-make install
-popd
-echo "RPCSVC done"
-
 #libtirpc
 tar --one-top-level -xzf nfs-debs/libtirpc-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
@@ -32,8 +12,8 @@ pushd  ${BOSH_COMPILE_TARGET}/libtirpc-*/
   --disable-gssapi 
   make
   make install
-  popd 
-  echo "LIBTIRPC done"
+popd
+echo "LIBTIRPC done"
 
 #linux-utils
 tar --one-top-level -xzf nfs-debs/util-linux-*.tar.gz
@@ -50,10 +30,8 @@ pushd ${BOSH_COMPILE_TARGET}/util-linux-*/
   --docdir=${BOSH_INSTALL_TARGET}/doc/util-linux   \
   --enable-libblkid   \
   --enable-libmount   \
-  --enable-libuuid   \
   --enable-blkid   \
   --enable-mount   \
-  --enable-uuid \
   --enable-shared   \
   --disable-all-programs   \
   --without-python
@@ -73,14 +51,13 @@ export TIRPC_LIBS="-L${BOSH_INSTALL_TARGET}/lib -I${BOSH_INSTALL_TARGET}/include
 
 tar --one-top-level -xzf nfs-debs/rpcbind-*.tar.gz
 pushd  ${BOSH_COMPILE_TARGET}/rpcbind-*/
-sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 
 ./configure \
-  --prefix=${BOSH_INSTALL_TARGET}/                                \
-  --bindir=${BOSH_INSTALL_TARGET}/sbin                             \
-  --with-rpcuser=root                            \
-  --enable-warmstarts                            \
-  --without-systemdsystemunitdir \
+  --prefix=${BOSH_INSTALL_TARGET}/         \
+  --bindir=${BOSH_INSTALL_TARGET}/sbin     \
+  --with-rpcuser=root                      \
+  --enable-warmstarts                      \
+  --without-systemdsystemunitdir           \
   LIBS="-L${BOSH_INSTALL_TARGET}/lib -ltirpc"
   make
   make install
@@ -99,7 +76,8 @@ pushd  ${BOSH_COMPILE_TARGET}/nfs-utils-*/
   --sbindir=${BOSH_INSTALL_TARGET}/sbin    \
   --disable-nfsv4        \
   --disable-gss          \
-  LIBS="-L${BOSH_INSTALL_TARGET}/lib -lmount -levent_core -ltirpc"
+  --disable-uuid         \
+  LIBS="-L${BOSH_INSTALL_TARGET}/lib -lmount -ltirpc"
   make
   make install
 

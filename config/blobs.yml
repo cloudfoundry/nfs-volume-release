@@ -2,10 +2,6 @@ berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
-nfs-debs/libevent-2.1.8-stable.tar.gz:
-  size: 1026485
-  object_id: 9b8c7244-3eaf-4dcb-6724-e50fbf2ff387
-  sha: sha256:965cc5a8bb46ce4199a47e9b2c9e1cae3b137e8356ffdad6d94d3b9069b71dc2
 nfs-debs/libtirpc-1.3.5.tar.gz:
   size: 257976
   object_id: 2c1a29ff-8495-4cae-6d7b-183680e67c78
@@ -18,10 +14,6 @@ nfs-debs/rpcbind-1.2.6-2build1-0-gd4047c3303d327fc59a869a7243132cb01aa0314.tar.g
   size: 163516
   object_id: 14a004b1-cfb6-4105-794f-5d448325582c
   sha: sha256:59778e27a97a44887ef5a1ce6c246bc1fcfb87a42f834a70145f03cb95868b5b
-nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
-  size: 168648
-  object_id: 4e8c8dcd-97a2-4855-5bb2-34df28452116
-  sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
 nfs-debs/util-linux-2.40.2.tar.gz:
   size: 14941746
   object_id: 92de9700-16c7-4101-75d2-7171a78209ba
