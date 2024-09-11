@@ -2,9 +2,9 @@
 
 set -e
 
-mkdir -p /var/vcap/sys/log/statd
-exec 1>> /var/vcap/sys/log/statd/rpcbind.log
-exec 2>> /var/vcap/sys/log/statd/rpcbind.err.log
+mkdir -p /var/vcap/sys/log/nfsv3driver
+exec 1>> /var/vcap/sys/log/nfsv3driver/rpcbind.stdout.log
+exec 2>> /var/vcap/sys/log/nfsv3driver/rpcbind.stderr.log
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/var/vcap/packages/nfs-debs/lib
 echo "[$(date  +%Y-%m-%dT%H:%M:%S.%NZ)] ------------ `basename $0` $* --------------" | tee /dev/stderr
 
