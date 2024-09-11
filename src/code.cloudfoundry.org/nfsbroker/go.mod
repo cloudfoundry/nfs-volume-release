@@ -3,11 +3,11 @@ module code.cloudfoundry.org/nfsbroker
 go 1.22.6
 
 require (
-	code.cloudfoundry.org/clock v1.12.0
-	code.cloudfoundry.org/debugserver v0.12.0
+	code.cloudfoundry.org/clock v1.13.0
+	code.cloudfoundry.org/debugserver v0.13.0
 	code.cloudfoundry.org/existingvolumebroker v0.142.0
 	code.cloudfoundry.org/goshims v0.39.0
-	code.cloudfoundry.org/lager/v3 v3.5.0
+	code.cloudfoundry.org/lager/v3 v3.6.0
 	code.cloudfoundry.org/service-broker-store v0.89.0
 	code.cloudfoundry.org/volume-mount-options v0.96.0
 	github.com/google/gofuzz v1.2.0
@@ -26,7 +26,7 @@ require (
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
-	github.com/google/pprof v0.0.0-20240903155634-a8630aee4ab9 // indirect
+	github.com/google/pprof v0.0.0-20240910150728-a0b0bb1d4134 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
