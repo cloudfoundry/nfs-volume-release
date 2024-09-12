@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	code.cloudfoundry.org/clock v1.13.0
-	code.cloudfoundry.org/debugserver v0.13.0
+	code.cloudfoundry.org/debugserver v0.14.0
 	code.cloudfoundry.org/existingvolumebroker v0.142.0
 	code.cloudfoundry.org/goshims v0.39.0
 	code.cloudfoundry.org/lager/v3 v3.6.0
