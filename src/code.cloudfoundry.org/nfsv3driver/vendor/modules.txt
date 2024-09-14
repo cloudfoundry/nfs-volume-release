@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.14.0
+# code.cloudfoundry.org/cf-networking-helpers v0.15.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
 # code.cloudfoundry.org/cfhttp/v2 v2.12.0
