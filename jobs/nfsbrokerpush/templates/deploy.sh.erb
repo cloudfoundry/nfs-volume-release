@@ -62,6 +62,7 @@ function create_credhub_security_group() {
   cf create-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf update-security-group credhub_open /var/vcap/jobs/nfsbrokerpush/credhub.json
   cf bind-security-group credhub_open $ORG --space $SPACE
+  cf bind-security-group credhub_open $ORG --space $SPACE --lifecycle staging
 }
 
 function create_manifest() {
