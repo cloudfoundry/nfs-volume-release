@@ -8,6 +8,10 @@ backup_should_be_locked_before:
   release: credhub
 - job_name: cloud_controller_ng
   release: capi
+- job_name: cc-worker
+  release: capi
+- job_name: scheduler
+  release: capi
 
 restore_should_be_locked_before:
 - job_name: uaa
@@ -15,4 +19,8 @@ restore_should_be_locked_before:
 - job_name: credhub
   release: credhub
 - job_name: cloud_controller_ng
+  release: capi
+- job_name: cc-worker
+  release: capi
+- job_name: scheduler
   release: capi"
