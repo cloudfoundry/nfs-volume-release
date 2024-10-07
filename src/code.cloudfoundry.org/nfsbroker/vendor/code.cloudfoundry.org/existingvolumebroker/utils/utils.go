@@ -33,7 +33,7 @@ func IsThereAProxy(os osshim.Os, logger lager.Logger) bool {
 
 	https_proxy, ok := os.LookupEnv("https_proxy")
 
-	if ok == true && https_proxy != "" {
+	if ok && https_proxy != "" {
 		lgr.Info("proxy-found", lager.Data{"https_proxy": https_proxy})
 		return true
 	}

@@ -7,7 +7,6 @@ import (
 
 	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims"
-	"github.com/pivotal-cf/brokerapi/v11"
 	"github.com/pivotal-cf/brokerapi/v11/domain"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -59,42 +58,12 @@ func NewStore(
 		}
 		return NewCredhubStore(logger, ch, storeID)
 	}
-	logger.Fatal("failed-creating-broker-store", errors.New("Invalid brokerstore configuration"))
+	logger.Fatal("failed-creating-broker-store", errors.New("invalid brokerstore configuration"))
 	return nil
 }
 
 // Utility methods for storing bindings with secrets stripped out
 const HashKey = "paramsHash"
-
-func redactBindingDetails(details brokerapi.BindDetails) (brokerapi.BindDetails, error) {
-	if len(details.RawParameters) == 0 {
-		return details, nil
-	}
-	var opts map[string]interface{}
-	if err := json.Unmarshal(details.RawParameters, &opts); err != nil {
-		return details, err
-	}
-	if len(opts) == 1 {
-		if _, ok := opts[HashKey]; ok {
-			return details, nil
-		}
-	}
-
-	s, err := json.Marshal(opts)
-	if err != nil {
-		return brokerapi.BindDetails{}, err
-	}
-	s, err = bcrypt.GenerateFromPassword(s, bcrypt.DefaultCost)
-	if err != nil {
-		return brokerapi.BindDetails{}, err
-	}
-	redacted := map[string]interface{}{HashKey: string(s)}
-	details.RawParameters, err = json.Marshal(redacted)
-	if err != nil {
-		return brokerapi.BindDetails{}, err
-	}
-	return details, nil
-}
 
 func isInstanceConflict(s Store, id string, details ServiceInstance) bool {
 	if existing, err := s.RetrieveInstanceDetails(id); err == nil {
@@ -105,7 +74,7 @@ func isInstanceConflict(s Store, id string, details ServiceInstance) bool {
 	return false
 }
 
-func isBindingConflict(s Store, id string, details brokerapi.BindDetails) bool {
+func isBindingConflict(s Store, id string, details domain.BindDetails) bool {
 	if existing, err := s.RetrieveBindingDetails(id); err == nil {
 		if existing.AppGUID != details.AppGUID {
 			return true
@@ -131,54 +100,7 @@ func isBindingConflict(s Store, id string, details brokerapi.BindDetails) bool {
 			return false
 		}
 
-		h, _ := opts[HashKey]
-		if bcrypt.CompareHashAndPassword([]byte(h.(string)), details.RawParameters) != nil {
-			return true
-		}
-	}
-	return false
-}
-
-// checks service details to see if there is a "password" key contained within.  Since we don't encrypt stored data,
-// it's not safe to store secrets in service instances.
-func passwordCheck(data []byte) bool {
-	var jsonBlob interface{}
-	err := json.Unmarshal(data, &jsonBlob)
-	if err != nil {
-		return false
-	}
-	return passwordCheckValue(&jsonBlob)
-}
-
-func passwordCheckValue(data *interface{}) bool {
-	if data == nil {
-		return false
-	}
-
-	if a, ok := (*data).([]interface{}); ok {
-		return passwordCheckArray(&a)
-	} else if m, ok := (*data).(map[string]interface{}); ok {
-		return passwordCheckObject(&m)
-	} else {
-		return false
-	}
-}
-
-func passwordCheckArray(data *[]interface{}) bool {
-	for i := range *data {
-		if passwordCheckValue(&((*data)[i])) {
-			return true
-		}
-	}
-	return false
-}
-
-func passwordCheckObject(data *map[string]interface{}) bool {
-	for k, v := range *data {
-		if k == "password" {
-			return true
-		}
-		if passwordCheckValue(&v) {
+		if bcrypt.CompareHashAndPassword([]byte(opts[HashKey].(string)), details.RawParameters) != nil {
 			return true
 		}
 	}

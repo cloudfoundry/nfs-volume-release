@@ -19,7 +19,7 @@ import (
 	vmo "code.cloudfoundry.org/volume-mount-options"
 	vmou "code.cloudfoundry.org/volume-mount-options/utils"
 	"github.com/pivotal-cf/brokerapi/v11/domain"
-	`github.com/pivotal-cf/brokerapi/v11/domain/apiresponses`
+	"github.com/pivotal-cf/brokerapi/v11/domain/apiresponses"
 )
 
 const (
@@ -85,10 +85,6 @@ func New(
 
 func (b *Broker) isNFSBroker() bool {
 	return b.brokerType == BrokerTypeNFS
-}
-
-func (b *Broker) isSMBBroker() bool {
-	return b.brokerType == BrokerTypeSMB
 }
 
 func (b *Broker) Services(_ context.Context) ([]domain.Service, error) {
@@ -227,7 +223,7 @@ func (b *Broker) Bind(context context.Context, instanceID string, bindingID stri
 	for k, v := range bindOpts {
 		for _, disallowed := range b.DisallowedBindOverrides {
 			if k == disallowed {
-				err := errors.New(fmt.Sprintf("bind configuration contains the following invalid option: ['%s']", k))
+				err := fmt.Errorf("bind configuration contains the following invalid option: ['%s']", k)
 				logger.Error("err-override-not-allowed-in-bind", err, lager.Data{"key": k})
 				return domain.Binding{}, apiresponses.NewFailureResponse(
 					err, http.StatusBadRequest, "invalid-raw-params",
@@ -346,7 +342,7 @@ func (b *Broker) Unbind(context context.Context, instanceID string, bindingID st
 func (b *Broker) Update(context context.Context, instanceID string, details domain.UpdateDetails, _ bool) (domain.UpdateServiceSpec, error) {
 	return domain.UpdateServiceSpec{},
 		apiresponses.NewFailureResponse(
-			errors.New("This service does not support instance updates. Please delete your service instance and create a new one with updated configuration."),
+			errors.New("this service does not support instance updates. Please delete your service instance and create a new one with updated configuration"),
 			422,
 			"",
 		)
@@ -398,7 +394,7 @@ func evaluateMode(parameters map[string]interface{}) (string, error) {
 			return "r", nil
 		}
 
-		return "", apiresponses.NewFailureResponse(fmt.Errorf("Invalid ro parameter value: %q", roc), http.StatusBadRequest, "invalid-ro-param")
+		return "", apiresponses.NewFailureResponse(fmt.Errorf("invalid ro parameter value: %q", roc), http.StatusBadRequest, "invalid-ro-param")
 	}
 
 	return "rw", nil

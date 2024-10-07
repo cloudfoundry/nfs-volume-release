@@ -54,7 +54,7 @@ func NewMountOptsMask(allowed []string,
 		mask.SloppyMount, err = strconv.ParseBool(vc)
 
 		if err != nil {
-			return MountOptsMask{}, fmt.Errorf("Invalid sloppy_mount option: %w", err)
+			return MountOptsMask{}, fmt.Errorf("invalid sloppy_mount option: %w", err)
 		}
 	}
 

@@ -6,9 +6,9 @@ import (
 )
 
 func InterfaceToString(input interface{}) string {
-	switch input.(type) {
+	switch t := input.(type) {
 	case string:
-		return input.(string)
+		return t
 	case int64:
 		return fmt.Sprintf("%d", input)
 	case float64:

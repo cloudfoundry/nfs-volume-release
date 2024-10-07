@@ -7,7 +7,6 @@ import (
 	"code.cloudfoundry.org/credhub-cli/credhub/credentials"
 	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims"
-	"github.com/pivotal-cf/brokerapi/v11"
 	"github.com/pivotal-cf/brokerapi/v11/domain"
 )
 
@@ -93,7 +92,7 @@ func (s *CredhubStore) RetrieveBindingDetails(id string) (domain.BindDetails, er
 		return domain.BindDetails{}, err
 	}
 
-	var bindDetails brokerapi.BindDetails
+	var bindDetails domain.BindDetails
 	err = toStruct(creds, &bindDetails)
 	if err != nil {
 		return domain.BindDetails{}, err
@@ -106,11 +105,11 @@ func (s *CredhubStore) RetrieveAllInstanceDetails() (map[string]ServiceInstance,
 	panic("Not Implemented")
 }
 
-func (s *CredhubStore) RetrieveAllBindingDetails() (map[string]brokerapi.BindDetails, error) {
+func (s *CredhubStore) RetrieveAllBindingDetails() (map[string]domain.BindDetails, error) {
 	panic("Not Implemented")
 }
 
-func (s *CredhubStore) CreateBindingDetails(id string, details brokerapi.BindDetails) error {
+func (s *CredhubStore) CreateBindingDetails(id string, details domain.BindDetails) error {
 	logger := s.logger.Session("create-binding-details")
 	logger.Info("start")
 	defer logger.Info("end")
@@ -145,7 +144,7 @@ func (s *CredhubStore) DeleteBindingDetails(id string) error {
 func (s *CredhubStore) IsInstanceConflict(id string, details ServiceInstance) bool {
 	return isInstanceConflict(s, id, details)
 }
-func (s *CredhubStore) IsBindingConflict(id string, details brokerapi.BindDetails) bool {
+func (s *CredhubStore) IsBindingConflict(id string, details domain.BindDetails) bool {
 	return isBindingConflict(s, id, details)
 }
 
