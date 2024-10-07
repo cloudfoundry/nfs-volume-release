@@ -10,11 +10,11 @@ import (
 )
 
 type FakeLdap struct {
-	DialStub        func(network, addr string) (ldapshim.LdapConnection, error)
+	DialStub        func(string, string) (ldapshim.LdapConnection, error)
 	dialMutex       sync.RWMutex
 	dialArgsForCall []struct {
-		network string
-		addr    string
+		arg1 string
+		arg2 string
 	}
 	dialReturns struct {
 		result1 ldapshim.LdapConnection
@@ -24,12 +24,12 @@ type FakeLdap struct {
 		result1 ldapshim.LdapConnection
 		result2 error
 	}
-	DialTLSStub        func(network, addr string, config *tls.Config) (ldapshim.LdapConnection, error)
+	DialTLSStub        func(string, string, *tls.Config) (ldapshim.LdapConnection, error)
 	dialTLSMutex       sync.RWMutex
 	dialTLSArgsForCall []struct {
-		network string
-		addr    string
-		config  *tls.Config
+		arg1 string
+		arg2 string
+		arg3 *tls.Config
 	}
 	dialTLSReturns struct {
 		result1 ldapshim.LdapConnection
@@ -62,22 +62,24 @@ type FakeLdap struct {
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeLdap) Dial(network string, addr string) (ldapshim.LdapConnection, error) {
+func (fake *FakeLdap) Dial(arg1 string, arg2 string) (ldapshim.LdapConnection, error) {
 	fake.dialMutex.Lock()
 	ret, specificReturn := fake.dialReturnsOnCall[len(fake.dialArgsForCall)]
 	fake.dialArgsForCall = append(fake.dialArgsForCall, struct {
-		network string
-		addr    string
-	}{network, addr})
-	fake.recordInvocation("Dial", []interface{}{network, addr})
+		arg1 string
+		arg2 string
+	}{arg1, arg2})
+	stub := fake.DialStub
+	fakeReturns := fake.dialReturns
+	fake.recordInvocation("Dial", []interface{}{arg1, arg2})
 	fake.dialMutex.Unlock()
-	if fake.DialStub != nil {
-		return fake.DialStub(network, addr)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	return fake.dialReturns.result1, fake.dialReturns.result2
+	return fakeReturns.result1, fakeReturns.result2
 }
 
 func (fake *FakeLdap) DialCallCount() int {
@@ -86,13 +88,22 @@ func (fake *FakeLdap) DialCallCount() int {
 	return len(fake.dialArgsForCall)
 }
 
+func (fake *FakeLdap) DialCalls(stub func(string, string) (ldapshim.LdapConnection, error)) {
+	fake.dialMutex.Lock()
+	defer fake.dialMutex.Unlock()
+	fake.DialStub = stub
+}
+
 func (fake *FakeLdap) DialArgsForCall(i int) (string, string) {
 	fake.dialMutex.RLock()
 	defer fake.dialMutex.RUnlock()
-	return fake.dialArgsForCall[i].network, fake.dialArgsForCall[i].addr
+	argsForCall := fake.dialArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
 }
 
 func (fake *FakeLdap) DialReturns(result1 ldapshim.LdapConnection, result2 error) {
+	fake.dialMutex.Lock()
+	defer fake.dialMutex.Unlock()
 	fake.DialStub = nil
 	fake.dialReturns = struct {
 		result1 ldapshim.LdapConnection
@@ -101,6 +112,8 @@ func (fake *FakeLdap) DialReturns(result1 ldapshim.LdapConnection, result2 error
 }
 
 func (fake *FakeLdap) DialReturnsOnCall(i int, result1 ldapshim.LdapConnection, result2 error) {
+	fake.dialMutex.Lock()
+	defer fake.dialMutex.Unlock()
 	fake.DialStub = nil
 	if fake.dialReturnsOnCall == nil {
 		fake.dialReturnsOnCall = make(map[int]struct {
@@ -114,23 +127,25 @@ func (fake *FakeLdap) DialReturnsOnCall(i int, result1 ldapshim.LdapConnection, 
 	}{result1, result2}
 }
 
-func (fake *FakeLdap) DialTLS(network string, addr string, config *tls.Config) (ldapshim.LdapConnection, error) {
+func (fake *FakeLdap) DialTLS(arg1 string, arg2 string, arg3 *tls.Config) (ldapshim.LdapConnection, error) {
 	fake.dialTLSMutex.Lock()
 	ret, specificReturn := fake.dialTLSReturnsOnCall[len(fake.dialTLSArgsForCall)]
 	fake.dialTLSArgsForCall = append(fake.dialTLSArgsForCall, struct {
-		network string
-		addr    string
-		config  *tls.Config
-	}{network, addr, config})
-	fake.recordInvocation("DialTLS", []interface{}{network, addr, config})
+		arg1 string
+		arg2 string
+		arg3 *tls.Config
+	}{arg1, arg2, arg3})
+	stub := fake.DialTLSStub
+	fakeReturns := fake.dialTLSReturns
+	fake.recordInvocation("DialTLS", []interface{}{arg1, arg2, arg3})
 	fake.dialTLSMutex.Unlock()
-	if fake.DialTLSStub != nil {
-		return fake.DialTLSStub(network, addr, config)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	return fake.dialTLSReturns.result1, fake.dialTLSReturns.result2
+	return fakeReturns.result1, fakeReturns.result2
 }
 
 func (fake *FakeLdap) DialTLSCallCount() int {
@@ -139,13 +154,22 @@ func (fake *FakeLdap) DialTLSCallCount() int {
 	return len(fake.dialTLSArgsForCall)
 }
 
+func (fake *FakeLdap) DialTLSCalls(stub func(string, string, *tls.Config) (ldapshim.LdapConnection, error)) {
+	fake.dialTLSMutex.Lock()
+	defer fake.dialTLSMutex.Unlock()
+	fake.DialTLSStub = stub
+}
+
 func (fake *FakeLdap) DialTLSArgsForCall(i int) (string, string, *tls.Config) {
 	fake.dialTLSMutex.RLock()
 	defer fake.dialTLSMutex.RUnlock()
-	return fake.dialTLSArgsForCall[i].network, fake.dialTLSArgsForCall[i].addr, fake.dialTLSArgsForCall[i].config
+	argsForCall := fake.dialTLSArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3
 }
 
 func (fake *FakeLdap) DialTLSReturns(result1 ldapshim.LdapConnection, result2 error) {
+	fake.dialTLSMutex.Lock()
+	defer fake.dialTLSMutex.Unlock()
 	fake.DialTLSStub = nil
 	fake.dialTLSReturns = struct {
 		result1 ldapshim.LdapConnection
@@ -154,6 +178,8 @@ func (fake *FakeLdap) DialTLSReturns(result1 ldapshim.LdapConnection, result2 er
 }
 
 func (fake *FakeLdap) DialTLSReturnsOnCall(i int, result1 ldapshim.LdapConnection, result2 error) {
+	fake.dialTLSMutex.Lock()
+	defer fake.dialTLSMutex.Unlock()
 	fake.DialTLSStub = nil
 	if fake.dialTLSReturnsOnCall == nil {
 		fake.dialTLSReturnsOnCall = make(map[int]struct {
@@ -191,15 +217,17 @@ func (fake *FakeLdap) NewSearchRequest(arg1 string, arg2 int, arg3 int, arg4 int
 		arg8 []string
 		arg9 []ldap.Control
 	}{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8Copy, arg9Copy})
+	stub := fake.NewSearchRequestStub
+	fakeReturns := fake.newSearchRequestReturns
 	fake.recordInvocation("NewSearchRequest", []interface{}{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8Copy, arg9Copy})
 	fake.newSearchRequestMutex.Unlock()
-	if fake.NewSearchRequestStub != nil {
-		return fake.NewSearchRequestStub(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	return fake.newSearchRequestReturns.result1
+	return fakeReturns.result1
 }
 
 func (fake *FakeLdap) NewSearchRequestCallCount() int {
@@ -208,13 +236,22 @@ func (fake *FakeLdap) NewSearchRequestCallCount() int {
 	return len(fake.newSearchRequestArgsForCall)
 }
 
+func (fake *FakeLdap) NewSearchRequestCalls(stub func(string, int, int, int, int, bool, string, []string, []ldap.Control) *ldap.SearchRequest) {
+	fake.newSearchRequestMutex.Lock()
+	defer fake.newSearchRequestMutex.Unlock()
+	fake.NewSearchRequestStub = stub
+}
+
 func (fake *FakeLdap) NewSearchRequestArgsForCall(i int) (string, int, int, int, int, bool, string, []string, []ldap.Control) {
 	fake.newSearchRequestMutex.RLock()
 	defer fake.newSearchRequestMutex.RUnlock()
-	return fake.newSearchRequestArgsForCall[i].arg1, fake.newSearchRequestArgsForCall[i].arg2, fake.newSearchRequestArgsForCall[i].arg3, fake.newSearchRequestArgsForCall[i].arg4, fake.newSearchRequestArgsForCall[i].arg5, fake.newSearchRequestArgsForCall[i].arg6, fake.newSearchRequestArgsForCall[i].arg7, fake.newSearchRequestArgsForCall[i].arg8, fake.newSearchRequestArgsForCall[i].arg9
+	argsForCall := fake.newSearchRequestArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4, argsForCall.arg5, argsForCall.arg6, argsForCall.arg7, argsForCall.arg8, argsForCall.arg9
 }
 
 func (fake *FakeLdap) NewSearchRequestReturns(result1 *ldap.SearchRequest) {
+	fake.newSearchRequestMutex.Lock()
+	defer fake.newSearchRequestMutex.Unlock()
 	fake.NewSearchRequestStub = nil
 	fake.newSearchRequestReturns = struct {
 		result1 *ldap.SearchRequest
@@ -222,6 +259,8 @@ func (fake *FakeLdap) NewSearchRequestReturns(result1 *ldap.SearchRequest) {
 }
 
 func (fake *FakeLdap) NewSearchRequestReturnsOnCall(i int, result1 *ldap.SearchRequest) {
+	fake.newSearchRequestMutex.Lock()
+	defer fake.newSearchRequestMutex.Unlock()
 	fake.NewSearchRequestStub = nil
 	if fake.newSearchRequestReturnsOnCall == nil {
 		fake.newSearchRequestReturnsOnCall = make(map[int]struct {

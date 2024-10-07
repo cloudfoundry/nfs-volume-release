@@ -30,10 +30,6 @@ func (sh *SyscallShim) Environ() []string {
 	return syscall.Environ()
 }
 
-func (sh *SyscallShim) StringSlicePtr(ss []string) []*byte {
-	return syscall.StringSlicePtr(ss)
-}
-
 func (sh *SyscallShim) SlicePtrFromStrings(ss []string) ([]*byte, error) {
 	return syscall.SlicePtrFromStrings(ss)
 }
@@ -310,16 +306,8 @@ func (sh *SyscallShim) ParseUnixRights(m *syscall.SocketControlMessage) ([]int, 
 	return syscall.ParseUnixRights(m)
 }
 
-func (sh *SyscallShim) StringByteSlice(s string) []byte {
-	return syscall.StringByteSlice(s)
-}
-
 func (sh *SyscallShim) ByteSliceFromString(s string) ([]byte, error) {
 	return syscall.ByteSliceFromString(s)
-}
-
-func (sh *SyscallShim) StringBytePtr(s string) *byte {
-	return syscall.StringBytePtr(s)
 }
 
 func (sh *SyscallShim) BytePtrFromString(s string) (*byte, error) {

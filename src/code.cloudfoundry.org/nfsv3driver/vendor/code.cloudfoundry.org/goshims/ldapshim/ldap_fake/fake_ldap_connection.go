@@ -10,17 +10,9 @@ import (
 )
 
 type FakeLdapConnection struct {
-	SetTimeoutStub        func(timeout time.Duration)
-	setTimeoutMutex       sync.RWMutex
-	setTimeoutArgsForCall []struct {
-		timeout time.Duration
-	}
-	CloseStub        func()
-	closeMutex       sync.RWMutex
-	closeArgsForCall []struct{}
-	BindStub         func(string, string) error
-	bindMutex        sync.RWMutex
-	bindArgsForCall  []struct {
+	BindStub        func(string, string) error
+	bindMutex       sync.RWMutex
+	bindArgsForCall []struct {
 		arg1 string
 		arg2 string
 	}
@@ -29,6 +21,10 @@ type FakeLdapConnection struct {
 	}
 	bindReturnsOnCall map[int]struct {
 		result1 error
+	}
+	CloseStub        func()
+	closeMutex       sync.RWMutex
+	closeArgsForCall []struct {
 	}
 	SearchStub        func(*ldap.SearchRequest) (*ldap.SearchResult, error)
 	searchMutex       sync.RWMutex
@@ -43,48 +39,13 @@ type FakeLdapConnection struct {
 		result1 *ldap.SearchResult
 		result2 error
 	}
+	SetTimeoutStub        func(time.Duration)
+	setTimeoutMutex       sync.RWMutex
+	setTimeoutArgsForCall []struct {
+		arg1 time.Duration
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
-}
-
-func (fake *FakeLdapConnection) SetTimeout(timeout time.Duration) {
-	fake.setTimeoutMutex.Lock()
-	fake.setTimeoutArgsForCall = append(fake.setTimeoutArgsForCall, struct {
-		timeout time.Duration
-	}{timeout})
-	fake.recordInvocation("SetTimeout", []interface{}{timeout})
-	fake.setTimeoutMutex.Unlock()
-	if fake.SetTimeoutStub != nil {
-		fake.SetTimeoutStub(timeout)
-	}
-}
-
-func (fake *FakeLdapConnection) SetTimeoutCallCount() int {
-	fake.setTimeoutMutex.RLock()
-	defer fake.setTimeoutMutex.RUnlock()
-	return len(fake.setTimeoutArgsForCall)
-}
-
-func (fake *FakeLdapConnection) SetTimeoutArgsForCall(i int) time.Duration {
-	fake.setTimeoutMutex.RLock()
-	defer fake.setTimeoutMutex.RUnlock()
-	return fake.setTimeoutArgsForCall[i].timeout
-}
-
-func (fake *FakeLdapConnection) Close() {
-	fake.closeMutex.Lock()
-	fake.closeArgsForCall = append(fake.closeArgsForCall, struct{}{})
-	fake.recordInvocation("Close", []interface{}{})
-	fake.closeMutex.Unlock()
-	if fake.CloseStub != nil {
-		fake.CloseStub()
-	}
-}
-
-func (fake *FakeLdapConnection) CloseCallCount() int {
-	fake.closeMutex.RLock()
-	defer fake.closeMutex.RUnlock()
-	return len(fake.closeArgsForCall)
 }
 
 func (fake *FakeLdapConnection) Bind(arg1 string, arg2 string) error {
@@ -94,15 +55,17 @@ func (fake *FakeLdapConnection) Bind(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.BindStub
+	fakeReturns := fake.bindReturns
 	fake.recordInvocation("Bind", []interface{}{arg1, arg2})
 	fake.bindMutex.Unlock()
-	if fake.BindStub != nil {
-		return fake.BindStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	return fake.bindReturns.result1
+	return fakeReturns.result1
 }
 
 func (fake *FakeLdapConnection) BindCallCount() int {
@@ -111,13 +74,22 @@ func (fake *FakeLdapConnection) BindCallCount() int {
 	return len(fake.bindArgsForCall)
 }
 
+func (fake *FakeLdapConnection) BindCalls(stub func(string, string) error) {
+	fake.bindMutex.Lock()
+	defer fake.bindMutex.Unlock()
+	fake.BindStub = stub
+}
+
 func (fake *FakeLdapConnection) BindArgsForCall(i int) (string, string) {
 	fake.bindMutex.RLock()
 	defer fake.bindMutex.RUnlock()
-	return fake.bindArgsForCall[i].arg1, fake.bindArgsForCall[i].arg2
+	argsForCall := fake.bindArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
 }
 
 func (fake *FakeLdapConnection) BindReturns(result1 error) {
+	fake.bindMutex.Lock()
+	defer fake.bindMutex.Unlock()
 	fake.BindStub = nil
 	fake.bindReturns = struct {
 		result1 error
@@ -125,6 +97,8 @@ func (fake *FakeLdapConnection) BindReturns(result1 error) {
 }
 
 func (fake *FakeLdapConnection) BindReturnsOnCall(i int, result1 error) {
+	fake.bindMutex.Lock()
+	defer fake.bindMutex.Unlock()
 	fake.BindStub = nil
 	if fake.bindReturnsOnCall == nil {
 		fake.bindReturnsOnCall = make(map[int]struct {
@@ -136,21 +110,47 @@ func (fake *FakeLdapConnection) BindReturnsOnCall(i int, result1 error) {
 	}{result1}
 }
 
+func (fake *FakeLdapConnection) Close() {
+	fake.closeMutex.Lock()
+	fake.closeArgsForCall = append(fake.closeArgsForCall, struct {
+	}{})
+	stub := fake.CloseStub
+	fake.recordInvocation("Close", []interface{}{})
+	fake.closeMutex.Unlock()
+	if stub != nil {
+		fake.CloseStub()
+	}
+}
+
+func (fake *FakeLdapConnection) CloseCallCount() int {
+	fake.closeMutex.RLock()
+	defer fake.closeMutex.RUnlock()
+	return len(fake.closeArgsForCall)
+}
+
+func (fake *FakeLdapConnection) CloseCalls(stub func()) {
+	fake.closeMutex.Lock()
+	defer fake.closeMutex.Unlock()
+	fake.CloseStub = stub
+}
+
 func (fake *FakeLdapConnection) Search(arg1 *ldap.SearchRequest) (*ldap.SearchResult, error) {
 	fake.searchMutex.Lock()
 	ret, specificReturn := fake.searchReturnsOnCall[len(fake.searchArgsForCall)]
 	fake.searchArgsForCall = append(fake.searchArgsForCall, struct {
 		arg1 *ldap.SearchRequest
 	}{arg1})
+	stub := fake.SearchStub
+	fakeReturns := fake.searchReturns
 	fake.recordInvocation("Search", []interface{}{arg1})
 	fake.searchMutex.Unlock()
-	if fake.SearchStub != nil {
-		return fake.SearchStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	return fake.searchReturns.result1, fake.searchReturns.result2
+	return fakeReturns.result1, fakeReturns.result2
 }
 
 func (fake *FakeLdapConnection) SearchCallCount() int {
@@ -159,13 +159,22 @@ func (fake *FakeLdapConnection) SearchCallCount() int {
 	return len(fake.searchArgsForCall)
 }
 
+func (fake *FakeLdapConnection) SearchCalls(stub func(*ldap.SearchRequest) (*ldap.SearchResult, error)) {
+	fake.searchMutex.Lock()
+	defer fake.searchMutex.Unlock()
+	fake.SearchStub = stub
+}
+
 func (fake *FakeLdapConnection) SearchArgsForCall(i int) *ldap.SearchRequest {
 	fake.searchMutex.RLock()
 	defer fake.searchMutex.RUnlock()
-	return fake.searchArgsForCall[i].arg1
+	argsForCall := fake.searchArgsForCall[i]
+	return argsForCall.arg1
 }
 
 func (fake *FakeLdapConnection) SearchReturns(result1 *ldap.SearchResult, result2 error) {
+	fake.searchMutex.Lock()
+	defer fake.searchMutex.Unlock()
 	fake.SearchStub = nil
 	fake.searchReturns = struct {
 		result1 *ldap.SearchResult
@@ -174,6 +183,8 @@ func (fake *FakeLdapConnection) SearchReturns(result1 *ldap.SearchResult, result
 }
 
 func (fake *FakeLdapConnection) SearchReturnsOnCall(i int, result1 *ldap.SearchResult, result2 error) {
+	fake.searchMutex.Lock()
+	defer fake.searchMutex.Unlock()
 	fake.SearchStub = nil
 	if fake.searchReturnsOnCall == nil {
 		fake.searchReturnsOnCall = make(map[int]struct {
@@ -187,17 +198,49 @@ func (fake *FakeLdapConnection) SearchReturnsOnCall(i int, result1 *ldap.SearchR
 	}{result1, result2}
 }
 
+func (fake *FakeLdapConnection) SetTimeout(arg1 time.Duration) {
+	fake.setTimeoutMutex.Lock()
+	fake.setTimeoutArgsForCall = append(fake.setTimeoutArgsForCall, struct {
+		arg1 time.Duration
+	}{arg1})
+	stub := fake.SetTimeoutStub
+	fake.recordInvocation("SetTimeout", []interface{}{arg1})
+	fake.setTimeoutMutex.Unlock()
+	if stub != nil {
+		fake.SetTimeoutStub(arg1)
+	}
+}
+
+func (fake *FakeLdapConnection) SetTimeoutCallCount() int {
+	fake.setTimeoutMutex.RLock()
+	defer fake.setTimeoutMutex.RUnlock()
+	return len(fake.setTimeoutArgsForCall)
+}
+
+func (fake *FakeLdapConnection) SetTimeoutCalls(stub func(time.Duration)) {
+	fake.setTimeoutMutex.Lock()
+	defer fake.setTimeoutMutex.Unlock()
+	fake.SetTimeoutStub = stub
+}
+
+func (fake *FakeLdapConnection) SetTimeoutArgsForCall(i int) time.Duration {
+	fake.setTimeoutMutex.RLock()
+	defer fake.setTimeoutMutex.RUnlock()
+	argsForCall := fake.setTimeoutArgsForCall[i]
+	return argsForCall.arg1
+}
+
 func (fake *FakeLdapConnection) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
-	fake.setTimeoutMutex.RLock()
-	defer fake.setTimeoutMutex.RUnlock()
-	fake.closeMutex.RLock()
-	defer fake.closeMutex.RUnlock()
 	fake.bindMutex.RLock()
 	defer fake.bindMutex.RUnlock()
+	fake.closeMutex.RLock()
+	defer fake.closeMutex.RUnlock()
 	fake.searchMutex.RLock()
 	defer fake.searchMutex.RUnlock()
+	fake.setTimeoutMutex.RLock()
+	defer fake.setTimeoutMutex.RUnlock()
 	copiedInvocations := map[string][][]interface{}{}
 	for key, value := range fake.invocations {
 		copiedInvocations[key] = value

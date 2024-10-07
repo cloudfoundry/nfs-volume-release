@@ -1766,15 +1766,16 @@ func (fake *FakeSyscall) Accept(arg1 int) (int, syscall.Sockaddr, error) {
 	fake.acceptArgsForCall = append(fake.acceptArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.AcceptStub
+	fakeReturns := fake.acceptReturns
 	fake.recordInvocation("Accept", []interface{}{arg1})
 	fake.acceptMutex.Unlock()
-	if fake.AcceptStub != nil {
-		return fake.AcceptStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.acceptReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -1833,15 +1834,16 @@ func (fake *FakeSyscall) Access(arg1 string, arg2 uint32) error {
 		arg1 string
 		arg2 uint32
 	}{arg1, arg2})
+	stub := fake.AccessStub
+	fakeReturns := fake.accessReturns
 	fake.recordInvocation("Access", []interface{}{arg1, arg2})
 	fake.accessMutex.Unlock()
-	if fake.AccessStub != nil {
-		return fake.AccessStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.accessReturns
 	return fakeReturns.result1
 }
 
@@ -1894,15 +1896,16 @@ func (fake *FakeSyscall) Bind(arg1 int, arg2 syscall.Sockaddr) error {
 		arg1 int
 		arg2 syscall.Sockaddr
 	}{arg1, arg2})
+	stub := fake.BindStub
+	fakeReturns := fake.bindReturns
 	fake.recordInvocation("Bind", []interface{}{arg1, arg2})
 	fake.bindMutex.Unlock()
-	if fake.BindStub != nil {
-		return fake.BindStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.bindReturns
 	return fakeReturns.result1
 }
 
@@ -1954,15 +1957,16 @@ func (fake *FakeSyscall) BytePtrFromString(arg1 string) (*byte, error) {
 	fake.bytePtrFromStringArgsForCall = append(fake.bytePtrFromStringArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.BytePtrFromStringStub
+	fakeReturns := fake.bytePtrFromStringReturns
 	fake.recordInvocation("BytePtrFromString", []interface{}{arg1})
 	fake.bytePtrFromStringMutex.Unlock()
-	if fake.BytePtrFromStringStub != nil {
-		return fake.BytePtrFromStringStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.bytePtrFromStringReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2017,15 +2021,16 @@ func (fake *FakeSyscall) ByteSliceFromString(arg1 string) ([]byte, error) {
 	fake.byteSliceFromStringArgsForCall = append(fake.byteSliceFromStringArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.ByteSliceFromStringStub
+	fakeReturns := fake.byteSliceFromStringReturns
 	fake.recordInvocation("ByteSliceFromString", []interface{}{arg1})
 	fake.byteSliceFromStringMutex.Unlock()
-	if fake.ByteSliceFromStringStub != nil {
-		return fake.ByteSliceFromStringStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.byteSliceFromStringReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2080,15 +2085,16 @@ func (fake *FakeSyscall) Chdir(arg1 string) error {
 	fake.chdirArgsForCall = append(fake.chdirArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.ChdirStub
+	fakeReturns := fake.chdirReturns
 	fake.recordInvocation("Chdir", []interface{}{arg1})
 	fake.chdirMutex.Unlock()
-	if fake.ChdirStub != nil {
-		return fake.ChdirStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.chdirReturns
 	return fakeReturns.result1
 }
 
@@ -2141,15 +2147,16 @@ func (fake *FakeSyscall) Chmod(arg1 string, arg2 uint32) error {
 		arg1 string
 		arg2 uint32
 	}{arg1, arg2})
+	stub := fake.ChmodStub
+	fakeReturns := fake.chmodReturns
 	fake.recordInvocation("Chmod", []interface{}{arg1, arg2})
 	fake.chmodMutex.Unlock()
-	if fake.ChmodStub != nil {
-		return fake.ChmodStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.chmodReturns
 	return fakeReturns.result1
 }
 
@@ -2203,15 +2210,16 @@ func (fake *FakeSyscall) Chown(arg1 string, arg2 int, arg3 int) error {
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.ChownStub
+	fakeReturns := fake.chownReturns
 	fake.recordInvocation("Chown", []interface{}{arg1, arg2, arg3})
 	fake.chownMutex.Unlock()
-	if fake.ChownStub != nil {
-		return fake.ChownStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.chownReturns
 	return fakeReturns.result1
 }
 
@@ -2263,15 +2271,16 @@ func (fake *FakeSyscall) Chroot(arg1 string) error {
 	fake.chrootArgsForCall = append(fake.chrootArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.ChrootStub
+	fakeReturns := fake.chrootReturns
 	fake.recordInvocation("Chroot", []interface{}{arg1})
 	fake.chrootMutex.Unlock()
-	if fake.ChrootStub != nil {
-		return fake.ChrootStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.chrootReturns
 	return fakeReturns.result1
 }
 
@@ -2321,9 +2330,10 @@ func (fake *FakeSyscall) Clearenv() {
 	fake.clearenvMutex.Lock()
 	fake.clearenvArgsForCall = append(fake.clearenvArgsForCall, struct {
 	}{})
+	stub := fake.ClearenvStub
 	fake.recordInvocation("Clearenv", []interface{}{})
 	fake.clearenvMutex.Unlock()
-	if fake.ClearenvStub != nil {
+	if stub != nil {
 		fake.ClearenvStub()
 	}
 }
@@ -2346,15 +2356,16 @@ func (fake *FakeSyscall) Close(arg1 int) error {
 	fake.closeArgsForCall = append(fake.closeArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.CloseStub
+	fakeReturns := fake.closeReturns
 	fake.recordInvocation("Close", []interface{}{arg1})
 	fake.closeMutex.Unlock()
-	if fake.CloseStub != nil {
-		return fake.CloseStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.closeReturns
 	return fakeReturns.result1
 }
 
@@ -2405,9 +2416,10 @@ func (fake *FakeSyscall) CloseOnExec(arg1 int) {
 	fake.closeOnExecArgsForCall = append(fake.closeOnExecArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.CloseOnExecStub
 	fake.recordInvocation("CloseOnExec", []interface{}{arg1})
 	fake.closeOnExecMutex.Unlock()
-	if fake.CloseOnExecStub != nil {
+	if stub != nil {
 		fake.CloseOnExecStub(arg1)
 	}
 }
@@ -2437,15 +2449,16 @@ func (fake *FakeSyscall) CmsgLen(arg1 int) int {
 	fake.cmsgLenArgsForCall = append(fake.cmsgLenArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.CmsgLenStub
+	fakeReturns := fake.cmsgLenReturns
 	fake.recordInvocation("CmsgLen", []interface{}{arg1})
 	fake.cmsgLenMutex.Unlock()
-	if fake.CmsgLenStub != nil {
-		return fake.CmsgLenStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.cmsgLenReturns
 	return fakeReturns.result1
 }
 
@@ -2497,15 +2510,16 @@ func (fake *FakeSyscall) CmsgSpace(arg1 int) int {
 	fake.cmsgSpaceArgsForCall = append(fake.cmsgSpaceArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.CmsgSpaceStub
+	fakeReturns := fake.cmsgSpaceReturns
 	fake.recordInvocation("CmsgSpace", []interface{}{arg1})
 	fake.cmsgSpaceMutex.Unlock()
-	if fake.CmsgSpaceStub != nil {
-		return fake.CmsgSpaceStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.cmsgSpaceReturns
 	return fakeReturns.result1
 }
 
@@ -2558,15 +2572,16 @@ func (fake *FakeSyscall) Connect(arg1 int, arg2 syscall.Sockaddr) error {
 		arg1 int
 		arg2 syscall.Sockaddr
 	}{arg1, arg2})
+	stub := fake.ConnectStub
+	fakeReturns := fake.connectReturns
 	fake.recordInvocation("Connect", []interface{}{arg1, arg2})
 	fake.connectMutex.Unlock()
-	if fake.ConnectStub != nil {
-		return fake.ConnectStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.connectReturns
 	return fakeReturns.result1
 }
 
@@ -2618,15 +2633,16 @@ func (fake *FakeSyscall) Dup(arg1 int) (int, error) {
 	fake.dupArgsForCall = append(fake.dupArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.DupStub
+	fakeReturns := fake.dupReturns
 	fake.recordInvocation("Dup", []interface{}{arg1})
 	fake.dupMutex.Unlock()
-	if fake.DupStub != nil {
-		return fake.DupStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.dupReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -2682,15 +2698,16 @@ func (fake *FakeSyscall) Dup2(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.Dup2Stub
+	fakeReturns := fake.dup2Returns
 	fake.recordInvocation("Dup2", []interface{}{arg1, arg2})
 	fake.dup2Mutex.Unlock()
-	if fake.Dup2Stub != nil {
-		return fake.Dup2Stub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.dup2Returns
 	return fakeReturns.result1
 }
 
@@ -2741,15 +2758,16 @@ func (fake *FakeSyscall) Environ() []string {
 	ret, specificReturn := fake.environReturnsOnCall[len(fake.environArgsForCall)]
 	fake.environArgsForCall = append(fake.environArgsForCall, struct {
 	}{})
+	stub := fake.EnvironStub
+	fakeReturns := fake.environReturns
 	fake.recordInvocation("Environ", []interface{}{})
 	fake.environMutex.Unlock()
-	if fake.EnvironStub != nil {
-		return fake.EnvironStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.environReturns
 	return fakeReturns.result1
 }
 
@@ -2806,15 +2824,16 @@ func (fake *FakeSyscall) Exec(arg1 string, arg2 []string, arg3 []string) error {
 		arg2 []string
 		arg3 []string
 	}{arg1, arg2Copy, arg3Copy})
+	stub := fake.ExecStub
+	fakeReturns := fake.execReturns
 	fake.recordInvocation("Exec", []interface{}{arg1, arg2Copy, arg3Copy})
 	fake.execMutex.Unlock()
-	if fake.ExecStub != nil {
-		return fake.ExecStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.execReturns
 	return fakeReturns.result1
 }
 
@@ -2865,9 +2884,10 @@ func (fake *FakeSyscall) Exit(arg1 int) {
 	fake.exitArgsForCall = append(fake.exitArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.ExitStub
 	fake.recordInvocation("Exit", []interface{}{arg1})
 	fake.exitMutex.Unlock()
-	if fake.ExitStub != nil {
+	if stub != nil {
 		fake.ExitStub(arg1)
 	}
 }
@@ -2900,15 +2920,16 @@ func (fake *FakeSyscall) Faccessat(arg1 int, arg2 string, arg3 uint32, arg4 int)
 		arg3 uint32
 		arg4 int
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.FaccessatStub
+	fakeReturns := fake.faccessatReturns
 	fake.recordInvocation("Faccessat", []interface{}{arg1, arg2, arg3, arg4})
 	fake.faccessatMutex.Unlock()
-	if fake.FaccessatStub != nil {
-		return fake.FaccessatStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.faccessatReturns
 	return fakeReturns.result1
 }
 
@@ -2960,15 +2981,16 @@ func (fake *FakeSyscall) Fchdir(arg1 int) error {
 	fake.fchdirArgsForCall = append(fake.fchdirArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.FchdirStub
+	fakeReturns := fake.fchdirReturns
 	fake.recordInvocation("Fchdir", []interface{}{arg1})
 	fake.fchdirMutex.Unlock()
-	if fake.FchdirStub != nil {
-		return fake.FchdirStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fchdirReturns
 	return fakeReturns.result1
 }
 
@@ -3021,15 +3043,16 @@ func (fake *FakeSyscall) Fchmod(arg1 int, arg2 uint32) error {
 		arg1 int
 		arg2 uint32
 	}{arg1, arg2})
+	stub := fake.FchmodStub
+	fakeReturns := fake.fchmodReturns
 	fake.recordInvocation("Fchmod", []interface{}{arg1, arg2})
 	fake.fchmodMutex.Unlock()
-	if fake.FchmodStub != nil {
-		return fake.FchmodStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fchmodReturns
 	return fakeReturns.result1
 }
 
@@ -3083,15 +3106,16 @@ func (fake *FakeSyscall) Fchown(arg1 int, arg2 int, arg3 int) error {
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.FchownStub
+	fakeReturns := fake.fchownReturns
 	fake.recordInvocation("Fchown", []interface{}{arg1, arg2, arg3})
 	fake.fchownMutex.Unlock()
-	if fake.FchownStub != nil {
-		return fake.FchownStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fchownReturns
 	return fakeReturns.result1
 }
 
@@ -3145,15 +3169,16 @@ func (fake *FakeSyscall) FcntlFlock(arg1 uintptr, arg2 int, arg3 *syscall.Flock_
 		arg2 int
 		arg3 *syscall.Flock_t
 	}{arg1, arg2, arg3})
+	stub := fake.FcntlFlockStub
+	fakeReturns := fake.fcntlFlockReturns
 	fake.recordInvocation("FcntlFlock", []interface{}{arg1, arg2, arg3})
 	fake.fcntlFlockMutex.Unlock()
-	if fake.FcntlFlockStub != nil {
-		return fake.FcntlFlockStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fcntlFlockReturns
 	return fakeReturns.result1
 }
 
@@ -3206,15 +3231,16 @@ func (fake *FakeSyscall) Flock(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.FlockStub
+	fakeReturns := fake.flockReturns
 	fake.recordInvocation("Flock", []interface{}{arg1, arg2})
 	fake.flockMutex.Unlock()
-	if fake.FlockStub != nil {
-		return fake.FlockStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.flockReturns
 	return fakeReturns.result1
 }
 
@@ -3273,15 +3299,16 @@ func (fake *FakeSyscall) ForkExec(arg1 string, arg2 []string, arg3 *syscall.Proc
 		arg2 []string
 		arg3 *syscall.ProcAttr
 	}{arg1, arg2Copy, arg3})
+	stub := fake.ForkExecStub
+	fakeReturns := fake.forkExecReturns
 	fake.recordInvocation("ForkExec", []interface{}{arg1, arg2Copy, arg3})
 	fake.forkExecMutex.Unlock()
-	if fake.ForkExecStub != nil {
-		return fake.ForkExecStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.forkExecReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -3337,15 +3364,16 @@ func (fake *FakeSyscall) Fstat(arg1 int, arg2 *syscall.Stat_t) error {
 		arg1 int
 		arg2 *syscall.Stat_t
 	}{arg1, arg2})
+	stub := fake.FstatStub
+	fakeReturns := fake.fstatReturns
 	fake.recordInvocation("Fstat", []interface{}{arg1, arg2})
 	fake.fstatMutex.Unlock()
-	if fake.FstatStub != nil {
-		return fake.FstatStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fstatReturns
 	return fakeReturns.result1
 }
 
@@ -3398,15 +3426,16 @@ func (fake *FakeSyscall) Fstatfs(arg1 int, arg2 *syscall.Statfs_t) error {
 		arg1 int
 		arg2 *syscall.Statfs_t
 	}{arg1, arg2})
+	stub := fake.FstatfsStub
+	fakeReturns := fake.fstatfsReturns
 	fake.recordInvocation("Fstatfs", []interface{}{arg1, arg2})
 	fake.fstatfsMutex.Unlock()
-	if fake.FstatfsStub != nil {
-		return fake.FstatfsStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fstatfsReturns
 	return fakeReturns.result1
 }
 
@@ -3458,15 +3487,16 @@ func (fake *FakeSyscall) Fsync(arg1 int) error {
 	fake.fsyncArgsForCall = append(fake.fsyncArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.FsyncStub
+	fakeReturns := fake.fsyncReturns
 	fake.recordInvocation("Fsync", []interface{}{arg1})
 	fake.fsyncMutex.Unlock()
-	if fake.FsyncStub != nil {
-		return fake.FsyncStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.fsyncReturns
 	return fakeReturns.result1
 }
 
@@ -3519,15 +3549,16 @@ func (fake *FakeSyscall) Ftruncate(arg1 int, arg2 int64) error {
 		arg1 int
 		arg2 int64
 	}{arg1, arg2})
+	stub := fake.FtruncateStub
+	fakeReturns := fake.ftruncateReturns
 	fake.recordInvocation("Ftruncate", []interface{}{arg1, arg2})
 	fake.ftruncateMutex.Unlock()
-	if fake.FtruncateStub != nil {
-		return fake.FtruncateStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.ftruncateReturns
 	return fakeReturns.result1
 }
 
@@ -3585,15 +3616,16 @@ func (fake *FakeSyscall) Futimes(arg1 int, arg2 []syscall.Timeval) error {
 		arg1 int
 		arg2 []syscall.Timeval
 	}{arg1, arg2Copy})
+	stub := fake.FutimesStub
+	fakeReturns := fake.futimesReturns
 	fake.recordInvocation("Futimes", []interface{}{arg1, arg2Copy})
 	fake.futimesMutex.Unlock()
-	if fake.FutimesStub != nil {
-		return fake.FutimesStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.futimesReturns
 	return fakeReturns.result1
 }
 
@@ -3644,15 +3676,16 @@ func (fake *FakeSyscall) Getegid() int {
 	ret, specificReturn := fake.getegidReturnsOnCall[len(fake.getegidArgsForCall)]
 	fake.getegidArgsForCall = append(fake.getegidArgsForCall, struct {
 	}{})
+	stub := fake.GetegidStub
+	fakeReturns := fake.getegidReturns
 	fake.recordInvocation("Getegid", []interface{}{})
 	fake.getegidMutex.Unlock()
-	if fake.GetegidStub != nil {
-		return fake.GetegidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getegidReturns
 	return fakeReturns.result1
 }
 
@@ -3697,15 +3730,16 @@ func (fake *FakeSyscall) Getenv(arg1 string) (string, bool) {
 	fake.getenvArgsForCall = append(fake.getenvArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.GetenvStub
+	fakeReturns := fake.getenvReturns
 	fake.recordInvocation("Getenv", []interface{}{arg1})
 	fake.getenvMutex.Unlock()
-	if fake.GetenvStub != nil {
-		return fake.GetenvStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getenvReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -3759,15 +3793,16 @@ func (fake *FakeSyscall) Geteuid() int {
 	ret, specificReturn := fake.geteuidReturnsOnCall[len(fake.geteuidArgsForCall)]
 	fake.geteuidArgsForCall = append(fake.geteuidArgsForCall, struct {
 	}{})
+	stub := fake.GeteuidStub
+	fakeReturns := fake.geteuidReturns
 	fake.recordInvocation("Geteuid", []interface{}{})
 	fake.geteuidMutex.Unlock()
-	if fake.GeteuidStub != nil {
-		return fake.GeteuidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.geteuidReturns
 	return fakeReturns.result1
 }
 
@@ -3811,15 +3846,16 @@ func (fake *FakeSyscall) Getgid() int {
 	ret, specificReturn := fake.getgidReturnsOnCall[len(fake.getgidArgsForCall)]
 	fake.getgidArgsForCall = append(fake.getgidArgsForCall, struct {
 	}{})
+	stub := fake.GetgidStub
+	fakeReturns := fake.getgidReturns
 	fake.recordInvocation("Getgid", []interface{}{})
 	fake.getgidMutex.Unlock()
-	if fake.GetgidStub != nil {
-		return fake.GetgidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getgidReturns
 	return fakeReturns.result1
 }
 
@@ -3863,15 +3899,16 @@ func (fake *FakeSyscall) Getgroups() ([]int, error) {
 	ret, specificReturn := fake.getgroupsReturnsOnCall[len(fake.getgroupsArgsForCall)]
 	fake.getgroupsArgsForCall = append(fake.getgroupsArgsForCall, struct {
 	}{})
+	stub := fake.GetgroupsStub
+	fakeReturns := fake.getgroupsReturns
 	fake.recordInvocation("Getgroups", []interface{}{})
 	fake.getgroupsMutex.Unlock()
-	if fake.GetgroupsStub != nil {
-		return fake.GetgroupsStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getgroupsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -3918,15 +3955,16 @@ func (fake *FakeSyscall) Getpagesize() int {
 	ret, specificReturn := fake.getpagesizeReturnsOnCall[len(fake.getpagesizeArgsForCall)]
 	fake.getpagesizeArgsForCall = append(fake.getpagesizeArgsForCall, struct {
 	}{})
+	stub := fake.GetpagesizeStub
+	fakeReturns := fake.getpagesizeReturns
 	fake.recordInvocation("Getpagesize", []interface{}{})
 	fake.getpagesizeMutex.Unlock()
-	if fake.GetpagesizeStub != nil {
-		return fake.GetpagesizeStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getpagesizeReturns
 	return fakeReturns.result1
 }
 
@@ -3971,15 +4009,16 @@ func (fake *FakeSyscall) Getpeername(arg1 int) (syscall.Sockaddr, error) {
 	fake.getpeernameArgsForCall = append(fake.getpeernameArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.GetpeernameStub
+	fakeReturns := fake.getpeernameReturns
 	fake.recordInvocation("Getpeername", []interface{}{arg1})
 	fake.getpeernameMutex.Unlock()
-	if fake.GetpeernameStub != nil {
-		return fake.GetpeernameStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getpeernameReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4034,15 +4073,16 @@ func (fake *FakeSyscall) Getpgid(arg1 int) (int, error) {
 	fake.getpgidArgsForCall = append(fake.getpgidArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.GetpgidStub
+	fakeReturns := fake.getpgidReturns
 	fake.recordInvocation("Getpgid", []interface{}{arg1})
 	fake.getpgidMutex.Unlock()
-	if fake.GetpgidStub != nil {
-		return fake.GetpgidStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getpgidReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4096,15 +4136,16 @@ func (fake *FakeSyscall) Getpgrp() int {
 	ret, specificReturn := fake.getpgrpReturnsOnCall[len(fake.getpgrpArgsForCall)]
 	fake.getpgrpArgsForCall = append(fake.getpgrpArgsForCall, struct {
 	}{})
+	stub := fake.GetpgrpStub
+	fakeReturns := fake.getpgrpReturns
 	fake.recordInvocation("Getpgrp", []interface{}{})
 	fake.getpgrpMutex.Unlock()
-	if fake.GetpgrpStub != nil {
-		return fake.GetpgrpStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getpgrpReturns
 	return fakeReturns.result1
 }
 
@@ -4148,15 +4189,16 @@ func (fake *FakeSyscall) Getpid() int {
 	ret, specificReturn := fake.getpidReturnsOnCall[len(fake.getpidArgsForCall)]
 	fake.getpidArgsForCall = append(fake.getpidArgsForCall, struct {
 	}{})
+	stub := fake.GetpidStub
+	fakeReturns := fake.getpidReturns
 	fake.recordInvocation("Getpid", []interface{}{})
 	fake.getpidMutex.Unlock()
-	if fake.GetpidStub != nil {
-		return fake.GetpidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getpidReturns
 	return fakeReturns.result1
 }
 
@@ -4200,15 +4242,16 @@ func (fake *FakeSyscall) Getppid() int {
 	ret, specificReturn := fake.getppidReturnsOnCall[len(fake.getppidArgsForCall)]
 	fake.getppidArgsForCall = append(fake.getppidArgsForCall, struct {
 	}{})
+	stub := fake.GetppidStub
+	fakeReturns := fake.getppidReturns
 	fake.recordInvocation("Getppid", []interface{}{})
 	fake.getppidMutex.Unlock()
-	if fake.GetppidStub != nil {
-		return fake.GetppidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getppidReturns
 	return fakeReturns.result1
 }
 
@@ -4254,15 +4297,16 @@ func (fake *FakeSyscall) Getpriority(arg1 int, arg2 int) (int, error) {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.GetpriorityStub
+	fakeReturns := fake.getpriorityReturns
 	fake.recordInvocation("Getpriority", []interface{}{arg1, arg2})
 	fake.getpriorityMutex.Unlock()
-	if fake.GetpriorityStub != nil {
-		return fake.GetpriorityStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getpriorityReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4318,15 +4362,16 @@ func (fake *FakeSyscall) Getrlimit(arg1 int, arg2 *syscall.Rlimit) error {
 		arg1 int
 		arg2 *syscall.Rlimit
 	}{arg1, arg2})
+	stub := fake.GetrlimitStub
+	fakeReturns := fake.getrlimitReturns
 	fake.recordInvocation("Getrlimit", []interface{}{arg1, arg2})
 	fake.getrlimitMutex.Unlock()
-	if fake.GetrlimitStub != nil {
-		return fake.GetrlimitStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getrlimitReturns
 	return fakeReturns.result1
 }
 
@@ -4379,15 +4424,16 @@ func (fake *FakeSyscall) Getrusage(arg1 int, arg2 *syscall.Rusage) error {
 		arg1 int
 		arg2 *syscall.Rusage
 	}{arg1, arg2})
+	stub := fake.GetrusageStub
+	fakeReturns := fake.getrusageReturns
 	fake.recordInvocation("Getrusage", []interface{}{arg1, arg2})
 	fake.getrusageMutex.Unlock()
-	if fake.GetrusageStub != nil {
-		return fake.GetrusageStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getrusageReturns
 	return fakeReturns.result1
 }
 
@@ -4439,15 +4485,16 @@ func (fake *FakeSyscall) Getsockname(arg1 int) (syscall.Sockaddr, error) {
 	fake.getsocknameArgsForCall = append(fake.getsocknameArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.GetsocknameStub
+	fakeReturns := fake.getsocknameReturns
 	fake.recordInvocation("Getsockname", []interface{}{arg1})
 	fake.getsocknameMutex.Unlock()
-	if fake.GetsocknameStub != nil {
-		return fake.GetsocknameStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsocknameReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4504,15 +4551,16 @@ func (fake *FakeSyscall) GetsockoptICMPv6Filter(arg1 int, arg2 int, arg3 int) (*
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptICMPv6FilterStub
+	fakeReturns := fake.getsockoptICMPv6FilterReturns
 	fake.recordInvocation("GetsockoptICMPv6Filter", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptICMPv6FilterMutex.Unlock()
-	if fake.GetsockoptICMPv6FilterStub != nil {
-		return fake.GetsockoptICMPv6FilterStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptICMPv6FilterReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4569,15 +4617,16 @@ func (fake *FakeSyscall) GetsockoptIPMreq(arg1 int, arg2 int, arg3 int) (*syscal
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptIPMreqStub
+	fakeReturns := fake.getsockoptIPMreqReturns
 	fake.recordInvocation("GetsockoptIPMreq", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptIPMreqMutex.Unlock()
-	if fake.GetsockoptIPMreqStub != nil {
-		return fake.GetsockoptIPMreqStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptIPMreqReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4634,15 +4683,16 @@ func (fake *FakeSyscall) GetsockoptIPv6MTUInfo(arg1 int, arg2 int, arg3 int) (*s
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptIPv6MTUInfoStub
+	fakeReturns := fake.getsockoptIPv6MTUInfoReturns
 	fake.recordInvocation("GetsockoptIPv6MTUInfo", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptIPv6MTUInfoMutex.Unlock()
-	if fake.GetsockoptIPv6MTUInfoStub != nil {
-		return fake.GetsockoptIPv6MTUInfoStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptIPv6MTUInfoReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4699,15 +4749,16 @@ func (fake *FakeSyscall) GetsockoptIPv6Mreq(arg1 int, arg2 int, arg3 int) (*sysc
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptIPv6MreqStub
+	fakeReturns := fake.getsockoptIPv6MreqReturns
 	fake.recordInvocation("GetsockoptIPv6Mreq", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptIPv6MreqMutex.Unlock()
-	if fake.GetsockoptIPv6MreqStub != nil {
-		return fake.GetsockoptIPv6MreqStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptIPv6MreqReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4764,15 +4815,16 @@ func (fake *FakeSyscall) GetsockoptInet4Addr(arg1 int, arg2 int, arg3 int) ([4]b
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptInet4AddrStub
+	fakeReturns := fake.getsockoptInet4AddrReturns
 	fake.recordInvocation("GetsockoptInet4Addr", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptInet4AddrMutex.Unlock()
-	if fake.GetsockoptInet4AddrStub != nil {
-		return fake.GetsockoptInet4AddrStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptInet4AddrReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4829,15 +4881,16 @@ func (fake *FakeSyscall) GetsockoptInt(arg1 int, arg2 int, arg3 int) (int, error
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.GetsockoptIntStub
+	fakeReturns := fake.getsockoptIntReturns
 	fake.recordInvocation("GetsockoptInt", []interface{}{arg1, arg2, arg3})
 	fake.getsockoptIntMutex.Unlock()
-	if fake.GetsockoptIntStub != nil {
-		return fake.GetsockoptIntStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getsockoptIntReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -4892,15 +4945,16 @@ func (fake *FakeSyscall) Gettimeofday(arg1 *syscall.Timeval) error {
 	fake.gettimeofdayArgsForCall = append(fake.gettimeofdayArgsForCall, struct {
 		arg1 *syscall.Timeval
 	}{arg1})
+	stub := fake.GettimeofdayStub
+	fakeReturns := fake.gettimeofdayReturns
 	fake.recordInvocation("Gettimeofday", []interface{}{arg1})
 	fake.gettimeofdayMutex.Unlock()
-	if fake.GettimeofdayStub != nil {
-		return fake.GettimeofdayStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.gettimeofdayReturns
 	return fakeReturns.result1
 }
 
@@ -4951,15 +5005,16 @@ func (fake *FakeSyscall) Getuid() int {
 	ret, specificReturn := fake.getuidReturnsOnCall[len(fake.getuidArgsForCall)]
 	fake.getuidArgsForCall = append(fake.getuidArgsForCall, struct {
 	}{})
+	stub := fake.GetuidStub
+	fakeReturns := fake.getuidReturns
 	fake.recordInvocation("Getuid", []interface{}{})
 	fake.getuidMutex.Unlock()
-	if fake.GetuidStub != nil {
-		return fake.GetuidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.getuidReturns
 	return fakeReturns.result1
 }
 
@@ -5003,15 +5058,16 @@ func (fake *FakeSyscall) Getwd() (string, error) {
 	ret, specificReturn := fake.getwdReturnsOnCall[len(fake.getwdArgsForCall)]
 	fake.getwdArgsForCall = append(fake.getwdArgsForCall, struct {
 	}{})
+	stub := fake.GetwdStub
+	fakeReturns := fake.getwdReturns
 	fake.recordInvocation("Getwd", []interface{}{})
 	fake.getwdMutex.Unlock()
-	if fake.GetwdStub != nil {
-		return fake.GetwdStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.getwdReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -5060,15 +5116,16 @@ func (fake *FakeSyscall) Kill(arg1 int, arg2 syscall.Signal) error {
 		arg1 int
 		arg2 syscall.Signal
 	}{arg1, arg2})
+	stub := fake.KillStub
+	fakeReturns := fake.killReturns
 	fake.recordInvocation("Kill", []interface{}{arg1, arg2})
 	fake.killMutex.Unlock()
-	if fake.KillStub != nil {
-		return fake.KillStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.killReturns
 	return fakeReturns.result1
 }
 
@@ -5122,15 +5179,16 @@ func (fake *FakeSyscall) Lchown(arg1 string, arg2 int, arg3 int) error {
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.LchownStub
+	fakeReturns := fake.lchownReturns
 	fake.recordInvocation("Lchown", []interface{}{arg1, arg2, arg3})
 	fake.lchownMutex.Unlock()
-	if fake.LchownStub != nil {
-		return fake.LchownStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.lchownReturns
 	return fakeReturns.result1
 }
 
@@ -5183,15 +5241,16 @@ func (fake *FakeSyscall) Link(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.LinkStub
+	fakeReturns := fake.linkReturns
 	fake.recordInvocation("Link", []interface{}{arg1, arg2})
 	fake.linkMutex.Unlock()
-	if fake.LinkStub != nil {
-		return fake.LinkStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.linkReturns
 	return fakeReturns.result1
 }
 
@@ -5244,15 +5303,16 @@ func (fake *FakeSyscall) Listen(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.ListenStub
+	fakeReturns := fake.listenReturns
 	fake.recordInvocation("Listen", []interface{}{arg1, arg2})
 	fake.listenMutex.Unlock()
-	if fake.ListenStub != nil {
-		return fake.ListenStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.listenReturns
 	return fakeReturns.result1
 }
 
@@ -5305,15 +5365,16 @@ func (fake *FakeSyscall) Lstat(arg1 string, arg2 *syscall.Stat_t) error {
 		arg1 string
 		arg2 *syscall.Stat_t
 	}{arg1, arg2})
+	stub := fake.LstatStub
+	fakeReturns := fake.lstatReturns
 	fake.recordInvocation("Lstat", []interface{}{arg1, arg2})
 	fake.lstatMutex.Unlock()
-	if fake.LstatStub != nil {
-		return fake.LstatStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.lstatReturns
 	return fakeReturns.result1
 }
 
@@ -5366,15 +5427,16 @@ func (fake *FakeSyscall) Mkdir(arg1 string, arg2 uint32) error {
 		arg1 string
 		arg2 uint32
 	}{arg1, arg2})
+	stub := fake.MkdirStub
+	fakeReturns := fake.mkdirReturns
 	fake.recordInvocation("Mkdir", []interface{}{arg1, arg2})
 	fake.mkdirMutex.Unlock()
-	if fake.MkdirStub != nil {
-		return fake.MkdirStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mkdirReturns
 	return fakeReturns.result1
 }
 
@@ -5427,15 +5489,16 @@ func (fake *FakeSyscall) Mkfifo(arg1 string, arg2 uint32) error {
 		arg1 string
 		arg2 uint32
 	}{arg1, arg2})
+	stub := fake.MkfifoStub
+	fakeReturns := fake.mkfifoReturns
 	fake.recordInvocation("Mkfifo", []interface{}{arg1, arg2})
 	fake.mkfifoMutex.Unlock()
-	if fake.MkfifoStub != nil {
-		return fake.MkfifoStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mkfifoReturns
 	return fakeReturns.result1
 }
 
@@ -5489,15 +5552,16 @@ func (fake *FakeSyscall) Mknod(arg1 string, arg2 uint32, arg3 int) error {
 		arg2 uint32
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.MknodStub
+	fakeReturns := fake.mknodReturns
 	fake.recordInvocation("Mknod", []interface{}{arg1, arg2, arg3})
 	fake.mknodMutex.Unlock()
-	if fake.MknodStub != nil {
-		return fake.MknodStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mknodReturns
 	return fakeReturns.result1
 }
 
@@ -5554,15 +5618,16 @@ func (fake *FakeSyscall) Mlock(arg1 []byte) error {
 	fake.mlockArgsForCall = append(fake.mlockArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.MlockStub
+	fakeReturns := fake.mlockReturns
 	fake.recordInvocation("Mlock", []interface{}{arg1Copy})
 	fake.mlockMutex.Unlock()
-	if fake.MlockStub != nil {
-		return fake.MlockStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mlockReturns
 	return fakeReturns.result1
 }
 
@@ -5614,15 +5679,16 @@ func (fake *FakeSyscall) Mlockall(arg1 int) error {
 	fake.mlockallArgsForCall = append(fake.mlockallArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.MlockallStub
+	fakeReturns := fake.mlockallReturns
 	fake.recordInvocation("Mlockall", []interface{}{arg1})
 	fake.mlockallMutex.Unlock()
-	if fake.MlockallStub != nil {
-		return fake.MlockallStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mlockallReturns
 	return fakeReturns.result1
 }
 
@@ -5678,15 +5744,16 @@ func (fake *FakeSyscall) Mmap(arg1 int, arg2 int64, arg3 int, arg4 int, arg5 int
 		arg4 int
 		arg5 int
 	}{arg1, arg2, arg3, arg4, arg5})
+	stub := fake.MmapStub
+	fakeReturns := fake.mmapReturns
 	fake.recordInvocation("Mmap", []interface{}{arg1, arg2, arg3, arg4, arg5})
 	fake.mmapMutex.Unlock()
-	if fake.MmapStub != nil {
-		return fake.MmapStub(arg1, arg2, arg3, arg4, arg5)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.mmapReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -5747,15 +5814,16 @@ func (fake *FakeSyscall) Mprotect(arg1 []byte, arg2 int) error {
 		arg1 []byte
 		arg2 int
 	}{arg1Copy, arg2})
+	stub := fake.MprotectStub
+	fakeReturns := fake.mprotectReturns
 	fake.recordInvocation("Mprotect", []interface{}{arg1Copy, arg2})
 	fake.mprotectMutex.Unlock()
-	if fake.MprotectStub != nil {
-		return fake.MprotectStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.mprotectReturns
 	return fakeReturns.result1
 }
 
@@ -5812,15 +5880,16 @@ func (fake *FakeSyscall) Munlock(arg1 []byte) error {
 	fake.munlockArgsForCall = append(fake.munlockArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.MunlockStub
+	fakeReturns := fake.munlockReturns
 	fake.recordInvocation("Munlock", []interface{}{arg1Copy})
 	fake.munlockMutex.Unlock()
-	if fake.MunlockStub != nil {
-		return fake.MunlockStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.munlockReturns
 	return fakeReturns.result1
 }
 
@@ -5871,15 +5940,16 @@ func (fake *FakeSyscall) Munlockall() error {
 	ret, specificReturn := fake.munlockallReturnsOnCall[len(fake.munlockallArgsForCall)]
 	fake.munlockallArgsForCall = append(fake.munlockallArgsForCall, struct {
 	}{})
+	stub := fake.MunlockallStub
+	fakeReturns := fake.munlockallReturns
 	fake.recordInvocation("Munlockall", []interface{}{})
 	fake.munlockallMutex.Unlock()
-	if fake.MunlockallStub != nil {
-		return fake.MunlockallStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.munlockallReturns
 	return fakeReturns.result1
 }
 
@@ -5929,15 +5999,16 @@ func (fake *FakeSyscall) Munmap(arg1 []byte) error {
 	fake.munmapArgsForCall = append(fake.munmapArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.MunmapStub
+	fakeReturns := fake.munmapReturns
 	fake.recordInvocation("Munmap", []interface{}{arg1Copy})
 	fake.munmapMutex.Unlock()
-	if fake.MunmapStub != nil {
-		return fake.MunmapStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.munmapReturns
 	return fakeReturns.result1
 }
 
@@ -5989,15 +6060,16 @@ func (fake *FakeSyscall) NsecToTimespec(arg1 int64) syscall.Timespec {
 	fake.nsecToTimespecArgsForCall = append(fake.nsecToTimespecArgsForCall, struct {
 		arg1 int64
 	}{arg1})
+	stub := fake.NsecToTimespecStub
+	fakeReturns := fake.nsecToTimespecReturns
 	fake.recordInvocation("NsecToTimespec", []interface{}{arg1})
 	fake.nsecToTimespecMutex.Unlock()
-	if fake.NsecToTimespecStub != nil {
-		return fake.NsecToTimespecStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.nsecToTimespecReturns
 	return fakeReturns.result1
 }
 
@@ -6049,15 +6121,16 @@ func (fake *FakeSyscall) NsecToTimeval(arg1 int64) syscall.Timeval {
 	fake.nsecToTimevalArgsForCall = append(fake.nsecToTimevalArgsForCall, struct {
 		arg1 int64
 	}{arg1})
+	stub := fake.NsecToTimevalStub
+	fakeReturns := fake.nsecToTimevalReturns
 	fake.recordInvocation("NsecToTimeval", []interface{}{arg1})
 	fake.nsecToTimevalMutex.Unlock()
-	if fake.NsecToTimevalStub != nil {
-		return fake.NsecToTimevalStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.nsecToTimevalReturns
 	return fakeReturns.result1
 }
 
@@ -6111,15 +6184,16 @@ func (fake *FakeSyscall) Open(arg1 string, arg2 int, arg3 uint32) (int, error) {
 		arg2 int
 		arg3 uint32
 	}{arg1, arg2, arg3})
+	stub := fake.OpenStub
+	fakeReturns := fake.openReturns
 	fake.recordInvocation("Open", []interface{}{arg1, arg2, arg3})
 	fake.openMutex.Unlock()
-	if fake.OpenStub != nil {
-		return fake.OpenStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.openReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6186,15 +6260,16 @@ func (fake *FakeSyscall) ParseDirent(arg1 []byte, arg2 int, arg3 []string) (int,
 		arg2 int
 		arg3 []string
 	}{arg1Copy, arg2, arg3Copy})
+	stub := fake.ParseDirentStub
+	fakeReturns := fake.parseDirentReturns
 	fake.recordInvocation("ParseDirent", []interface{}{arg1Copy, arg2, arg3Copy})
 	fake.parseDirentMutex.Unlock()
-	if fake.ParseDirentStub != nil {
-		return fake.ParseDirentStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.parseDirentReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -6257,15 +6332,16 @@ func (fake *FakeSyscall) ParseSocketControlMessage(arg1 []byte) ([]syscall.Socke
 	fake.parseSocketControlMessageArgsForCall = append(fake.parseSocketControlMessageArgsForCall, struct {
 		arg1 []byte
 	}{arg1Copy})
+	stub := fake.ParseSocketControlMessageStub
+	fakeReturns := fake.parseSocketControlMessageReturns
 	fake.recordInvocation("ParseSocketControlMessage", []interface{}{arg1Copy})
 	fake.parseSocketControlMessageMutex.Unlock()
-	if fake.ParseSocketControlMessageStub != nil {
-		return fake.ParseSocketControlMessageStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.parseSocketControlMessageReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6320,15 +6396,16 @@ func (fake *FakeSyscall) ParseUnixRights(arg1 *syscall.SocketControlMessage) ([]
 	fake.parseUnixRightsArgsForCall = append(fake.parseUnixRightsArgsForCall, struct {
 		arg1 *syscall.SocketControlMessage
 	}{arg1})
+	stub := fake.ParseUnixRightsStub
+	fakeReturns := fake.parseUnixRightsReturns
 	fake.recordInvocation("ParseUnixRights", []interface{}{arg1})
 	fake.parseUnixRightsMutex.Unlock()
-	if fake.ParseUnixRightsStub != nil {
-		return fake.ParseUnixRightsStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.parseUnixRightsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6388,15 +6465,16 @@ func (fake *FakeSyscall) Pipe(arg1 []int) error {
 	fake.pipeArgsForCall = append(fake.pipeArgsForCall, struct {
 		arg1 []int
 	}{arg1Copy})
+	stub := fake.PipeStub
+	fakeReturns := fake.pipeReturns
 	fake.recordInvocation("Pipe", []interface{}{arg1Copy})
 	fake.pipeMutex.Unlock()
-	if fake.PipeStub != nil {
-		return fake.PipeStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.pipeReturns
 	return fakeReturns.result1
 }
 
@@ -6455,15 +6533,16 @@ func (fake *FakeSyscall) Pread(arg1 int, arg2 []byte, arg3 int64) (int, error) {
 		arg2 []byte
 		arg3 int64
 	}{arg1, arg2Copy, arg3})
+	stub := fake.PreadStub
+	fakeReturns := fake.preadReturns
 	fake.recordInvocation("Pread", []interface{}{arg1, arg2Copy, arg3})
 	fake.preadMutex.Unlock()
-	if fake.PreadStub != nil {
-		return fake.PreadStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.preadReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6518,15 +6597,16 @@ func (fake *FakeSyscall) PtraceAttach(arg1 int) error {
 	fake.ptraceAttachArgsForCall = append(fake.ptraceAttachArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.PtraceAttachStub
+	fakeReturns := fake.ptraceAttachReturns
 	fake.recordInvocation("PtraceAttach", []interface{}{arg1})
 	fake.ptraceAttachMutex.Unlock()
-	if fake.PtraceAttachStub != nil {
-		return fake.PtraceAttachStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.ptraceAttachReturns
 	return fakeReturns.result1
 }
 
@@ -6578,15 +6658,16 @@ func (fake *FakeSyscall) PtraceDetach(arg1 int) error {
 	fake.ptraceDetachArgsForCall = append(fake.ptraceDetachArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.PtraceDetachStub
+	fakeReturns := fake.ptraceDetachReturns
 	fake.recordInvocation("PtraceDetach", []interface{}{arg1})
 	fake.ptraceDetachMutex.Unlock()
-	if fake.PtraceDetachStub != nil {
-		return fake.PtraceDetachStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.ptraceDetachReturns
 	return fakeReturns.result1
 }
 
@@ -6645,15 +6726,16 @@ func (fake *FakeSyscall) Pwrite(arg1 int, arg2 []byte, arg3 int64) (int, error) 
 		arg2 []byte
 		arg3 int64
 	}{arg1, arg2Copy, arg3})
+	stub := fake.PwriteStub
+	fakeReturns := fake.pwriteReturns
 	fake.recordInvocation("Pwrite", []interface{}{arg1, arg2Copy, arg3})
 	fake.pwriteMutex.Unlock()
-	if fake.PwriteStub != nil {
-		return fake.PwriteStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.pwriteReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6711,15 +6793,16 @@ func (fake *FakeSyscall) RawSyscall(arg1 uintptr, arg2 uintptr, arg3 uintptr, ar
 		arg3 uintptr
 		arg4 uintptr
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.RawSyscallStub
+	fakeReturns := fake.rawSyscallReturns
 	fake.recordInvocation("RawSyscall", []interface{}{arg1, arg2, arg3, arg4})
 	fake.rawSyscallMutex.Unlock()
-	if fake.RawSyscallStub != nil {
-		return fake.RawSyscallStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.rawSyscallReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -6783,15 +6866,16 @@ func (fake *FakeSyscall) RawSyscall6(arg1 uintptr, arg2 uintptr, arg3 uintptr, a
 		arg6 uintptr
 		arg7 uintptr
 	}{arg1, arg2, arg3, arg4, arg5, arg6, arg7})
+	stub := fake.RawSyscall6Stub
+	fakeReturns := fake.rawSyscall6Returns
 	fake.recordInvocation("RawSyscall6", []interface{}{arg1, arg2, arg3, arg4, arg5, arg6, arg7})
 	fake.rawSyscall6Mutex.Unlock()
-	if fake.RawSyscall6Stub != nil {
-		return fake.RawSyscall6Stub(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.rawSyscall6Returns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -6855,15 +6939,16 @@ func (fake *FakeSyscall) Read(arg1 int, arg2 []byte) (int, error) {
 		arg1 int
 		arg2 []byte
 	}{arg1, arg2Copy})
+	stub := fake.ReadStub
+	fakeReturns := fake.readReturns
 	fake.recordInvocation("Read", []interface{}{arg1, arg2Copy})
 	fake.readMutex.Unlock()
-	if fake.ReadStub != nil {
-		return fake.ReadStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.readReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6924,15 +7009,16 @@ func (fake *FakeSyscall) ReadDirent(arg1 int, arg2 []byte) (int, error) {
 		arg1 int
 		arg2 []byte
 	}{arg1, arg2Copy})
+	stub := fake.ReadDirentStub
+	fakeReturns := fake.readDirentReturns
 	fake.recordInvocation("ReadDirent", []interface{}{arg1, arg2Copy})
 	fake.readDirentMutex.Unlock()
-	if fake.ReadDirentStub != nil {
-		return fake.ReadDirentStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.readDirentReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -6993,15 +7079,16 @@ func (fake *FakeSyscall) Readlink(arg1 string, arg2 []byte) (int, error) {
 		arg1 string
 		arg2 []byte
 	}{arg1, arg2Copy})
+	stub := fake.ReadlinkStub
+	fakeReturns := fake.readlinkReturns
 	fake.recordInvocation("Readlink", []interface{}{arg1, arg2Copy})
 	fake.readlinkMutex.Unlock()
-	if fake.ReadlinkStub != nil {
-		return fake.ReadlinkStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.readlinkReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7063,15 +7150,16 @@ func (fake *FakeSyscall) Recvfrom(arg1 int, arg2 []byte, arg3 int) (int, syscall
 		arg2 []byte
 		arg3 int
 	}{arg1, arg2Copy, arg3})
+	stub := fake.RecvfromStub
+	fakeReturns := fake.recvfromReturns
 	fake.recordInvocation("Recvfrom", []interface{}{arg1, arg2Copy, arg3})
 	fake.recvfromMutex.Unlock()
-	if fake.RecvfromStub != nil {
-		return fake.RecvfromStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.recvfromReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -7142,15 +7230,16 @@ func (fake *FakeSyscall) Recvmsg(arg1 int, arg2 []byte, arg3 []byte, arg4 int) (
 		arg3 []byte
 		arg4 int
 	}{arg1, arg2Copy, arg3Copy, arg4})
+	stub := fake.RecvmsgStub
+	fakeReturns := fake.recvmsgReturns
 	fake.recordInvocation("Recvmsg", []interface{}{arg1, arg2Copy, arg3Copy, arg4})
 	fake.recvmsgMutex.Unlock()
-	if fake.RecvmsgStub != nil {
-		return fake.RecvmsgStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3, ret.result4, ret.result5
 	}
-	fakeReturns := fake.recvmsgReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3, fakeReturns.result4, fakeReturns.result5
 }
 
@@ -7215,15 +7304,16 @@ func (fake *FakeSyscall) Rename(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.RenameStub
+	fakeReturns := fake.renameReturns
 	fake.recordInvocation("Rename", []interface{}{arg1, arg2})
 	fake.renameMutex.Unlock()
-	if fake.RenameStub != nil {
-		return fake.RenameStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.renameReturns
 	return fakeReturns.result1
 }
 
@@ -7275,15 +7365,16 @@ func (fake *FakeSyscall) Rmdir(arg1 string) error {
 	fake.rmdirArgsForCall = append(fake.rmdirArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.RmdirStub
+	fakeReturns := fake.rmdirReturns
 	fake.recordInvocation("Rmdir", []interface{}{arg1})
 	fake.rmdirMutex.Unlock()
-	if fake.RmdirStub != nil {
-		return fake.RmdirStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.rmdirReturns
 	return fakeReturns.result1
 }
 
@@ -7337,15 +7428,16 @@ func (fake *FakeSyscall) Seek(arg1 int, arg2 int64, arg3 int) (int64, error) {
 		arg2 int64
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.SeekStub
+	fakeReturns := fake.seekReturns
 	fake.recordInvocation("Seek", []interface{}{arg1, arg2, arg3})
 	fake.seekMutex.Unlock()
-	if fake.SeekStub != nil {
-		return fake.SeekStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.seekReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7403,15 +7495,16 @@ func (fake *FakeSyscall) Sendfile(arg1 int, arg2 int, arg3 *int64, arg4 int) (in
 		arg3 *int64
 		arg4 int
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SendfileStub
+	fakeReturns := fake.sendfileReturns
 	fake.recordInvocation("Sendfile", []interface{}{arg1, arg2, arg3, arg4})
 	fake.sendfileMutex.Unlock()
-	if fake.SendfileStub != nil {
-		return fake.SendfileStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.sendfileReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7480,15 +7573,16 @@ func (fake *FakeSyscall) Sendmsg(arg1 int, arg2 []byte, arg3 []byte, arg4 syscal
 		arg4 syscall.Sockaddr
 		arg5 int
 	}{arg1, arg2Copy, arg3Copy, arg4, arg5})
+	stub := fake.SendmsgStub
+	fakeReturns := fake.sendmsgReturns
 	fake.recordInvocation("Sendmsg", []interface{}{arg1, arg2Copy, arg3Copy, arg4, arg5})
 	fake.sendmsgMutex.Unlock()
-	if fake.SendmsgStub != nil {
-		return fake.SendmsgStub(arg1, arg2, arg3, arg4, arg5)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.sendmsgReturns
 	return fakeReturns.result1
 }
 
@@ -7554,15 +7648,16 @@ func (fake *FakeSyscall) SendmsgN(arg1 int, arg2 []byte, arg3 []byte, arg4 sysca
 		arg4 syscall.Sockaddr
 		arg5 int
 	}{arg1, arg2Copy, arg3Copy, arg4, arg5})
+	stub := fake.SendmsgNStub
+	fakeReturns := fake.sendmsgNReturns
 	fake.recordInvocation("SendmsgN", []interface{}{arg1, arg2Copy, arg3Copy, arg4, arg5})
 	fake.sendmsgNMutex.Unlock()
-	if fake.SendmsgNStub != nil {
-		return fake.SendmsgNStub(arg1, arg2, arg3, arg4, arg5)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4, arg5)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.sendmsgNReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -7625,15 +7720,16 @@ func (fake *FakeSyscall) Sendto(arg1 int, arg2 []byte, arg3 int, arg4 syscall.So
 		arg3 int
 		arg4 syscall.Sockaddr
 	}{arg1, arg2Copy, arg3, arg4})
+	stub := fake.SendtoStub
+	fakeReturns := fake.sendtoReturns
 	fake.recordInvocation("Sendto", []interface{}{arg1, arg2Copy, arg3, arg4})
 	fake.sendtoMutex.Unlock()
-	if fake.SendtoStub != nil {
-		return fake.SendtoStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.sendtoReturns
 	return fakeReturns.result1
 }
 
@@ -7686,15 +7782,16 @@ func (fake *FakeSyscall) SetNonblock(arg1 int, arg2 bool) error {
 		arg1 int
 		arg2 bool
 	}{arg1, arg2})
+	stub := fake.SetNonblockStub
+	fakeReturns := fake.setNonblockReturns
 	fake.recordInvocation("SetNonblock", []interface{}{arg1, arg2})
 	fake.setNonblockMutex.Unlock()
-	if fake.SetNonblockStub != nil {
-		return fake.SetNonblockStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setNonblockReturns
 	return fakeReturns.result1
 }
 
@@ -7747,15 +7844,16 @@ func (fake *FakeSyscall) Setenv(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.SetenvStub
+	fakeReturns := fake.setenvReturns
 	fake.recordInvocation("Setenv", []interface{}{arg1, arg2})
 	fake.setenvMutex.Unlock()
-	if fake.SetenvStub != nil {
-		return fake.SetenvStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setenvReturns
 	return fakeReturns.result1
 }
 
@@ -7807,15 +7905,16 @@ func (fake *FakeSyscall) Setgid(arg1 int) error {
 	fake.setgidArgsForCall = append(fake.setgidArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.SetgidStub
+	fakeReturns := fake.setgidReturns
 	fake.recordInvocation("Setgid", []interface{}{arg1})
 	fake.setgidMutex.Unlock()
-	if fake.SetgidStub != nil {
-		return fake.SetgidStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setgidReturns
 	return fakeReturns.result1
 }
 
@@ -7872,15 +7971,16 @@ func (fake *FakeSyscall) Setgroups(arg1 []int) error {
 	fake.setgroupsArgsForCall = append(fake.setgroupsArgsForCall, struct {
 		arg1 []int
 	}{arg1Copy})
+	stub := fake.SetgroupsStub
+	fakeReturns := fake.setgroupsReturns
 	fake.recordInvocation("Setgroups", []interface{}{arg1Copy})
 	fake.setgroupsMutex.Unlock()
-	if fake.SetgroupsStub != nil {
-		return fake.SetgroupsStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setgroupsReturns
 	return fakeReturns.result1
 }
 
@@ -7933,15 +8033,16 @@ func (fake *FakeSyscall) Setpgid(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.SetpgidStub
+	fakeReturns := fake.setpgidReturns
 	fake.recordInvocation("Setpgid", []interface{}{arg1, arg2})
 	fake.setpgidMutex.Unlock()
-	if fake.SetpgidStub != nil {
-		return fake.SetpgidStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setpgidReturns
 	return fakeReturns.result1
 }
 
@@ -7995,15 +8096,16 @@ func (fake *FakeSyscall) Setpriority(arg1 int, arg2 int, arg3 int) error {
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.SetpriorityStub
+	fakeReturns := fake.setpriorityReturns
 	fake.recordInvocation("Setpriority", []interface{}{arg1, arg2, arg3})
 	fake.setpriorityMutex.Unlock()
-	if fake.SetpriorityStub != nil {
-		return fake.SetpriorityStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setpriorityReturns
 	return fakeReturns.result1
 }
 
@@ -8056,15 +8158,16 @@ func (fake *FakeSyscall) Setregid(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.SetregidStub
+	fakeReturns := fake.setregidReturns
 	fake.recordInvocation("Setregid", []interface{}{arg1, arg2})
 	fake.setregidMutex.Unlock()
-	if fake.SetregidStub != nil {
-		return fake.SetregidStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setregidReturns
 	return fakeReturns.result1
 }
 
@@ -8117,15 +8220,16 @@ func (fake *FakeSyscall) Setreuid(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.SetreuidStub
+	fakeReturns := fake.setreuidReturns
 	fake.recordInvocation("Setreuid", []interface{}{arg1, arg2})
 	fake.setreuidMutex.Unlock()
-	if fake.SetreuidStub != nil {
-		return fake.SetreuidStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setreuidReturns
 	return fakeReturns.result1
 }
 
@@ -8178,15 +8282,16 @@ func (fake *FakeSyscall) Setrlimit(arg1 int, arg2 *syscall.Rlimit) error {
 		arg1 int
 		arg2 *syscall.Rlimit
 	}{arg1, arg2})
+	stub := fake.SetrlimitStub
+	fakeReturns := fake.setrlimitReturns
 	fake.recordInvocation("Setrlimit", []interface{}{arg1, arg2})
 	fake.setrlimitMutex.Unlock()
-	if fake.SetrlimitStub != nil {
-		return fake.SetrlimitStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setrlimitReturns
 	return fakeReturns.result1
 }
 
@@ -8237,15 +8342,16 @@ func (fake *FakeSyscall) Setsid() (int, error) {
 	ret, specificReturn := fake.setsidReturnsOnCall[len(fake.setsidArgsForCall)]
 	fake.setsidArgsForCall = append(fake.setsidArgsForCall, struct {
 	}{})
+	stub := fake.SetsidStub
+	fakeReturns := fake.setsidReturns
 	fake.recordInvocation("Setsid", []interface{}{})
 	fake.setsidMutex.Unlock()
-	if fake.SetsidStub != nil {
-		return fake.SetsidStub()
+	if stub != nil {
+		return stub()
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.setsidReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -8296,15 +8402,16 @@ func (fake *FakeSyscall) SetsockoptByte(arg1 int, arg2 int, arg3 int, arg4 byte)
 		arg3 int
 		arg4 byte
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptByteStub
+	fakeReturns := fake.setsockoptByteReturns
 	fake.recordInvocation("SetsockoptByte", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptByteMutex.Unlock()
-	if fake.SetsockoptByteStub != nil {
-		return fake.SetsockoptByteStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptByteReturns
 	return fakeReturns.result1
 }
 
@@ -8359,15 +8466,16 @@ func (fake *FakeSyscall) SetsockoptICMPv6Filter(arg1 int, arg2 int, arg3 int, ar
 		arg3 int
 		arg4 *syscall.ICMPv6Filter
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptICMPv6FilterStub
+	fakeReturns := fake.setsockoptICMPv6FilterReturns
 	fake.recordInvocation("SetsockoptICMPv6Filter", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptICMPv6FilterMutex.Unlock()
-	if fake.SetsockoptICMPv6FilterStub != nil {
-		return fake.SetsockoptICMPv6FilterStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptICMPv6FilterReturns
 	return fakeReturns.result1
 }
 
@@ -8422,15 +8530,16 @@ func (fake *FakeSyscall) SetsockoptIPMreq(arg1 int, arg2 int, arg3 int, arg4 *sy
 		arg3 int
 		arg4 *syscall.IPMreq
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptIPMreqStub
+	fakeReturns := fake.setsockoptIPMreqReturns
 	fake.recordInvocation("SetsockoptIPMreq", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptIPMreqMutex.Unlock()
-	if fake.SetsockoptIPMreqStub != nil {
-		return fake.SetsockoptIPMreqStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptIPMreqReturns
 	return fakeReturns.result1
 }
 
@@ -8485,15 +8594,16 @@ func (fake *FakeSyscall) SetsockoptIPv6Mreq(arg1 int, arg2 int, arg3 int, arg4 *
 		arg3 int
 		arg4 *syscall.IPv6Mreq
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptIPv6MreqStub
+	fakeReturns := fake.setsockoptIPv6MreqReturns
 	fake.recordInvocation("SetsockoptIPv6Mreq", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptIPv6MreqMutex.Unlock()
-	if fake.SetsockoptIPv6MreqStub != nil {
-		return fake.SetsockoptIPv6MreqStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptIPv6MreqReturns
 	return fakeReturns.result1
 }
 
@@ -8548,15 +8658,16 @@ func (fake *FakeSyscall) SetsockoptInet4Addr(arg1 int, arg2 int, arg3 int, arg4 
 		arg3 int
 		arg4 [4]byte
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptInet4AddrStub
+	fakeReturns := fake.setsockoptInet4AddrReturns
 	fake.recordInvocation("SetsockoptInet4Addr", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptInet4AddrMutex.Unlock()
-	if fake.SetsockoptInet4AddrStub != nil {
-		return fake.SetsockoptInet4AddrStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptInet4AddrReturns
 	return fakeReturns.result1
 }
 
@@ -8611,15 +8722,16 @@ func (fake *FakeSyscall) SetsockoptInt(arg1 int, arg2 int, arg3 int, arg4 int) e
 		arg3 int
 		arg4 int
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptIntStub
+	fakeReturns := fake.setsockoptIntReturns
 	fake.recordInvocation("SetsockoptInt", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptIntMutex.Unlock()
-	if fake.SetsockoptIntStub != nil {
-		return fake.SetsockoptIntStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptIntReturns
 	return fakeReturns.result1
 }
 
@@ -8674,15 +8786,16 @@ func (fake *FakeSyscall) SetsockoptLinger(arg1 int, arg2 int, arg3 int, arg4 *sy
 		arg3 int
 		arg4 *syscall.Linger
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptLingerStub
+	fakeReturns := fake.setsockoptLingerReturns
 	fake.recordInvocation("SetsockoptLinger", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptLingerMutex.Unlock()
-	if fake.SetsockoptLingerStub != nil {
-		return fake.SetsockoptLingerStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptLingerReturns
 	return fakeReturns.result1
 }
 
@@ -8737,15 +8850,16 @@ func (fake *FakeSyscall) SetsockoptString(arg1 int, arg2 int, arg3 int, arg4 str
 		arg3 int
 		arg4 string
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptStringStub
+	fakeReturns := fake.setsockoptStringReturns
 	fake.recordInvocation("SetsockoptString", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptStringMutex.Unlock()
-	if fake.SetsockoptStringStub != nil {
-		return fake.SetsockoptStringStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptStringReturns
 	return fakeReturns.result1
 }
 
@@ -8800,15 +8914,16 @@ func (fake *FakeSyscall) SetsockoptTimeval(arg1 int, arg2 int, arg3 int, arg4 *s
 		arg3 int
 		arg4 *syscall.Timeval
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.SetsockoptTimevalStub
+	fakeReturns := fake.setsockoptTimevalReturns
 	fake.recordInvocation("SetsockoptTimeval", []interface{}{arg1, arg2, arg3, arg4})
 	fake.setsockoptTimevalMutex.Unlock()
-	if fake.SetsockoptTimevalStub != nil {
-		return fake.SetsockoptTimevalStub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setsockoptTimevalReturns
 	return fakeReturns.result1
 }
 
@@ -8860,15 +8975,16 @@ func (fake *FakeSyscall) Settimeofday(arg1 *syscall.Timeval) error {
 	fake.settimeofdayArgsForCall = append(fake.settimeofdayArgsForCall, struct {
 		arg1 *syscall.Timeval
 	}{arg1})
+	stub := fake.SettimeofdayStub
+	fakeReturns := fake.settimeofdayReturns
 	fake.recordInvocation("Settimeofday", []interface{}{arg1})
 	fake.settimeofdayMutex.Unlock()
-	if fake.SettimeofdayStub != nil {
-		return fake.SettimeofdayStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.settimeofdayReturns
 	return fakeReturns.result1
 }
 
@@ -8920,15 +9036,16 @@ func (fake *FakeSyscall) Setuid(arg1 int) error {
 	fake.setuidArgsForCall = append(fake.setuidArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.SetuidStub
+	fakeReturns := fake.setuidReturns
 	fake.recordInvocation("Setuid", []interface{}{arg1})
 	fake.setuidMutex.Unlock()
-	if fake.SetuidStub != nil {
-		return fake.SetuidStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.setuidReturns
 	return fakeReturns.result1
 }
 
@@ -8981,15 +9098,16 @@ func (fake *FakeSyscall) Shutdown(arg1 int, arg2 int) error {
 		arg1 int
 		arg2 int
 	}{arg1, arg2})
+	stub := fake.ShutdownStub
+	fakeReturns := fake.shutdownReturns
 	fake.recordInvocation("Shutdown", []interface{}{arg1, arg2})
 	fake.shutdownMutex.Unlock()
-	if fake.ShutdownStub != nil {
-		return fake.ShutdownStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.shutdownReturns
 	return fakeReturns.result1
 }
 
@@ -9046,15 +9164,16 @@ func (fake *FakeSyscall) SlicePtrFromStrings(arg1 []string) ([]*byte, error) {
 	fake.slicePtrFromStringsArgsForCall = append(fake.slicePtrFromStringsArgsForCall, struct {
 		arg1 []string
 	}{arg1Copy})
+	stub := fake.SlicePtrFromStringsStub
+	fakeReturns := fake.slicePtrFromStringsReturns
 	fake.recordInvocation("SlicePtrFromStrings", []interface{}{arg1Copy})
 	fake.slicePtrFromStringsMutex.Unlock()
-	if fake.SlicePtrFromStringsStub != nil {
-		return fake.SlicePtrFromStringsStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.slicePtrFromStringsReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9111,15 +9230,16 @@ func (fake *FakeSyscall) Socket(arg1 int, arg2 int, arg3 int) (int, error) {
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.SocketStub
+	fakeReturns := fake.socketReturns
 	fake.recordInvocation("Socket", []interface{}{arg1, arg2, arg3})
 	fake.socketMutex.Unlock()
-	if fake.SocketStub != nil {
-		return fake.SocketStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.socketReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9176,15 +9296,16 @@ func (fake *FakeSyscall) Socketpair(arg1 int, arg2 int, arg3 int) ([2]int, error
 		arg2 int
 		arg3 int
 	}{arg1, arg2, arg3})
+	stub := fake.SocketpairStub
+	fakeReturns := fake.socketpairReturns
 	fake.recordInvocation("Socketpair", []interface{}{arg1, arg2, arg3})
 	fake.socketpairMutex.Unlock()
-	if fake.SocketpairStub != nil {
-		return fake.SocketpairStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.socketpairReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -9246,15 +9367,16 @@ func (fake *FakeSyscall) StartProcess(arg1 string, arg2 []string, arg3 *syscall.
 		arg2 []string
 		arg3 *syscall.ProcAttr
 	}{arg1, arg2Copy, arg3})
+	stub := fake.StartProcessStub
+	fakeReturns := fake.startProcessReturns
 	fake.recordInvocation("StartProcess", []interface{}{arg1, arg2Copy, arg3})
 	fake.startProcessMutex.Unlock()
-	if fake.StartProcessStub != nil {
-		return fake.StartProcessStub(arg1, arg2, arg3)
+	if stub != nil {
+		return stub(arg1, arg2, arg3)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2, ret.result3
 	}
-	fakeReturns := fake.startProcessReturns
 	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
 }
 
@@ -9313,15 +9435,16 @@ func (fake *FakeSyscall) Stat(arg1 string, arg2 *syscall.Stat_t) error {
 		arg1 string
 		arg2 *syscall.Stat_t
 	}{arg1, arg2})
+	stub := fake.StatStub
+	fakeReturns := fake.statReturns
 	fake.recordInvocation("Stat", []interface{}{arg1, arg2})
 	fake.statMutex.Unlock()
-	if fake.StatStub != nil {
-		return fake.StatStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.statReturns
 	return fakeReturns.result1
 }
 
@@ -9374,15 +9497,16 @@ func (fake *FakeSyscall) Statfs(arg1 string, arg2 *syscall.Statfs_t) error {
 		arg1 string
 		arg2 *syscall.Statfs_t
 	}{arg1, arg2})
+	stub := fake.StatfsStub
+	fakeReturns := fake.statfsReturns
 	fake.recordInvocation("Statfs", []interface{}{arg1, arg2})
 	fake.statfsMutex.Unlock()
-	if fake.StatfsStub != nil {
-		return fake.StatfsStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.statfsReturns
 	return fakeReturns.result1
 }
 
@@ -9434,15 +9558,16 @@ func (fake *FakeSyscall) StringBytePtr(arg1 string) *byte {
 	fake.stringBytePtrArgsForCall = append(fake.stringBytePtrArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.StringBytePtrStub
+	fakeReturns := fake.stringBytePtrReturns
 	fake.recordInvocation("StringBytePtr", []interface{}{arg1})
 	fake.stringBytePtrMutex.Unlock()
-	if fake.StringBytePtrStub != nil {
-		return fake.StringBytePtrStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.stringBytePtrReturns
 	return fakeReturns.result1
 }
 
@@ -9494,15 +9619,16 @@ func (fake *FakeSyscall) StringByteSlice(arg1 string) []byte {
 	fake.stringByteSliceArgsForCall = append(fake.stringByteSliceArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.StringByteSliceStub
+	fakeReturns := fake.stringByteSliceReturns
 	fake.recordInvocation("StringByteSlice", []interface{}{arg1})
 	fake.stringByteSliceMutex.Unlock()
-	if fake.StringByteSliceStub != nil {
-		return fake.StringByteSliceStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.stringByteSliceReturns
 	return fakeReturns.result1
 }
 
@@ -9559,15 +9685,16 @@ func (fake *FakeSyscall) StringSlicePtr(arg1 []string) []*byte {
 	fake.stringSlicePtrArgsForCall = append(fake.stringSlicePtrArgsForCall, struct {
 		arg1 []string
 	}{arg1Copy})
+	stub := fake.StringSlicePtrStub
+	fakeReturns := fake.stringSlicePtrReturns
 	fake.recordInvocation("StringSlicePtr", []interface{}{arg1Copy})
 	fake.stringSlicePtrMutex.Unlock()
-	if fake.StringSlicePtrStub != nil {
-		return fake.StringSlicePtrStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.stringSlicePtrReturns
 	return fakeReturns.result1
 }
 
@@ -9620,15 +9747,16 @@ func (fake *FakeSyscall) Symlink(arg1 string, arg2 string) error {
 		arg1 string
 		arg2 string
 	}{arg1, arg2})
+	stub := fake.SymlinkStub
+	fakeReturns := fake.symlinkReturns
 	fake.recordInvocation("Symlink", []interface{}{arg1, arg2})
 	fake.symlinkMutex.Unlock()
-	if fake.SymlinkStub != nil {
-		return fake.SymlinkStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.symlinkReturns
 	return fakeReturns.result1
 }
 
@@ -9680,15 +9808,16 @@ func (fake *FakeSyscall) TimespecToNsec(arg1 syscall.Timespec) int64 {
 	fake.timespecToNsecArgsForCall = append(fake.timespecToNsecArgsForCall, struct {
 		arg1 syscall.Timespec
 	}{arg1})
+	stub := fake.TimespecToNsecStub
+	fakeReturns := fake.timespecToNsecReturns
 	fake.recordInvocation("TimespecToNsec", []interface{}{arg1})
 	fake.timespecToNsecMutex.Unlock()
-	if fake.TimespecToNsecStub != nil {
-		return fake.TimespecToNsecStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.timespecToNsecReturns
 	return fakeReturns.result1
 }
 
@@ -9740,15 +9869,16 @@ func (fake *FakeSyscall) TimevalToNsec(arg1 syscall.Timeval) int64 {
 	fake.timevalToNsecArgsForCall = append(fake.timevalToNsecArgsForCall, struct {
 		arg1 syscall.Timeval
 	}{arg1})
+	stub := fake.TimevalToNsecStub
+	fakeReturns := fake.timevalToNsecReturns
 	fake.recordInvocation("TimevalToNsec", []interface{}{arg1})
 	fake.timevalToNsecMutex.Unlock()
-	if fake.TimevalToNsecStub != nil {
-		return fake.TimevalToNsecStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.timevalToNsecReturns
 	return fakeReturns.result1
 }
 
@@ -9801,15 +9931,16 @@ func (fake *FakeSyscall) Truncate(arg1 string, arg2 int64) error {
 		arg1 string
 		arg2 int64
 	}{arg1, arg2})
+	stub := fake.TruncateStub
+	fakeReturns := fake.truncateReturns
 	fake.recordInvocation("Truncate", []interface{}{arg1, arg2})
 	fake.truncateMutex.Unlock()
-	if fake.TruncateStub != nil {
-		return fake.TruncateStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.truncateReturns
 	return fakeReturns.result1
 }
 
@@ -9861,15 +9992,16 @@ func (fake *FakeSyscall) Umask(arg1 int) int {
 	fake.umaskArgsForCall = append(fake.umaskArgsForCall, struct {
 		arg1 int
 	}{arg1})
+	stub := fake.UmaskStub
+	fakeReturns := fake.umaskReturns
 	fake.recordInvocation("Umask", []interface{}{arg1})
 	fake.umaskMutex.Unlock()
-	if fake.UmaskStub != nil {
-		return fake.UmaskStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.umaskReturns
 	return fakeReturns.result1
 }
 
@@ -9921,15 +10053,16 @@ func (fake *FakeSyscall) UnixRights(arg1 ...int) []byte {
 	fake.unixRightsArgsForCall = append(fake.unixRightsArgsForCall, struct {
 		arg1 []int
 	}{arg1})
+	stub := fake.UnixRightsStub
+	fakeReturns := fake.unixRightsReturns
 	fake.recordInvocation("UnixRights", []interface{}{arg1})
 	fake.unixRightsMutex.Unlock()
-	if fake.UnixRightsStub != nil {
-		return fake.UnixRightsStub(arg1...)
+	if stub != nil {
+		return stub(arg1...)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.unixRightsReturns
 	return fakeReturns.result1
 }
 
@@ -9981,15 +10114,16 @@ func (fake *FakeSyscall) Unlink(arg1 string) error {
 	fake.unlinkArgsForCall = append(fake.unlinkArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.UnlinkStub
+	fakeReturns := fake.unlinkReturns
 	fake.recordInvocation("Unlink", []interface{}{arg1})
 	fake.unlinkMutex.Unlock()
-	if fake.UnlinkStub != nil {
-		return fake.UnlinkStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.unlinkReturns
 	return fakeReturns.result1
 }
 
@@ -10041,15 +10175,16 @@ func (fake *FakeSyscall) Unsetenv(arg1 string) error {
 	fake.unsetenvArgsForCall = append(fake.unsetenvArgsForCall, struct {
 		arg1 string
 	}{arg1})
+	stub := fake.UnsetenvStub
+	fakeReturns := fake.unsetenvReturns
 	fake.recordInvocation("Unsetenv", []interface{}{arg1})
 	fake.unsetenvMutex.Unlock()
-	if fake.UnsetenvStub != nil {
-		return fake.UnsetenvStub(arg1)
+	if stub != nil {
+		return stub(arg1)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.unsetenvReturns
 	return fakeReturns.result1
 }
 
@@ -10107,15 +10242,16 @@ func (fake *FakeSyscall) Utimes(arg1 string, arg2 []syscall.Timeval) error {
 		arg1 string
 		arg2 []syscall.Timeval
 	}{arg1, arg2Copy})
+	stub := fake.UtimesStub
+	fakeReturns := fake.utimesReturns
 	fake.recordInvocation("Utimes", []interface{}{arg1, arg2Copy})
 	fake.utimesMutex.Unlock()
-	if fake.UtimesStub != nil {
-		return fake.UtimesStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.utimesReturns
 	return fakeReturns.result1
 }
 
@@ -10173,15 +10309,16 @@ func (fake *FakeSyscall) UtimesNano(arg1 string, arg2 []syscall.Timespec) error 
 		arg1 string
 		arg2 []syscall.Timespec
 	}{arg1, arg2Copy})
+	stub := fake.UtimesNanoStub
+	fakeReturns := fake.utimesNanoReturns
 	fake.recordInvocation("UtimesNano", []interface{}{arg1, arg2Copy})
 	fake.utimesNanoMutex.Unlock()
-	if fake.UtimesNanoStub != nil {
-		return fake.UtimesNanoStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1
 	}
-	fakeReturns := fake.utimesNanoReturns
 	return fakeReturns.result1
 }
 
@@ -10236,15 +10373,16 @@ func (fake *FakeSyscall) Wait4(arg1 int, arg2 *syscall.WaitStatus, arg3 int, arg
 		arg3 int
 		arg4 *syscall.Rusage
 	}{arg1, arg2, arg3, arg4})
+	stub := fake.Wait4Stub
+	fakeReturns := fake.wait4Returns
 	fake.recordInvocation("Wait4", []interface{}{arg1, arg2, arg3, arg4})
 	fake.wait4Mutex.Unlock()
-	if fake.Wait4Stub != nil {
-		return fake.Wait4Stub(arg1, arg2, arg3, arg4)
+	if stub != nil {
+		return stub(arg1, arg2, arg3, arg4)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.wait4Returns
 	return fakeReturns.result1, fakeReturns.result2
 }
 
@@ -10305,15 +10443,16 @@ func (fake *FakeSyscall) Write(arg1 int, arg2 []byte) (int, error) {
 		arg1 int
 		arg2 []byte
 	}{arg1, arg2Copy})
+	stub := fake.WriteStub
+	fakeReturns := fake.writeReturns
 	fake.recordInvocation("Write", []interface{}{arg1, arg2Copy})
 	fake.writeMutex.Unlock()
-	if fake.WriteStub != nil {
-		return fake.WriteStub(arg1, arg2)
+	if stub != nil {
+		return stub(arg1, arg2)
 	}
 	if specificReturn {
 		return ret.result1, ret.result2
 	}
-	fakeReturns := fake.writeReturns
 	return fakeReturns.result1, fakeReturns.result2
 }
 

@@ -15,6 +15,7 @@ type Ldap interface {
 }
 
 // Manually generated ldap interface
+//
 //go:generate counterfeiter -o ldap_fake/fake_ldap_connection.go . LdapConnection
 type LdapConnection interface {
 	SetTimeout(timeout time.Duration)

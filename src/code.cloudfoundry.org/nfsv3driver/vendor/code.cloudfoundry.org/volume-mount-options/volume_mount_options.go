@@ -1,6 +1,7 @@
 package volume_mount_options
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -62,7 +63,7 @@ func NewMountOpts(userOpts map[string]interface{}, mask MountOptsMask) (MountOpt
 	errorString += buildErrorMessage(mandatoryErrorList, MissingOptionErrorMessage)
 
 	if hasErrors(allowedErrorList, validationErrorList, mandatoryErrorList) {
-		return MountOpts{}, fmt.Errorf(errorString)
+		return MountOpts{}, errors.New(errorString)
 	}
 
 	return mountOpts, nil
@@ -103,12 +104,12 @@ func uniformKeyData(key string, data interface{}) string {
 }
 
 func uniformData(data interface{}, boolAsInt bool) string {
-	switch data.(type) {
+	switch t := data.(type) {
 	case int, int8, int16, int32, int64, float32, float64:
 		return fmt.Sprintf("%#v", data)
 
 	case string:
-		return data.(string)
+		return t
 
 	case bool:
 		if boolAsInt {

@@ -12,7 +12,6 @@ import (
 	"code.cloudfoundry.org/dockerdriver"
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
 	"code.cloudfoundry.org/goshims/filepathshim"
-	"code.cloudfoundry.org/goshims/ioutilshim"
 	"code.cloudfoundry.org/goshims/osshim"
 	"code.cloudfoundry.org/goshims/timeshim"
 	"code.cloudfoundry.org/lager/v3"
@@ -33,7 +32,6 @@ type VolumeDriver struct {
 	volumes       *syncmap.SyncMap[NfsVolumeInfo]
 	os            osshim.Os
 	filepath      filepathshim.Filepath
-	ioutil        ioutilshim.Ioutil
 	time          timeshim.Time
 	mountChecker  mountchecker.MountChecker
 	mountPathRoot string
@@ -41,12 +39,11 @@ type VolumeDriver struct {
 	osHelper      OsHelper
 }
 
-func NewVolumeDriver(logger lager.Logger, os osshim.Os, filepath filepathshim.Filepath, ioutil ioutilshim.Ioutil, time timeshim.Time, mountChecker mountchecker.MountChecker, mountPathRoot string, mounter Mounter, oshelper OsHelper) *VolumeDriver {
+func NewVolumeDriver(logger lager.Logger, os osshim.Os, filepath filepathshim.Filepath, time timeshim.Time, mountChecker mountchecker.MountChecker, mountPathRoot string, mounter Mounter, oshelper OsHelper) *VolumeDriver {
 	d := &VolumeDriver{
 		volumes:       syncmap.New[NfsVolumeInfo](),
 		os:            os,
 		filepath:      filepath,
-		ioutil:        ioutil,
 		time:          time,
 		mountChecker:  mountChecker,
 		mountPathRoot: mountPathRoot,
@@ -202,7 +199,7 @@ func (d *VolumeDriver) Path(env dockerdriver.Env, pathRequest dockerdriver.PathR
 	}
 
 	if vol.Mountpoint == "" {
-		errText := "Volume not previously mounted"
+		errText := "volume not previously mounted"
 		logger.Error("failed-mountpoint-not-assigned", errors.New(errText))
 		return dockerdriver.PathResponse{Err: errText}
 	}
@@ -227,7 +224,7 @@ func (d *VolumeDriver) Unmount(env dockerdriver.Env, unmountRequest dockerdriver
 	}
 
 	if volume.Mountpoint == "" {
-		errText := "Volume not previously mounted"
+		errText := "volume not previously mounted"
 		logger.Error("failed-mountpoint-not-assigned", errors.New(errText))
 		return dockerdriver.ErrorResponse{Err: errText}
 	}
@@ -267,7 +264,7 @@ func (d *VolumeDriver) Remove(env dockerdriver.Env, removeRequest dockerdriver.R
 	vol, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), removeRequest.Name)
 
 	if err != nil {
-		logger.Error("warning-volume-removal", fmt.Errorf(fmt.Sprintf("Volume %s not found", removeRequest.Name)))
+		logger.Error("warning-volume-removal", fmt.Errorf("volume %s not found", removeRequest.Name))
 		return dockerdriver.ErrorResponse{}
 	}
 
@@ -310,24 +307,13 @@ func (d *VolumeDriver) getVolume(env dockerdriver.Env, volumeName string) (NfsVo
 		return vol, nil
 	}
 
-	return NfsVolumeInfo{}, errors.New("Volume not found")
+	return NfsVolumeInfo{}, errors.New("volume not found")
 }
 
 func (d *VolumeDriver) Capabilities(env dockerdriver.Env) dockerdriver.CapabilitiesResponse {
 	return dockerdriver.CapabilitiesResponse{
 		Capabilities: dockerdriver.CapabilityInfo{Scope: "local"},
 	}
-}
-
-func (d *VolumeDriver) exists(path string) (bool, error) {
-	_, err := d.os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return true, err
 }
 
 func (d *VolumeDriver) mountPath(env dockerdriver.Env, volumeId string) string {
@@ -395,7 +381,7 @@ func (d *VolumeDriver) persistState(env dockerdriver.Env) error {
 		return err
 	}
 
-	err = d.ioutil.WriteFile(stateFile, stateData, os.ModePerm)
+	err = d.os.WriteFile(stateFile, stateData, os.ModePerm)
 	if err != nil {
 		logger.Error("failed-to-write-state-file", err, lager.Data{"stateFile": stateFile})
 		return err
@@ -412,7 +398,7 @@ func (d *VolumeDriver) restoreState(env dockerdriver.Env) {
 
 	stateFile := filepath.Join(d.mountPathRoot, "driver-state.json")
 
-	stateData, err := d.ioutil.ReadFile(stateFile)
+	stateData, err := d.os.ReadFile(stateFile)
 	if err != nil {
 		logger.Info("failed-to-read-state-file", lager.Data{"err": err, "stateFile": stateFile})
 		return
@@ -455,30 +441,17 @@ func (d *VolumeDriver) unmount(env dockerdriver.Env, name string, mountPath stri
 	err = d.mounter.Unmount(env, mountPath)
 	if err != nil {
 		logger.Error("unmount-failed", err)
-		return fmt.Errorf("Error unmounting volume: %s", err.Error())
+		return fmt.Errorf("error unmounting volume: %s", err.Error())
 	}
 	err = d.os.Remove(mountPath)
 	if err != nil {
 		logger.Error("remove-mountpoint-failed", err)
-		return fmt.Errorf("Error removing mountpoint: %s", err.Error())
+		return fmt.Errorf("error removing mountpoint: %s", err.Error())
 	}
 
 	logger.Info("unmounted-volume")
 
 	return nil
-}
-
-func (d *VolumeDriver) checkMounts(env dockerdriver.Env) {
-	logger := env.Logger().Session("check-mounts")
-	logger.Info("start")
-	defer logger.Info("end")
-
-	for _, key := range d.volumes.Keys() {
-		mount, ok := d.volumes.Get(key)
-		if ok && !d.mounter.Check(driverhttp.EnvWithLogger(logger, env), key, mount.VolumeInfo.Mountpoint) {
-			d.volumes.Delete(key)
-		}
-	}
 }
 
 func (d *VolumeDriver) Drain(env dockerdriver.Env) error {

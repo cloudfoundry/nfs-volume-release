@@ -13,8 +13,6 @@ type Syscall interface {
 	Clearenv()
 	Unsetenv(key string) error
 	Environ() []string
-	StringSlicePtr(ss []string) []*byte
-	SlicePtrFromStrings(ss []string) ([]*byte, error)
 	ForkExec(argv0 string, argv []string, attr *syscall.ProcAttr) (pid int, err error)
 	StartProcess(argv0 string, argv []string, attr *syscall.ProcAttr) (pid int, handle uintptr, err error)
 	Exec(argv0 string, argv []string, envv []string) (err error)
@@ -83,9 +81,7 @@ type Syscall interface {
 	ParseSocketControlMessage(b []byte) ([]syscall.SocketControlMessage, error)
 	UnixRights(fds ...int) []byte
 	ParseUnixRights(m *syscall.SocketControlMessage) ([]int, error)
-	StringByteSlice(s string) []byte
 	ByteSliceFromString(s string) ([]byte, error)
-	StringBytePtr(s string) *byte
 	BytePtrFromString(s string) (*byte, error)
 	Getpagesize() int
 	Getgroups() (gids []int, err error)

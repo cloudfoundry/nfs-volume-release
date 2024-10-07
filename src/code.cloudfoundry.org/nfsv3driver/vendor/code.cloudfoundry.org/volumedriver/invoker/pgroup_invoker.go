@@ -31,10 +31,7 @@ func (r *pgroupInvoker) Invoke(env dockerdriver.Env, executable string, cmdArgs 
 	cmdHandle.Stdout = &stdOutBuffer
 	cmdHandle.Stderr = &stdErrBuffer
 	if len(envVars) > 0 {
-		allEnvVars := os.Environ()
-		for _, envVar := range envVars {
-			allEnvVars = append(allEnvVars, envVar)
-		}
+		allEnvVars := append(os.Environ(), envVars...)
 		cmdHandle.Env = allEnvVars
 	}
 	err := cmdHandle.Start()
@@ -51,21 +48,19 @@ func (r *pgroupInvoker) Invoke(env dockerdriver.Env, executable string, cmdArgs 
 	var cmdDone = false
 
 	go func() {
-		select {
-		case <-env.Context().Done():
-			if cmdDone {
-				logger.Info("not killing process due to already finished")
-				return
-			}
-			logger.Info("command-sigkill", lager.Data{"exe": executable, "pid": -cmdHandle.Process.Pid})
-			err := syscall.Kill(-cmdHandle.Process.Pid, syscall.SIGKILL)
-			if err != nil {
-				logger.Info("command-sigkill-error", lager.Data{"desc": err.Error()})
-			}
-			err = cmdHandle.Wait()
-			if err != nil {
-				logger.Info("command-sigkill-wait-error", lager.Data{"desc": err.Error()})
-			}
+		<-env.Context().Done()
+		if cmdDone {
+			logger.Info("not killing process due to already finished")
+			return
+		}
+		logger.Info("command-sigkill", lager.Data{"exe": executable, "pid": -cmdHandle.Process.Pid})
+		err := syscall.Kill(-cmdHandle.Process.Pid, syscall.SIGKILL)
+		if err != nil {
+			logger.Info("command-sigkill-error", lager.Data{"desc": err.Error()})
+		}
+		err = cmdHandle.Wait()
+		if err != nil {
+			logger.Info("command-sigkill-wait-error", lager.Data{"desc": err.Error()})
 		}
 	}()
 
