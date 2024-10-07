@@ -17,7 +17,6 @@ files:
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/bufioshim/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
-  - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/ldapshim/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/nfsv3driver/vendor/code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
