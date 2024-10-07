@@ -259,7 +259,7 @@ var _ = Describe("nfsbroker Main", func() {
 
 				responseBody, err := io.ReadAll(resp.Body)
 				Expect(err).NotTo(HaveOccurred())
-				Expect(string(responseBody)).To(ContainSubstring("This service does not support instance updates. Please delete your service instance and create a new one with updated configuration."))
+				Expect(string(responseBody)).To(ContainSubstring("this service does not support instance updates. Please delete your service instance and create a new one with updated configuration"))
 			})
 
 		})
