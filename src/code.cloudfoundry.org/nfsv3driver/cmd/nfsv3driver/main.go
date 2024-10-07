@@ -15,7 +15,6 @@ import (
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
 	"code.cloudfoundry.org/goshims/bufioshim"
 	"code.cloudfoundry.org/goshims/filepathshim"
-	"code.cloudfoundry.org/goshims/ioutilshim"
 	"code.cloudfoundry.org/goshims/ldapshim"
 	"code.cloudfoundry.org/goshims/osshim"
 	"code.cloudfoundry.org/goshims/syscallshim"
@@ -162,7 +161,6 @@ func main() {
 		processGroupInvoker,
 		&osshim.OsShim{},
 		&syscallshim.SyscallShim{},
-		&ioutilshim.IoutilShim{},
 		mountchecker.NewChecker(&bufioshim.BufioShim{}, &osshim.OsShim{}),
 		fsType,
 		mountOptions,
@@ -175,7 +173,6 @@ func main() {
 		logger,
 		&osshim.OsShim{},
 		&filepathshim.FilepathShim{},
-		&ioutilshim.IoutilShim{},
 		&timeshim.TimeShim{},
 		mountchecker.NewChecker(&bufioshim.BufioShim{}, &osshim.OsShim{}),
 		*mountDir,

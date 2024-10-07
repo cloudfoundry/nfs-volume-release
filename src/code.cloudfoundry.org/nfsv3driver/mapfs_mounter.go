@@ -13,7 +13,6 @@ import (
 
 	"code.cloudfoundry.org/dockerdriver"
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
-	"code.cloudfoundry.org/goshims/ioutilshim"
 	"code.cloudfoundry.org/goshims/osshim"
 	"code.cloudfoundry.org/goshims/syscallshim"
 	"code.cloudfoundry.org/lager/v3"
@@ -34,7 +33,6 @@ type mapfsMounter struct {
 	invoker      invoker.Invoker
 	osshim       osshim.Os
 	syscallshim  syscallshim.Syscall
-	ioutilshim   ioutilshim.Ioutil
 	mountChecker mountchecker.MountChecker
 	fstype       string
 	defaultOpts  string
@@ -55,7 +53,6 @@ func NewMapfsMounter(
 	invoker invoker.Invoker,
 	osshim osshim.Os,
 	syscallshim syscallshim.Syscall,
-	ioutilshim ioutilshim.Ioutil,
 	mountChecker mountchecker.MountChecker,
 	fstype string,
 	defaultOpts string,
@@ -63,7 +60,7 @@ func NewMapfsMounter(
 	mask vmo.MountOptsMask,
 	mapfsPath string,
 ) volumedriver.Mounter {
-	return &mapfsMounter{invoker, osshim, syscallshim, ioutilshim, mountChecker, fstype, defaultOpts, resolver, mask, mapfsPath}
+	return &mapfsMounter{invoker, osshim, syscallshim, mountChecker, fstype, defaultOpts, resolver, mask, mapfsPath}
 }
 
 func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string, opts map[string]interface{}) error {
