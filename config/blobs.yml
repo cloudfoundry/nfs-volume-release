@@ -2,6 +2,10 @@ berkeleydb/db-5.3.28.tar.gz:
   size: 35090431
   object_id: 3ad9234b-50b7-4f58-7d46-d3569f90d3d6
   sha: fa3f8a41ad5101f43d08bc0efb6241c9b6fc1ae9
+nfs-debs/libevent-2.1.8-stable.tar.gz:
+  size: 1026485
+  object_id: ee4b41bd-b91b-40c3-5721-995f4a211dcd
+  sha: sha256:965cc5a8bb46ce4199a47e9b2c9e1cae3b137e8356ffdad6d94d3b9069b71dc2
 nfs-debs/libtirpc-1.3.5.tar.gz:
   size: 257976
   object_id: 2c1a29ff-8495-4cae-6d7b-183680e67c78
