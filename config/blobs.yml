@@ -18,6 +18,10 @@ nfs-debs/rpcbind-1.2.6-2build1-0-gd4047c3303d327fc59a869a7243132cb01aa0314.tar.g
   size: 163516
   object_id: 14a004b1-cfb6-4105-794f-5d448325582c
   sha: sha256:59778e27a97a44887ef5a1ce6c246bc1fcfb87a42f834a70145f03cb95868b5b
+nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
+  size: 168648
+  object_id: a2eb31b9-cce3-4a00-5ddb-adf55c3f3471
+  sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
 nfs-debs/util-linux-2.40.2.tar.gz:
   size: 14941746
   object_id: 92de9700-16c7-4101-75d2-7171a78209ba
