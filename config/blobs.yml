@@ -6,10 +6,10 @@ nfs-debs/libevent-2.1.8-stable.tar.gz:
   size: 1026485
   object_id: ee4b41bd-b91b-40c3-5721-995f4a211dcd
   sha: sha256:965cc5a8bb46ce4199a47e9b2c9e1cae3b137e8356ffdad6d94d3b9069b71dc2
-nfs-debs/libtirpc-1.3.5.tar.gz:
-  size: 257976
-  object_id: 2c1a29ff-8495-4cae-6d7b-183680e67c78
-  sha: sha256:1d87c975d52d695af7b32ccab93f1d2e93989c95140c622d04d027e2297c3bce
+nfs-debs/libtirpc-1.3.6.tar.gz:
+  size: 257167
+  object_id: e0bde52d-1315-4719-578b-a68498f0c937
+  sha: sha256:f43fea065019121ce4558c6a2ed65e8ee60d2668490957e0d7c686d861ceebbb
 nfs-debs/nfs-utils-1%2.6.1-1ubuntu1-0-ge96e5559473df8852ef387761697aa40713d6ef7.tar.gz:
   size: 1420757
   object_id: c4b2df63-88bb-4fb5-64f4-ab0eb0a20d9f
