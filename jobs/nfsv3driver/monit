@@ -8,12 +8,19 @@ check process nfsv3driver
 check process statd matching rpc.statd
   start program "/var/vcap/jobs/nfsv3driver/bin/statd_ctl start"
   stop program "/var/vcap/jobs/nfsv3driver/bin/statd_ctl stop"
-  if failed port <%= p("nfsv3driver.statd_port") %> then restart
   group vcap
+  if failed
+     host 127.0.0.1
+     port <%= p("nfsv3driver.statd_port") %>
+     for 3 cycles
+  then restart
 check process rpcbind matching rpcbind
   start program "/var/vcap/jobs/nfsv3driver/bin/rpcbind_ctl start"
   stop program "/var/vcap/jobs/nfsv3driver/bin/rpcbind_ctl stop"
-  if failed port 111 then restart
   group vcap
+  if failed
+     host 127.0.0.1
+     port 111
+     for 3 cycles
+  then restart
 <% end %>
-
