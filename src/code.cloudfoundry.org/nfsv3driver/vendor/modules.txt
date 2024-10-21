@@ -1,21 +1,21 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.19.0
+# code.cloudfoundry.org/cf-networking-helpers v0.20.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
-# code.cloudfoundry.org/cfhttp/v2 v2.15.0
+# code.cloudfoundry.org/cfhttp/v2 v2.16.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.15.0
+# code.cloudfoundry.org/clock v1.16.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.17.0
+# code.cloudfoundry.org/debugserver v0.18.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.18.0
+# code.cloudfoundry.org/dockerdriver v0.19.0
 ## explicit; go 1.23
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/goshims v0.44.0
+# code.cloudfoundry.org/goshims v0.45.0
 ## explicit; go 1.23
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/filepathshim
@@ -27,7 +27,7 @@ code.cloudfoundry.org/goshims/osshim/os_fake
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.9.0
+# code.cloudfoundry.org/lager/v3 v3.10.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
@@ -37,11 +37,11 @@ code.cloudfoundry.org/lager/v3/lagertest
 # code.cloudfoundry.org/tlsconfig v0.7.0
 ## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
-# code.cloudfoundry.org/volume-mount-options v0.99.0
+# code.cloudfoundry.org/volume-mount-options v0.100.0
 ## explicit; go 1.22.6
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.100.0
+# code.cloudfoundry.org/volumedriver v0.101.0
 ## explicit; go 1.23
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
@@ -67,7 +67,7 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/pprof v0.0.0-20241009165004-a3522334989c
+# github.com/google/pprof v0.0.0-20241017200806-017d972448fc
 ## explicit; go 1.22
 github.com/google/pprof/profile
 # github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
