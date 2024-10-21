@@ -1,3 +1,14 @@
+# Contributing
+
+See the [Contributing.md](./.github/CONTRIBUTING.md) for more
+information on how to contribute.
+
+# Working Group Charter
+
+This repository is maintained by [App Runtime
+Platform](https://github.com/cloudfoundry/community/blob/main/toc/working-groups/app-runtime-platform.md)
+under `Volume Services` area.
+
 # NFS-Volume Release
 
 This repository is a [BOSH](https://github.com/cloudfoundry/bosh)
@@ -10,17 +21,6 @@ server for tests to target with which you can try out volume mounts.
 
 For information on getting started with Cloud Foundry look at the docs
 for [CF Deployment](https://github.com/cloudfoundry/cf-deployment).
-
-# Contributing
-
-See the [Contributing.md](./.github/CONTRIBUTING.md) for more
-information on how to contribute.
-
-# Working Group Charter
-
-This repository is maintained by [App Runtime
-Platform](https://github.com/cloudfoundry/community/blob/main/toc/working-groups/app-runtime-platform.md)
-under `Volume Services` area.
 
 # Docs
 
