@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/clock v1.15.0
+# code.cloudfoundry.org/clock v1.16.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/clock
 # code.cloudfoundry.org/credhub-cli v0.0.0-20241007130734-43a9b718dfb3
@@ -11,33 +11,33 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.17.0
+# code.cloudfoundry.org/debugserver v0.18.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.145.0
+# code.cloudfoundry.org/existingvolumebroker v0.146.0
 ## explicit; go 1.23
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.44.0
+# code.cloudfoundry.org/goshims v0.45.0
 ## explicit; go 1.23
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.9.0
+# code.cloudfoundry.org/lager/v3 v3.10.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.92.0
+# code.cloudfoundry.org/service-broker-store v0.93.0
 ## explicit; go 1.22.3
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
-# code.cloudfoundry.org/volume-mount-options v0.99.0
+# code.cloudfoundry.org/volume-mount-options v0.100.0
 ## explicit; go 1.22.6
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
 # github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.127
+# github.com/cloudfoundry/socks5-proxy v0.2.128
 ## explicit; go 1.22.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-chi/chi/v5 v5.1.0
@@ -61,7 +61,7 @@ github.com/google/go-cmp/cmp/internal/value
 ## explicit; go 1.12
 github.com/google/gofuzz
 github.com/google/gofuzz/bytesource
-# github.com/google/pprof v0.0.0-20241009165004-a3522334989c
+# github.com/google/pprof v0.0.0-20241017200806-017d972448fc
 ## explicit; go 1.22
 github.com/google/pprof/profile
 # github.com/google/uuid v1.6.0
