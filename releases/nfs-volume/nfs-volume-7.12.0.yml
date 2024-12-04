@@ -1,0 +1,86 @@
+name: nfs-volume
+version: 7.12.0
+commit_hash: 68ee28e
+uncommitted_changes: false
+jobs:
+- name: dockerdriver-integration
+  version: c185719735aae534aed749530e26b059f2c213e2f7ff6f94979c447b0be3d337
+  fingerprint: c185719735aae534aed749530e26b059f2c213e2f7ff6f94979c447b0be3d337
+  sha1: sha256:ffe4d9349948ca1f4ba2595d8565c558b30e6f9dc3e34f433c59f3bb33dc7116
+  packages:
+  - dockerdriver-integration
+  - nfs-debs
+  - nfsv3driver
+- name: nfsbroker-bbr-lock
+  version: 09fa16f2541a5c5450d1aba23aae99412e71507f362a62b0a50c9a9287c1e718
+  fingerprint: 09fa16f2541a5c5450d1aba23aae99412e71507f362a62b0a50c9a9287c1e718
+  sha1: sha256:7a3b605c583e011abbe3d76ad0699ffed1f3157412fd105c9bf815540b19304b
+  packages: []
+- name: nfsbrokerpush
+  version: 851712bd98b0d9179e7807b83ecd972d4f46be56a73f0b48c645f57f9a95e23a
+  fingerprint: 851712bd98b0d9179e7807b83ecd972d4f46be56a73f0b48c645f57f9a95e23a
+  sha1: sha256:8bf9f45b45e315fd497c65ec37cce9be9a5a1c291e25cb349c3dd4a46c1ad4e0
+  packages:
+  - nfsbroker
+- name: nfstestldapserver
+  version: 0e63024395c6d961a73846764608436da3e6c70e746bd94cadfba61a3f60e27f
+  fingerprint: 0e63024395c6d961a73846764608436da3e6c70e746bd94cadfba61a3f60e27f
+  sha1: sha256:842ac537d7583a28216ac2ee350398cbb43d776a06e4baff9ad837bbe79b440d
+  packages:
+  - openldap
+- name: nfstestserver
+  version: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  fingerprint: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  sha1: sha256:360ce74f8fc1bd32be398c99174ca73b5fe88a51c350357633c57ee7798b8a73
+  packages: []
+- name: nfsv3driver
+  version: 0293ad0030d2dcf812ebcd6b4bd4f6b3a0eeeb98610aa617e7bc8ea90135a42b
+  fingerprint: 0293ad0030d2dcf812ebcd6b4bd4f6b3a0eeeb98610aa617e7bc8ea90135a42b
+  sha1: sha256:be3646408ed361fab321b25d68ad41028d2bf03976c4c9dc769badf1aa4e996b
+  packages:
+  - nfs-debs
+  - nfsv3driver
+packages:
+- name: berkeleydb
+  version: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  fingerprint: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  sha1: sha256:1e94bc772d8923cb05bfd0b28927b46f19b2e94de15833e601e330e5141745c4
+  dependencies: []
+- name: dockerdriver-integration
+  version: ef293748fdfe6c59ba50cb47e3b25147fededbfa1bfe14cf37bf5c5e56e45524
+  fingerprint: ef293748fdfe6c59ba50cb47e3b25147fededbfa1bfe14cf37bf5c5e56e45524
+  sha1: sha256:d379d592e277ace7f3620f6327f98a0f03d22427b835dfba78ea36547ae4c9ab
+  dependencies:
+  - golang-1.23-linux
+- name: golang-1.23-linux
+  version: 14f95d7b762c61087eae7534ad5f78c978102ef1537cdf3e0e9c71efd401182b
+  fingerprint: 14f95d7b762c61087eae7534ad5f78c978102ef1537cdf3e0e9c71efd401182b
+  sha1: sha256:a24290f242acc2d4eb4c47208a90fee3c7cec12951fcb819e536aae1ecafdcb2
+  dependencies: []
+- name: nfs-debs
+  version: 4492a308a195cf5744b5625ff9dd488f1b1c4b84a46fc92210ad593f254d821e
+  fingerprint: 4492a308a195cf5744b5625ff9dd488f1b1c4b84a46fc92210ad593f254d821e
+  sha1: sha256:b3461c426f2b70ce91a72bcaea204bbf9d2bcae7922ee3d1d426a4f3820dba23
+  dependencies: []
+- name: nfsbroker
+  version: 43265d9144dd24f174f0c36d329e181b5f19946aa9cbccf867c3a060ce25afbe
+  fingerprint: 43265d9144dd24f174f0c36d329e181b5f19946aa9cbccf867c3a060ce25afbe
+  sha1: sha256:bf59f5af67ba3948e11f6a28105e9c96f6fe9c37566f5ad3fbae7566865dd8fd
+  dependencies:
+  - golang-1.23-linux
+- name: nfsv3driver
+  version: 71bd975e9deb762cb20508ef1836d6f07b9e9258342470b04c821a1210fc2255
+  fingerprint: 71bd975e9deb762cb20508ef1836d6f07b9e9258342470b04c821a1210fc2255
+  sha1: sha256:b494ecb3f3b5fe6e0e34f8c381a513d437a16db940289b931d4d60721eed8d76
+  dependencies:
+  - golang-1.23-linux
+- name: openldap
+  version: 06da95940bab476ac9d8420d52633a5870a0026f24b7ae5728e0bcecfefaa391
+  fingerprint: 06da95940bab476ac9d8420d52633a5870a0026f24b7ae5728e0bcecfefaa391
+  sha1: sha256:79995377433c002cb48ad521f6734852732ac1dbe0e0e4f263512559f85cbf6e
+  dependencies:
+  - berkeleydb
+license:
+  version: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  fingerprint: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  sha1: sha256:426570cc065ba3857a8964ffb0e29d11c54109ab3ff7704a1a3236f8736cd6de
