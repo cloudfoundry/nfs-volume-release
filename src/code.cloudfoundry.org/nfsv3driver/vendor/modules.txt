@@ -1,17 +1,17 @@
 # code.cloudfoundry.org/cf-networking-helpers v0.30.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
-# code.cloudfoundry.org/cfhttp/v2 v2.25.0
+# code.cloudfoundry.org/cfhttp/v2 v2.26.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.24.0
+# code.cloudfoundry.org/clock v1.25.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.28.0
+# code.cloudfoundry.org/debugserver v0.29.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.28.0
+# code.cloudfoundry.org/dockerdriver v0.29.0
 ## explicit; go 1.23
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -27,14 +27,14 @@ code.cloudfoundry.org/goshims/osshim/os_fake
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.18.0
+# code.cloudfoundry.org/lager/v3 v3.19.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerctx
 code.cloudfoundry.org/lager/v3/lagerflags
 code.cloudfoundry.org/lager/v3/lagertest
-# code.cloudfoundry.org/tlsconfig v0.12.0
+# code.cloudfoundry.org/tlsconfig v0.13.0
 ## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
 # code.cloudfoundry.org/volume-mount-options v0.108.0
@@ -76,7 +76,7 @@ github.com/maxbrunsfeld/counterfeiter/v6
 github.com/maxbrunsfeld/counterfeiter/v6/arguments
 github.com/maxbrunsfeld/counterfeiter/v6/command
 github.com/maxbrunsfeld/counterfeiter/v6/generator
-# github.com/onsi/ginkgo/v2 v2.22.0
+# github.com/onsi/ginkgo/v2 v2.22.1
 ## explicit; go 1.22.0
 github.com/onsi/ginkgo/v2
 github.com/onsi/ginkgo/v2/config
@@ -131,9 +131,8 @@ github.com/tedsuo/rata
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.32.0
+# golang.org/x/net v0.33.0
 ## explicit; go 1.18
-golang.org/x/net/context
 golang.org/x/net/html
 golang.org/x/net/html/atom
 golang.org/x/net/html/charset
