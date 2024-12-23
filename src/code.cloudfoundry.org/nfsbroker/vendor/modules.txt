@@ -14,11 +14,11 @@ code.cloudfoundry.org/credhub-cli/credhub/server
 # code.cloudfoundry.org/debugserver v0.29.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.155.0
+# code.cloudfoundry.org/existingvolumebroker v0.156.0
 ## explicit; go 1.23
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.53.0
+# code.cloudfoundry.org/goshims v0.54.0
 ## explicit; go 1.23
 code.cloudfoundry.org/goshims/osshim
 # code.cloudfoundry.org/lager/v3 v3.19.0
@@ -26,18 +26,18 @@ code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.102.0
+# code.cloudfoundry.org/service-broker-store v0.103.0
 ## explicit; go 1.23
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
-# code.cloudfoundry.org/volume-mount-options v0.108.0
+# code.cloudfoundry.org/volume-mount-options v0.109.0
 ## explicit; go 1.22.6
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
 # github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.135
+# github.com/cloudfoundry/socks5-proxy v0.2.136
 ## explicit; go 1.22.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-chi/chi/v5 v5.2.0
