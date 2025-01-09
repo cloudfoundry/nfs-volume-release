@@ -26,10 +26,10 @@ nfs-debs/sqlite-3.47.0.tar.gz:
   size: 13193187
   object_id: c54c609b-6caf-4deb-6f71-8826bbea3a88
   sha: sha256:ce5550cf28601cf76c7a7d16784312da58837a8ad2df365c493a4705b482b859
-nfs-debs/util-linux-2.40.2.tar.gz:
-  size: 14941746
-  object_id: 92de9700-16c7-4101-75d2-7171a78209ba
-  sha: sha256:568a99a4eea84b93acbb9f58b47599d831a4ebef5124220f81e43968877ea9d6
+nfs-debs/util-linux-2.40.3.tar.gz:
+  size: 14978886
+  object_id: 772bfc87-930f-4411-531e-079a1ef85a58
+  sha: sha256:e17af8ddf156bf6bbf7ac31f96754b71f67703ebbfd37f67a5c801a4484fbb91
 openldap/openldap-2.6.9.tar.gz:
   size: 6516669
   object_id: a9a7874a-7da1-47ba-7ad3-86173e4cf649
