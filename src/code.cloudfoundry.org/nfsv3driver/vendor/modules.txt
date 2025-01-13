@@ -1,21 +1,21 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.32.0
+# code.cloudfoundry.org/cf-networking-helpers v0.33.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
-# code.cloudfoundry.org/cfhttp/v2 v2.28.0
+# code.cloudfoundry.org/cfhttp/v2 v2.29.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.27.0
+# code.cloudfoundry.org/clock v1.28.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.31.0
+# code.cloudfoundry.org/debugserver v0.32.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.31.0
+# code.cloudfoundry.org/dockerdriver v0.32.0
 ## explicit; go 1.23
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/goshims v0.56.0
+# code.cloudfoundry.org/goshims v0.57.0
 ## explicit; go 1.23
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/filepathshim
@@ -27,17 +27,17 @@ code.cloudfoundry.org/goshims/osshim/os_fake
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.21.0
+# code.cloudfoundry.org/lager/v3 v3.22.0
 ## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerctx
 code.cloudfoundry.org/lager/v3/lagerflags
 code.cloudfoundry.org/lager/v3/lagertest
-# code.cloudfoundry.org/tlsconfig v0.14.0
+# code.cloudfoundry.org/tlsconfig v0.15.0
 ## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
-# code.cloudfoundry.org/volume-mount-options v0.111.0
+# code.cloudfoundry.org/volume-mount-options v0.112.0
 ## explicit; go 1.22.6
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
@@ -131,7 +131,7 @@ github.com/tedsuo/rata
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.33.0
+# golang.org/x/net v0.34.0
 ## explicit; go 1.18
 golang.org/x/net/html
 golang.org/x/net/html/atom
@@ -164,7 +164,7 @@ golang.org/x/text/language
 golang.org/x/text/runes
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
-# golang.org/x/tools v0.28.0
+# golang.org/x/tools v0.29.0
 ## explicit; go 1.22.0
 golang.org/x/tools/cover
 golang.org/x/tools/go/ast/astutil
