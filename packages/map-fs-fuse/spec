@@ -1,0 +1,6 @@
+---
+name: map-fs-fuse
+
+files:
+- fuse/**
+- build-deps/**

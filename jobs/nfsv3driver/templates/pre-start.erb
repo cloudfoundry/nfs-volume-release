@@ -17,6 +17,37 @@ function prepend_rfc3339_datetime() {
   perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
 }
 
+function mapfs_setup() {
+  if [[ ! -f /sbin/mount.fuse3 ]]; then
+    echo "symlinking fuse mounthelper binary to /sbin"
+    ln -fs "$( readlink -f /var/vcap/packages/map-fs-fuse/sbin/mount.fuse3 )" /sbin/mount.fuse3
+  fi
+  if [[ ! -f /bin/fusermount ]]; then
+    echo "symlinking fusermount3 to /bin/fusermount"
+    ln -fs "$( readlink -f /var/vcap/packages/map-fs-fuse/bin/fusermount3 )" /bin/fusermount
+  fi
+ 
+  for FULL_PATH in $( find /var/vcap/packages/map-fs-fuse/lib/x86_64-linux-gnu/ -name  "*.so*" ); do 
+    TARGET_PATH="$( readlink -f $FULL_PATH )"
+    LINK_NAME="$( basename $FULL_PATH )"
+    ln -sf "$TARGET_PATH" "/lib/$LINK_NAME"
+  done
+
+  modprobe fuse || true
+  groupadd fuse || true
+  adduser vcap fuse
+  chown root:fuse /dev/fuse
+cat << EOF > /etc/fuse.conf
+user_allow_other
+EOF
+  chmod 644 /etc/fuse.conf
+
+  echo "Installing mapfs"
+
+  chown root:vcap /var/vcap/packages/map-fs/bin/mapfs
+  chmod 750 /var/vcap/packages/map-fs/bin/mapfs
+  chmod u+s /var/vcap/packages/map-fs/bin/mapfs
+}
 function main() {
   echo "Copying client certs to data directory..."
   copy_client_certs_to_spec_dir
@@ -24,6 +55,8 @@ function main() {
   echo "Creating symlinks to nfs-utils sbins from package dir"
     ln -s /var/vcap/packages/nfs-debs/sbin/mount.nfs /sbin/mount.nfs
   fi
+
+  mapfs_setup
 
   exit 0
 }

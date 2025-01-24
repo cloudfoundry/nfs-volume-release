@@ -51,7 +51,7 @@ var _ = Describe("MapfsMounter", func() {
 
 	BeforeEach(func() {
 		logger = lagertest.NewTestLogger("mapfs-mounter")
-		mapfsPath = "/var/vcap/packages/mapfs/bin/mapfs"
+		mapfsPath = "/var/vcap/packages/map-fs/bin/mapfs"
 		testContext = context.TODO()
 		env = driverhttp.NewHttpDriverEnv(logger, testContext)
 		opts = map[string]interface{}{}

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -ex
+
+base=$PWD
+
+cd "$(dirname "$0")/.."
+
+if [[ ! -f /sbin/mount.nfs ]]; then
+  ln -s /var/vcap/packages/nfs-debs/sbin/mount.nfs /sbin/
+fi
+if [[ ! -f /bin/fusermount ]]; then
+  echo "symlinking fusermount3 to /bin/fusermount"
+  ln -fs "$( readlink -f /var/vcap/packages/map-fs-fuse/bin/fusermount3 )" /bin/fusermount
+fi
+
+export CONFIG="/var/vcap/jobs/map-fs-performance-acceptance-tests/config/config.json"
+cat $CONFIG
+cd packages/map-fs-performance-acceptance-tests/bin
+for file in $(find . -name "*.test"); do
+./ginkgo $file
+done

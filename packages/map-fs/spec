@@ -1,0 +1,22 @@
+---
+name: map-fs
+
+dependencies:
+- golang-1.23-linux
+
+files:
+  - code.cloudfoundry.org/mapfs/go.mod
+  - code.cloudfoundry.org/mapfs/go.sum
+  - code.cloudfoundry.org/mapfs/vendor/modules.txt
+  - code.cloudfoundry.org/mapfs/vendor/code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
+  - code.cloudfoundry.org/mapfs/*.go # gosub
+  - code.cloudfoundry.org/mapfs/mapfs/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/fuse/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/fuse/nodefs/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/fuse/pathfs/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/internal/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/internal/utimens/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/github.com/hanwen/go-fuse/v2/splice/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/golang.org/x/sys/unix/*.go # gosub
+  - code.cloudfoundry.org/mapfs/vendor/golang.org/x/sys/unix/*.s # gosub
+  - code.cloudfoundry.org/mapfs/vendor/gopkg.in/yaml.v3/*.go # gosub

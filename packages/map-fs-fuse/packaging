@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+# unpack everything
+cd $BOSH_COMPILE_TARGET
+for f in $(find . -name "*tar.gz"); do
+  tar -xzf  $f
+done
+
+# first build ninja, it's required to install fuse
+pushd ninja-*/
+  python3 configure.py --bootstrap
+  ln -s $(pwd)/ninja /usr/bin/ninja
+popd
+
+# symlink meson, it's required to build fuse
+# there are newer version but these require newer python3.x which isn't available on xenial stemcell.
+# it will also never leave the compilation vm, same as ninja
+pushd meson-*/
+  ln -s $(pwd)/meson.py /usr/bin/meson
+popd
+
+# build libfuse
+pushd fuse-*/
+  sed -i '/^udev/,$ s/^/#/' util/meson.build
+
+  mkdir build
+  cd    build
+
+  meson setup --prefix=${BOSH_INSTALL_TARGET} --buildtype=release ..
+  ninja install
+popd
+
