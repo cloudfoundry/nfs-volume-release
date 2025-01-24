@@ -7,14 +7,6 @@ describe 'nfsv3driver job' do
 
   describe 'start.sh' do
     let(:template) {job.template('bin/start.sh')}
-    mapfs_link = [
-        Bosh::Template::Test::Link.new(
-            name: 'mapfs',
-            properties: {
-                'path' => '/some/path',
-            }
-        )
-    ]
 
     context 'when configured with a ca cert' do
       let(:manifest_properties) do
@@ -28,7 +20,7 @@ describe 'nfsv3driver job' do
       end
 
       it 'successfully renders the script' do
-        tpl_output = template.render(manifest_properties, consumes: mapfs_link)
+        tpl_output = template.render(manifest_properties)
 
         expect(tpl_output).to include("--caFile=\"${CLIENT_CERTS_DIR}/ca.crt\"")
       end
@@ -50,7 +42,7 @@ describe 'nfsv3driver job' do
         end
 
         it 'sets the allowedOptions flag correctly' do
-          tpl_output = template.render(manifest_properties, consumes: mapfs_link)
+          tpl_output = template.render(manifest_properties)
 
           expect(tpl_output).to include("export LDAP_SVC_USER='service-user'")
           expect(tpl_output).to include("export LDAP_SVC_PASS='service-password'")
@@ -78,7 +70,7 @@ describe 'nfsv3driver job' do
         end
 
         it 'escapes the properties correctly' do
-          tpl_output = template.render(manifest_properties, consumes: mapfs_link)
+          tpl_output = template.render(manifest_properties)
 
           expect(tpl_output).to include("export LDAP_SVC_USER='Patrick O'\"'\"'Malley'")
           expect(tpl_output).to include("export LDAP_SVC_PASS='!que&pasa!${xxx}$?'")
@@ -100,7 +92,7 @@ describe 'nfsv3driver job' do
       end
 
       it 'renders LDAP_CA_CERT with an empty string' do
-        tpl_output = template.render(manifest_properties, consumes: mapfs_link)
+        tpl_output = template.render(manifest_properties)
 
         expect(tpl_output).to include("export LDAP_CA_CERT=\"\"")
       end

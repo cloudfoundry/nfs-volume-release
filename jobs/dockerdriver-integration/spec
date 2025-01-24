@@ -9,6 +9,7 @@ templates:
 packages:
 - dockerdriver-integration
 - nfs-debs
+- map-fs
 - nfsv3driver
 
 
@@ -19,4 +20,4 @@ properties:
 
   mapfs_path:
     description: "Path to mapfs binary"
-    default: /var/vcap/packages/mapfs/bin/mapfs
+    default: /var/vcap/packages/map-fs/bin/mapfs

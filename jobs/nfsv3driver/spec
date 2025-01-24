@@ -17,10 +17,8 @@ templates:
 packages:
 - nfs-debs
 - nfsv3driver
-
-consumes:
-- name: mapfs
-  type: mapfs
+- map-fs
+- map-fs-fuse
 
 properties:
   nfsv3driver.statd_port:

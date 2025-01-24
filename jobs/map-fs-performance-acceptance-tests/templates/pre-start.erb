@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eo pipefail
+
+function prepend_rfc3339_datetime() {
+  perl -ne 'BEGIN { use Time::HiRes "time"; use POSIX "strftime"; STDOUT->autoflush(1) }; my $t = time; my $fsec = sprintf ".%09d", ($t-int($t))*1000000000; my $time = strftime("[%Y-%m-%dT%H:%M:%S".$fsec."Z]", localtime $t); print("$time $_")'
+}
+
+prepend_rfc3339_datetime

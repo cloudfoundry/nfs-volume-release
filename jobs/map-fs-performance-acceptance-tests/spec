@@ -1,0 +1,23 @@
+---
+name: map-fs-performance-acceptance-tests
+
+templates:
+  pre-start.erb: bin/pre-start
+  run.erb: bin/run
+  config.json.erb: config/config.json
+
+packages:
+- map-fs-performance-acceptance-tests
+- map-fs
+- map-fs-fuse
+- nfs-debs
+
+
+properties:
+  nfs_remote_path:
+    description: Address for SMB Remote Path 
+    default: nfstestserver.service.cf.internal:export
+
+  mapfs_path:
+    description: "Path to mapfs binary"
+    default: /var/vcap/packages/map-fs/bin/mapfs
