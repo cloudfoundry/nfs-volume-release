@@ -9,23 +9,18 @@ for f in $(find . -name "*tar.gz"); do
 done
 
 # first build ninja, it's required to install fuse
-if [[ ! -f /usr/bin/ninja ]]; then
-  echo "building ninja"
-  pushd ninja-*/
-  python3 configure.py --bootstrap
-  ln -s $(pwd)/ninja /usr/bin/ninja
-  popd
-fi
+pushd ninja-*/
+python3 configure.py --bootstrap
+export NINJA_BINARY="$(pwd)/ninja"
+export PATH="$PATH:$PWD"
+popd
 
 # symlink meson, it's required to build fuse
 # there are newer version but these require newer python3.x which isn't available on xenial stemcell.
 # it will also never leave the compilation vm, same as ninja
-if [[ ! -f /usr/bin/meson ]]; then
-  echo "building meson"
-  pushd meson-*/
-  ln -s $(pwd)/meson.py /usr/bin/meson
-  popd
-fi
+pushd meson-*/
+export MESON_BINARY="$(pwd)/meson.py"
+popd
 
 # build libfuse
 pushd fuse-*/
@@ -34,7 +29,7 @@ pushd fuse-*/
   mkdir build
   cd    build
 
-  meson setup --prefix=${BOSH_INSTALL_TARGET} --buildtype=release ..
-  ninja install
+  $MESON_BINARY setup --prefix=${BOSH_INSTALL_TARGET} --buildtype=release ..
+  $NINJA_BINARY install
 popd
 
