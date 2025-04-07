@@ -53,6 +53,10 @@ files:
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/onsi/gomega/matchers/support/goraph/node/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/onsi/gomega/matchers/support/goraph/util/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/onsi/gomega/types/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/internal/cgroups/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/internal/runtime/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/maxprocs/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/atom/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/charset/*.go # gosub
