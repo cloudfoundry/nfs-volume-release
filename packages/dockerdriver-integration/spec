@@ -69,6 +69,10 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/tedsuo/rata/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/go.uber.org/automaxprocs/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/go.uber.org/automaxprocs/internal/cgroups/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/go.uber.org/automaxprocs/internal/runtime/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/go.uber.org/automaxprocs/maxprocs/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/atom/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/charset/*.go # gosub
