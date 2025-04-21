@@ -1,10 +1,10 @@
-# code.cloudfoundry.org/goshims v0.68.0
+# code.cloudfoundry.org/goshims v0.69.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
-# code.cloudfoundry.org/volumedriver v0.126.0
+# code.cloudfoundry.org/volumedriver v0.127.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/volumedriver/mountchecker
 # github.com/go-logr/logr v1.4.2
@@ -21,7 +21,7 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/pprof v0.0.0-20250403155104-27863c87afa6
+# github.com/google/pprof v0.0.0-20250418163039-24c5476c6587
 ## explicit; go 1.23
 github.com/google/pprof/profile
 # github.com/hanwen/go-fuse/v2 v2.7.2
