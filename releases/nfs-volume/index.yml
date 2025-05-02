@@ -57,6 +57,8 @@ builds:
     version: 7.1.41
   3fc419df-6c06-4827-5d1c-ae29a7178b8a:
     version: 7.11.0
+  405ae5cc-902f-4c2d-50a3-646842434fc4:
+    version: 7.27.0
   473b894f-732c-4273-7908-048c21a33455:
     version: 7.8.0
   4be797b8-fa4c-42d7-abaf-d3f0b660ca20:

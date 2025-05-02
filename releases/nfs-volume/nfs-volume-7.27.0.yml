@@ -1,0 +1,115 @@
+name: nfs-volume
+version: 7.27.0
+commit_hash: a4269a44
+uncommitted_changes: false
+jobs:
+- name: dockerdriver-integration
+  version: 28a29124a4629425945a9dfb8e17b27c5d781644fbf94549b70acf02f7e043c1
+  fingerprint: 28a29124a4629425945a9dfb8e17b27c5d781644fbf94549b70acf02f7e043c1
+  sha1: sha256:a5256add0826fae887113ffca417af98744b280eaa0a10df2c39248a74cb7365
+  packages:
+  - dockerdriver-integration
+  - nfs-debs
+  - map-fs
+  - nfsv3driver
+- name: map-fs-performance-acceptance-tests
+  version: 74c0bbad989dfdd206567a72990cf8fe23d6aa74085e08e10fe3885de4fbbbb7
+  fingerprint: 74c0bbad989dfdd206567a72990cf8fe23d6aa74085e08e10fe3885de4fbbbb7
+  sha1: sha256:d98a6a71c08589dec8d776b5db5ff39a095595c5c8ace9e99923b4372476a751
+  packages:
+  - map-fs-performance-acceptance-tests
+  - map-fs
+  - map-fs-fuse
+  - nfs-debs
+- name: nfsbroker-bbr-lock
+  version: 09fa16f2541a5c5450d1aba23aae99412e71507f362a62b0a50c9a9287c1e718
+  fingerprint: 09fa16f2541a5c5450d1aba23aae99412e71507f362a62b0a50c9a9287c1e718
+  sha1: sha256:7a3b605c583e011abbe3d76ad0699ffed1f3157412fd105c9bf815540b19304b
+  packages: []
+- name: nfsbrokerpush
+  version: 851712bd98b0d9179e7807b83ecd972d4f46be56a73f0b48c645f57f9a95e23a
+  fingerprint: 851712bd98b0d9179e7807b83ecd972d4f46be56a73f0b48c645f57f9a95e23a
+  sha1: sha256:8bf9f45b45e315fd497c65ec37cce9be9a5a1c291e25cb349c3dd4a46c1ad4e0
+  packages:
+  - nfsbroker
+- name: nfstestldapserver
+  version: 0e63024395c6d961a73846764608436da3e6c70e746bd94cadfba61a3f60e27f
+  fingerprint: 0e63024395c6d961a73846764608436da3e6c70e746bd94cadfba61a3f60e27f
+  sha1: sha256:842ac537d7583a28216ac2ee350398cbb43d776a06e4baff9ad837bbe79b440d
+  packages:
+  - openldap
+- name: nfstestserver
+  version: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  fingerprint: 549ea67d50370ad1d93b4cfd5a8b8b6a0f1a12611ab0f5cf2df4203cff1fe673
+  sha1: sha256:360ce74f8fc1bd32be398c99174ca73b5fe88a51c350357633c57ee7798b8a73
+  packages: []
+- name: nfsv3driver
+  version: 367d962de3d95f3e43f69804ca78055f8e49368082357cdaa161245651278468
+  fingerprint: 367d962de3d95f3e43f69804ca78055f8e49368082357cdaa161245651278468
+  sha1: sha256:df73ef8c2f3794c4f172184b63c8e02205cb5605fb5ab1f2b72dd2117562b4a7
+  packages:
+  - nfs-debs
+  - nfsv3driver
+  - map-fs
+  - map-fs-fuse
+packages:
+- name: berkeleydb
+  version: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  fingerprint: 8fefd348e5866adbca8c20efa150dd7d2921cbb7891fed4e95c7ed265afcd9ea
+  sha1: sha256:1e94bc772d8923cb05bfd0b28927b46f19b2e94de15833e601e330e5141745c4
+  dependencies: []
+- name: dockerdriver-integration
+  version: e489cc0776dd8711bb471ce97a8d6902a63e4bfbfe529e39f3283cba9f669ba4
+  fingerprint: e489cc0776dd8711bb471ce97a8d6902a63e4bfbfe529e39f3283cba9f669ba4
+  sha1: sha256:4a7afbe28c6cce86afb7be36d6a264adbc3ea7ce968a6790b1ac5a0681bcd0cc
+  dependencies:
+  - golang-1.24-linux
+- name: golang-1.24-linux
+  version: d742dc5eebc66113a186db2c1446ff5d646524cc798d1e74a56b684cffc53d35
+  fingerprint: d742dc5eebc66113a186db2c1446ff5d646524cc798d1e74a56b684cffc53d35
+  sha1: sha256:6f9779405aa938b56d2f36459738be64f7640ddc0afde8d8736416142f70b766
+  dependencies: []
+- name: map-fs
+  version: 2d8c8b775f986aefafe5e1b7504f64e40608303670e8a293d5c78545eb27600a
+  fingerprint: 2d8c8b775f986aefafe5e1b7504f64e40608303670e8a293d5c78545eb27600a
+  sha1: sha256:0b5f9686323f67b7c73598bfa32682fb30e5db3837fa683b524af2e9d5d34bec
+  dependencies:
+  - golang-1.24-linux
+- name: map-fs-fuse
+  version: 6bd69585e0b8863ace4f459d6b07438f563eb9785349f80c3962f5a08b565868
+  fingerprint: 6bd69585e0b8863ace4f459d6b07438f563eb9785349f80c3962f5a08b565868
+  sha1: sha256:15ea85d4e13b90213ef8032c566950409abecb762533ecf0f37721d5d94f310b
+  dependencies: []
+- name: map-fs-performance-acceptance-tests
+  version: bbdefca0e547024912f6280708e2d66312ed36650c082aa50172532db08d1896
+  fingerprint: bbdefca0e547024912f6280708e2d66312ed36650c082aa50172532db08d1896
+  sha1: sha256:64058035ba2895a6e3120d37f6ad64f949ac68307a5b8e84efa60bcc0690025d
+  dependencies:
+  - golang-1.24-linux
+- name: nfs-debs
+  version: f79616b76107bc705acc790d176acbf23f977bb54d59adb9cc270f39a2edbcd4
+  fingerprint: f79616b76107bc705acc790d176acbf23f977bb54d59adb9cc270f39a2edbcd4
+  sha1: sha256:aadde0905c3392d88a06ab4bead01736dd6d60efe64f700e2e08d72db78286cc
+  dependencies: []
+- name: nfsbroker
+  version: fa2ed3533061b84ef3fac2ddadf952fdfa966f1250d045d535878b9d7ce25b9d
+  fingerprint: fa2ed3533061b84ef3fac2ddadf952fdfa966f1250d045d535878b9d7ce25b9d
+  sha1: sha256:ad703a213d60cf1cca3566f49284fa482443c08f1821b7d14bd2dd1aba530790
+  dependencies:
+  - golang-1.24-linux
+- name: nfsv3driver
+  version: 3e9c42749dea077a1bb81d9904499b82d43c1f18209ec89b6392726da63b1c4b
+  fingerprint: 3e9c42749dea077a1bb81d9904499b82d43c1f18209ec89b6392726da63b1c4b
+  sha1: sha256:ec96bc1c694d4b9e4284729fbd95e43f1433e5c578a373083e4f9798febf8a6c
+  dependencies:
+  - golang-1.24-linux
+- name: openldap
+  version: 4c402254b6010fffd868a815084dd2fac22c6ff1a7c3bbab1904c7ff179950af
+  fingerprint: 4c402254b6010fffd868a815084dd2fac22c6ff1a7c3bbab1904c7ff179950af
+  sha1: sha256:fd417512520ce36606bbf508a0c6831d992ab1a10499924d2ead5c5cb5708c0a
+  dependencies:
+  - berkeleydb
+license:
+  version: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  fingerprint: 7beddae563eb0540f179f968ec28e267bf7e47afaefc4e6fbb155ca5e3419cf9
+  sha1: sha256:426570cc065ba3857a8964ffb0e29d11c54109ab3ff7704a1a3236f8736cd6de
