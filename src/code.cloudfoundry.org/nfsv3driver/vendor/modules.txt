@@ -1,17 +1,17 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.43.0
+# code.cloudfoundry.org/cf-networking-helpers v0.44.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
-# code.cloudfoundry.org/cfhttp/v2 v2.43.0
+# code.cloudfoundry.org/cfhttp/v2 v2.44.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.36.0
+# code.cloudfoundry.org/clock v1.37.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.47.0
+# code.cloudfoundry.org/debugserver v0.48.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.47.0
+# code.cloudfoundry.org/dockerdriver v0.48.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -27,14 +27,14 @@ code.cloudfoundry.org/goshims/osshim/os_fake
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.35.0
+# code.cloudfoundry.org/lager/v3 v3.36.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerctx
 code.cloudfoundry.org/lager/v3/lagerflags
 code.cloudfoundry.org/lager/v3/lagertest
-# code.cloudfoundry.org/tlsconfig v0.25.0
+# code.cloudfoundry.org/tlsconfig v0.26.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/tlsconfig
 # code.cloudfoundry.org/volume-mount-options v0.124.0
@@ -67,7 +67,7 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/pprof v0.0.0-20250423184734-337e5dd93bb4
+# github.com/google/pprof v0.0.0-20250501235452-c0086092b71a
 ## explicit; go 1.23.0
 github.com/google/pprof/profile
 # github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
