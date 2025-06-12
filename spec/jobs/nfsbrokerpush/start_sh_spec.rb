@@ -31,7 +31,6 @@ describe 'nfsbrokerpush job' do
             },
             "store_id" => "some-store-id",
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-time-format",
           }
         }
       end
@@ -45,7 +44,6 @@ describe 'nfsbrokerpush job' do
         expect(tpl_output).not_to include("--uaaClientSecret=\"client-secret\"")
         expect(tpl_output).to include("--servicesConfig=\"./services.json\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
-        expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
         expect(tpl_output).to include("--allowedOptions=\"source,uid,gid,auto_cache,readonly,version,mount,cache\"")
       end
     end
