@@ -65,7 +65,7 @@ func NewMapfsMounter(
 
 func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string, opts map[string]interface{}) error {
 	logger := env.Logger().Session("mount")
-	logger.Info("mount-start")
+	logger.Info("mount-start", lager.Data{"remote": remote, "target": target, "opts": opts})
 	defer logger.Info("mount-end")
 
 	if username, ok := opts["username"]; ok {
@@ -154,26 +154,6 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 		mountOptions = strings.ReplaceAll(mountOptions, ",actimeo=0", "")
 	}
 
-	if version, ok := opts["version"].(string); ok {
-		versionFloat, err := strconv.ParseFloat(version, 64)
-		if err != nil {
-			return dockerdriver.SafeError{SafeDescription: "\"version\" must be a positive numeric value"}
-		}
-
-		if versionFloat <= 0 {
-			return dockerdriver.SafeError{SafeDescription: "\"version\" must be a positive numeric value"}
-		}
-		if versionFloat == 3.0 {
-			version = "3"
-			logger.Info("detected version parameter set to `3.0`, NFSv3 does not have a minor version available, correcting to `3`")
-		}
-		if versionFloat > 3.0 && versionFloat < 4.0 {
-			return dockerdriver.SafeError{SafeDescription: fmt.Sprintf("NFSv3 does not use minor versions. NFSv %v does not exist", versionFloat)}
-		}
-
-		mountOptions = mountOptions + ",vers=" + version
-	}
-
 	t := intermediateMount
 	if !uidok {
 		t = target
@@ -181,7 +161,7 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 
 	err = m.invoker.Invoke(env, "mount", []string{"-t", m.fstype, "-o", mountOptions, remote, t}).Wait()
 	if err != nil {
-		logger.Error("invoke-mount-failed", err)
+		logger.Error("invoke-mount-failed", err, lager.Data{"mount-options": mountOptions})
 		err1 := m.osshim.Remove(intermediateMount)
 		if err1 != nil {
 			logger.Error("remove-failed", err1)

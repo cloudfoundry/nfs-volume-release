@@ -111,8 +111,8 @@ var insecureSkipVerify = flag.Bool(
 	"whether SSL communication should skip verification of server IP addresses in the certificate",
 )
 
-const fsType = "nfs"
-const mountOptions = "rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,actimeo=0"
+const fsType = "ext4"
+const mountOptions = ""
 
 var (
 	ldapSvcUser  string

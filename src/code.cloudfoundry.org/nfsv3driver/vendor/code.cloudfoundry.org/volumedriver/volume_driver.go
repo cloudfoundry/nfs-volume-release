@@ -1,10 +1,13 @@
 package volumedriver
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net"
+	"net/http"
 	"os"
 	"path/filepath"
 	"time"
@@ -65,6 +68,58 @@ func (d *VolumeDriver) Activate(env dockerdriver.Env) dockerdriver.ActivateRespo
 	}
 }
 
+func newUnixSocketHTTPClient(socketPath string) *http.Client {
+	transport := &http.Transport{
+		DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
+			return net.Dial("unix", socketPath)
+		},
+	}
+	return &http.Client{
+		Transport: transport,
+	}
+}
+
+type TaskResult struct {
+	DevicePath string `json:"device_path"`
+}
+
+type TaskResponse struct {
+	TaskID string     `json:"task_id"`
+	State  string     `json:"state,omitempty"`
+	Error  string     `json:"error,omitempty"`
+	Result TaskResult `json:"result,omitempty"`
+}
+
+func createTask(client *http.Client) (string, error) {
+	body := bytes.NewBuffer([]byte(`{}`)) // Example payload
+	resp, err := client.Post("http://unix/disks", "application/json", body)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	var result TaskResponse
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return "", err
+	}
+	return result.TaskID, nil
+}
+
+func pollTaskStatus(client *http.Client, taskID string) (*TaskResponse, error) {
+	url := fmt.Sprintf("http://unix/tasks/%s", taskID)
+	resp, err := client.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var result TaskResponse
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 func (d *VolumeDriver) Create(env dockerdriver.Env, createRequest dockerdriver.CreateRequest) dockerdriver.ErrorResponse {
 	logger := env.Logger().Session("create")
 	logger.Info("start")
@@ -74,11 +129,35 @@ func (d *VolumeDriver) Create(env dockerdriver.Env, createRequest dockerdriver.C
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
 	}
 
-	var ok bool
-	if _, ok = createRequest.Opts["source"].(string); !ok {
-		logger.Info("mount-config-missing-source", lager.Data{"volume_name": createRequest.Name})
-		return dockerdriver.ErrorResponse{Err: `Missing mandatory 'source' field in 'Opts'`}
+	logger.Info("sending-agent-request")
+	client := newUnixSocketHTTPClient("/var/vcap/bosh/agent.sock")
+	taskID, err := createTask(client)
+	if err != nil {
+		logger.Error("sending-agent-request-failed", err)
+		return dockerdriver.ErrorResponse{Err: fmt.Sprintf("sending agent request failed: %s", err.Error())}
 	}
+	logger.Info(fmt.Sprintf("got agent task ID: %s", taskID))
+	var devicePath string
+	for {
+		task, err := pollTaskStatus(client, taskID)
+		if err != nil {
+			logger.Error("failed-to-poll-agent", err)
+			return dockerdriver.ErrorResponse{Err: fmt.Sprintf("failed to poll: %s", task.Error)}
+		}
+
+		logger.Info("received-task", lager.Data{"task": task})
+		if task.State == "done" {
+			logger.Info("got-device-path", lager.Data{"path": devicePath})
+			devicePath = task.Result.DevicePath
+			break
+		}
+		if task.State == "failed" {
+			logger.Error("task-failed", err)
+			return dockerdriver.ErrorResponse{Err: fmt.Sprintf("task failed: %s", task.Error)}
+		}
+		time.Sleep(1 * time.Second)
+	}
+	createRequest.Opts["source"] = devicePath
 
 	existing, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), createRequest.Name)
 
