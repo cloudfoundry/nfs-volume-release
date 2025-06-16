@@ -100,7 +100,7 @@ func doInit(server *protocolServer, req *request) {
 	kernelFlags := input.Flags64()
 	server.kernelSettings = *input
 	kernelFlags &= (CAP_ASYNC_READ | CAP_BIG_WRITES | CAP_FILE_OPS |
-		CAP_READDIRPLUS | CAP_NO_OPEN_SUPPORT | CAP_PARALLEL_DIROPS | CAP_MAX_PAGES | CAP_RENAME_SWAP | CAP_PASSTHROUGH)
+		CAP_READDIRPLUS | CAP_NO_OPEN_SUPPORT | CAP_PARALLEL_DIROPS | CAP_MAX_PAGES | CAP_RENAME_SWAP | CAP_PASSTHROUGH | CAP_ALLOW_IDMAP)
 
 	if server.opts.EnableLocks {
 		kernelFlags |= CAP_FLOCK_LOCKS | CAP_POSIX_LOCKS
@@ -119,18 +119,17 @@ func doInit(server *protocolServer, req *request) {
 		// Clear CAP_READDIRPLUS
 		kernelFlags &= ^uint64(CAP_READDIRPLUS)
 	}
+	if !server.opts.IDMappedMount {
+		// Clear CAP_ALLOW_IDMAP
+		kernelFlags &= ^uint64(CAP_ALLOW_IDMAP)
+	}
 
-	dataCacheMode := kernelFlags & CAP_AUTO_INVAL_DATA
 	if server.opts.ExplicitDataCacheControl {
 		// we don't want CAP_AUTO_INVAL_DATA even if we cannot go into fully explicit mode
-		dataCacheMode = 0
-
-		explicit := kernelFlags & CAP_EXPLICIT_INVAL_DATA
-		if explicit != 0 {
-			dataCacheMode = explicit
-		}
+		kernelFlags |= input.Flags64() & CAP_EXPLICIT_INVAL_DATA
+	} else {
+		kernelFlags |= input.Flags64() & CAP_AUTO_INVAL_DATA
 	}
-	kernelFlags |= dataCacheMode
 
 	// maxPages is the maximum request size we want the kernel to use, in units of
 	// memory pages (usually 4kiB). Linux v4.19 and older ignore this and always use
@@ -445,7 +444,8 @@ func doStatFs(server *protocolServer, req *request) {
 }
 
 func doIoctl(server *protocolServer, req *request) {
-	req.status = Status(syscall.ENOTTY)
+	req.status = server.fileSystem.Ioctl(req.cancel, (*IoctlIn)(req.inData()), req.inPayload, (*IoctlOut)(req.outData()),
+		req.outPayload)
 }
 
 func doDestroy(server *protocolServer, req *request) {
@@ -650,7 +650,7 @@ func init() {
 		_OP_GETLK:                 LkOut{},
 		_OP_GETXATTR:              GetXAttrOut{},
 		_OP_INIT:                  InitOut{},
-		_OP_IOCTL:                 _IoctlOut{},
+		_OP_IOCTL:                 IoctlOut{},
 		_OP_LINK:                  EntryOut{},
 		_OP_LISTXATTR:             GetXAttrOut{},
 		_OP_LOOKUP:                EntryOut{},
@@ -691,7 +691,7 @@ func init() {
 		_OP_GETXATTR:        GetXAttrIn{},
 		_OP_INIT:            InitIn{},
 		_OP_INTERRUPT:       InterruptIn{},
-		_OP_IOCTL:           _IoctlIn{},
+		_OP_IOCTL:           IoctlIn{},
 		_OP_LINK:            LinkIn{},
 		_OP_LISTXATTR:       GetXAttrIn{},
 		_OP_LSEEK:           LseekIn{},

@@ -19,6 +19,10 @@ type defaultRawFileSystem struct{}
 func (fs *defaultRawFileSystem) Init(*Server) {
 }
 
+func (fs *defaultRawFileSystem) OnUnmount() {
+
+}
+
 func (fs *defaultRawFileSystem) String() string {
 	return os.Args[0]
 }
@@ -161,6 +165,10 @@ func (fs *defaultRawFileSystem) Fallocate(cancel <-chan struct{}, in *FallocateI
 
 func (fs *defaultRawFileSystem) CopyFileRange(cancel <-chan struct{}, input *CopyFileRangeIn) (written uint32, code Status) {
 	return 0, ENOSYS
+}
+
+func (fs *defaultRawFileSystem) Ioctl(cancel <-chan struct{}, input *IoctlIn, inbuf []byte, output *IoctlOut, outbuf []byte) (code Status) {
+	return ENOSYS
 }
 
 func (fs *defaultRawFileSystem) Lseek(cancel <-chan struct{}, in *LseekIn, out *LseekOut) Status {

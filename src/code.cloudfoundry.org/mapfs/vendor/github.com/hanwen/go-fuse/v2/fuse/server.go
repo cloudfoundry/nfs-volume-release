@@ -281,6 +281,9 @@ func (o *MountOptions) optionsStrings() []string {
 	if runtime.GOOS == "darwin" {
 		r = append(r, "daemon_timeout=0")
 	}
+	if o.IDMappedMount && !o.containsOption("default_permissions") {
+		r = append(r, "default_permissions")
+	}
 
 	// Commas and backslashs in an option need to be escaped, because
 	// options are separated by a comma and backslashs are used to
@@ -291,6 +294,15 @@ func (o *MountOptions) optionsStrings() []string {
 	}
 
 	return rEscaped
+}
+
+func (o *MountOptions) containsOption(opt string) bool {
+	for _, o := range o.Options {
+		if o == opt {
+			return true
+		}
+	}
+	return false
 }
 
 // DebugData returns internal status information for debugging
@@ -323,9 +335,9 @@ func handleEINTR(fn func() error) (err error) {
 	return
 }
 
-// Returns a new request, or error. In case exitIdle is given, returns
+// Returns a new request, or error. Returns
 // nil, OK if we have too many readers already.
-func (ms *Server) readRequest(exitIdle bool) (req *requestAlloc, code Status) {
+func (ms *Server) readRequest() (req *requestAlloc, code Status) {
 	ms.reqMu.Lock()
 	if ms.reqReaders > ms.maxReaders {
 		ms.reqMu.Unlock()
@@ -364,14 +376,20 @@ func (ms *Server) readRequest(exitIdle bool) (req *requestAlloc, code Status) {
 		log.Printf("Short read for input header: %v", req.inputBuf)
 		return nil, EINVAL
 	}
+	opCode := ((*InHeader)(unsafe.Pointer(&req.inputBuf[0]))).Opcode
+	/* These messages don't expect reply, so they cost nothing for
+	   the kernel to send. Make sure we're not overwhelmed by not
+	   spawning a new reader.
+	*/
+	needsBackPressure := (opCode == _OP_FORGET || opCode == _OP_BATCH_FORGET)
 
 	if !gobbled {
 		ms.readPool.Put(destIface)
 	}
 	ms.reqReaders--
-	if !ms.singleReader && ms.reqReaders <= 0 {
+	if !ms.singleReader && ms.reqReaders <= 0 && !needsBackPressure {
 		ms.loops.Add(1)
-		go ms.loop(true)
+		go ms.loop()
 	}
 
 	return req, OK
@@ -420,7 +438,7 @@ func (ms *Server) Serve() {
 	}
 	ms.serving = true
 
-	ms.loop(false)
+	ms.loop()
 	ms.loops.Wait()
 
 	ms.writeMu.Lock()
@@ -443,6 +461,8 @@ func (ms *Server) Serve() {
 		reading.st = ENODEV
 		close(reading.ready)
 	}
+
+	ms.fileSystem.OnUnmount()
 }
 
 // Wait waits for the serve loop to exit. This should only be called
@@ -456,7 +476,7 @@ func (ms *Server) handleInit() Status {
 	// and don't spawn new readers.
 	orig := ms.singleReader
 	ms.singleReader = true
-	req, errNo := ms.readRequest(false)
+	req, errNo := ms.readRequest()
 	ms.singleReader = orig
 
 	if errNo != OK || req == nil {
@@ -503,11 +523,11 @@ func (ms *Server) handleInit() Status {
 // BenchmarkGoFuseStat-2          	    9310	    121332 ns/op
 // BenchmarkGoFuseReaddir         	    4074	    361568 ns/op
 // BenchmarkGoFuseReaddir-2       	    3511	    319765 ns/op
-func (ms *Server) loop(exitIdle bool) {
+func (ms *Server) loop() {
 	defer ms.loops.Done()
 exit:
 	for {
-		req, errNo := ms.readRequest(exitIdle)
+		req, errNo := ms.readRequest()
 		switch errNo {
 		case OK:
 			if req == nil {

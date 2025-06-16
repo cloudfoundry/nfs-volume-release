@@ -335,6 +335,18 @@ type MountOptions struct {
 
 	// Maximum stacking depth for passthrough files. Defaults to 1.
 	MaxStackDepth int
+
+	// Enable ID-mapped mount if the Kernel supports it.
+	// ID-mapped mount allows the device to be mounted on the system
+	// with the IDs remapped (via mount_setattr, move_mount syscalls) to
+	// those of the user on the local system.
+	//
+	// Enabling this flag automatically sets the "default_permissions"
+	// mount option. This is required by FUSE to delegate the UID/GID-based
+	// permission checks to the kernel. For requests that create new inodes,
+	// FUSE will send the mapped UID/GIDs. For all other requests, FUSE
+	// will send "-1".
+	IDMappedMount bool
 }
 
 // RawFileSystem is an interface close to the FUSE wire protocol.
@@ -431,6 +443,7 @@ type RawFileSystem interface {
 	Release(cancel <-chan struct{}, input *ReleaseIn)
 	Write(cancel <-chan struct{}, input *WriteIn, data []byte) (written uint32, code Status)
 	CopyFileRange(cancel <-chan struct{}, input *CopyFileRangeIn) (written uint32, code Status)
+	Ioctl(cancel <-chan struct{}, input *IoctlIn, inbuf []byte, output *IoctlOut, outbuf []byte) (code Status)
 
 	Flush(cancel <-chan struct{}, input *FlushIn) Status
 	Fsync(cancel <-chan struct{}, input *FsyncIn) (code Status)
@@ -450,4 +463,7 @@ type RawFileSystem interface {
 	// filesystem implementation can use the server argument to
 	// talk back to the kernel (through notify methods).
 	Init(*Server)
+
+	// Called after processing the last request.
+	OnUnmount()
 }
