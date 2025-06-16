@@ -2,13 +2,11 @@ package nfsv3driver
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	"code.cloudfoundry.org/dockerdriver"
@@ -68,194 +66,20 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 	logger.Info("mount-start", lager.Data{"remote": remote, "target": target, "opts": opts})
 	defer logger.Info("mount-end")
 
-	if username, ok := opts["username"]; ok {
-		if _, found := opts["uid"]; found {
-			return dockerdriver.SafeError{SafeDescription: "Not allowed options"}
-		}
-
-		if _, found := opts["gid"]; found {
-			return dockerdriver.SafeError{SafeDescription: "Not allowed options"}
-		}
-
-		if m.resolver == nil {
-			return dockerdriver.SafeError{SafeDescription: "LDAP username is specified but LDAP is not configured"}
-		}
-		password, ok := opts["password"]
-		if !ok {
-			return dockerdriver.SafeError{SafeDescription: "LDAP username is specified but LDAP password is missing"}
-		}
-
-		uid, gid, err := m.resolver.Resolve(env, username.(string), password.(string))
-		if err != nil {
-			return err
-		}
-
-		opts["uid"] = uid
-		opts["gid"] = gid
-	}
-
-	_, uidok := opts["uid"]
-	_, gidok := opts["gid"]
-	if uidok && !gidok {
-		return dockerdriver.SafeError{SafeDescription: "required 'gid' option is missing"}
-	}
-
-	optsToUse, err := vmo.NewMountOpts(opts, m.mask)
-	if err != nil {
-		logger.Debug("mount-options-failed", lager.Data{
-			"source":  remote,
-			"target":  target,
-			"options": opts,
-		})
-		return dockerdriver.SafeError{SafeDescription: err.Error()}
-	}
-
-	// check for legacy URL formatted mounts and rewrite to standard nfs format as necessary
-	match := legacyNfsSharePattern.FindStringSubmatch(remote)
-
-	if len(match) > 2 {
-		if strings.TrimSpace(match[1]) == "" {
-			return dockerdriver.SafeError{SafeDescription: "Invalid 'share' option"}
-		}
-		if match[2] == "" {
-			remote = match[1] + ":/"
-		} else {
-			remote = match[1] + ":" + match[2]
-		}
-	}
-
 	target = strings.TrimSuffix(target, "/")
 
-	intermediateMount := target + MapfsDirectorySuffix
-	orig := syscall.Umask(000)
-	defer syscall.Umask(orig)
-	err = m.osshim.MkdirAll(intermediateMount, os.ModePerm)
-	if err != nil {
-		logger.Error("mkdir-intermediate-failed", err)
-		return dockerdriver.SafeError{SafeDescription: err.Error()}
-	}
-
-	cache := false
 	mountOptions := m.defaultOpts
 
-	if val, ok := opts["readonly"]; ok {
-		cache, _ = strconv.ParseBool(fmt.Sprintf("%v", val))
-	}
-
-	if val, ok := opts["cache"]; ok {
-		cache, err = strconv.ParseBool(fmt.Sprintf("%v", val))
-		if err != nil {
-			logger.Error("invalid-cache-option", err)
-			return dockerdriver.SafeError{SafeDescription: "Invalid 'cache' option"}
-		}
-	}
-
-	if cache {
-		mountOptions = strings.ReplaceAll(mountOptions, ",actimeo=0", "")
-	}
-
-	t := intermediateMount
-	if !uidok {
-		t = target
-	}
-
-	err = m.invoker.Invoke(env, "mount", []string{"-t", m.fstype, "-o", mountOptions, remote, t}).Wait()
+	err := m.invoker.Invoke(env, "mount", []string{"-t", m.fstype, "-o", mountOptions, remote, target}).Wait()
 	if err != nil {
 		logger.Error("invoke-mount-failed", err, lager.Data{"mount-options": mountOptions})
-		err1 := m.osshim.Remove(intermediateMount)
-		if err1 != nil {
-			logger.Error("remove-failed", err1)
-		}
 		return dockerdriver.SafeError{SafeDescription: err.Error()}
 	}
 
-	if uidok {
-		// make sure the mapped user has read access to the directory before doing the mapfs mount
-		// this check is best effort--root may not be able to stat the directory, or the server may
-		// anonymize the owner UID.
-		uid, err := strconv.ParseUint(uniformData(opts["uid"]), 10, 32)
-		if err != nil {
-			return dockerdriver.SafeError{SafeDescription: InvalidUidValueErrorMessage}
-		}
-		if uid <= 0 {
-			return dockerdriver.SafeError{SafeDescription: InvalidUidValueErrorMessage}
-		}
-
-		gid, err := strconv.ParseUint(uniformData(opts["gid"]), 10, 32)
-		if err != nil {
-			return dockerdriver.SafeError{SafeDescription: InvalidGidValueErrorMessage}
-		}
-		if gid <= 0 {
-			return dockerdriver.SafeError{SafeDescription: InvalidGidValueErrorMessage}
-		}
-
-		st := syscall.Stat_t{}
-		err = m.syscallshim.Stat(intermediateMount, &st)
-		if err != nil {
-			logger.Error("unable-to-stat-new-mount", err)
-			err = nil
-		} else {
-			if (st.Mode&04 == 0) &&
-				((uint32(gid) != st.Gid && NobodyId != st.Gid && UnknownId != st.Gid) || st.Mode&040 == 0) &&
-				((uint32(uid) != st.Uid && NobodyId != st.Uid && UnknownId != st.Uid) || st.Mode&0400 == 0) {
-				err = errors.New("user lacks read access to share")
-			}
-		}
-		if err != nil {
-			logger.Error("mount-read-access-check-failed", err)
-
-			err1 := m.invoker.Invoke(env, "umount", []string{intermediateMount}).Wait()
-			if err1 != nil {
-				logger.Error("intermediate-unmount-failed", err1)
-			}
-
-			if err1 == nil {
-				err1 = m.osshim.Remove(intermediateMount)
-				if err1 != nil {
-					logger.Error("intermediate-remove-failed", err1)
-				}
-			}
-
-			return dockerdriver.SafeError{SafeDescription: err.Error()}
-		}
-
-		err = or.Chown(intermediateMount, uid, gid)
-		if err != nil {
-			logger.Error("unable-to-chown-new-mount", err)
-			err1 := m.invoker.Invoke(env, "umount", []string{intermediateMount}).Wait()
-			if err1 != nil {
-				logger.Error("intermediate-unmount-failed", err1)
-			}
-
-			if err1 == nil {
-				err1 = m.osshim.Remove(intermediateMount)
-				if err1 != nil {
-					logger.Error("intermediate-remove-failed", err1)
-				}
-			}
-			return dockerdriver.SafeError{SafeDescription: err.Error()}
-		}
-
-		args := mapfsOptions(optsToUse)
-		args = append(args, target, intermediateMount)
-		mountError := m.invoker.Invoke(env, m.mapfsPath, args).WaitFor("Mounted!", MapfsMountTimeout)
-		if mountError != nil {
-			logger.Error("background-invoke-mount-failed", err)
-			err = m.invoker.Invoke(env, "umount", []string{intermediateMount}).Wait()
-			if err != nil {
-				logger.Error("unmount-failed", err)
-				return dockerdriver.SafeError{SafeDescription: mountError.Error()}
-			}
-
-			err = m.osshim.Remove(intermediateMount)
-			if err != nil {
-				logger.Error("remove-failed", err)
-				return dockerdriver.SafeError{SafeDescription: mountError.Error()}
-			}
-
-			return dockerdriver.SafeError{SafeDescription: mountError.Error()}
-		}
-
+	err = os.Chown(target, 2000, 2000)
+	if err != nil {
+		logger.Error("unable-to-chown-new-mount", err)
+		return dockerdriver.SafeError{SafeDescription: err.Error()}
 	}
 
 	return nil

@@ -424,9 +424,6 @@ func (d *VolumeDriver) mount(env dockerdriver.Env, opts map[string]interface{}, 
 		return err
 	}
 
-	orig := d.osHelper.Umask(000)
-	defer d.osHelper.Umask(orig)
-
 	err := d.os.MkdirAll(mountPath, os.ModePerm)
 	if err != nil {
 		logger.Error("create-mountdir-failed", err)
