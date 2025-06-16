@@ -219,6 +219,23 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 			return dockerdriver.SafeError{SafeDescription: err.Error()}
 		}
 
+		err = or.Chown(intermediateMount, uid, gid)
+		if err != nil {
+			logger.Error("unable-to-chown-new-mount", err)
+			err1 := m.invoker.Invoke(env, "umount", []string{intermediateMount}).Wait()
+			if err1 != nil {
+				logger.Error("intermediate-unmount-failed", err1)
+			}
+
+			if err1 == nil {
+				err1 = m.osshim.Remove(intermediateMount)
+				if err1 != nil {
+					logger.Error("intermediate-remove-failed", err1)
+				}
+			}
+			return dockerdriver.SafeError{SafeDescription: err.Error()}
+		}
+
 		args := mapfsOptions(optsToUse)
 		args = append(args, target, intermediateMount)
 		mountError := m.invoker.Invoke(env, m.mapfsPath, args).WaitFor("Mounted!", MapfsMountTimeout)
