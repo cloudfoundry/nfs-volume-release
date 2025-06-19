@@ -46,7 +46,7 @@ exec /var/vcap/packages/nfsv3driver/bin/nfsv3driver \
   --driversPath="<%= p("nfsv3driver.driver_path") %>" \
   --mountDir="<%= p("nfsv3driver.cell_mount_path") %>" \
   --logLevel="<%= p("nfsv3driver.log_level") %>" \
-  --timeFormat="<%= p("nfsv3driver.log_time_format") %>" \
+  --timeFormat="rfc3339" \
   --mapfsPath="/var/vcap/packages/map-fs/bin/mapfs" \
   >> $LOG_DIR/nfsv3driver.stdout.log \
   2>> $LOG_DIR/nfsv3driver.stderr.log

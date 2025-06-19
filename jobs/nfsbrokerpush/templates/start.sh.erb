@@ -30,5 +30,5 @@ bin/nfsbroker --listenAddr="0.0.0.0:$PORT" \
               --credhubURL="<%= credhub_url %>" \
               --storeID="<%= p('nfsbrokerpush.store_id') %>" \
               --logLevel="<%= p("nfsbrokerpush.log_level") %>" \
-              --timeFormat="<%= p("nfsbrokerpush.log_time_format") %>" \
+              --timeFormat="rfc3339" \
               --allowedOptions="<%= allowed_options %>"

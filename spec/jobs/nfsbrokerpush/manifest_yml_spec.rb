@@ -31,7 +31,6 @@ describe 'nfsbrokerpush job' do
             },
             "store_id" => "some-store-id",
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-time-format",
             "app_name" => "super-cool-app",
             "app_domain" => "cf-domain.test",
             "username" => "jane-doe",
@@ -64,7 +63,6 @@ describe 'nfsbrokerpush job' do
           "nfsbrokerpush" => {
             "store_id" => "some-store-id",
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-time-format",
             "app_name" => "super-cool-app",
             "app_domain" => "cf-domain.test",
             "username" => "jane-doe",
