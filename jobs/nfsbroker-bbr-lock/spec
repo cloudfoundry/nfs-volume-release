@@ -11,3 +11,31 @@ consumes:
   - name: nfsbrokerpush
     type: nfsbrokerpush
 
+properties:
+  bbr.metadata:
+    description: "BBR Metadata"
+    default: |
+      ---
+      backup_should_be_locked_before:
+      - job_name: uaa
+        release: uaa
+      - job_name: credhub
+        release: credhub
+      - job_name: cloud_controller_ng
+        release: capi
+      - job_name: cloud_controller_worker
+        release: capi
+      - job_name: cc_deployment_updater
+        release: capi
+
+      restore_should_be_locked_before:
+      - job_name: uaa
+        release: uaa
+      - job_name: credhub
+        release: credhub
+      - job_name: cloud_controller_ng
+        release: capi
+      - job_name: cloud_controller_worker
+        release: capi
+      - job_name: cc_deployment_updater
+        release: capi
