@@ -4,7 +4,7 @@ code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
-# code.cloudfoundry.org/volumedriver v0.129.0
+# code.cloudfoundry.org/volumedriver v0.130.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/volumedriver/mountchecker
 # github.com/go-logr/logr v1.4.3
