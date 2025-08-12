@@ -183,6 +183,8 @@ builds:
     version: 1.5.2
   a28e58d0-26f9-4d74-577b-01d3be2777e0:
     version: 7.1.75
+  a44b0d92-aff2-4368-555c-b74bce789ce1:
+    version: 7.33.0
   a46ed0d6-0e07-4430-a825-82583550fa3e:
     version: 0.0.7
   a4977db9-ddc6-46f5-8fff-23458d1e2a74:
