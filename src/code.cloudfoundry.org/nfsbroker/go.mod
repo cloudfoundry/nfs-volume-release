@@ -6,11 +6,11 @@ toolchain go1.23.6
 
 require (
 	code.cloudfoundry.org/clock v1.43.0
-	code.cloudfoundry.org/debugserver v0.61.0
-	code.cloudfoundry.org/existingvolumebroker v0.179.0
+	code.cloudfoundry.org/debugserver v0.62.0
+	code.cloudfoundry.org/existingvolumebroker v0.180.0
 	code.cloudfoundry.org/goshims v0.73.0
-	code.cloudfoundry.org/lager/v3 v3.42.0
-	code.cloudfoundry.org/service-broker-store v0.126.0
+	code.cloudfoundry.org/lager/v3 v3.43.0
+	code.cloudfoundry.org/service-broker-store v0.127.0
 	code.cloudfoundry.org/volume-mount-options v0.128.0
 	github.com/google/gofuzz v1.2.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.10.0
