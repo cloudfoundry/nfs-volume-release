@@ -9,6 +9,7 @@ files:
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/go.sum
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/modules.txt
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/Masterminds/semver/v3/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/go-logr/logr/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/go-logr/logr/funcr/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/github.com/go-task/slim-sprig/v3/*.go # gosub
@@ -57,6 +58,7 @@ files:
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/internal/cgroups/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/internal/runtime/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.uber.org/automaxprocs/maxprocs/*.go # gosub
+  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/go.yaml.in/yaml/v3/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/atom/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/net/html/charset/*.go # gosub
@@ -82,4 +84,3 @@ files:
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/tools/cover/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/tools/go/ast/edge/*.go # gosub
   - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/golang.org/x/tools/go/ast/inspector/*.go # gosub
-  - code.cloudfoundry.org/mapfs-performance-acceptance-tests/vendor/gopkg.in/yaml.v3/*.go # gosub

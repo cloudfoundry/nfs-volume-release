@@ -22,6 +22,7 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/lager/v3/lagerctx/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/lager/v3/lagertest/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/tlsconfig/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/Masterminds/semver/v3/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/bmizerany/pat/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/go-logr/logr/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/go-logr/logr/funcr/*.go # gosub
