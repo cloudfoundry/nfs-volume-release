@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.60.0
+# code.cloudfoundry.org/cf-networking-helpers v0.61.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/cf-networking-helpers/portauthority
 # code.cloudfoundry.org/cfhttp/v2 v2.57.0
@@ -15,7 +15,7 @@ code.cloudfoundry.org/debugserver
 ## explicit; go 1.23.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/goshims v0.78.0
+# code.cloudfoundry.org/goshims v0.79.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/filepathshim
@@ -37,11 +37,11 @@ code.cloudfoundry.org/lager/v3/lagertest
 # code.cloudfoundry.org/tlsconfig v0.35.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/tlsconfig
-# code.cloudfoundry.org/volume-mount-options v0.133.0
+# code.cloudfoundry.org/volume-mount-options v0.134.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.139.0
+# code.cloudfoundry.org/volumedriver v0.140.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
