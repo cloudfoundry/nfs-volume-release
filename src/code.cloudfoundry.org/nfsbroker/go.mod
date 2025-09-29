@@ -5,11 +5,11 @@ go 1.24.0
 require (
 	code.cloudfoundry.org/clock v1.49.0
 	code.cloudfoundry.org/debugserver v0.68.0
-	code.cloudfoundry.org/existingvolumebroker v0.185.0
-	code.cloudfoundry.org/goshims v0.78.0
+	code.cloudfoundry.org/existingvolumebroker v0.186.0
+	code.cloudfoundry.org/goshims v0.79.0
 	code.cloudfoundry.org/lager/v3 v3.49.0
-	code.cloudfoundry.org/service-broker-store v0.132.0
-	code.cloudfoundry.org/volume-mount-options v0.133.0
+	code.cloudfoundry.org/service-broker-store v0.133.0
+	code.cloudfoundry.org/volume-mount-options v0.134.0
 	github.com/google/gofuzz v1.2.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.10.0
 	github.com/onsi/ginkgo/v2 v2.25.3
