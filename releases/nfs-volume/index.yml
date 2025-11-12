@@ -91,6 +91,8 @@ builds:
     version: 7.0.1
   5d23bb65-8e38-4e2b-5a12-d50ba4499dc2:
     version: 7.1.27
+  5e87c7da-cbaf-4604-5341-69090694aa2e:
+    version: 7.42.0
   60265cbc-b220-4e2e-98dc-b40ff27f6fc1:
     version: 0.1.1
   60fcc8fc-8179-4262-42ec-7f9925214f31:
