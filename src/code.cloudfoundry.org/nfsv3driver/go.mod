@@ -1,14 +1,14 @@
 module code.cloudfoundry.org/nfsv3driver
 
 require (
-	code.cloudfoundry.org/cf-networking-helpers v0.65.0
-	code.cloudfoundry.org/debugserver v0.74.0
-	code.cloudfoundry.org/dockerdriver v0.62.0
-	code.cloudfoundry.org/goshims v0.84.0
-	code.cloudfoundry.org/lager/v3 v3.53.0
-	code.cloudfoundry.org/tlsconfig v0.38.0
-	code.cloudfoundry.org/volume-mount-options v0.139.0
-	code.cloudfoundry.org/volumedriver v0.146.0
+	code.cloudfoundry.org/cf-networking-helpers v0.66.0
+	code.cloudfoundry.org/debugserver v0.75.0
+	code.cloudfoundry.org/dockerdriver v0.63.0
+	code.cloudfoundry.org/goshims v0.85.0
+	code.cloudfoundry.org/lager/v3 v3.54.0
+	code.cloudfoundry.org/tlsconfig v0.39.0
+	code.cloudfoundry.org/volume-mount-options v0.140.0
+	code.cloudfoundry.org/volumedriver v0.147.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
@@ -18,22 +18,22 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.61.0 // indirect
-	code.cloudfoundry.org/clock v1.53.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.62.0 // indirect
+	code.cloudfoundry.org/clock v1.54.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20251007162407-5df77e3f7d1d // indirect
+	github.com/google/pprof v0.0.0-20251114195745-4902fdda35c8 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/mod v0.29.0 // indirect
-	golang.org/x/net v0.46.0 // indirect
+	golang.org/x/mod v0.30.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/sync v0.18.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
-	golang.org/x/text v0.30.0 // indirect
-	golang.org/x/tools v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
+	golang.org/x/tools v0.39.0 // indirect
 	gopkg.in/asn1-ber.v1 v1.0.0-20181015200546-f715ec2f112d // indirect
 )
 
