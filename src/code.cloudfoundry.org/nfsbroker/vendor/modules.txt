@@ -1,7 +1,7 @@
-# code.cloudfoundry.org/clock v1.55.0
-## explicit; go 1.24.0
+# code.cloudfoundry.org/clock v1.56.0
+## explicit; go 1.24.9
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20251210001818-b949b0e73b17
+# code.cloudfoundry.org/credhub-cli v0.0.0-20251215140710-93274ab0250e
 ## explicit; go 1.24.9
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -11,22 +11,22 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.77.0
-## explicit; go 1.24.0
+# code.cloudfoundry.org/debugserver v0.78.0
+## explicit; go 1.24.9
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.196.0
+# code.cloudfoundry.org/existingvolumebroker v0.197.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
 # code.cloudfoundry.org/goshims v0.86.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.55.0
-## explicit; go 1.24.0
+# code.cloudfoundry.org/lager/v3 v3.56.0
+## explicit; go 1.24.9
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.143.0
+# code.cloudfoundry.org/service-broker-store v0.144.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
@@ -40,7 +40,7 @@ github.com/Masterminds/semver/v3
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.162
+# github.com/cloudfoundry/socks5-proxy v0.2.163
 ## explicit; go 1.24.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-chi/chi/v5 v5.2.3
