@@ -8,10 +8,10 @@ code.cloudfoundry.org/cfhttp/v2/handlers
 # code.cloudfoundry.org/clock v1.56.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.78.0
+# code.cloudfoundry.org/debugserver v0.79.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.67.0
+# code.cloudfoundry.org/dockerdriver v0.68.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -41,7 +41,7 @@ code.cloudfoundry.org/tlsconfig
 ## explicit; go 1.24.9
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.151.0
+# code.cloudfoundry.org/volumedriver v0.152.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
