@@ -369,6 +369,8 @@ builds:
     version: 7.1.63
   fd180aca-09ae-4260-585f-5f5ab6d95c26:
     version: 7.1.74
+  fde3ab4f-dfee-4681-667c-43ca4e0b8718:
+    version: 7.47.0
   fee935d7-3835-4417-5b25-cd1c42cac1b6:
     version: 7.23.0
   feed4394-af36-4db1-8194-22c6010f7018:
