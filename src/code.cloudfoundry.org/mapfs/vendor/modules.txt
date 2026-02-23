@@ -1,10 +1,10 @@
-# code.cloudfoundry.org/goshims v0.91.0
+# code.cloudfoundry.org/goshims v0.92.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
-# code.cloudfoundry.org/volumedriver v0.159.0
+# code.cloudfoundry.org/volumedriver v0.160.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/volumedriver/mountchecker
 # github.com/Masterminds/semver/v3 v3.4.0
