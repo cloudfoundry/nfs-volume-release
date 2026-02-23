@@ -1,14 +1,14 @@
 module code.cloudfoundry.org/nfsv3driver
 
 require (
-	code.cloudfoundry.org/cf-networking-helpers v0.75.0
-	code.cloudfoundry.org/debugserver v0.85.0
-	code.cloudfoundry.org/dockerdriver v0.75.0
-	code.cloudfoundry.org/goshims v0.91.0
+	code.cloudfoundry.org/cf-networking-helpers v0.76.0
+	code.cloudfoundry.org/debugserver v0.86.0
+	code.cloudfoundry.org/dockerdriver v0.76.0
+	code.cloudfoundry.org/goshims v0.92.0
 	code.cloudfoundry.org/lager/v3 v3.61.0
 	code.cloudfoundry.org/tlsconfig v0.45.0
 	code.cloudfoundry.org/volume-mount-options v0.146.0
-	code.cloudfoundry.org/volumedriver v0.159.0
+	code.cloudfoundry.org/volumedriver v0.160.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
