@@ -1,7 +1,7 @@
 # code.cloudfoundry.org/clock v1.61.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20260212202352-e7a28f9d31c0
+# code.cloudfoundry.org/credhub-cli v0.0.0-20260216140056-3ed7ad5aa36b
 ## explicit; go 1.25.7
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -11,14 +11,14 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.85.0
+# code.cloudfoundry.org/debugserver v0.86.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.204.0
+# code.cloudfoundry.org/existingvolumebroker v0.205.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.91.0
+# code.cloudfoundry.org/goshims v0.92.0
 ## explicit; go 1.24.9
 code.cloudfoundry.org/goshims/osshim
 # code.cloudfoundry.org/lager/v3 v3.61.0
