@@ -2,7 +2,7 @@
 set -euo pipefail
 set -x
 
-PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
+PATH="<%= link('nfsbrokerpush').p('nfsbrokerpush.cli_path') %>:${PATH}"
 
 API_ENDPOINT=https://api.<%= link('nfsbrokerpush').p('nfsbrokerpush.domain') %>
 ORG=<%= link('nfsbrokerpush').p('nfsbrokerpush.organization') %>
