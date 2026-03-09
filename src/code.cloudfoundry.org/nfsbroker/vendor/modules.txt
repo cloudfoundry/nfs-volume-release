@@ -1,7 +1,7 @@
-# code.cloudfoundry.org/clock v1.61.0
-## explicit; go 1.24.9
+# code.cloudfoundry.org/clock v1.62.0
+## explicit; go 1.25.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20260216140056-3ed7ad5aa36b
+# code.cloudfoundry.org/credhub-cli v0.0.0-20260302140100-b28cba4f6966
 ## explicit; go 1.25.7
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -11,18 +11,18 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.86.0
-## explicit; go 1.24.9
+# code.cloudfoundry.org/debugserver v0.87.0
+## explicit; go 1.25.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.206.0
+# code.cloudfoundry.org/existingvolumebroker v0.207.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.93.0
+# code.cloudfoundry.org/goshims v0.94.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.61.0
-## explicit; go 1.24.9
+# code.cloudfoundry.org/lager/v3 v3.62.0
+## explicit; go 1.25.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
@@ -30,7 +30,7 @@ code.cloudfoundry.org/lager/v3/lagerflags
 ## explicit; go 1.24.9
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
-# code.cloudfoundry.org/volume-mount-options v0.147.0
+# code.cloudfoundry.org/volume-mount-options v0.148.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
@@ -40,7 +40,7 @@ github.com/Masterminds/semver/v3
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.169
+# github.com/cloudfoundry/socks5-proxy v0.2.170
 ## explicit; go 1.25.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-chi/chi/v5 v5.2.5
@@ -166,11 +166,11 @@ golang.org/x/net/html/atom
 golang.org/x/net/html/charset
 golang.org/x/net/internal/socks
 golang.org/x/net/proxy
-# golang.org/x/sync v0.19.0
-## explicit; go 1.24.0
+# golang.org/x/sync v0.20.0
+## explicit; go 1.25.0
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.41.0
-## explicit; go 1.24.0
+# golang.org/x/sys v0.42.0
+## explicit; go 1.25.0
 golang.org/x/sys/cpu
 golang.org/x/sys/unix
 golang.org/x/sys/windows
