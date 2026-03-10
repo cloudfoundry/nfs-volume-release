@@ -2,7 +2,7 @@
 name: dockerdriver-integration
 
 dependencies:
-- golang-1.25-linux
+- golang-1.26-linux
 
 files:
   - code.cloudfoundry.org/dockerdriver/go.mod
