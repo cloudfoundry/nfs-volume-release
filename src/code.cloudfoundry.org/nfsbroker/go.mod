@@ -5,7 +5,7 @@ go 1.25.7
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.20
 	code.cloudfoundry.org/clock v1.64.0
-	code.cloudfoundry.org/debugserver v0.88.0
+	code.cloudfoundry.org/debugserver v0.90.0
 	code.cloudfoundry.org/existingvolumebroker v0.209.0
 	code.cloudfoundry.org/goshims v0.95.0
 	code.cloudfoundry.org/lager/v3 v3.64.0
