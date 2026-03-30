@@ -1,10 +1,10 @@
 package main_test
 
 import (
+	"code.cloudfoundry.org/brokerapi/v13/domain"
 	. "code.cloudfoundry.org/nfsbroker"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"code.cloudfoundry.org/brokerapi/v13/domain"
 )
 
 var _ = Describe("Services", func() {
