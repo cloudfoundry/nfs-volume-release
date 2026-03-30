@@ -8,9 +8,9 @@ package fakes
 import (
 	"sync"
 
+	"code.cloudfoundry.org/brokerapi/v13/domain"
 	"code.cloudfoundry.org/lager/v3"
 	"code.cloudfoundry.org/service-broker-store/brokerstore"
-	"code.cloudfoundry.org/brokerapi/v13/domain"
 )
 
 type FakeRetiredStore struct {
