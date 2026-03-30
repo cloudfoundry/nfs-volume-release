@@ -8,6 +8,15 @@ files:
   - code.cloudfoundry.org/nfsbroker/go.mod
   - code.cloudfoundry.org/nfsbroker/go.sum
   - code.cloudfoundry.org/nfsbroker/vendor/modules.txt
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/auth/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/domain/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/domain/apiresponses/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/handlers/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/internal/blog/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/internal/middleware/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/middlewares/*.go # gosub
+  - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/brokerapi/v13/utils/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/credhub-cli/credhub/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/credhub-cli/credhub/auth/*.go # gosub
@@ -32,19 +41,10 @@ files:
   - code.cloudfoundry.org/nfsbroker/vendor/code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/cloudfoundry/go-socks5/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/cloudfoundry/socks5-proxy/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/go-chi/chi/v5/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/google/uuid/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/hashicorp/go-version/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/auth/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/domain/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/domain/apiresponses/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/handlers/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/internal/blog/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/middlewares/*.go # gosub
-  - code.cloudfoundry.org/nfsbroker/vendor/github.com/pivotal-cf/brokerapi/v11/utils/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/grouper/*.go # gosub
   - code.cloudfoundry.org/nfsbroker/vendor/github.com/tedsuo/ifrit/http_server/*.go # gosub
