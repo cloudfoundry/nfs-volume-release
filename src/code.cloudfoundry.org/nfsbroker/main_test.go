@@ -19,8 +19,8 @@ import (
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/onsi/gomega/ghttp"
-	"github.com/pivotal-cf/brokerapi/v11/domain"
-	"github.com/pivotal-cf/brokerapi/v11/domain/apiresponses"
+	"code.cloudfoundry.org/brokerapi/v13/domain"
+	"code.cloudfoundry.org/brokerapi/v13/domain/apiresponses"
 	"github.com/tedsuo/ifrit"
 	ginkgomon "github.com/tedsuo/ifrit/ginkgomon_v2"
 )

@@ -4,7 +4,7 @@ import (
 	. "code.cloudfoundry.org/nfsbroker"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"github.com/pivotal-cf/brokerapi/v11/domain"
+	"code.cloudfoundry.org/brokerapi/v13/domain"
 )
 
 var _ = Describe("Services", func() {

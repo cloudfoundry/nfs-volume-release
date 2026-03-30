@@ -1,7 +1,18 @@
-# code.cloudfoundry.org/clock v1.63.0
+# code.cloudfoundry.org/brokerapi/v13 v13.0.20
+## explicit; go 1.25.0
+code.cloudfoundry.org/brokerapi/v13
+code.cloudfoundry.org/brokerapi/v13/auth
+code.cloudfoundry.org/brokerapi/v13/domain
+code.cloudfoundry.org/brokerapi/v13/domain/apiresponses
+code.cloudfoundry.org/brokerapi/v13/handlers
+code.cloudfoundry.org/brokerapi/v13/internal/blog
+code.cloudfoundry.org/brokerapi/v13/internal/middleware
+code.cloudfoundry.org/brokerapi/v13/middlewares
+code.cloudfoundry.org/brokerapi/v13/utils
+# code.cloudfoundry.org/clock v1.64.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20260312192301-efc1a847c0dd
+# code.cloudfoundry.org/credhub-cli v0.0.0-20260330130201-fd2571486ea6
 ## explicit; go 1.25.7
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -14,20 +25,20 @@ code.cloudfoundry.org/credhub-cli/credhub/server
 # code.cloudfoundry.org/debugserver v0.88.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.208.0
+# code.cloudfoundry.org/existingvolumebroker v0.209.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
 # code.cloudfoundry.org/goshims v0.95.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.63.0
+# code.cloudfoundry.org/lager/v3 v3.64.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.145.0
-## explicit; go 1.24.9
+# code.cloudfoundry.org/service-broker-store v0.148.0
+## explicit; go 1.25.7
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
 # code.cloudfoundry.org/volume-mount-options v0.149.0
@@ -43,9 +54,6 @@ github.com/cloudfoundry/go-socks5
 # github.com/cloudfoundry/socks5-proxy v0.2.171
 ## explicit; go 1.25.0
 github.com/cloudfoundry/socks5-proxy
-# github.com/go-chi/chi/v5 v5.2.5
-## explicit; go 1.22
-github.com/go-chi/chi/v5
 # github.com/go-logr/logr v1.4.3
 ## explicit; go 1.18
 github.com/go-logr/logr
@@ -70,11 +78,11 @@ github.com/google/pprof/profile
 # github.com/google/uuid v1.6.0
 ## explicit
 github.com/google/uuid
-# github.com/hashicorp/go-version v1.8.0
+# github.com/hashicorp/go-version v1.9.0
 ## explicit
 github.com/hashicorp/go-version
-# github.com/maxbrunsfeld/counterfeiter/v6 v6.10.0
-## explicit; go 1.23
+# github.com/maxbrunsfeld/counterfeiter/v6 v6.12.1
+## explicit; go 1.24.0
 github.com/maxbrunsfeld/counterfeiter/v6
 github.com/maxbrunsfeld/counterfeiter/v6/arguments
 github.com/maxbrunsfeld/counterfeiter/v6/command
@@ -123,16 +131,6 @@ github.com/onsi/gomega/types
 ## explicit; go 1.20
 github.com/openzipkin/zipkin-go/idgenerator
 github.com/openzipkin/zipkin-go/model
-# github.com/pivotal-cf/brokerapi/v11 v11.0.16
-## explicit; go 1.22.1
-github.com/pivotal-cf/brokerapi/v11
-github.com/pivotal-cf/brokerapi/v11/auth
-github.com/pivotal-cf/brokerapi/v11/domain
-github.com/pivotal-cf/brokerapi/v11/domain/apiresponses
-github.com/pivotal-cf/brokerapi/v11/handlers
-github.com/pivotal-cf/brokerapi/v11/internal/blog
-github.com/pivotal-cf/brokerapi/v11/middlewares
-github.com/pivotal-cf/brokerapi/v11/utils
 # github.com/tedsuo/ifrit v0.0.0-20230516164442-7862c310ad26
 ## explicit; go 1.16
 github.com/tedsuo/ifrit

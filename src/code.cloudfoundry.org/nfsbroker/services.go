@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/pivotal-cf/brokerapi/v11/domain"
+	"code.cloudfoundry.org/brokerapi/v13/domain"
 )
 
 type Services interface {

@@ -25,7 +25,7 @@ import (
 	"code.cloudfoundry.org/service-broker-store/brokerstore"
 	vmo "code.cloudfoundry.org/volume-mount-options"
 	vmou "code.cloudfoundry.org/volume-mount-options/utils"
-	"github.com/pivotal-cf/brokerapi/v11"
+	"code.cloudfoundry.org/brokerapi/v13"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/grouper"
 	"github.com/tedsuo/ifrit/http_server"
