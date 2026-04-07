@@ -46,7 +46,7 @@ openldap/openldap-2.6.13.tar.gz:
   size: 6525768
   object_id: 130857d9-98e0-4555-45e5-94a8f543feb4
   sha: sha256:d693b49517a42efb85a1a364a310aed16a53d428d1b46c0d31ef3fba78fcb656
-test-dependencies/openssl-3.6.1.tar.gz:
-  size: 54891951
-  object_id: 98a555cd-6115-4708-4673-f082fd7fed57
-  sha: sha256:b1bfedcd5b289ff22aee87c9d600f515767ebf45f77168cb6d64f231f518a82e
+test-dependencies/openssl-3.6.2.tar.gz:
+  size: 54913556
+  object_id: e3d4dd34-b7fb-4b3b-73f8-fad12748c13c
+  sha: sha256:aaf51a1fe064384f811daeaeb4ec4dce7340ec8bd893027eee676af31e83a04f
