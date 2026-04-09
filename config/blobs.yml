@@ -34,10 +34,10 @@ nfs-debs/rpcsvc-proto-1.4.4.tar.xz:
   size: 168648
   object_id: a2eb31b9-cce3-4a00-5ddb-adf55c3f3471
   sha: sha256:81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
-nfs-debs/sqlite-3.52.0.tar.gz:
-  size: 13148102
-  object_id: 529e995e-06cb-491d-7a41-59d839a38f92
-  sha: sha256:180eb397d09262fcb318fa6fbfe8dd4ed538f75eb137d9e7e9d51eb3307c01b8
+nfs-debs/sqlite-3.53.0.tar.gz:
+  size: 13317659
+  object_id: 1be5890a-526e-4e04-60b2-0390b3d0f23b
+  sha: sha256:c6c7775b97735779248a2efd0d2f245c1c0f8627e127c04e0c7190b382b91c69
 nfs-debs/util-linux-2.40.4.tar.gz:
   size: 14975114
   object_id: 9d5fccdc-1e77-4a83-6ba1-ed1f51871916
