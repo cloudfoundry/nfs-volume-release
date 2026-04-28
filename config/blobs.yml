@@ -1,7 +1,7 @@
-berkeleydb/db-5.3.29.tar.gz:
-  size: 35074578
-  object_id: 87704ffd-d938-4be6-78a3-5b5ec66ea4b9
-  sha: sha256:0a2ec1a3b4155d831a1cf69a169bd6eb41f14529f6324006b984fd4c534d9e13
+berkeleydb/db-5.3.28.tar.gz:
+  size: 35058414
+  object_id: 51f852a1-8c7a-46fe-6ea6-06836a95ef63
+  sha: sha256:59a28056ab54d86c0afc7c7c6b782faf3c3ebab5b6dd33111352d461e08c2a16
 build-deps/meson-1.6.1.tar.gz:
   size: 2276144
   object_id: b5da291e-1cca-46a1-60ff-a0fac823cf01
