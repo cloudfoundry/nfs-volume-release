@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"code.cloudfoundry.org/dockerdriver"
@@ -105,6 +106,9 @@ func (d *VolumeDriver) Create(env dockerdriver.Env, createRequest dockerdriver.C
 	if createRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
 	}
+	if err := validateVolumeName(createRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
+	}
 
 	var ok bool
 	if _, ok = createRequest.Opts["source"].(string); !ok {
@@ -158,6 +162,9 @@ func (d *VolumeDriver) Mount(env dockerdriver.Env, mountRequest dockerdriver.Mou
 
 	if mountRequest.Name == "" {
 		return dockerdriver.MountResponse{Err: "Missing mandatory 'volume_name'"}
+	}
+	if err := validateVolumeName(mountRequest.Name); err != nil {
+		return dockerdriver.MountResponse{Err: err.Error()}
 	}
 
 	volume, ok := d.volumes.Get(mountRequest.Name)
@@ -222,6 +229,9 @@ func (d *VolumeDriver) Path(env dockerdriver.Env, pathRequest dockerdriver.PathR
 	if pathRequest.Name == "" {
 		return dockerdriver.PathResponse{Err: "Missing mandatory 'volume_name'"}
 	}
+	if err := validateVolumeName(pathRequest.Name); err != nil {
+		return dockerdriver.PathResponse{Err: err.Error()}
+	}
 
 	vol, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), pathRequest.Name)
 	if err != nil {
@@ -265,6 +275,9 @@ func (d *VolumeDriver) Unmount(env dockerdriver.Env, unmountRequest dockerdriver
 
 	if unmountRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
+	}
+	if err := validateVolumeName(unmountRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
 	}
 
 	volume, ok := d.volumes.Get(unmountRequest.Name)
@@ -313,6 +326,9 @@ func (d *VolumeDriver) Remove(env dockerdriver.Env, removeRequest dockerdriver.R
 	if removeRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
 	}
+	if err := validateVolumeName(removeRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
+	}
 
 	vol, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), removeRequest.Name)
 
@@ -339,6 +355,10 @@ func (d *VolumeDriver) Remove(env dockerdriver.Env, removeRequest dockerdriver.R
 }
 
 func (d *VolumeDriver) Get(env dockerdriver.Env, getRequest dockerdriver.GetRequest) dockerdriver.GetResponse {
+	if err := validateVolumeName(getRequest.Name); err != nil {
+		return dockerdriver.GetResponse{Err: err.Error()}
+	}
+
 	volume, err := d.getVolume(env, getRequest.Name)
 	if err != nil {
 		return dockerdriver.GetResponse{Err: err.Error()}
@@ -545,4 +565,11 @@ func copyOpts(input map[string]any) map[string]any {
 		output[k] = v
 	}
 	return output
+}
+
+func validateVolumeName(name string) error {
+	if strings.Contains(name, "..") || strings.Contains(name, "/") || strings.Contains(name, "\\") {
+		return fmt.Errorf("invalid volume name: %s", name)
+	}
+	return nil
 }
