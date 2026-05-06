@@ -2,11 +2,11 @@ module code.cloudfoundry.org/nfsv3driver
 
 require (
 	code.cloudfoundry.org/cf-networking-helpers v0.84.0
-	code.cloudfoundry.org/debugserver v0.94.0
-	code.cloudfoundry.org/dockerdriver v0.86.0
+	code.cloudfoundry.org/debugserver v0.95.0
+	code.cloudfoundry.org/dockerdriver v0.87.0
 	code.cloudfoundry.org/goshims v0.98.0
-	code.cloudfoundry.org/lager/v3 v3.67.0
-	code.cloudfoundry.org/tlsconfig v0.52.0
+	code.cloudfoundry.org/lager/v3 v3.68.0
+	code.cloudfoundry.org/tlsconfig v0.53.0
 	code.cloudfoundry.org/volume-mount-options v0.152.0
 	code.cloudfoundry.org/volumedriver v0.171.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
@@ -18,8 +18,8 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.75.0 // indirect
-	code.cloudfoundry.org/clock v1.68.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.76.0 // indirect
+	code.cloudfoundry.org/clock v1.69.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
