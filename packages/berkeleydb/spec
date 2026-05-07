@@ -1,5 +1,0 @@
----
-name: berkeleydb
-dependencies: []
-files:
-- berkeleydb/db-5.3.28.tar.gz
