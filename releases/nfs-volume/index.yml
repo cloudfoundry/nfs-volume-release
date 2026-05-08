@@ -337,6 +337,8 @@ builds:
     version: 1.1.3
   e19861dc-426a-4cb1-7d9f-e06338279ed6:
     version: 7.1.64
+  e1d246f1-6d93-4583-5d3d-3828068aa377:
+    version: 7.59.0
   e2af8bbb-9f69-48c6-a495-9729acfced01:
     version: 0.1.0
   e43b0f73-f80d-4640-5148-e56e6a0c381c:
