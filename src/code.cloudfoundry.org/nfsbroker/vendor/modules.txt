@@ -9,10 +9,10 @@ code.cloudfoundry.org/brokerapi/v13/internal/blog
 code.cloudfoundry.org/brokerapi/v13/internal/middleware
 code.cloudfoundry.org/brokerapi/v13/middlewares
 code.cloudfoundry.org/brokerapi/v13/utils
-# code.cloudfoundry.org/clock v1.72.0
+# code.cloudfoundry.org/clock v1.73.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20260525130100-0755c85522c7
+# code.cloudfoundry.org/credhub-cli v0.0.0-20260601130146-10715408e47d
 ## explicit; go 1.25.7
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -22,26 +22,26 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.98.0
+# code.cloudfoundry.org/debugserver v0.100.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/existingvolumebroker v0.218.0
+# code.cloudfoundry.org/existingvolumebroker v0.220.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.100.0
+# code.cloudfoundry.org/goshims v0.102.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.71.0
+# code.cloudfoundry.org/lager/v3 v3.72.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.157.0
+# code.cloudfoundry.org/service-broker-store v0.159.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
-# code.cloudfoundry.org/volume-mount-options v0.154.0
+# code.cloudfoundry.org/volume-mount-options v0.156.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
@@ -51,7 +51,7 @@ github.com/Masterminds/semver/v3
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.176
+# github.com/cloudfoundry/socks5-proxy v0.2.177
 ## explicit; go 1.25.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-logr/logr v1.4.3
@@ -72,7 +72,7 @@ github.com/google/go-cmp/cmp/internal/value
 ## explicit; go 1.12
 github.com/google/gofuzz
 github.com/google/gofuzz/bytesource
-# github.com/google/pprof v0.0.0-20260507013755-92041b743c96
+# github.com/google/pprof v0.0.0-20260604005048-7023385849c0
 ## explicit; go 1.24.0
 github.com/google/pprof/profile
 # github.com/google/uuid v1.6.0
