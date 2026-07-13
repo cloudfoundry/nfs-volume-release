@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"code.cloudfoundry.org/dockerdriver"
@@ -18,6 +19,38 @@ import (
 	"code.cloudfoundry.org/volumedriver/internal/syncmap"
 	"code.cloudfoundry.org/volumedriver/mountchecker"
 )
+
+// MountPointNotExistError indicates that the mount point does not exist.
+// This error is created to handle the case when the mount point does not exist during an unmount operation.
+// It wraps the original os.ErrNotExist error.
+type MountPointNotExistError struct {
+	VolumeName string
+	MountPath  string
+	err        error
+}
+
+func (e *MountPointNotExistError) Error() string {
+	return fmt.Sprintf("Volume %s does not exist (path: %s): %v", e.VolumeName, e.MountPath, e.err)
+}
+
+func (e *MountPointNotExistError) Unwrap() error {
+	return e.err
+}
+
+// removeMountPath attempts to remove the mount path directory.
+// If os.ErrNotExist is returned, it returns MountPointNotExistError wrapping the original error to allow mount count decrement.
+func (d *VolumeDriver) removeMountPath(logger lager.Logger, name, mountPath string, context string) error {
+	err := d.os.Remove(mountPath)
+	if err != nil {
+		// If os.Remove returns os.ErrNotExist, wrap it in a special error that allows mount count decrement
+		if errors.Is(err, os.ErrNotExist) {
+			logger.Info("mountpoint-not-exist", lager.Data{"volume": name, "mountpath": mountPath, "context": context})
+			return &MountPointNotExistError{VolumeName: name, MountPath: mountPath, err: err}
+		}
+		return err
+	}
+	return nil
+}
 
 type NfsVolumeInfo struct {
 	Opts                    map[string]interface{} `json:"-"` // don't store opts
@@ -73,6 +106,9 @@ func (d *VolumeDriver) Create(env dockerdriver.Env, createRequest dockerdriver.C
 	if createRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
 	}
+	if err := validateVolumeName(createRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
+	}
 
 	var ok bool
 	if _, ok = createRequest.Opts["source"].(string); !ok {
@@ -126,6 +162,9 @@ func (d *VolumeDriver) Mount(env dockerdriver.Env, mountRequest dockerdriver.Mou
 
 	if mountRequest.Name == "" {
 		return dockerdriver.MountResponse{Err: "Missing mandatory 'volume_name'"}
+	}
+	if err := validateVolumeName(mountRequest.Name); err != nil {
+		return dockerdriver.MountResponse{Err: err.Error()}
 	}
 
 	volume, ok := d.volumes.Get(mountRequest.Name)
@@ -190,6 +229,9 @@ func (d *VolumeDriver) Path(env dockerdriver.Env, pathRequest dockerdriver.PathR
 	if pathRequest.Name == "" {
 		return dockerdriver.PathResponse{Err: "Missing mandatory 'volume_name'"}
 	}
+	if err := validateVolumeName(pathRequest.Name); err != nil {
+		return dockerdriver.PathResponse{Err: err.Error()}
+	}
 
 	vol, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), pathRequest.Name)
 	if err != nil {
@@ -207,6 +249,25 @@ func (d *VolumeDriver) Path(env dockerdriver.Env, pathRequest dockerdriver.PathR
 	return dockerdriver.PathResponse{Mountpoint: vol.Mountpoint}
 }
 
+// decrementMountCount decrements the mount count for a volume and updates or removes it from the state.
+// If the mount count reaches 0, the volume is removed from the volumes map.
+func (d *VolumeDriver) decrementMountCount(logger lager.Logger, volumeName string) {
+	volume, ok := d.volumes.Get(volumeName)
+	if !ok {
+		return
+	}
+
+	volume.MountCount--
+	logger.Info("volume-ref-count-decremented", lager.Data{"name": volume.Name, "count": volume.MountCount})
+
+	switch volume.MountCount {
+	case 0:
+		d.volumes.Delete(volumeName)
+	default:
+		d.volumes.Put(volumeName, volume)
+	}
+}
+
 func (d *VolumeDriver) Unmount(env dockerdriver.Env, unmountRequest dockerdriver.UnmountRequest) dockerdriver.ErrorResponse {
 	logger := env.Logger().Session("unmount", lager.Data{"volume": unmountRequest.Name})
 	logger.Info("start")
@@ -214,6 +275,9 @@ func (d *VolumeDriver) Unmount(env dockerdriver.Env, unmountRequest dockerdriver
 
 	if unmountRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
+	}
+	if err := validateVolumeName(unmountRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
 	}
 
 	volume, ok := d.volumes.Get(unmountRequest.Name)
@@ -229,24 +293,26 @@ func (d *VolumeDriver) Unmount(env dockerdriver.Env, unmountRequest dockerdriver
 		return dockerdriver.ErrorResponse{Err: errText}
 	}
 
+	var unmountErr error
 	if volume.MountCount == 1 {
-		if err := d.unmount(driverhttp.EnvWithLogger(logger, env), unmountRequest.Name, volume.Mountpoint); err != nil {
-			return dockerdriver.ErrorResponse{Err: err.Error()}
-		}
+		unmountErr = d.unmount(driverhttp.EnvWithLogger(logger, env), unmountRequest.Name, volume.Mountpoint)
 	}
 
-	volume.MountCount--
-	logger.Info("volume-ref-count-decremented", lager.Data{"name": volume.Name, "count": volume.MountCount})
+	// Always decrement the mount count, even if unmount failed
+	d.decrementMountCount(logger, unmountRequest.Name)
 
-	switch volume.MountCount {
-	case 0:
-		d.volumes.Delete(unmountRequest.Name)
-	default:
-		d.volumes.Put(unmountRequest.Name, volume)
-	}
-
+	// Persist state after decrementing (even if unmount failed)
 	if err := d.persistState(driverhttp.EnvWithLogger(logger, env)); err != nil {
 		return dockerdriver.ErrorResponse{Err: fmt.Sprintf("failed to persist state when unmounting: %s", err.Error())}
+	}
+
+	// If unmount failed, return error after decrementing and persisting
+	if unmountErr != nil {
+		var mountPointNotExistErr *MountPointNotExistError
+		if errors.As(unmountErr, &mountPointNotExistErr) {
+			logger.Info("mountpoint-not-exist-return-error", lager.Data{"volume": unmountRequest.Name, "mountpath": volume.Mountpoint})
+		}
+		return dockerdriver.ErrorResponse{Err: unmountErr.Error()}
 	}
 
 	return dockerdriver.ErrorResponse{}
@@ -259,6 +325,9 @@ func (d *VolumeDriver) Remove(env dockerdriver.Env, removeRequest dockerdriver.R
 
 	if removeRequest.Name == "" {
 		return dockerdriver.ErrorResponse{Err: "Missing mandatory 'volume_name'"}
+	}
+	if err := validateVolumeName(removeRequest.Name); err != nil {
+		return dockerdriver.ErrorResponse{Err: err.Error()}
 	}
 
 	vol, err := d.getVolume(driverhttp.EnvWithLogger(logger, env), removeRequest.Name)
@@ -286,6 +355,10 @@ func (d *VolumeDriver) Remove(env dockerdriver.Env, removeRequest dockerdriver.R
 }
 
 func (d *VolumeDriver) Get(env dockerdriver.Env, getRequest dockerdriver.GetRequest) dockerdriver.GetResponse {
+	if err := validateVolumeName(getRequest.Name); err != nil {
+		return dockerdriver.GetResponse{Err: err.Error()}
+	}
+
 	volume, err := d.getVolume(env, getRequest.Name)
 	if err != nil {
 		return dockerdriver.GetResponse{Err: err.Error()}
@@ -424,11 +497,15 @@ func (d *VolumeDriver) unmount(env dockerdriver.Env, name string, mountPath stri
 	}
 
 	if !exists {
-		err := d.os.Remove(mountPath)
+		err := d.removeMountPath(logger, name, mountPath, "mount-not-exists")
 		if err != nil {
+			var mountPointNotExistErr *MountPointNotExistError
+			if errors.As(err, &mountPointNotExistErr) {
+				return err
+			}
 			errText := fmt.Sprintf("Volume %s does not exist (path: %s) and unable to remove mount directory", name, mountPath)
 			logger.Info("mountpoint-not-found", lager.Data{"msg": errText})
-			return errors.New(errText)
+			return fmt.Errorf("%s: %w", errText, err)
 		}
 
 		errText := fmt.Sprintf("Volume %s does not exist (path: %s)", name, mountPath)
@@ -441,12 +518,17 @@ func (d *VolumeDriver) unmount(env dockerdriver.Env, name string, mountPath stri
 	err = d.mounter.Unmount(env, mountPath)
 	if err != nil {
 		logger.Error("unmount-failed", err)
-		return fmt.Errorf("error unmounting volume: %s", err.Error())
+		return fmt.Errorf("error unmounting volume: %w", err)
 	}
-	err = d.os.Remove(mountPath)
+
+	err = d.removeMountPath(logger, name, mountPath, "after-unmount")
 	if err != nil {
+		var mountPointNotExistErr *MountPointNotExistError
+		if errors.As(err, &mountPointNotExistErr) {
+			return err
+		}
 		logger.Error("remove-mountpoint-failed", err)
-		return fmt.Errorf("error removing mountpoint: %s", err.Error())
+		return fmt.Errorf("error removing mountpoint: %w", err)
 	}
 
 	logger.Info("unmounted-volume")
@@ -483,4 +565,11 @@ func copyOpts(input map[string]any) map[string]any {
 		output[k] = v
 	}
 	return output
+}
+
+func validateVolumeName(name string) error {
+	if strings.Contains(name, "..") || strings.Contains(name, "/") || strings.Contains(name, "\\") {
+		return fmt.Errorf("invalid volume name: %s", name)
+	}
+	return nil
 }

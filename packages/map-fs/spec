@@ -2,7 +2,7 @@
 name: map-fs
 
 dependencies:
-- golang-1.25-linux
+- golang-1.26-linux
 
 files:
   - code.cloudfoundry.org/mapfs/go.mod

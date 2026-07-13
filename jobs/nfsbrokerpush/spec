@@ -31,6 +31,7 @@ provides:
     - nfsbrokerpush.space
     - nfsbrokerpush.app_name
     - nfsbrokerpush.skip_cert_verify
+    - nfsbrokerpush.cli_path
 
 properties:
   nfsbrokerpush.domain:
@@ -123,3 +124,6 @@ properties:
   nfsbrokerpush.log_level:
     description: "nfsbroker log level"
     default: "info"
+  nfsbrokerpush.cli_path:
+    description: "Path where the cf cli binary is stored"
+    default: "/var/vcap/packages/cf-cli-8-linux/bin"
