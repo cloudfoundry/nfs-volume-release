@@ -22,6 +22,7 @@
     long_description = service["metadata"] ? service["metadata"]["long_description"] : ""
     provider_display_name = service["metadata"] ? service["metadata"]["provider_display_name"] : ""
     documentation_url = service["metadata"] ? service["metadata"]["documentation_url"] : ""
+    support_type = service["metadata"] ? service["metadata"]["support_type"] : ""
 
     config << {
       "id": service["id"],
@@ -37,7 +38,8 @@
         "imageUrl": image_url,
         "longDescription": long_description,
         "providerDisplayName": provider_display_name,
-        "documentationUrl": documentation_url
+        "documentationUrl": documentation_url,
+        "supportType": support_type
       }
     }
   end
