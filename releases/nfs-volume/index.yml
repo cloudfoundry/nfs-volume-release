@@ -265,6 +265,8 @@ builds:
     version: 7.14.0
   b4cc33c9-6c65-4a12-6e6b-9b444e73d481:
     version: 7.1.48
+  b518ee7d-2434-4944-5a5a-0fde09310d9c:
+    version: 7.67.0
   b652d77b-89b9-4f5f-7cd1-867263e0aa3b:
     version: 7.1.16
   b836fac4-f0ce-41f1-766a-7d1f70cc9d51:
