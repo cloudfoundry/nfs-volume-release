@@ -1,14 +1,14 @@
 module code.cloudfoundry.org/nfsv3driver
 
 require (
-	code.cloudfoundry.org/cf-networking-helpers v0.94.0
-	code.cloudfoundry.org/debugserver v0.106.0
-	code.cloudfoundry.org/dockerdriver v0.98.0
-	code.cloudfoundry.org/goshims v0.106.0
-	code.cloudfoundry.org/lager/v3 v3.78.0
-	code.cloudfoundry.org/tlsconfig v0.62.0
-	code.cloudfoundry.org/volume-mount-options v0.160.0
-	code.cloudfoundry.org/volumedriver v0.183.0
+	code.cloudfoundry.org/cf-networking-helpers v0.95.0
+	code.cloudfoundry.org/debugserver v0.107.0
+	code.cloudfoundry.org/dockerdriver v0.99.0
+	code.cloudfoundry.org/goshims v0.107.0
+	code.cloudfoundry.org/lager/v3 v3.79.0
+	code.cloudfoundry.org/tlsconfig v0.63.0
+	code.cloudfoundry.org/volume-mount-options v0.161.0
+	code.cloudfoundry.org/volumedriver v0.184.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.32.0
 	github.com/onsi/gomega v1.42.1
@@ -18,16 +18,16 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.86.0 // indirect
-	code.cloudfoundry.org/clock v1.79.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.87.0 // indirect
+	code.cloudfoundry.org/clock v1.80.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
-	github.com/go-logr/logr v1.4.3 // indirect
+	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/pprof v0.0.0-20260709232956-b9395ee17fa0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
-	go.yaml.in/yaml/v3 v3.0.4 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/mod v0.38.0 // indirect
 	golang.org/x/net v0.57.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
