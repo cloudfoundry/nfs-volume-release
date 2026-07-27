@@ -22,10 +22,7 @@ type dataFile struct {
 }
 
 func (f *dataFile) String() string {
-	l := len(f.data)
-	if l > 10 {
-		l = 10
-	}
+	l := min(len(f.data), 10)
 
 	return fmt.Sprintf("dataFile(%x)", f.data[:l])
 }
@@ -44,10 +41,7 @@ func NewDataFile(data []byte) File {
 }
 
 func (f *dataFile) Read(buf []byte, off int64) (res fuse.ReadResult, code fuse.Status) {
-	end := int(off) + int(len(buf))
-	if end > len(f.data) {
-		end = len(f.data)
-	}
+	end := min(int(off)+int(len(buf)), len(f.data))
 
 	return fuse.ReadResultData(f.data[off:end]), fuse.OK
 }

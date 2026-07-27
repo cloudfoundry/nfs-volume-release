@@ -6,23 +6,23 @@ package fuse
 
 const useSingleReader = false
 
-func (ms *Server) write(req *request) Status {
+func (r *fuseFD) write(req *request) Status {
 	if req.outPayloadSize() == 0 {
 		err := handleEINTR(func() error {
-			_, err := writev(ms.mountFd, [][]byte{req.outHeaderBuf, req.outDataBuf})
+			_, err := r.writevFD([][]byte{req.outHeaderBuf, req.outDataBuf})
 			return err
 		})
 		return ToStatus(err)
 	}
 	if req.readResult != nil {
 		defer req.readResult.Done()
-		if ms.canSplice {
-			err := ms.trySplice(req, req.readResult)
+		if r.server.canSplice {
+			err := r.trySplice(req, req.readResult)
 			if err == nil {
 				return OK
 			}
 			if err != errRecoverSplice {
-				ms.opts.Logger.Println("trySplice:", err)
+				r.server.opts.Logger.Println("trySplice:", err)
 			}
 		}
 
@@ -30,6 +30,6 @@ func (ms *Server) write(req *request) Status {
 		req.serializeHeader(len(req.outPayload))
 	}
 
-	_, err := writev(ms.mountFd, [][]byte{req.outHeaderBuf, req.outDataBuf, req.outPayload})
+	_, err := r.writevFD([][]byte{req.outHeaderBuf, req.outDataBuf, req.outPayload})
 	return ToStatus(err)
 }
