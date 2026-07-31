@@ -174,6 +174,17 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 		mountOptions = mountOptions + ",vers=" + version
 	}
 
+	if uidok {
+		uid, err := strconv.ParseUint(uniformData(opts["uid"]), 10, 32)
+		if err != nil || uid <= 0 {
+			return dockerdriver.SafeError{SafeDescription: InvalidUidValueErrorMessage}
+		}
+		gid, err := strconv.ParseUint(uniformData(opts["gid"]), 10, 32)
+		if err != nil || gid <= 0 {
+			return dockerdriver.SafeError{SafeDescription: InvalidGidValueErrorMessage}
+		}
+	}
+
 	t := intermediateMount
 	if !uidok {
 		t = target
@@ -193,21 +204,8 @@ func (m *mapfsMounter) Mount(env dockerdriver.Env, remote string, target string,
 		// make sure the mapped user has read access to the directory before doing the mapfs mount
 		// this check is best effort--root may not be able to stat the directory, or the server may
 		// anonymize the owner UID.
-		uid, err := strconv.ParseUint(uniformData(opts["uid"]), 10, 32)
-		if err != nil {
-			return dockerdriver.SafeError{SafeDescription: InvalidUidValueErrorMessage}
-		}
-		if uid <= 0 {
-			return dockerdriver.SafeError{SafeDescription: InvalidUidValueErrorMessage}
-		}
-
-		gid, err := strconv.ParseUint(uniformData(opts["gid"]), 10, 32)
-		if err != nil {
-			return dockerdriver.SafeError{SafeDescription: InvalidGidValueErrorMessage}
-		}
-		if gid <= 0 {
-			return dockerdriver.SafeError{SafeDescription: InvalidGidValueErrorMessage}
-		}
+		uid, _ := strconv.ParseUint(uniformData(opts["uid"]), 10, 32)
+		gid, _ := strconv.ParseUint(uniformData(opts["gid"]), 10, 32)
 
 		st := syscall.Stat_t{}
 		err = m.syscallshim.Stat(intermediateMount, &st)
