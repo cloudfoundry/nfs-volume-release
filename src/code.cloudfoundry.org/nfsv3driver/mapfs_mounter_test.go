@@ -456,12 +456,14 @@ var _ = Describe("MapfsMounter", func() {
 		})
 
 		DescribeTable("when uid is provided invalid values it should error", func(invalidUid interface{}) {
+			countBefore := fakeInvoker.InvokeCallCount()
 			opts["uid"] = invalidUid
 			err = subject.Mount(env, source, target, opts)
 			Expect(err).To(HaveOccurred())
 			_, ok := err.(dockerdriver.SafeError)
 			Expect(ok).To(BeTrue())
 			Expect(err.Error()).To(Equal("Invalid 'uid' option (0, negative, or non-integer)"))
+			Expect(fakeInvoker.InvokeCallCount()).To(Equal(countBefore), "mount must not be called when uid validation fails")
 
 		},
 			Entry("when uid is not an integer", "foo"),
@@ -471,12 +473,14 @@ var _ = Describe("MapfsMounter", func() {
 		)
 
 		DescribeTable("when gid is provided invalid values it should error", func(invalidGid interface{}) {
+			countBefore := fakeInvoker.InvokeCallCount()
 			opts["gid"] = invalidGid
 			err = subject.Mount(env, source, target, opts)
 			Expect(err).To(HaveOccurred())
 			_, ok := err.(dockerdriver.SafeError)
 			Expect(ok).To(BeTrue())
 			Expect(err.Error()).To(Equal("Invalid 'gid' option (0, negative, or non-integer)"))
+			Expect(fakeInvoker.InvokeCallCount()).To(Equal(countBefore), "mount must not be called when gid validation fails")
 
 		},
 			Entry("when gid is not an integer", "foo"),
