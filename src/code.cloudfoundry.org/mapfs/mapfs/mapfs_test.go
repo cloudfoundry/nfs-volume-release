@@ -279,14 +279,14 @@ var _ = Describe("mapfs", func() {
 		Context(".Chmod", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Chmod("foo", uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 			})
 		})
 
 		Context(".Chown", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Chown("foo", uint32(50), uint32(100), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 			})
 		})
 
@@ -294,14 +294,14 @@ var _ = Describe("mapfs", func() {
 			It("returns a fuse error message", func() {
 				t := time.Now()
 				code := mapFS.Utimens("foo", &t, &t, context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 			})
 		})
 
 		Context(".Truncate", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Truncate("foo", uint64(50), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -309,7 +309,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Access", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Access("foo", uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -317,7 +317,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Link", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Link("foo", "bar", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -325,7 +325,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Mknod", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Mknod("foo", uint32(0777), uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -333,7 +333,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Mkdir", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Mkdir("foo", uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -341,7 +341,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Rename", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Rename("foo", "bar", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -349,7 +349,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Rmdir", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Rmdir("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -357,7 +357,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Unlink", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Unlink("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -365,7 +365,7 @@ var _ = Describe("mapfs", func() {
 		Context(".GetXAttr", func() {
 			It("returns a fuse error message", func() {
 				_, code := mapFS.GetXAttr("foo", "bar", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -373,7 +373,7 @@ var _ = Describe("mapfs", func() {
 		Context(".ListXAttr", func() {
 			It("returns a fuse error message", func() {
 				_, code := mapFS.ListXAttr("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -381,7 +381,7 @@ var _ = Describe("mapfs", func() {
 		Context(".RemoveXAttr", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.RemoveXAttr("foo", "bar", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -389,7 +389,7 @@ var _ = Describe("mapfs", func() {
 		Context(".SetXAttr", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.SetXAttr("foo", "bar", []byte("baz"), 0, context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -398,7 +398,7 @@ var _ = Describe("mapfs", func() {
 			It("returns a fuse error message", func() {
 				context := &fuse.Context{}
 				_, code := mapFS.Open("foo", uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -406,7 +406,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Create", func() {
 			It("returns a fuse error message", func() {
 				_, code := mapFS.Create("foo", 0, uint32(0777), context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -414,7 +414,7 @@ var _ = Describe("mapfs", func() {
 		Context(".OpenDir", func() {
 			It("returns a fuse error message", func() {
 				_, code := mapFS.OpenDir("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -422,7 +422,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Symlink", func() {
 			It("returns a fuse error message", func() {
 				code := mapFS.Symlink("foo", "bar", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -430,7 +430,7 @@ var _ = Describe("mapfs", func() {
 		Context(".Readlink", func() {
 			It("returns a fuse error message", func() {
 				_, code := mapFS.Readlink("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 
 			})
 		})
@@ -445,7 +445,7 @@ var _ = Describe("mapfs", func() {
 		Context(".GetAttr", func() {
 			It("maps the uid/gid back to the fuse context uid when it matches the mapped id", func() {
 				_, code := mapFS.GetAttr("foo", context)
-				Expect(code).To(Equal(fuse.ENOSYS))
+				Expect(code).To(Equal(fuse.ENOTSUP))
 			})
 		})
 	})
