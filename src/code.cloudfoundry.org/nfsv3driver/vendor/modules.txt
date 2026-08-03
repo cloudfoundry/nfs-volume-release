@@ -1,17 +1,17 @@
-# code.cloudfoundry.org/cf-networking-helpers v0.95.0
+# code.cloudfoundry.org/cf-networking-helpers v0.96.0
 ## explicit; go 1.25.8
 code.cloudfoundry.org/cf-networking-helpers/portauthority
-# code.cloudfoundry.org/cfhttp/v2 v2.87.0
+# code.cloudfoundry.org/cfhttp/v2 v2.88.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.80.0
+# code.cloudfoundry.org/clock v1.81.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/debugserver v0.107.0
+# code.cloudfoundry.org/debugserver v0.108.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.99.0
+# code.cloudfoundry.org/dockerdriver v0.100.0
 ## explicit; go 1.25.8
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -27,7 +27,7 @@ code.cloudfoundry.org/goshims/osshim/os_fake
 code.cloudfoundry.org/goshims/syscallshim
 code.cloudfoundry.org/goshims/syscallshim/syscall_fake
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.79.0
+# code.cloudfoundry.org/lager/v3 v3.80.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
@@ -70,8 +70,8 @@ github.com/google/go-cmp/cmp/internal/diff
 github.com/google/go-cmp/cmp/internal/flags
 github.com/google/go-cmp/cmp/internal/function
 github.com/google/go-cmp/cmp/internal/value
-# github.com/google/pprof v0.0.0-20260709232956-b9395ee17fa0
-## explicit; go 1.24.0
+# github.com/google/pprof v0.0.0-20260802141513-ef3492d7dac3
+## explicit; go 1.25.0
 github.com/google/pprof/profile
 # github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 ## explicit; go 1.22.0
