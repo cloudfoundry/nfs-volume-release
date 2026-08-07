@@ -405,6 +405,8 @@ builds:
     version: 7.1.42
   fba07ed4-24d4-49db-6d66-00e87d621f17:
     version: 7.6.0
+  fc4b3bb9-5056-4837-6400-1e348dcd82b2:
+    version: 7.68.0
   fc60eb57-1b96-465c-7a17-17734ea2e65d:
     version: 7.1.63
   fd180aca-09ae-4260-585f-5f5ab6d95c26:
