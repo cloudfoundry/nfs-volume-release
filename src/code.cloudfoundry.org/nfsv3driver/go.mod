@@ -12,7 +12,7 @@ require (
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.32.1
 	github.com/onsi/gomega v1.42.1
-	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
+	github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
 	github.com/tedsuo/rata v1.0.0
 	gopkg.in/ldap.v2 v2.5.1
 )
@@ -39,3 +39,8 @@ require (
 )
 
 go 1.25.8
+
+replace (
+	// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
+	github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
+)
