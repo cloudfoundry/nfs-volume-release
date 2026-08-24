@@ -1,13 +1,13 @@
 module code.cloudfoundry.org/mapfs
 
 require (
-	code.cloudfoundry.org/goshims v0.109.0
+	code.cloudfoundry.org/goshims v0.110.0
 	code.cloudfoundry.org/volumedriver v0.184.0
 	github.com/hanwen/go-fuse/v2 v2.11.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.32.1
 	github.com/onsi/gomega v1.42.1
-	github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
+	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
 	golang.org/x/sys v0.47.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -28,7 +28,5 @@ require (
 
 go 1.25.8
 
-replace (
-	// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
-	github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
-)
+// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
+replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
