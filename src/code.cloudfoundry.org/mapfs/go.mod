@@ -1,14 +1,14 @@
 module code.cloudfoundry.org/mapfs
 
 require (
-	code.cloudfoundry.org/goshims v0.112.0
-	code.cloudfoundry.org/volumedriver v0.189.0
+	code.cloudfoundry.org/goshims v0.113.0
+	code.cloudfoundry.org/volumedriver v0.190.0
 	github.com/hanwen/go-fuse/v2 v2.11.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
-	github.com/onsi/ginkgo/v2 v2.32.1
+	github.com/onsi/ginkgo/v2 v2.32.2
 	github.com/onsi/gomega v1.43.0
-	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
-	golang.org/x/sys v0.47.0
+	github.com/tedsuo/ifrit v0.0.0-20260908181113-dd353a7daa27
+	golang.org/x/sys v0.48.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -19,14 +19,14 @@ require (
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/pprof v0.0.0-20260906184651-6331bc6350fe // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
-	golang.org/x/mod v0.40.0 // indirect
-	golang.org/x/net v0.58.0 // indirect
-	golang.org/x/sync v0.22.0 // indirect
-	golang.org/x/text v0.41.0 // indirect
-	golang.org/x/tools v0.49.0 // indirect
+	golang.org/x/mod v0.41.0 // indirect
+	golang.org/x/net v0.59.0 // indirect
+	golang.org/x/sync v0.23.0 // indirect
+	golang.org/x/text v0.42.0 // indirect
+	golang.org/x/tools v0.50.0 // indirect
 )
 
-go 1.25.8
+go 1.26.0
 
 // pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
 replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
