@@ -4,25 +4,25 @@ go 1.26.0
 
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.25
-	code.cloudfoundry.org/clock v1.87.0
-	code.cloudfoundry.org/debugserver v0.114.0
-	code.cloudfoundry.org/existingvolumebroker v0.234.0
-	code.cloudfoundry.org/goshims v0.113.0
-	code.cloudfoundry.org/lager/v3 v3.86.0
-	code.cloudfoundry.org/service-broker-store v0.173.0
-	code.cloudfoundry.org/volume-mount-options v0.167.0
+	code.cloudfoundry.org/clock v1.88.0
+	code.cloudfoundry.org/debugserver v0.115.0
+	code.cloudfoundry.org/existingvolumebroker v0.235.0
+	code.cloudfoundry.org/goshims v0.114.0
+	code.cloudfoundry.org/lager/v3 v3.87.0
+	code.cloudfoundry.org/service-broker-store v0.174.0
+	code.cloudfoundry.org/volume-mount-options v0.168.0
 	github.com/google/gofuzz v1.2.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.12.2
-	github.com/onsi/ginkgo/v2 v2.32.2
-	github.com/onsi/gomega v1.43.0
+	github.com/onsi/ginkgo/v2 v2.33.0
+	github.com/onsi/gomega v1.43.1
 	github.com/tedsuo/ifrit v0.0.0-20260908181113-dd353a7daa27
 )
 
 require (
-	code.cloudfoundry.org/credhub-cli v0.0.0-20260907130120-567c46b571cd // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20260915183920-858ec47b73bd // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.188 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.189 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
