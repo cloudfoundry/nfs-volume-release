@@ -1,12 +1,12 @@
 module code.cloudfoundry.org/mapfs
 
 require (
-	code.cloudfoundry.org/goshims v0.113.0
-	code.cloudfoundry.org/volumedriver v0.190.0
+	code.cloudfoundry.org/goshims v0.114.0
+	code.cloudfoundry.org/volumedriver v0.191.0
 	github.com/hanwen/go-fuse/v2 v2.11.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
-	github.com/onsi/ginkgo/v2 v2.32.2
-	github.com/onsi/gomega v1.43.0
+	github.com/onsi/ginkgo/v2 v2.33.0
+	github.com/onsi/gomega v1.43.1
 	github.com/tedsuo/ifrit v0.0.0-20260908181113-dd353a7daa27
 	golang.org/x/sys v0.48.0
 	gopkg.in/yaml.v3 v3.0.1
