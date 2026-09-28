@@ -25,7 +25,7 @@ case $1 in
     # Allowed number of open file descriptors
     ulimit -n 100000
 
-    exec chpst /var/vcap/jobs/nfsv3driver/bin/start.sh
+    exec /var/vcap/jobs/nfsv3driver/bin/start.sh
 
     ;;
 
