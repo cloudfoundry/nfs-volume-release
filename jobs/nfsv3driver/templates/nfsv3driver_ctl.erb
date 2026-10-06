@@ -17,7 +17,7 @@ case $1 in
 
   start)
     mkdir -p "<%= p("nfsv3driver.driver_path") %>"
-    chmod 777 "<%= p("nfsv3driver.driver_path") %>"
+    chmod 755 "<%= p("nfsv3driver.driver_path") %>"
 
     mkdir -p "<%= p("nfsv3driver.cell_mount_path") %>"
     chown vcap:vcap "<%= p("nfsv3driver.cell_mount_path") %>"
