@@ -5,9 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 
 	"code.cloudfoundry.org/dockerdriver"
@@ -52,6 +54,8 @@ func (d *VolumeDriver) removeMountPath(logger lager.Logger, name, mountPath stri
 	return nil
 }
 
+const stateFileName = "driver-state.json"
+
 type NfsVolumeInfo struct {
 	Opts                    map[string]interface{} `json:"-"` // don't store opts
 	dockerdriver.VolumeInfo                        // see dockerdriver.resources.go
@@ -70,6 +74,7 @@ type VolumeDriver struct {
 	mountPathRoot string
 	mounter       Mounter
 	osHelper      OsHelper
+	persistMu     sync.Mutex
 }
 
 func NewVolumeDriver(logger lager.Logger, os osshim.Os, filepath filepathshim.Filepath, time timeshim.Time, mountChecker mountchecker.MountChecker, mountPathRoot string, mounter Mounter, oshelper OsHelper) *VolumeDriver {
@@ -391,15 +396,13 @@ func (d *VolumeDriver) Capabilities(env dockerdriver.Env) dockerdriver.Capabilit
 
 func (d *VolumeDriver) mountPath(env dockerdriver.Env, volumeId string) string {
 	logger := env.Logger().Session("mount-path")
-	orig := d.osHelper.Umask(000)
-	defer d.osHelper.Umask(orig)
 
 	dir, err := d.filepath.Abs(d.mountPathRoot)
 	if err != nil {
 		logger.Fatal("abs-failed", err)
 	}
 
-	if err := d.os.MkdirAll(dir, os.ModePerm); err != nil {
+	if err := d.os.MkdirAll(dir, 0755); err != nil {
 		logger.Fatal("mkdir-rootpath-failed", err)
 	}
 
@@ -421,7 +424,7 @@ func (d *VolumeDriver) mount(env dockerdriver.Env, opts map[string]interface{}, 
 	orig := d.osHelper.Umask(000)
 	defer d.osHelper.Umask(orig)
 
-	err := d.os.MkdirAll(mountPath, os.ModePerm)
+	err := d.os.MkdirAll(mountPath, 0755)
 	if err != nil {
 		logger.Error("create-mountdir-failed", err)
 		return err
@@ -443,10 +446,12 @@ func (d *VolumeDriver) persistState(env dockerdriver.Env) error {
 	logger.Info("start")
 	defer logger.Info("end")
 
-	orig := d.osHelper.Umask(000)
-	defer d.osHelper.Umask(orig)
+	stateFile := d.mountPath(env, stateFileName)
+	tmpFile := stateFile + ".tmp"
 
-	stateFile := d.mountPath(env, "driver-state.json")
+	// the fixed tmp path must not be shared by concurrent writers
+	d.persistMu.Lock()
+	defer d.persistMu.Unlock()
 
 	stateData, err := json.Marshal(d.volumes)
 	if err != nil {
@@ -454,8 +459,26 @@ func (d *VolumeDriver) persistState(env dockerdriver.Env) error {
 		return err
 	}
 
-	err = d.os.WriteFile(stateFile, stateData, os.ModePerm)
+	// O_EXCL never follows a planted symlink; a leftover tmp file from a killed run is removed once.
+	f, err := d.os.OpenFile(tmpFile, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+	if errors.Is(err, os.ErrExist) {
+		_ = d.os.Remove(tmpFile)
+		f, err = d.os.OpenFile(tmpFile, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+	}
 	if err != nil {
+		logger.Error("failed-to-create-state-tmp-file", err, lager.Data{"tmpFile": tmpFile})
+		return err
+	}
+
+	_, err = f.Write(stateData)
+	if closeErr := f.Close(); err == nil {
+		err = closeErr
+	}
+	if err == nil {
+		err = d.os.Rename(tmpFile, stateFile)
+	}
+	if err != nil {
+		_ = d.os.Remove(tmpFile)
 		logger.Error("failed-to-write-state-file", err, lager.Data{"stateFile": stateFile})
 		return err
 	}
@@ -464,23 +487,118 @@ func (d *VolumeDriver) persistState(env dockerdriver.Env) error {
 	return nil
 }
 
+// readStateFile reads the state file only if it is a regular file owned by the
+// driver's effective uid with a single hard link; a legacy world-writable file is tightened to 0600.
+func (d *VolumeDriver) readStateFile(logger lager.Logger, stateFile string) ([]byte, error) {
+	f, err := d.os.OpenFile(stateFile, stateReadFlags, 0)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	info, err := f.Stat()
+	if err != nil {
+		return nil, err
+	}
+	if !info.Mode().IsRegular() {
+		return nil, errors.New("state file is not a regular file")
+	}
+	if !ownedBy(info, d.os.Geteuid()) {
+		return nil, errors.New("state file is not owned by the driver user")
+	}
+	if !singleLink(info) {
+		return nil, errors.New("state file has more than one hard link")
+	}
+
+	data, err := io.ReadAll(f)
+	if err != nil {
+		return nil, err
+	}
+
+	if info.Mode().Perm() != 0600 {
+		// chmod the validated fd, not the path, so a swapped-in symlink is not followed
+		if err := fchmod(f, 0600); err != nil {
+			logger.Error("failed-to-tighten-state-file", err, lager.Data{"stateFile": stateFile})
+		}
+	}
+	return data, nil
+}
+
+// tightenRoot removes group/world write from an existing mount root the driver owns
+// (older versions created it 0777 without a sticky bit).
+func (d *VolumeDriver) tightenRoot(logger lager.Logger) {
+	info, err := d.os.Stat(d.mountPathRoot)
+	if err != nil || info == nil || !info.IsDir() || !ownedBy(info, d.os.Geteuid()) {
+		return
+	}
+	if info.Mode().Perm()&0022 != 0 {
+		if err := d.os.Chmod(d.mountPathRoot, 0755); err != nil {
+			logger.Error("failed-to-tighten-mount-root", err, lager.Data{"root": d.mountPathRoot})
+		}
+	}
+}
+
+// fchmod chmods an open file; osshim.File does not expose Chmod.
+func fchmod(f osshim.File, mode os.FileMode) error {
+	switch v := f.(type) {
+	case interface{ Chmod(os.FileMode) error }:
+		return v.Chmod(mode)
+	case *osshim.FileShim:
+		return v.Delegate.Chmod(mode)
+	}
+	return errors.New("file does not support chmod")
+}
+
 func (d *VolumeDriver) restoreState(env dockerdriver.Env) {
 	logger := env.Logger().Session("restore-state")
 	logger.Info("start")
 	defer logger.Info("end")
 
-	stateFile := filepath.Join(d.mountPathRoot, "driver-state.json")
+	d.tightenRoot(logger)
 
-	stateData, err := d.os.ReadFile(stateFile)
+	stateFile := filepath.Join(d.mountPathRoot, stateFileName)
+
+	stateData, err := d.readStateFile(logger, stateFile)
 	if err != nil {
-		logger.Info("failed-to-read-state-file", lager.Data{"err": err, "stateFile": stateFile})
+		if errors.Is(err, os.ErrNotExist) {
+			logger.Info("failed-to-read-state-file", lager.Data{"err": err, "stateFile": stateFile})
+		} else {
+			logger.Error("rejected-state-file", err, lager.Data{"stateFile": stateFile})
+		}
 		return
 	}
 	logger.Info("state", lager.Data{"state": string(stateData)})
 
-	if err := json.Unmarshal(stateData, d.volumes); err != nil {
+	restored := map[string]NfsVolumeInfo{}
+	if err := json.Unmarshal(stateData, &restored); err != nil {
 		logger.Error("failed-to-unmarshall-state", err, lager.Data{"stateFile": stateFile})
 		return
+	}
+
+	root, err := d.filepath.Abs(d.mountPathRoot)
+	if err != nil {
+		logger.Error("abs-failed", err)
+		return
+	}
+
+	for key, vol := range restored {
+		if err := validateVolumeName(vol.Name); err != nil {
+			logger.Error("dropping-state-entry", err, lager.Data{"key": key, "reason": "invalid-name"})
+			continue
+		}
+		if key != vol.Name {
+			logger.Error("dropping-state-entry", errors.New("key does not match name"), lager.Data{"key": key, "name": vol.Name})
+			continue
+		}
+		if vol.MountCount < 0 {
+			logger.Error("dropping-state-entry", errors.New("negative mount count"), lager.Data{"name": vol.Name})
+			continue
+		}
+		// never trust a stored path: it is root's umount/remove target
+		if vol.Mountpoint != "" {
+			vol.Mountpoint = filepath.Join(root, vol.Name)
+		}
+		d.volumes.Put(key, vol)
 	}
 	logger.Info("state-restored", lager.Data{"state-file": stateFile})
 }
@@ -568,7 +686,9 @@ func copyOpts(input map[string]any) map[string]any {
 }
 
 func validateVolumeName(name string) error {
-	if strings.Contains(name, "..") || strings.Contains(name, "/") || strings.Contains(name, "\\") {
+	if name == "" || name == "." || name == stateFileName || name == stateFileName+".tmp" ||
+		strings.Contains(name, "..") || strings.Contains(name, "/") || strings.Contains(name, "\\") ||
+		strings.IndexFunc(name, func(r rune) bool { return r <= 0x20 || r == 0x7f }) >= 0 {
 		return fmt.Errorf("invalid volume name: %s", name)
 	}
 	return nil
