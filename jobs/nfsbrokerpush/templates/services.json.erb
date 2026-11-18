@@ -24,6 +24,24 @@
     documentation_url = service["metadata"] ? service["metadata"]["documentation_url"] : ""
     support_type = service["metadata"] ? service["metadata"]["support_type"] : ""
 
+    metadata = {
+      "displayName": display_name,
+      "imageUrl": image_url,
+      "longDescription": long_description,
+      "providerDisplayName": provider_display_name,
+      "documentationUrl": documentation_url,
+      "supportType": support_type
+    }
+
+    # Optional marketplace classification, passed through only when set so the
+    # rendered catalog is unchanged for deployments that don't use it.
+    types = service.dig("metadata", "types")
+    categories = service.dig("metadata", "categories")
+    verified = service.dig("metadata", "verified")
+    metadata[:types] = types unless types.nil?
+    metadata[:categories] = categories unless categories.nil?
+    metadata[:verified] = verified unless verified.nil?
+
     config << {
       "id": service["id"],
       "name": service["name"],
@@ -33,14 +51,7 @@
       "tags": service["tags"],
       "plans": plans,
       "requires": service["requires"],
-      "metadata": {
-        "displayName": display_name,
-        "imageUrl": image_url,
-        "longDescription": long_description,
-        "providerDisplayName": provider_display_name,
-        "documentationUrl": documentation_url,
-        "supportType": support_type
-      }
+      "metadata": metadata
     }
   end
 

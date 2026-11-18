@@ -96,7 +96,7 @@ properties:
     description: 'name of the service broker registered in CF'
     default: nfsbroker
   nfsbrokerpush.services:
-    description: "List of services and plans supported by broker"
+    description: "List of services and plans supported by broker. Each service's optional metadata.types (array of strings), metadata.categories (array of strings) and metadata.verified (boolean) are passed through to the broker catalog metadata when set."
     default:
     - id: "997f8f26-e10c-11e7-80c1-9a214cf093ae"
       name: "nfs"
